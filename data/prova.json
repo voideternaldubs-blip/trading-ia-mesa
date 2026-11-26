@@ -1,13 +1,13 @@
 {
- "gerado": "2026-11-26T22:58",
+ "gerado": "2026-11-26T23:01",
  "fim": "2026-11-30",
  "dias_restantes": 4,
  "robos": [
   {
    "robo": "Carteira do Prédio",
    "inicial": 100.0,
-   "atual": 78.89,
-   "retorno_pct": -21.11,
+   "atual": 79.89,
+   "retorno_pct": -20.11,
    "operacoes": 1,
    "acerto_pct": 0.0,
    "ganho_medio": null,
@@ -17,8 +17,8 @@
   {
    "robo": "Foguete v2 (Binance demo)",
    "inicial": 100.0,
-   "atual": 104.15,
-   "retorno_pct": 4.15,
+   "atual": 105.82,
+   "retorno_pct": 5.82,
    "operacoes": 2,
    "acerto_pct": 50.0,
    "ganho_medio": 0.05,
@@ -50,8 +50,8 @@
   {
    "robo": "IA pura (manual)",
    "inicial": 100.0,
-   "atual": 86.86,
-   "retorno_pct": -13.14,
+   "atual": 87.75,
+   "retorno_pct": -12.25,
    "operacoes": 6,
    "acerto_pct": 33.3,
    "ganho_medio": 1.0,
