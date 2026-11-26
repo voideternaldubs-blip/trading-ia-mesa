@@ -19,9 +19,11 @@ curvas_ls.csv
 series_motores.csv
 serie_piramide_*.csv
 resultado*.csv
-data/foguete*
+data/foguete.json
+data/foguete_trades.csv
+data/foguete*.log
+data/foguete2.lock
 diario/foguete_*
-data/analise_ia.json
 data/aranha_ia.*
 data/h1/
 .vercel

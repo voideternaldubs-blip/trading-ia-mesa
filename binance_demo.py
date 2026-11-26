@@ -5,11 +5,13 @@ import os, time, hmac, hashlib, json, math, urllib.parse, requests
 AQUI = os.path.dirname(os.path.abspath(__file__))
 ENV = os.path.join(AQUI, "data", "binance_demo.env")
 EXEC = os.path.join(AQUI, "data", "foguete2_exec.json")
-BASE = "https://demo-fapi.binance.com"  # SÓ demo
+BASE = "https://testnet.binancefuture.com"  # SÓ demo (mesma conta; acessível da nuvem)
 _filtros = {}
 
 
 def chaves():
+    if os.environ.get("BINANCE_KEY") and os.environ.get("BINANCE_SECRET"):
+        return {"BINANCE_KEY": os.environ["BINANCE_KEY"], "BINANCE_SECRET": os.environ["BINANCE_SECRET"]}
     if not os.path.exists(ENV):
         return None
     return dict(l.strip().split("=", 1) for l in open(ENV, encoding="utf-8") if "=" in l)

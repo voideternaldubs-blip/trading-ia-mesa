@@ -15,7 +15,7 @@ permissions:
 jobs:
   rodar:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     env:
       PYTHONIOENCODING: utf-8
       TZ: UTC
@@ -43,6 +43,19 @@ jobs:
           python -c "import aranha; c=aranha.db(); print('notícias', aranha.noticias(c)); aranha.mercado(c); c.commit()"
           cd mesa && python explicador.py
           cd .. && python equipe/impacto.py || true
+
+      - name: FOGUETE v2 (Binance demo, toda rodada)
+        if: always()
+        env:
+          BINANCE_KEY: ${{ secrets.BINANCE_KEY }}
+          BINANCE_SECRET: ${{ secrets.BINANCE_SECRET }}
+        run: python foguete2.py || true
+
+      - name: ARANHA ANALISTA (IA da NVIDIA)
+        if: always()
+        env:
+          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
+        run: timeout 600 python equipe/aranha_ia.py || true
 
       - name: Robô de tendência cripto (a cada 4h)
         if: always()
@@ -79,7 +92,7 @@ jobs:
           rm -f data/alpaca.env
           git config user.name "mesa-de-agentes"
           git config user.email "mesa@users.noreply.github.com"
-          for f in data/aranha.db data/carteira.json data/relatorio_aranha.json data/calendario.json data/sec.json data/fills.json data/sentinela.json acoes/carteira_acoes.json acoes/ordens.json diario site; do [ -e "$f" ] && git add "$f"; done; true
+          for f in data/aranha.db data/carteira.json data/relatorio_aranha.json data/calendario.json data/sec.json data/fills.json data/sentinela.json data/foguete2.json data/foguete2_trades.csv data/foguete2_exec.json data/analise_ia.json acoes/carteira_acoes.json acoes/ordens.json diario site; do [ -e "$f" ] && git add "$f"; done; true
           git diff --cached --quiet && exit 0
           git commit -q -m "mesa: rodada $(date -u +%Y-%m-%dT%H:%M)Z"
           for i in 1 2 3; do git pull -q --rebase -X theirs && git push -q && break; sleep 5; done

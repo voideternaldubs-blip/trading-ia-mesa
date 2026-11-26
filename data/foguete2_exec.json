@@ -1,0 +1,136 @@
+[
+ {
+  "quando": "2026-11-26T04:30",
+  "simbolo": "ADAUSDT",
+  "lado": "SELL",
+  "qtd": 231.0,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 1343293886
+ },
+ {
+  "quando": "2026-11-26T04:30",
+  "simbolo": "XRPUSDT",
+  "lado": "SELL",
+  "qtd": 32.0,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 3550575390
+ },
+ {
+  "quando": "2026-11-26T04:30",
+  "simbolo": "DOGEUSDT",
+  "lado": "SELL",
+  "qtd": 595.0,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 2398143817
+ },
+ {
+  "quando": "2026-11-26T04:30",
+  "simbolo": "ENAUSDT",
+  "lado": "SELL",
+  "qtd": 373.0,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 545344205
+ },
+ {
+  "quando": "2026-11-26T04:30",
+  "simbolo": "WLDUSDT",
+  "lado": "SELL",
+  "qtd": 165.0,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 557995072
+ },
+ {
+  "quando": "2026-11-26T04:30",
+  "simbolo": "BNBUSDT",
+  "lado": "SELL",
+  "qtd": 0.11,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 2685863234
+ },
+ {
+  "quando": "2026-11-26T04:30",
+  "simbolo": "PIEVERSEUSDT",
+  "erro": "Binance demo 400: {\"code\":-1121,\"msg\":\"Invalid symbol.\"}"
+ },
+ {
+  "quando": "2026-11-26T04:30",
+  "simbolo": "ZECUSDT",
+  "lado": "SELL",
+  "qtd": 0.02,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 3003470617
+ },
+ {
+  "quando": "2026-11-26T04:30",
+  "simbolo": "UNIUSDT",
+  "lado": "SELL",
+  "qtd": 4.0,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 500173273
+ },
+ {
+  "quando": "2026-11-26T04:30",
+  "simbolo": "BTCUSDT",
+  "lado": "SELL",
+  "qtd": 0.001,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 28695941336
+ },
+ {
+  "quando": "2026-11-26T04:30",
+  "simbolo": "SOLUSDT",
+  "lado": "SELL",
+  "qtd": 0.63,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 4251358174
+ },
+ {
+  "quando": "2026-11-26T04:30",
+  "simbolo": "ETHUSDT",
+  "lado": "SELL",
+  "qtd": 0.026,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 16880634529
+ },
+ {
+  "quando": "2026-11-26T04:33",
+  "simbolo": "PIEVERSEUSDT",
+  "erro": "Binance demo 400: {\"code\":-1121,\"msg\":\"Invalid symbol.\"}"
+ },
+ {
+  "quando": "2026-11-26T04:38",
+  "simbolo": "PIEVERSEUSDT",
+  "erro": "Binance demo 400: {\"code\":-1121,\"msg\":\"Invalid symbol.\"}"
+ },
+ {
+  "quando": "2026-11-26T04:43",
+  "simbolo": "PIEVERSEUSDT",
+  "erro": "Binance demo 400: {\"code\":-1121,\"msg\":\"Invalid symbol.\"}"
+ },
+ {
+  "quando": "2026-11-26T04:48",
+  "simbolo": "PIEVERSEUSDT",
+  "erro": "Binance demo 400: {\"code\":-1121,\"msg\":\"Invalid symbol.\"}"
+ },
+ {
+  "quando": "2026-11-26T04:53",
+  "simbolo": "PIEVERSEUSDT",
+  "erro": "Binance demo 400: {\"code\":-1121,\"msg\":\"Invalid symbol.\"}"
+ },
+ {
+  "quando": "2026-11-26T04:58",
+  "simbolo": "PIEVERSEUSDT",
+  "erro": "Binance demo 400: {\"code\":-1121,\"msg\":\"Invalid symbol.\"}"
+ }
+]

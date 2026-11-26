@@ -11,7 +11,7 @@ EST = os.path.join(AQUI, "data", "foguete2.json")
 TRADES = os.path.join(AQUI, "data", "foguete2_trades.csv")
 TRAVA = os.path.join(AQUI, "data", "foguete2.lock")
 DIARIO = os.path.join(AQUI, "diario")
-F = "https://fapi.binance.com"
+F = "https://testnet.binancefuture.com"  # demo da Binance com preço real; acessível também da nuvem (EUA)
 CFG = dict(horizontes=(80, 120, 200), max_pos=12, kappa=1.0, piso=15.0, m=20, lev_max=20, sigma_ref=0.025, cap_moeda=0.25,
            banda_G=0.15, banda_peso=0.25, stop_atr=4.0, taxa=0.0005, slip_stop=0.0005, mmr=0.01,
            funding_max=0.0010, funding_corte=0.0015, crash_btc_1h=-0.06, cofre_pct=0.25, meta=3000.0)
@@ -72,7 +72,9 @@ def montar_universo(st):
             ok = {s: 1 for s in ok if s in binance_demo._filtros}
     except Exception:
         pass
-    tk = [t for t in get("/fapi/v1/ticker/24hr") if t["symbol"] in ok]
+    # volume REAL vem do mercado à vista (o volume do demo é de teste)
+    vol = {t["symbol"]: float(t["quoteVolume"]) for t in requests.get("https://data-api.binance.vision/api/v3/ticker/24hr", timeout=30).json() if t["symbol"] in ok}
+    tk = [{"symbol": s, "quoteVolume": v} for s, v in vol.items()]
     tk.sort(key=lambda t: -float(t["quoteVolume"]))
     st["universo"] = {"lista": [t["symbol"] for t in tk if float(t["quoteVolume"]) >= 1e8][:30], "em": agora().isoformat()[:16]}
     st["filtros"] = {k: v for k, v in filtros.items() if k in st["universo"]["lista"] or k in st["posicoes"]}
@@ -178,9 +180,12 @@ def ciclo():
     simb = set(st["posicoes"]) | {"BTCUSDT"}
 
     # 1) replay minuto a minuto: liquidação -> stops -> funding
-    k1 = {}
-    for s in simb:
-        r = get("/fapi/v1/klines", symbol=s, interval="1m", startTime=st["ultimo_minuto"], limit=1000)
+    k1, fora = {}, set()
+    for s in list(simb):
+        try:
+            r = get("/fapi/v1/klines", symbol=s, interval="1m", startTime=st["ultimo_minuto"], limit=1000)
+        except Exception:
+            fora.add(s); simb.discard(s); continue
         k1[s] = {int(x[0]): (float(x[1]), float(x[2]), float(x[3]), float(x[4])) for x in r if int(x[6]) < t0.timestamp() * 1000}
     minutos = sorted(set().union(*[set(v) for v in k1.values()])) if k1 else []
     for m in minutos:
@@ -220,6 +225,11 @@ def ciclo():
 
     # 2) marcação e guardas
     px = {s: float(get("/fapi/v1/ticker/price", symbol=s)["price"]) for s in simb}
+    for s in fora:  # moeda que não existe no demo: fecha no preço de entrada e segue
+        if s in st["posicoes"]:
+            p = st["posicoes"].pop(s)
+            registrar(st, s, "FECHA", p["qtd"], p["entrada"], p["qtd"] * p["entrada"], 0.0, "indisponível no demo")
+            log.append(f"- SAÍDA {s}: indisponível na Binance demo, fechada sem resultado")
     E = equity(st, px); T = E + c["cofre"]
     if E <= CFG["piso"]:
         fechar_tudo(st, px, "PISO"); c["status"] = "FIM_PISO"; log.append(f"- 🛑 PISO do foguete ({E:.2f}). Cofre de {c['cofre']:.2f} intacto."); return salvar(st, px)

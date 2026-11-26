@@ -5,23 +5,32 @@ from datetime import datetime, timezone
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 DB = os.path.join(AQUI, "data", "aranha.db")
-UA = {"User-Agent": "Mozilla/5.0 trading-ia"}
+UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36"}
 MOEDAS = ["BTC", "ETH", "SOL", "BNB", "XRP", "DOGE", "AVAX", "LINK", "ADA", "SUI"]
 NOMES = {"BTC": "bitcoin", "ETH": "ethereum", "SOL": "solana", "BNB": "bnb|binance coin", "XRP": "xrp|ripple",
          "DOGE": "dogecoin|doge", "AVAX": "avalanche|avax", "LINK": "chainlink", "ADA": "cardano", "SUI": r"\bsui\b"}
-FEEDS = ["https://cointelegraph.com/rss", "https://decrypt.co/feed",
-         "https://news.google.com/rss/search?q=crypto+OR+bitcoin+when:1d&hl=en-US&gl=US&ceid=US:en",
-         "https://news.google.com/rss/search?q=nvidia+OR+nasdaq+OR+%22stock+market%22+when:1d&hl=en-US&gl=US&ceid=US:en",
-         "https://news.google.com/rss/search?q=stocks+earnings+OR+fed+OR+tariffs+when:1d&hl=en-US&gl=US&ceid=US:en",
-         # ---- o MUNDO: economia global, geopolítica, commodities, câmbio, bancos centrais
-         "https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=en-US&gl=US&ceid=US:en",
-         "https://news.google.com/rss/headlines/section/topic/WORLD?hl=en-US&gl=US&ceid=US:en",
-         "https://news.google.com/rss/search?q=oil+OR+gold+OR+dollar+OR+yuan+OR+euro+markets+when:1d&hl=en-US&gl=US&ceid=US:en",
-         "https://news.google.com/rss/search?q=ECB+OR+%22Bank+of+Japan%22+OR+PBOC+OR+%22Bank+of+England%22+when:1d&hl=en-US&gl=US&ceid=US:en",
-         "https://news.google.com/rss/search?q=war+OR+sanctions+OR+election+markets+when:1d&hl=en-US&gl=US&ceid=US:en",
-         "https://news.google.com/rss/search?q=Ibovespa+OR+Petrobras+OR+Vale+OR+Selic+when:1d&hl=en-US&gl=US&ceid=US:en",
-         "https://feeds.bbci.co.uk/news/business/rss.xml",
-         "https://www.cnbc.com/id/100003114/device/rss/rss.html"]
+GN = "https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q="
+FEEDS = [
+    # agências e mercado global (paywall: só título + link)
+    "https://feeds.bloomberg.com/markets/news.rss", GN + "site:reuters.com+markets+when:1d", GN + "site:apnews.com+business+when:1d",
+    "https://feeds.a.dj.com/rss/RSSMarketsMain.xml", "https://www.ft.com/markets?format=rss", "https://www.economist.com/finance-and-economics/rss.xml",
+    "https://www.cnbc.com/id/100003114/device/rss/rss.html", "https://feeds.content.dowjones.io/public/rss/mw_topstories",
+    "https://feeds.bbci.co.uk/news/business/rss.xml", GN + "site:finance.yahoo.com+when:1d", GN + "site:asia.nikkei.com+markets+when:1d",
+    # comunicados oficiais de empresas (fonte primária)
+    "https://www.prnewswire.com/rss/news-releases-list.rss", GN + "site:businesswire.com+when:1d",
+    GN + "site:globenewswire.com+when:1d",
+    # bancos centrais e reguladores (fonte primária)
+    "https://www.federalreserve.gov/feeds/press_all.xml", "https://www.ecb.europa.eu/rss/press.html", "https://www.sec.gov/news/pressreleases.rss",
+    # cripto
+    "https://www.coindesk.com/arc/outboundfeeds/rss/", "https://www.theblock.co/rss.xml", "https://cointelegraph.com/rss", "https://decrypt.co/feed",
+    # Brasil
+    "https://pox.globo.com/rss/valor/", "https://www.infomoney.com.br/feed/",
+    # temas (Google News)
+    GN + "crypto+OR+bitcoin+when:1d", GN + "nvidia+OR+nasdaq+OR+%22stock+market%22+when:1d", GN + "stocks+earnings+OR+fed+OR+tariffs+when:1d",
+    GN + "oil+OR+gold+OR+dollar+OR+yuan+OR+euro+markets+when:1d", GN + "war+OR+sanctions+OR+election+markets+when:1d",
+]
+PAYWALL = ("bloomberg.com", "reuters.com", "wsj.com", "a.dj.com", "ft.com", "economist.com", "dowjones.io")
+PRIMARIA = ("federalreserve.gov", "ecb.europa.eu", "sec.gov", "prnewswire.com", "globenewswire.com", "businesswire.com", "binance.com")
 ACOES = {"NVDA": r"nvidia|jensen huang|nvda", "NASDAQ": r"nasdaq|tech stocks", "S&P500": r"s&p 500|s&p500|spy|wall street|stock market|dow jones",
          "TSLA": r"tesla|tsla", "AAPL": r"apple|aapl", "MSFT": r"microsoft|msft", "AMD": r"amd", "TSM": r"tsmc|taiwan semiconductor",
          "META": r"meta", "GOOGL": r"google|alphabet", "AMZN": r"amazon", "FED": r"fed|federal reserve|powell|interest rate|rate cut|inflation",
@@ -58,17 +67,28 @@ def noticias(c):
             raiz = ET.fromstring(requests.get(f, headers=UA, timeout=20).content)
         except Exception as e:
             print("feed falhou", f, e); continue
-        for it in raiz.iter("item"):
+        for it in list(raiz.iter("item"))[:40]:
             tit, link = (it.findtext("title") or "").strip(), (it.findtext("link") or "").strip()
             resumo = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", it.findtext("description") or "")).strip()[:900]
-            if "news.google" in f:
-                resumo = ""  # o Google News só repete o título
+            if "news.google" in f or any(p in f for p in PAYWALL):
+                resumo = ""  # Google News repete o título; sites com paywall: só título + link (regra do dono)
             if not link:
                 continue
             moedas, p, fo = marcar(tit)
             cur = c.execute("insert or ignore into noticias(link,quando,fonte,titulo,moedas,perigo,forca,resumo) values(?,?,?,?,?,?,?,?) on conflict(link) do update set resumo=excluded.resumo where noticias.resumo='' and excluded.resumo!=''",
                             (link, datetime.now(timezone.utc).isoformat(), f.split("/")[2], tit, ",".join(moedas), p, fo, resumo))
             novas += cur.rowcount
+    try:
+        arts = requests.get("https://www.binance.com/bapi/composite/v1/public/cms/article/list/query",
+                            params={"type": 1, "catalogId": 48, "pageNo": 1, "pageSize": 15}, headers=UA, timeout=20).json()["data"]["catalogs"][0]["articles"]
+        for a in arts:
+            tit = a["title"]; link = f"https://www.binance.com/en/support/announcement/{a['code']}"
+            moedas, p, fo = marcar(tit)
+            cur = c.execute("insert or ignore into noticias(link,quando,fonte,titulo,moedas,perigo,forca,resumo) values(?,?,?,?,?,?,?,?)",
+                            (link, datetime.now(timezone.utc).isoformat(), "binance.com", tit, ",".join(moedas), p, int(fo or "list" in tit.lower()), ""))
+            novas += cur.rowcount
+    except Exception as e:
+        print("anúncios binance falharam", e)
     return novas
 
 

@@ -147,7 +147,9 @@ def relatorio(limite=60):
         out.append({"id": link, "quando": quando[:16].replace("T", " "), "fonte": fonte.replace("www.", ""),
                     "titulo_en": tit_limpo, "titulo": traduz(c, tit_limpo), "resumo": traduz(c, resumo[:700]),
                     "ativos": [a for a in ms.split(",") if a], "tipo": tipo, "cor": cor, "significa": sig, "mesa_usa": uso,
-                    "direcao": direcao, "perigo": p, "forca": fo, "termos": termos})
+                    "direcao": direcao, "perigo": p, "forca": fo, "termos": termos,
+                    "primaria": any(d in fonte for d in ("federalreserve.gov", "ecb.europa.eu", "sec.gov", "prnewswire", "globenewswire", "businesswire", "binance.com")),
+                    "link": link})
     c.commit()
     # resumo do humor do mercado
     contagem = {}
