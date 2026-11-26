@@ -22,7 +22,7 @@
    "em": "2026-11-26T13:52",
    "tese": "vendido a favor da tend\u00eancia de queda (m\u00e1quina do tempo: valor esperado positivo)",
    "conferido_ate": "2026-11-26T20:43",
-   "atual": 9.286
+   "atual": 9.287
   },
   "AAVEUSDT": {
    "lado": -1,
@@ -712,6 +712,10 @@
   {
    "quando": "2026-11-26T20:43",
    "valor": 81.67
+  },
+  {
+   "quando": "2026-11-26T20:43",
+   "valor": 81.65
   }
  ],
  "modo": "METODO 1:3 a favor da tend\u00eancia (vendido); probabilidades pela m\u00e1quina do tempo",
