@@ -22,7 +22,30 @@ AGENTES = {
     "SNIPER": "Executa as entradas",
     "SAÍDA": "Stops, alvos e realização",
     "RISCO": "Tamanho, alavancagem e vetos",
+    "CALENDÁRIO": "Agenda do Fed, inflação e balanços",
+    "SEC": "Documentos oficiais e compras de diretores",
+    "FILLS": "Confere cada execução",
+    "SENTINELA": "Vigia se todos estão trabalhando",
 }
+
+
+def ler_json(nome):
+    try:
+        return json.load(open(os.path.join(RAIZ, "data", nome), encoding="utf-8"))
+    except Exception:
+        return {}
+
+
+def equipe_extra():
+    k, s, f, v = ler_json("calendario.json"), ler_json("sec.json"), ler_json("fills.json"), ler_json("sentinela.json")
+    docs = s.get("documentos", [])
+    prox = [e for e in k.get("eventos", []) if e.get("quando", "") >= datetime.now(timezone.utc).isoformat()[:16]]
+    return {
+        "CALENDÁRIO": (len(k.get("eventos", [])), (prox[0]["nome"] + " · " + prox[0]["quando"].replace("T", " ")) if prox else k.get("aviso", "aguardando...")),
+        "SEC": (len(docs), next((d.get("sinal") for d in docs if d.get("sinal")), f"{len(docs)} documentos lidos")),
+        "FILLS": (len(f.get("execucoes", [])), f"escorregão médio {f.get('escorregao_medio_pct')}%" if f.get("execucoes") else "conferindo execuções"),
+        "SENTINELA": (len(v.get("checks", [])), v.get("resumo", "aguardando...")),
+    }, {"calendario": k, "sec": s, "fills": f, "sentinela": v}
 
 
 def agente_do_evento(t):
@@ -87,6 +110,9 @@ def estado():
         ultimo[e["agente"]] = e["texto"]
     t = teia()
     cont["ARANHA"] = t["total_noticias"]
+    extra, blocos = equipe_extra()
+    for nome, (n, txt) in extra.items():
+        cont[nome] = n; ultimo[nome] = txt
     return {
         "agora": datetime.now(timezone.utc).isoformat(),
         "mesas": ms,
@@ -95,6 +121,8 @@ def estado():
         "agentes": [{"nome": a, "papel": p, "acoes": cont.get(a, 0), "ultimo": ultimo.get(a, "aguardando...")} for a, p in AGENTES.items()],
         "eventos": ev,
         "teia": t,
+        "equipe": blocos,
+        "prova": ler_json("prova.json"),
     }
 
 

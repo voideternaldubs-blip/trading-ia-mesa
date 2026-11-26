@@ -33,6 +33,9 @@ html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font:400 13
 .live b{width:7px;height:7px;border-radius:50%;background:var(--gr);box-shadow:0 0 12px var(--gr);animation:blink 1.6s infinite}@keyframes blink{50%{opacity:.25}}
 .kpi{display:flex;flex-direction:column;line-height:1}.kpi span{font:500 9px Lexend;letter-spacing:.22em;color:var(--dim);text-transform:uppercase}
 .kpi b{font:800 17px Doto;margin-top:4px}
+.chip-s{display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:rgba(43,255,154,.08);box-shadow:inset 0 0 0 1px rgba(43,255,154,.25);font:600 10px Lexend;letter-spacing:.06em;color:#bfffe0;white-space:nowrap;max-width:260px;overflow:hidden;text-overflow:ellipsis}
+.chip-s i{width:7px;height:7px;border-radius:50%;background:var(--gr);box-shadow:0 0 10px var(--gr);flex:0 0 auto}
+.chip-s.alerta{background:rgba(255,77,109,.1);box-shadow:inset 0 0 0 1px rgba(255,77,109,.4);color:#ffd0d8}.chip-s.alerta i{background:var(--rd);box-shadow:0 0 10px var(--rd);animation:blink 1s infinite}
 .clock{padding:9px 16px;border-radius:999px;background:rgba(255,255,255,.05);box-shadow:inset 0 1px 0 rgba(255,255,255,.06);font:800 14px Doto;color:var(--cy)}
 
 /* bento */
@@ -68,13 +71,13 @@ html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font:400 13
 .otxt b{display:block;font:800 22px Montserrat;color:#fff;letter-spacing:-.01em}
 
 /* agentes */
-.agents .core{padding:50px 10px 10px;display:flex;flex-direction:column;gap:6px}
-.ag{--c:#fff;position:relative;display:grid;grid-template-columns:30px 1fr auto;align-items:center;gap:10px;padding:9px 10px;border-radius:16px;
+.agents .core{padding:48px 10px 10px;display:flex;flex-direction:column;gap:4px}
+.ag{--c:#fff;position:relative;display:grid;grid-template-columns:24px 1fr auto;align-items:center;gap:9px;padding:4px 9px;border-radius:13px;
   background:rgba(255,255,255,.025);box-shadow:inset 0 0 0 1px rgba(255,255,255,.04);transition:all .7s var(--ease);flex:1;min-height:0}
-.ag .ic{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 14%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 40%,transparent)}
+.ag .ic{width:24px;height:24px;border-radius:8px;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 14%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 40%,transparent)}
 .ag .ic i{width:8px;height:8px;border-radius:50%;background:var(--c);box-shadow:0 0 10px var(--c)}
 .ag .nm{font:700 11px Montserrat;letter-spacing:.16em}.ag .ul{font:300 10.5px Lexend;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ag .ct{font:800 18px Doto;color:var(--c)}
+.ag .ct{font:800 15px Doto;color:var(--c)}
 .ag.on{background:color-mix(in srgb,var(--c) 12%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 55%,transparent),0 0 28px -6px var(--c);transform:translateX(-4px)}
 
 /* teia */
@@ -112,6 +115,8 @@ html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font:400 13
   <div class="kpi"><span>Total</span><b id="kt">—</b></div>
   <div class="kpi hide"><span>Notícias</span><b id="kn" style="color:var(--cy)">—</b></div>
   <div class="kpi hide"><span>Medo / Ganância</span><b id="kf" style="color:var(--am)">—</b></div>
+  <div class="chip-s" id="sent"><i></i><span>sentinela…</span></div>
+  <div class="kpi hide"><span>Prova até 30/11</span><b id="kpv" style="color:#b56bff;font:600 11px Lexend;margin-top:5px">—</b></div>
   <div class="clock" id="clk">--:--:--</div>
 </nav>
 
@@ -158,7 +163,7 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
 
-const COR={CHEFE:'#ff2bd6',ARANHA:'#2ee6ff',ANALISTA:'#9b7bff',VET:'#ffb02e',RUG:'#ff4d6d',SNIPER:'#2bff9a',"SAÍDA":'#5ab8ff',RISCO:'#ff7aa8'};
+const COR={CHEFE:'#ff2bd6',ARANHA:'#2ee6ff',ANALISTA:'#9b7bff',VET:'#ffb02e',RUG:'#ff4d6d',SNIPER:'#2bff9a',"SAÍDA":'#5ab8ff',RISCO:'#ff7aa8',"CALENDÁRIO":'#c8ff2e',SEC:'#ffd86b',FILLS:'#7cf3c9',SENTINELA:'#ff8a3d'};
 const NOMES=Object.keys(COR);
 const $=id=>document.getElementById(id);
 let S=null,hist=[],vistos=new Set(),primeira=true;
@@ -182,7 +187,7 @@ const anel=new THREE.Mesh(new THREE.TorusGeometry(1.95,.025,8,96),new THREE.Mesh
 const anel2=new THREE.Mesh(new THREE.TorusGeometry(1.25,.015,8,96),new THREE.MeshBasicMaterial({color:0x2ee6ff}));anel2.position.y=2.6;anel2.rotation.x=Math.PI/2;cena.add(anel2);
 const holo=new THREE.Mesh(new THREE.OctahedronGeometry(.42,0),new THREE.MeshStandardMaterial({color:0xff2bd6,emissive:0xff2bd6,emissiveIntensity:1.4,wireframe:true}));holo.position.y=2.6;cena.add(holo);
 
-const POS={CHEFE:[0,0],ARANHA:[-5,-3],ANALISTA:[-1.7,-4.2],VET:[1.7,-4.2],RUG:[5,-3],SNIPER:[-5,3],"SAÍDA":[0,4.6],RISCO:[5,3]};
+const POS={CHEFE:[0,0]};NOMES.filter(n=>n!=='CHEFE').forEach((n,i,arr)=>{const a=i/arr.length*Math.PI*2-Math.PI*.75;POS[n]=[Math.cos(a)*5.9,Math.sin(a)*5.2]});
 const AG={};
 function mesa(nome){
   const [x,z]=POS[nome],c=new THREE.Color(COR[nome]),g=new THREE.Group();g.position.set(x,0,z);
@@ -311,6 +316,8 @@ async function puxa(){
   $('dl').className='delta '+(up?'up':'dn');$('dl').innerHTML=`<em>${up?'+':''}${(pct*100).toFixed(2)}%</em> desde o início`;
   $('bs').textContent=`${S.mesas.length} mesas · começou com ${S.base} USD`;
   hist.push(S.total);if(hist.length>500)hist.shift();localStorage.setItem('mesa_hist',JSON.stringify(hist));spark();
+  const eq=S.equipe||{},sv=eq.sentinela||{};$('sent').className='chip-s'+(sv.tudo_ok===false?' alerta':'');$('sent').querySelector('span').textContent=sv.tudo_ok===false?(sv.resumo||'alerta'):'todos os agentes ok';
+  const pv=S.prova||{},fg=(pv.robos||[])[0];$('kpv').textContent=pv.dias_restantes!=null?`faltam ${pv.dias_restantes}d · foguete ${fg?(fg.retorno_pct>=0?'+':'')+fg.retorno_pct+'%':'-'}`:'—';
   $('ob').textContent=`${NOMES.length} agentes`;$('os').textContent=`${S.eventos.length} ações registradas · papel · preço real`;
   S.agentes.forEach(a=>{$('n_'+a.nome).textContent=a.acoes;$('u_'+a.nome).textContent=a.ultimo});
   $('mesas').querySelectorAll('.ms').forEach(e=>e.remove());
