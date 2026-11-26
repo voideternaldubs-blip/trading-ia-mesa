@@ -32,6 +32,11 @@ def mesas():
     if r and r.get("hist"):
         out.append({"nome": "Foguete de ações", "mercado": "ETFs alavancados · 9 setores · Alpaca", "valor": r["hist"][-1]["valor"],
                     "posicoes": list(r.get("pos", {})) or ["caixa (nenhum setor em alta)"], "curva": [x["valor"] for x in r["hist"][-120:]], "quando": r["hist"][-1]["dia"]})
+    ia = ler(os.path.join(D, "ia_pura.json"))
+    if ia and ia.get("hist"):
+        out.append({"nome": "IA pura (Claude)", "mercado": "operações escolhidas na mão · Binance demo", "valor": ia["hist"][-1]["valor"],
+                    "posicoes": [f"{s.replace('USDT', '')} C" for s in ia.get("posicoes", {})] or ["sem posição"],
+                    "curva": [x["valor"] for x in ia["hist"][-120:]], "quando": ia["hist"][-1]["quando"]})
     fg = ler(os.path.join(D, "foguete2.json"))
     if fg and fg.get("hist"):
         h = fg["hist"][-1]

@@ -1,0 +1,37 @@
+{
+ "inicial": 100.0,
+ "caixa": 100.0,
+ "posicoes": {
+  "SUIUSDT": {
+   "lado": 1,
+   "qtd": 298.9,
+   "entrada": 0.669,
+   "stop": 0.63555,
+   "alvo": 0.7337,
+   "em": "2026-11-26T12:40",
+   "ordem": 1102579572,
+   "conferido_ate": "2026-11-26T12:40",
+   "atual": 0.6688
+  },
+  "HYPEUSDT": {
+   "lado": 1,
+   "qtd": 3.27,
+   "entrada": 61.048,
+   "stop": 57.9956,
+   "alvo": 69.8,
+   "em": "2026-11-26T12:40",
+   "ordem": 900746772,
+   "conferido_ate": "2026-11-26T12:40",
+   "atual": 61.058
+  }
+ },
+ "fechadas": [],
+ "tese": "Medo extremo (11) + repique de 24h com volume e funding neutro: aposta em alta de al\u00edvio de alguns dias nas alts mais fortes fora do foguete (que est\u00e1 vendido). Stop -5%, alvo topo de 5 dias.",
+ "inicio": "2026-11-26T12:40",
+ "hist": [
+  {
+   "quando": "2026-11-26T12:40",
+   "valor": 99.97
+  }
+ ]
+}

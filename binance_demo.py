@@ -67,7 +67,12 @@ def sincroniza(alvo):
     if not chaves():
         return []
     atuais, feitos = posicoes(), []
-    for sym in set(atuais) | set(alvo):
+    reservadas = set()  # moedas operadas pela "IA pura" (carteira separada): o foguete não toca
+    try:
+        reservadas = set(json.load(open(os.path.join(AQUI, "data", "ia_pura.json"), encoding="utf-8")).get("posicoes", {}))
+    except Exception:
+        pass
+    for sym in (set(atuais) | set(alvo)) - reservadas:
         a, cur = alvo.get(sym, 0.0), atuais.get(sym, 0.0)
         dif = a - cur
         f = filtros(sym)

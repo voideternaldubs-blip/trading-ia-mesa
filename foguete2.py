@@ -76,7 +76,11 @@ def montar_universo(st):
     vol = {t["symbol"]: float(t["quoteVolume"]) for t in requests.get("https://data-api.binance.vision/api/v3/ticker/24hr", timeout=30).json() if t["symbol"] in ok}
     tk = [{"symbol": s, "quoteVolume": v} for s, v in vol.items()]
     tk.sort(key=lambda t: -float(t["quoteVolume"]))
-    st["universo"] = {"lista": [t["symbol"] for t in tk if float(t["quoteVolume"]) >= 1e8][:30], "em": agora().isoformat()[:16]}
+    try:
+        reserv = set(json.load(open(os.path.join(AQUI, "data", "ia_pura.json"), encoding="utf-8")).get("posicoes", {}))
+    except Exception:
+        reserv = set()
+    st["universo"] = {"lista": [t["symbol"] for t in tk if float(t["quoteVolume"]) >= 1e8 and t["symbol"] not in reserv][:30], "em": agora().isoformat()[:16]}
     st["filtros"] = {k: v for k, v in filtros.items() if k in st["universo"]["lista"] or k in st["posicoes"]}
     log.append(f"- SCAN: universo {len(st['universo']['lista'])} moedas")
 
