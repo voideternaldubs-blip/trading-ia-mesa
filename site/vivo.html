@@ -262,7 +262,8 @@ async function puxa(){
   status();
 }
 let sI=0;function status(){if(!estado)return;const eq=estado.equipe||{},sv=eq.sentinela||{},cal=eq.calendario||{},sec=eq.sec||{};
-  const msgs=[["SENTINELA",sv.resumo||'—',sv.tudo_ok===false?'var(--dn)':'var(--up)'],["CALENDÁRIO",cal.aviso||'—','#A3E635'],
+  const pv=estado.prova||{},pr=(pv.robos||[]).map(r=>`${r.robo.split(' (')[0]}: ${r.retorno_pct>=0?'+':''}${r.retorno_pct}%${r.acerto_pct!=null?' · acerto '+r.acerto_pct+'%':''}`).join('  |  ');
+  const msgs=[["PROVA ATÉ 30/11",`faltam ${pv.dias_restantes??'-'} dias  ·  ${pr||'medindo…'}`,'#B56BFF'],["SENTINELA",sv.resumo||'—',sv.tudo_ok===false?'var(--dn)':'var(--up)'],["CALENDÁRIO",cal.aviso||'—','#A3E635'],
     ["SEC",(sec.documentos||[]).find(d=>d.sinal)?.sinal||`${(sec.documentos||[]).length} documentos lidos`,'#EAB308'],
     ["ARANHA",(estado.teia.noticias[sI%Math.max(1,estado.teia.noticias.length)]||{}).titulo||'—','#22D3EE']];
   const [tag,msg,cor]=msgs[sI%msgs.length];sI++;const m=$('smsg');m.classList.add('sai');

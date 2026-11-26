@@ -80,6 +80,7 @@ jobs:
           H=$(date -u +%H); M=$(date -u +%M); if { [ $((10#$H % 2)) -eq 0 ] && [ $((10#$M)) -lt 15 ]; } || [ "${{ github.event_name }}" = "workflow_dispatch" ]; then python sec.py || true; fi
           python fills.py || true
           python sentinela.py || true
+          python prova.py || true
 
       - name: CHEFE — placar geral
         if: always()
@@ -95,7 +96,7 @@ jobs:
           rm -f data/alpaca.env
           git config user.name "mesa-de-agentes"
           git config user.email "mesa@users.noreply.github.com"
-          for f in data/aranha.db data/carteira.json data/relatorio_aranha.json data/calendario.json data/sec.json data/fills.json data/sentinela.json data/foguete2.json data/foguete2_trades.csv data/foguete2_exec.json data/analise_ia.json acoes/carteira_acoes.json acoes/ordens.json diario site; do [ -e "$f" ] && git add "$f"; done; true
+          for f in data/aranha.db data/carteira.json data/relatorio_aranha.json data/calendario.json data/sec.json data/fills.json data/sentinela.json data/prova.json data/foguete2.json data/foguete2_trades.csv data/foguete2_exec.json data/analise_ia.json acoes/carteira_acoes.json acoes/ordens.json diario site; do [ -e "$f" ] && git add "$f"; done; true
           git diff --cached --quiet && exit 0
           git commit -q -m "mesa: rodada $(date -u +%Y-%m-%dT%H:%M)Z"
           for i in 1 2 3; do git pull -q --rebase -X theirs && git push -q && break; sleep 5; done
