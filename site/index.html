@@ -468,12 +468,15 @@ function recalculaVivo(){
     $('bs').textContent=`${Math.max(0,(v-100)/9).toFixed(1)}% do caminho até 1000 · ${Object.keys(CART.ia.posicoes).length} posições abertas`}
   if(!S||!CART||!CART.foguete)return;const f=CART.foguete,c=f.conta||{};let pnl=0;
   for(const [s,p] of Object.entries(f.pos||{})){const px=PX[s]||p.entrada;pnl+=p.lado*p.qtd*(px-p.entrada)}
-  const fog=(c.caixa||0)+pnl+(c.cofre||0);const m=S.mesas.find(x=>x.nome.startsWith('Foguete'));if(!m)return;
-
-  const card=[...document.querySelectorAll('.ms')].find(e=>e.querySelector('.t').textContent.startsWith('Foguete'));
-  if(card){const p=fog/100-1;const v=card.querySelector('.v');const ant=parseFloat(v.textContent);v.textContent=fog.toFixed(2);v.className='v '+(p>=0?'up':'dn');
-    card.querySelector('.q').textContent=(p>=0?'+':'')+(p*100).toFixed(2)+'%';card.querySelector('.q').className='q '+(p>=0?'up':'dn');
-    if(ant&&Math.abs(ant-fog)>0.004){v.style.transition='none';v.style.background=fog>ant?'rgba(43,255,154,.25)':'rgba(255,77,109,.25)';setTimeout(()=>{v.style.transition='background .6s';v.style.background='transparent'},60)}}
+  const fog=(c.caixa||0)+pnl+(c.cofre||0);
+  cartaoVivo('Foguete v2',fog);
+  if(CART.ia&&CART.ia.posicoes){let pi=0;for(const [s,p] of Object.entries(CART.ia.posicoes)){const px=PX[s]||p.atual||p.entrada;pi+=p.lado*p.qtd*(px-p.entrada)}cartaoVivo('IA pura',(CART.ia.caixa??100)+pi)}
+}
+function cartaoVivo(nome,val){ /* cada cartão recebe SÓ o próprio número ao vivo */
+  const card=[...document.querySelectorAll('.ms')].find(e=>e.querySelector('.t').textContent.startsWith(nome));if(!card)return;
+  const p=val/100-1;const v=card.querySelector('.v');const ant=parseFloat(v.textContent);v.textContent=val.toFixed(2);v.className='v '+(p>=0?'up':'dn');
+  card.querySelector('.q').textContent=(p>=0?'+':'')+(p*100).toFixed(2)+'%';card.querySelector('.q').className='q '+(p>=0?'up':'dn');
+  if(ant&&Math.abs(ant-val)>0.004){v.style.transition='none';v.style.background=val>ant?'rgba(43,255,154,.25)':'rgba(255,77,109,.25)';setTimeout(()=>{v.style.transition='background .6s';v.style.background='transparent'},60)}
 }
 setInterval(recalculaVivo,1000);carteiraViva();setInterval(carteiraViva,20000);
 try{hist=JSON.parse(localStorage.getItem('mesa_hist')||'[]')}catch(e){}
