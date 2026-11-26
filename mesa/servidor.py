@@ -65,7 +65,7 @@ def teia():
     nos, lig, mercado = [], [], {}
     if not os.path.exists(db):
         return {"noticias": nos, "ligacoes": lig, "mercado": mercado, "total_noticias": 0}
-    c = sqlite3.connect(db)
+    c = sqlite3.connect(f"file:{db}?mode=ro", uri=True)
     total = c.execute("select count(*) from noticias").fetchone()[0]
     for tit, ms, p, fo, fonte in c.execute("select titulo, moedas, perigo, forca, fonte from noticias where moedas!='' order by quando desc limit 40"):
         i = len(nos)
@@ -74,6 +74,7 @@ def teia():
             lig.append([i, m])
     for tipo, chave, valor in c.execute("select tipo, chave, valor from mercado where quando=(select max(quando) from mercado)"):
         mercado.setdefault(tipo, {})[chave] = valor
+    c.close()  # solta o arquivo (no Windows, conexão aberta trava o git)
     return {"noticias": nos, "ligacoes": lig, "mercado": mercado, "total_noticias": total}
 
 
@@ -132,12 +133,7 @@ def ciclo_aranha():
     import subprocess
     while True:
         try:
-            env = dict(os.environ, GIT_TERMINAL_PROMPT="0")
-            subprocess.run(["git", "fetch", "-q", "origin", "main"], cwd=RAIZ, timeout=90, env=env)
-            # só os DADOS que a nuvem produz; o código local nunca é tocado
-            subprocess.run(["git", "checkout", "FETCH_HEAD", "--", "data/aranha.db", "data/carteira.json", "data/relatorio_aranha.json",
-                            "data/calendario.json", "data/sec.json", "data/fills.json", "data/sentinela.json",
-                            "acoes/carteira_acoes.json", "diario"], cwd=RAIZ, timeout=60, env=env, capture_output=True)
+            subprocess.run(["git", "pull", "-q", "--rebase", "--autostash"], cwd=RAIZ, timeout=120)
         except Exception as e:
             print("sync:", e)
         time.sleep(10 * 60)
