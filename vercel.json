@@ -4,6 +4,6 @@
   "framework": null,
   "outputDirectory": "site",
   "cleanUrls": true,
-  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- site/index.html site/aranha.html site/vivo.html vercel.json",
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- site/index.html site/aranha.html site/vivo.html site/predio.html vercel.json",
   "headers": [{"source": "/dados/(.*)", "headers": [{"key": "Cache-Control", "value": "no-store"}]}]
 }
