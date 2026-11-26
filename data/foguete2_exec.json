@@ -171,5 +171,10 @@
   "quando": "2026-11-26T17:52",
   "simbolo": "SOLUSDT",
   "erro": "Binance demo 400: {\"code\":-4164,\"msg\":\"Order's notional must be no smaller than 5 (unless you choose reduce only).\"}"
+ },
+ {
+  "quando": "2026-11-26T17:57",
+  "simbolo": "SOLUSDT",
+  "erro": "Binance demo 400: {\"code\":-4164,\"msg\":\"Order's notional must be no smaller than 5 (unless you choose reduce only).\"}"
  }
 ]
