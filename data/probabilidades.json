@@ -1,35 +1,35 @@
 {
- "gerado": "2026-11-26T18:22",
+ "gerado": "2026-11-26T18:39",
  "prazo": "2026-11-30T23:59",
  "posicoes": {
   "SUIUSDT": {
-   "preco": 0.669,
-   "chance_alvo": 0.279,
-   "chance_stop": 0.666,
-   "nenhum": 0.055,
-   "valor_esperado": 2.87
+   "preco": 0.6697,
+   "chance_alvo": 0.269,
+   "chance_stop": 0.679,
+   "nenhum": 0.052,
+   "valor_esperado": 2.81
   },
   "HYPEUSDT": {
-   "preco": 60.62,
-   "chance_alvo": 0.394,
-   "chance_stop": 0.493,
-   "nenhum": 0.113,
-   "valor_esperado": 2.55
+   "preco": 60.9,
+   "chance_alvo": 0.35,
+   "chance_stop": 0.538,
+   "nenhum": 0.111,
+   "valor_esperado": 1.94
   },
   "LINKUSDT": {
-   "preco": 9.245,
-   "chance_alvo": 0.251,
-   "chance_stop": 0.63,
-   "nenhum": 0.119,
-   "valor_esperado": 1.21
+   "preco": 9.256,
+   "chance_alvo": 0.24,
+   "chance_stop": 0.64,
+   "nenhum": 0.12,
+   "valor_esperado": 1.17
   },
   "AAVEUSDT": {
-   "preco": 93.4,
-   "chance_alvo": 0.458,
-   "chance_stop": 0.462,
-   "nenhum": 0.08,
-   "valor_esperado": 2.74
+   "preco": 93.71,
+   "chance_alvo": 0.432,
+   "chance_stop": 0.492,
+   "nenhum": 0.076,
+   "valor_esperado": 2.3
   }
  },
- "valor_esperado_total": 9.36
+ "valor_esperado_total": 8.23
 }
