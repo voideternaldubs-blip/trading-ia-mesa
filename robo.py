@@ -6,7 +6,7 @@ RISCO      -> tamanho pela volatilidade (alvo 50%/ano por moeda), máx. 10 moeda
 SAÍDA      -> stop de emergência: perda de 12% numa posição fecha na hora
 NOTÍCIAS   -> aranha: muito perigo sobre a moeda = não abre compra nova nela
 BALEIA     -> financiamento esticado demais (>0,05%/8h) = não abre compra; muito negativo = não abre venda
-CHEFE      -> se a carteira cair 40% do topo, desliga tudo e chama o Breno
+GESTOR     -> piso de 50 USD, escada de alavancagem 3x→7x só com lucro, cofre de 25% do lucro a cada vez que dobra
 """
 import os, json, requests, pandas as pd
 from datetime import datetime, timezone
@@ -18,6 +18,8 @@ ESTADO = os.path.join(AQUI, "data", "carteira.json")
 DIARIO = os.path.join(AQUI, "diario")
 CUSTO = 0.0015
 INICIAL = 100.0
+PISO = 50.0                # nunca perde os 100 inteiros: com 50, para tudo
+ESCADA_INI, ESCADA_MAX = 3.0, 7.0
 
 
 def velas(m, n=600):
@@ -58,12 +60,20 @@ def main():
     precos = {m: d.c.iloc[-1] for m, d in dados.items()}
     total = valor(est, precos)
     est["topo"] = max(est["topo"], total)
-    queda = total / est["topo"] - 1
+    est.setdefault("cofre", 0.0); est.setdefault("degrau", 2 * INICIAL)
 
-    # CHEFE: freio de mão
-    if est["ligado"] and queda <= -0.40:
+    # GESTOR DE CAPITAL: piso + escada + cofre (testado em 10 mil simulações)
+    patrimonio = total + est["cofre"]
+    if est["ligado"] and patrimonio <= PISO:
         est["ligado"] = False
-        log.append(f"- 🛑 CHEFE: carteira caiu {queda:.0%} do topo. TUDO DESLIGADO. Chamar o Breno.")
+        log.append(f"- 🛑 PISO: patrimônio {patrimonio:.2f} USD bateu no piso de {PISO:.0f}. TUDO DESLIGADO, sobrou dinheiro na mão.")
+    if total >= est["degrau"]:  # dobrou: 25% do lucro vai pro cofre e não volta pro risco
+        tira = 0.25 * (total - est["degrau"] / 2)
+        est["caixa"] -= tira; est["cofre"] += tira; total -= tira
+        est["degrau"] = total * 2
+        log.append(f"- 🔒 COFRE: conta dobrou! {tira:.2f} USD guardados no cofre (cofre = {est['cofre']:.2f})")
+    alav = min(ESCADA_MAX, ESCADA_INI + max(0.0, (patrimonio / INICIAL - 1) / 0.5))
+    log.append(f"- ⚙️ ESCADA: alavancagem {alav:.1f}x (começa em {ESCADA_INI:.0f}x, +1x a cada +50% de lucro, máx {ESCADA_MAX:.0f}x)")
     alvo = {}
     for m, df in dados.items():
         if not est["ligado"]:
@@ -92,7 +102,7 @@ def main():
             log.append(f"- {m}: " + "; ".join(motivo))
 
     # executa no papel: cada moeda recebe no máx. 1/10 da carteira
-    fatia = total / len(dados)
+    fatia = total * alav / len(dados)
     for m, s in alvo.items():
         desejado = s * fatia / precos[m]
         atual = est["pos"].get(m, {"qtd": 0.0, "preco": precos[m]})
@@ -110,8 +120,8 @@ def main():
             est["pos"][m] = {"qtd": nova, "preco": atual["preco"] if mesmo else precos[m]}
 
     total = valor(est, precos)
-    est["historico"].append({"quando": agora, "valor": round(total, 4)})
-    log.append(f"- **Carteira: {total:.2f} USD** ({total / INICIAL - 1:+.1%} desde o início) | medo/ganância {merc.get('medo_ganancia', {}).get('geral')}")
+    est["historico"].append({"quando": agora, "valor": round(total + est["cofre"], 4)})
+    log.append(f"- **Carteira: {total + est['cofre']:.2f} USD** (em risco {total:.2f} + cofre {est['cofre']:.2f}) ({(total + est['cofre']) / INICIAL - 1:+.1%} desde o início) | medo/ganância {merc.get('medo_ganancia', {}).get('geral')}")
     log.append("- Posições: " + (", ".join(f"{m} {'comprado' if p['qtd'] > 0 else 'vendido'} {abs(p['qtd'] * precos[m]):.2f}$" for m, p in est["pos"].items()) or "nenhuma"))
     json.dump(est, open(ESTADO, "w", encoding="utf-8"), indent=1, ensure_ascii=False)
     os.makedirs(DIARIO, exist_ok=True)
