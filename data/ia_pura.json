@@ -4,25 +4,53 @@
  "posicoes": {
   "SUIUSDT": {
    "lado": 1,
-   "qtd": 298.9,
-   "entrada": 0.669,
-   "stop": 0.63555,
-   "alvo": 0.7337,
-   "em": "2026-11-26T12:40",
-   "ordem": 1102579572,
-   "conferido_ate": "2026-11-26T12:40",
-   "atual": 0.6688
+   "qtd": 1493.9,
+   "entrada": 0.670059903608,
+   "stop": 0.6433,
+   "alvo": 6.700599036080001,
+   "trailing_pct": 0.04,
+   "ativa_em": 0.7036,
+   "em": "2026-11-26T12:40"
   },
   "HYPEUSDT": {
    "lado": 1,
-   "qtd": 3.27,
-   "entrada": 61.048,
-   "stop": 57.9956,
-   "alvo": 69.8,
-   "em": "2026-11-26T12:40",
-   "ordem": 900746772,
-   "conferido_ate": "2026-11-26T12:40",
-   "atual": 61.058
+   "qtd": 16.37,
+   "entrada": 61.2714502138,
+   "stop": 58.821,
+   "alvo": 612.7145021380001,
+   "trailing_pct": 0.04,
+   "ativa_em": 64.335,
+   "em": "2026-11-26T12:40"
+  },
+  "SSVUSDT": {
+   "lado": 1,
+   "qtd": 113.55,
+   "entrada": 2.635,
+   "stop": 2.477,
+   "alvo": 26.349999999999998,
+   "trailing_pct": 0.06,
+   "ativa_em": 2.767,
+   "em": "2026-11-26T12:45"
+  },
+  "LINKUSDT": {
+   "lado": 1,
+   "qtd": 32.44,
+   "entrada": 9.247,
+   "stop": 8.877,
+   "alvo": 92.47,
+   "trailing_pct": 0.04,
+   "ativa_em": 9.709,
+   "em": "2026-11-26T12:45"
+  },
+  "AAVEUSDT": {
+   "lado": 1,
+   "qtd": 3.1,
+   "entrada": 96.22032258065,
+   "stop": 92.37,
+   "alvo": 962.2032258065001,
+   "trailing_pct": 0.04,
+   "ativa_em": 101.03,
+   "em": "2026-11-26T12:45"
   }
  },
  "fechadas": [],
@@ -33,5 +61,6 @@
    "quando": "2026-11-26T12:40",
    "valor": 99.97
   }
- ]
+ ],
+ "modo": "ATAQUE: 100 -> 1000 em 4 dias; ~25x total em 5 moedas; stops e stop m\u00f3vel NA CORRETORA"
 }
