@@ -1,5 +1,5 @@
 {
- "gerado": "2026-11-26T18:24",
+ "gerado": "2026-11-26T18:26",
  "fim": "2026-11-30",
  "dias_restantes": 4,
  "robos": [
@@ -39,13 +39,13 @@
   {
    "robo": "IA pura (Claude)",
    "inicial": 100.0,
-   "atual": 100.75,
-   "retorno_pct": 0.75,
+   "atual": 99.96,
+   "retorno_pct": -0.04,
    "operacoes": 5,
    "acerto_pct": 40.0,
    "ganho_medio": 1.0,
    "perda_media": -0.95,
-   "maior_queda_pct": -5.96
+   "maior_queda_pct": -6.69
   },
   {
    "robo": "Foguete de ações (Alpaca)",
