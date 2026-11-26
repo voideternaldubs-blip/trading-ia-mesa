@@ -47,6 +47,8 @@ def main():
     out.append(resumo("Tendência cripto", 100.0, [{"valor": h["valor"]} for h in c.get("historico", [])], []))
     a = ler(os.path.join(RAIZ, "acoes", "carteira_acoes.json"), {})
     out.append(resumo("Ações EUA (Alpaca)", 100.0, a.get("hist", []), []))
+    ro = ler(os.path.join(RAIZ, "acoes", "carteira_rotacao.json"), {})
+    out.append(resumo("Foguete de ações (Alpaca)", 100.0, ro.get("hist", []), []))
     hoje = datetime.now(timezone.utc).date()
     dias = (datetime.fromisoformat(FIM).date() - hoje).days
     json.dump({"gerado": datetime.now(timezone.utc).isoformat()[:16], "fim": FIM, "dias_restantes": dias, "robos": out},

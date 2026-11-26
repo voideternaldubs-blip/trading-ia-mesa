@@ -28,6 +28,10 @@ def mesas():
         out.append({"nome": "Ações EUA", "mercado": "TQQQ · SOXL · UPRO (filtro média 200)", "valor": a["hist"][-1]["valor"],
                     "posicoes": list(a["pos"]) or ["caixa (mercado abaixo da média 200)"],
                     "curva": [x["valor"] for x in a["hist"][-120:]], "quando": a["hist"][-1]["dia"]})
+    r = ler(os.path.join(AQUI, "acoes", "carteira_rotacao.json"))
+    if r and r.get("hist"):
+        out.append({"nome": "Foguete de ações", "mercado": "ETFs alavancados · 9 setores · Alpaca", "valor": r["hist"][-1]["valor"],
+                    "posicoes": list(r.get("pos", {})) or ["caixa (nenhum setor em alta)"], "curva": [x["valor"] for x in r["hist"][-120:]], "quando": r["hist"][-1]["dia"]})
     fg = ler(os.path.join(D, "foguete2.json"))
     if fg and fg.get("hist"):
         h = fg["hist"][-1]
