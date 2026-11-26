@@ -119,7 +119,7 @@ window.BRT_OFF=-3*3600; /* gráficos: desloca o eixo para Brasília */
   <div class="brand">ME<i>/</i>SA</div>
   <a href="/vivo.html" class="vivo-btn">AO VIVO<span>↗</span></a>
   <div class="live"><b></b>ao vivo</div>
-  <div class="kpi"><span>Total</span><b id="kt">—</b></div>
+  <div class="kpi"><span>IA pura</span><b id="kt">—</b></div>
   <div class="kpi hide"><span>Notícias</span><b id="kn" style="color:var(--cy)">—</b></div>
   <div class="kpi hide"><span>Medo / Ganância</span><b id="kf" style="color:var(--am)">—</b></div>
   <div class="chip-s" id="sent"><i></i><span>sentinela…</span></div>
@@ -129,7 +129,7 @@ window.BRT_OFF=-3*3600; /* gráficos: desloca o eixo para Brasília */
 
 <main class="bento">
   <section class="shell total" style="grid-area:total;animation-delay:.05s"><div class="core">
-    <span class="eyebrow" style="--c:var(--gr)"><i></i>Saldo da mesa</span>
+    <span class="eyebrow" style="--c:var(--gr)"><i></i>IA pura · 100 → meta 1000</span>
     <div class="big" id="bal">—</div>
     <div class="delta" id="dl"></div>
     <div class="sub" id="bs"></div>
@@ -170,7 +170,7 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
 
-const COR={CHEFE:'#ff2bd6',ARANHA:'#2ee6ff',ANALISTA:'#9b7bff',VET:'#ffb02e',RUG:'#ff4d6d',SNIPER:'#2bff9a',"SAÍDA":'#5ab8ff',RISCO:'#ff7aa8',"CALENDÁRIO":'#c8ff2e',SEC:'#ffd86b',FILLS:'#7cf3c9',SENTINELA:'#ff8a3d'};
+const COR={CHEFE:'#ff2bd6',ARANHA:'#2ee6ff',ANALISTA:'#9b7bff',"PREVISÃO":'#ffb02e',"IA PURA":'#B56BFF',SNIPER:'#2bff9a',"SAÍDA":'#5ab8ff',RISCO:'#ff7aa8',"CALENDÁRIO":'#c8ff2e',SEC:'#ffd86b',FILLS:'#7cf3c9',SENTINELA:'#ff8a3d'};
 const NOMES=Object.keys(COR);
 const $=id=>document.getElementById(id);
 let S=null,hist=[],vistos=new Set(),primeira=true;
@@ -317,12 +317,12 @@ function spark(){
 /* ================= DADOS ================= */
 async function puxa(){
   try{S=await (await fetch('/api/estado',{cache:'no-store'})).json()}catch(e){return}
-  const pct=S.total/S.base-1,up=pct>=0;
-  $('kt').textContent=S.total.toFixed(2);$('kn').textContent=S.teia.total_noticias;$('kf').textContent=(S.teia.mercado.medo_ganancia||{}).geral??'—';
-  $('bal').innerHTML=`${S.total.toFixed(2)}<small> usd</small>`;
+  const IA=S.ia||{valor:100,inicial:100,meta:1000,hist:[]},pct=IA.valor/IA.inicial-1,up=pct>=0;
+  $('kt').textContent=IA.valor.toFixed(2);$('kn').textContent=S.teia.total_noticias;$('kf').textContent=(S.teia.mercado.medo_ganancia||{}).geral??'—';
+  $('bal').innerHTML=`${IA.valor.toFixed(2)}<small> usd</small>`;
   $('dl').className='delta '+(up?'up':'dn');$('dl').innerHTML=`<em>${up?'+':''}${(pct*100).toFixed(2)}%</em> desde o início`;
-  $('bs').textContent=`${S.mesas.length} mesas · começou com ${S.base} USD`;
-  hist.push(S.total);if(hist.length>500)hist.shift();localStorage.setItem('mesa_hist',JSON.stringify(hist));spark();
+  $('bs').textContent=`${Math.max(0,(IA.valor-100)/9).toFixed(1)}% do caminho até 1000 · ${Object.keys(IA.posicoes||{}).length} posições abertas`;
+  hist=(IA.hist&&IA.hist.length>1)?IA.hist.slice():[IA.valor,IA.valor];spark();
   const eq=S.equipe||{},sv=eq.sentinela||{};$('sent').className='chip-s'+(sv.tudo_ok===false?' alerta':'');$('sent').querySelector('span').textContent=sv.tudo_ok===false?(sv.resumo||'alerta'):'todos os agentes ok';
   const pv=S.prova||{},fg=(pv.robos||[])[0];$('kpv').textContent=pv.dias_restantes!=null?`faltam ${pv.dias_restantes}d · foguete ${fg?(fg.retorno_pct>=0?'+':'')+fg.retorno_pct+'%':'-'}`:'—';
   $('ob').textContent=`${NOMES.length} agentes`;$('os').textContent=`${S.eventos.length} ações registradas · papel · preço real`;
@@ -339,27 +339,29 @@ async function puxa(){
 /* ================= AO VIVO: preço da Binance a cada segundo, sem esperar a nuvem ================= */
 let CART=null,PX={},wsV=null,simbV='';
 async function carteiraViva(){try{CART=await (await fetch(API('carteira'),{cache:'no-store'})).json()}catch(e){return}
-  const sy=Object.keys((CART.foguete||{}).pos||{}).map(s=>s.toLowerCase());const k=sy.join();if(k===simbV||!sy.length)return;simbV=k;
+  const sy=[...new Set([...Object.keys((CART.foguete||{}).pos||{}),...Object.keys((CART.ia||{}).posicoes||{})])].map(s=>s.toLowerCase());const k=sy.join();if(k===simbV||!sy.length)return;simbV=k;
   if(wsV)wsV.close();wsV=new WebSocket('wss://data-stream.binance.vision/stream?streams='+sy.map(s=>s+'@miniTicker').join('/'));
   wsV.onmessage=e=>{const d=JSON.parse(e.data).data;PX[d.s]=+d.c};wsV.onclose=()=>{simbV='';setTimeout(carteiraViva,3000)}}
 function recalculaVivo(){
+  if(S&&CART&&CART.ia&&CART.ia.posicoes){let pi=0;for(const [s,p] of Object.entries(CART.ia.posicoes)){const px=PX[s]||p.atual||p.entrada;pi+=p.lado*p.qtd*(px-p.entrada)}
+    const v=(CART.ia.caixa??100)+pi,pc=v/100-1,u=pc>=0;$('kt').textContent=v.toFixed(2);$('bal').innerHTML=`${v.toFixed(2)}<small> usd</small>`;
+    $('dl').className='delta '+(u?'up':'dn');$('dl').innerHTML=`<em>${u?'+':''}${(pc*100).toFixed(2)}%</em> desde 100 · <span style="color:#2bff9a">● ao vivo</span>`;
+    $('bs').textContent=`${Math.max(0,(v-100)/9).toFixed(1)}% do caminho até 1000 · ${Object.keys(CART.ia.posicoes).length} posições abertas`}
   if(!S||!CART||!CART.foguete)return;const f=CART.foguete,c=f.conta||{};let pnl=0;
   for(const [s,p] of Object.entries(f.pos||{})){const px=PX[s]||p.entrada;pnl+=p.lado*p.qtd*(px-p.entrada)}
   const fog=(c.caixa||0)+pnl+(c.cofre||0);const m=S.mesas.find(x=>x.nome.startsWith('Foguete'));if(!m)return;
-  const total=S.total-m.valor+fog,pct=total/S.base-1,up=pct>=0;
-  $('kt').textContent=total.toFixed(2);$('bal').innerHTML=`${total.toFixed(2)}<small> usd</small>`;
-  $('dl').className='delta '+(up?'up':'dn');$('dl').innerHTML=`<em>${up?'+':''}${(pct*100).toFixed(2)}%</em> desde o início · <span style="color:#2bff9a">● ao vivo</span>`;
+
   const card=[...document.querySelectorAll('.ms')].find(e=>e.querySelector('.t').textContent.startsWith('Foguete'));
   if(card){const p=fog/100-1;const v=card.querySelector('.v');const ant=parseFloat(v.textContent);v.textContent=fog.toFixed(2);v.className='v '+(p>=0?'up':'dn');
     card.querySelector('.q').textContent=(p>=0?'+':'')+(p*100).toFixed(2)+'%';card.querySelector('.q').className='q '+(p>=0?'up':'dn');
     if(ant&&Math.abs(ant-fog)>0.004){v.style.transition='none';v.style.background=fog>ant?'rgba(43,255,154,.25)':'rgba(255,77,109,.25)';setTimeout(()=>{v.style.transition='background .6s';v.style.background='transparent'},60)}}
 }
-setInterval(recalculaVivo,1000);carteiraViva();setInterval(carteiraViva,60000);
+setInterval(recalculaVivo,1000);carteiraViva();setInterval(carteiraViva,20000);
 try{hist=JSON.parse(localStorage.getItem('mesa_hist')||'[]')}catch(e){}
 // entre eventos reais, a equipe mantém a rotina: aranha varre, analista confere, risco audita
-setInterval(()=>{const n=['ARANHA','ANALISTA','RISCO','VET'][Math.floor(Math.random()*4)];acende(n,1100);if(Math.random()<.35)pacote(n)},3200);
+setInterval(()=>{const n=['ARANHA','ANALISTA','RISCO','PREVISÃO','IA PURA'][Math.floor(Math.random()*5)];acende(n,1100);if(Math.random()<.35)pacote(n)},3200);
 setInterval(()=>{$('clk').textContent=BRT(Date.now(),1)},1000);
-puxa();setInterval(puxa,15000);requestAnimationFrame(quadro);
+puxa();setInterval(puxa,20000);requestAnimationFrame(quadro);
 </script>
 </body>
 </html>

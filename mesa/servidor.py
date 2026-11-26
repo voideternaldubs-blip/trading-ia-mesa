@@ -17,8 +17,8 @@ AGENTES = {
     "CHEFE": "Decide, junta tudo e fecha o placar",
     "ARANHA": "Varre notícias e dados do mercado",
     "ANALISTA": "Sinais de tendência testados",
-    "VET": "Filtra moedas novas (liquidez, compradores)",
-    "RUG": "Detector de golpe",
+    "PREVISÃO": "Máquina do tempo: 10.000 futuros por posição",
+    "IA PURA": "A carteira do Claude: 100 -> meta 1000",
     "SNIPER": "Executa as entradas",
     "SAÍDA": "Stops, alvos e realização",
     "RISCO": "Tamanho, alavancagem e vetos",
@@ -40,7 +40,20 @@ def equipe_extra():
     k, s, f, v = ler_json("calendario.json"), ler_json("sec.json"), ler_json("fills.json"), ler_json("sentinela.json")
     docs = s.get("documentos", [])
     prox = [e for e in k.get("eventos", []) if e.get("quando", "") >= datetime.now(timezone.utc).isoformat()[:16]]
-    return {
+    ia, pb, fg, rel = ler_json("ia_pura.json"), ler_json("probabilidades.json"), ler_json("foguete2.json"), ler_json("relatorio_aranha.json")
+    ip = ia.get("posicoes", {}); valor = (ia.get("hist") or [{}])[-1].get("valor", 100)
+    pp = pb.get("posicoes", {})
+    fpos = fg.get("posicoes", {}); vend = sum(1 for p in fpos.values() if p.get("lado", 0) < 0)
+    nots = rel.get("noticias", [])
+    vivo = {
+        "IA PURA": (len(ia.get("fechadas", [])) + len(ip), f"{valor:.2f} USD ({valor - 100:+.2f}) · meta 1000 · " + ", ".join(f"{s.replace('USDT', '')} {'vendido' if p['lado'] < 0 else 'comprado'}" for s, p in ip.items())),
+        "PREVISÃO": (len(pp), " · ".join(f"{s.replace('USDT', '')} alvo {v['chance_alvo'] * 100:.0f}%" for s, v in pp.items()) or "calculando..."),
+        "ANALISTA": (len(fpos), f"tendência: {vend} vendidas, {len(fpos) - vend} compradas no foguete"),
+        "RISCO": (len(ip), f"IA arrisca {sum(abs(p['qtd'] * (p['stop'] - p['entrada'])) for p in ip.values()):.0f} USD p/ ganhar {sum(abs(p['qtd'] * (p['entrada'] - p['alvo'])) for p in ip.values()):.0f}" if ip else "sem risco aberto"),
+        "SAÍDA": (len(ip), " · ".join(f"{s.replace('USDT', '')} stop {p['stop']:g} alvo {p['alvo']:g}" for s, p in ip.items()) or "sem posições"),
+        "ARANHA": (len(nots), (nots[0].get("titulo_pt") or nots[0].get("titulo", ""))[:110] if nots else "varrendo..."),
+    }
+    return {**vivo,
         "CALENDÁRIO": (len(k.get("eventos", [])), (prox[0]["nome"] + " · " + prox[0]["quando"].replace("T", " ")) if prox else k.get("aviso", "aguardando...")),
         "SEC": (len(docs), next((d.get("sinal") for d in docs if d.get("sinal")), f"{len(docs)} documentos lidos")),
         "FILLS": (len(f.get("execucoes", [])), f"escorregão médio {f.get('escorregao_medio_pct')}%" if f.get("execucoes") else "conferindo execuções"),
@@ -52,7 +65,7 @@ def agente_do_evento(t):
     s = t.lower()
     if s.startswith("posições") or "posições:" in s: return "RISCO"
     if "→ posição" in s: return "SAÍDA" if "zerada" in s else "SNIPER"
-    if "barrada" in s or "golpe" in s or "tapete" in s: return "RUG"
+    if "ia pura" in s: return "IA PURA"
     if "veto" in s: return "RISCO"
     if "stop" in s or "venda" in s or "vendeu" in s or "vende " in s or "sumiu" in s or "tempo" in s: return "SAÍDA"
     if "compra" in s: return "SNIPER"
@@ -109,10 +122,11 @@ def estado():
     for e in ev:
         ultimo[e["agente"]] = e["texto"]
     t = teia()
-    cont["ARANHA"] = t["total_noticias"]
     extra, blocos = equipe_extra()
     for nome, (n, txt) in extra.items():
         cont[nome] = n; ultimo[nome] = txt
+    cont["ARANHA"] = t["total_noticias"]
+    ia = ler_json("ia_pura.json")
     return {
         "agora": datetime.now(timezone.utc).isoformat(),
         "mesas": ms,
@@ -123,6 +137,8 @@ def estado():
         "teia": t,
         "equipe": blocos,
         "prova": ler_json("prova.json"),
+        "ia": {"valor": (ia.get("hist") or [{"valor": 100}])[-1]["valor"], "caixa": ia.get("caixa", 100), "meta": 1000, "inicial": 100,
+               "posicoes": ia.get("posicoes", {}), "hist": [h["valor"] for h in ia.get("hist", [])[-300:]]},
     }
 
 

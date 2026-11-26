@@ -143,7 +143,7 @@ window.BRT_OFF=-3*3600; /* gráficos: desloca o eixo para Brasília */
 <script>
 const $=id=>document.getElementById(id);
 let MOEDAS=["BTC","ETH","SOL","BNB","XRP","DOGE","AVAX","LINK","ADA","SUI"];let EXTRA=[];
-const COR={CHEFE:'#D946EF',ARANHA:'#22D3EE',ANALISTA:'#A78BFA',VET:'#FBBF24',RUG:'#FB7185',SNIPER:'#34D399',"SAÍDA":'#60A5FA',RISCO:'#F472B6',"CALENDÁRIO":'#A3E635',SEC:'#EAB308',FILLS:'#2DD4BF',SENTINELA:'#FB923C'};
+const COR={CHEFE:'#D946EF',ARANHA:'#22D3EE',ANALISTA:'#A78BFA',"PREVISÃO":'#FBBF24',"IA PURA":'#B56BFF',SNIPER:'#34D399',"SAÍDA":'#60A5FA',RISCO:'#F472B6',"CALENDÁRIO":'#A3E635',SEC:'#EAB308',FILLS:'#2DD4BF',SENTINELA:'#FB923C'};
 let sel="BTC",iv="1m",ws=null,chart,cs,vs,entryLine=null,stopLine=null,ultimo={},abertura={},cart=null,estado=null,lat=[];
 
 /* ---------- formatação ---------- */
@@ -246,7 +246,7 @@ function atualizaCapital(html,n){
 function troca(m){sel=m;document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('at',b.dataset.m===m));document.querySelectorAll('.tile').forEach(t=>t.classList.toggle('at',t.dataset.m===m));$('tapelbl').textContent='Negócios ao vivo · '+m;$('trades').innerHTML='';carregaHist();conecta();atualizaPosicoes()}
 
 /* ---------- agentes ---------- */
-const PAPEL={CHEFE:'decide e fecha o placar',ARANHA:'lendo notícias do mundo',ANALISTA:'mede tendência e rompimentos',VET:'filtra moedas novas',RUG:'caça golpes',SNIPER:'executa entradas',"SAÍDA":'stops e alvos',RISCO:'tamanho e alavancagem',"CALENDÁRIO":'agenda do Fed e balanços',SEC:'documentos oficiais',FILLS:'confere execuções',SENTINELA:'vigia a equipe'};
+const PAPEL={CHEFE:'decide e fecha o placar',ARANHA:'lendo notícias do mundo',ANALISTA:'mede tendência e rompimentos',"PREVISÃO":'10.000 futuros por posição',"IA PURA":'carteira do Claude 100→1000',SNIPER:'executa entradas',"SAÍDA":'stops e alvos',RISCO:'tamanho e alavancagem',"CALENDÁRIO":'agenda do Fed e balanços',SEC:'documentos oficiais',FILLS:'confere execuções',SENTINELA:'vigia a equipe'};
 $('alist').innerHTML=Object.keys(COR).map(n=>`<div class="a" id="a_${n}" style="--c:${COR[n]}"><i></i><b>${n}</b><span id="at_${n}">${PAPEL[n]}</span></div>`).join('');
 function acende(n,txt,ms=2600){const a=$('a_'+n);if(!a)return;if(txt)$('at_'+n).textContent=txt;a.classList.add('on');clearTimeout(a._t);a._t=setTimeout(()=>{a.classList.remove('on')},ms);
   const st=document.querySelector(`.stage[data-n="${n}"]`);if(st){st.classList.add('on');setTimeout(()=>st.classList.remove('on'),ms)}}

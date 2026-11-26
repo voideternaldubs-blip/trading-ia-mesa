@@ -108,7 +108,7 @@ window.BRT_OFF=-3*3600; /* gráficos: desloca o eixo para Brasília */
     <div class="rhead"><div class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="#ff2bd6" stroke-width="1.4"><circle cx="12" cy="12" r="2.6"/><path d="M12 9.4V3M12 14.6V21M9.6 11 4 7M14.4 11 20 7M9.6 13 4 17M14.4 13 20 17M10 12H2M14 12h8"/></svg>RELATÓRIO DA ARANHA</div><span class="eyebrow" style="margin-left:auto;--c:var(--gr)"><i></i>em português simples</span></div>
     <div class="rbody" id="rep"></div>
     <div class="fila" id="fila"></div>
-    <div class="ctrl"><button class="btn" id="bp">Pausar leitura<span>❚❚</span></button><button class="btn pri" id="bn">Próxima notícia<span>↗</span></button></div>
+    
   </div></section>
 </main>
 <script>
@@ -222,13 +222,11 @@ function abre(i){
     requestAnimationFrame(()=>requestAnimationFrame(()=>{sheet.classList.remove('entra');novaAranha()}));
     montaRep(n);lidas++;$('kl').textContent=lidas;$('kq').textContent=R.noticias.length-1-idx;fila();
     $('dst').textContent=`${idx+1}/${R.noticias.length}`;
-    clearTimeout(timerProx);const dur=Math.max(14000,keys.length*1700+9000);document.documentElement.style.setProperty('--d',dur+'ms');
+    clearTimeout(timerProx);const dur=Math.max(7000,keys.length*900+5000);document.documentElement.style.setProperty('--d',dur+'ms');
     timerProx=setTimeout(prox,dur)},700);
 }
 function fila(){$('fila').innerHTML=R.noticias.slice(0,24).map((_,i)=>`<i class="${i<idx?'ok':i===idx?'now':''}"></i>`).join('')}
 function prox(){if(pausa){timerProx=setTimeout(prox,2000);return}abre(idx+1)}
-$('bn').onclick=()=>{clearTimeout(timerProx);abre(idx+1)};
-$('bp').onclick=()=>{pausa=!pausa;$('bp').innerHTML=pausa?'Continuar leitura<span>▶</span>':'Pausar leitura<span>❚❚</span>'};
 function briefing(){
   const b=R&&R.briefing;if(!b)return;const cor={medo:'#ff4d6d',cautela:'#ffb02e',neutro:'#9aa3b8',otimismo:'#2bff9a',euforia:'#ff2bd6'}[b.clima]||'#9aa3b8';
   $('bcore').innerHTML=`<span class="eyebrow" style="--c:#b56bff"><i></i>Briefing do mundo · ${BRTD(b.quando)} (Brasília)</span>
@@ -236,12 +234,12 @@ function briefing(){
    <div class="bgrid"><div class="bsec"><h3>O QUE ESTÁ ACONTECENDO</h3><p>${b.mundo||''}</p></div><div class="bsec"><h3>O QUE SIGNIFICA PRO DINHEIRO</h3><p>${b.dinheiro||''}</p></div>
    <div class="bsec"><h3>O QUE A MESA ESTÁ FAZENDO</h3><p>${b.mesa||''}</p></div><div class="bsec"><h3>FIQUE DE OLHO</h3><ul>${(b.ficar_de_olho||[]).map(x=>`<li>${x}</li>`).join('')}</ul></div></div>
    <div class="bgrid">${(b.aprenda||[]).map(x=>`<div class="term"><b>${x.termo}</b><span>${x.explicacao}</span></div>`).join('')}</div>
-   <div class="bfoot"><span style="color:var(--mut);font-size:11px">escrito pela IA da aranha (NVIDIA) a partir das notícias e da mesa</span><button class="btn pri" id="bfecha" style="flex:0 0 auto">Começar a leitura<span>↗</span></button></div>`;
-  $('brief').classList.add('on');$('bfecha').onclick=()=>{$('brief').classList.remove('on');pausa=false};pausa=true;
+   <div class="bfoot"><span style="color:var(--mut);font-size:11px">escrito pela IA da aranha (NVIDIA) a partir das notícias e da mesa</span><span style="color:var(--mut);font-size:11px">a leitura continua sozinha em instantes</span></div>`;
+  $('brief').classList.add('on');pausa=true;clearTimeout(window._bt);window._bt=setTimeout(()=>{$('brief').classList.remove('on');pausa=false},12000);
 }
 $('bb').onclick=briefing;
 async function carrega(){try{const r=await (await fetch(API('aranha'),{cache:'no-store'})).json();const novo=!R;R=r;if(novo){abre(0);setTimeout(briefing,900)}}catch(e){}}
-carrega();setInterval(carrega,5*60*1000);requestAnimationFrame(passo);
+carrega();setInterval(carrega,60*1000);requestAnimationFrame(passo);
 addEventListener('resize',()=>{if(R)novaAranha()});
 </script>
 </body>
