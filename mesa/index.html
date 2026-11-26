@@ -460,8 +460,8 @@ async function puxa(){
 let CART=null,PX={},wsV=null,simbV='';
 async function carteiraViva(){try{CART=await (await fetch(API('carteira'),{cache:'no-store'})).json()}catch(e){return}
   const sy=[...new Set([...Object.keys((CART.foguete||{}).pos||{}),...Object.keys((CART.ia||{}).posicoes||{})])].map(s=>s.toLowerCase());const k=sy.join();if(k===simbV||!sy.length)return;simbV=k;
-  if(wsV)wsV.close();wsV=new WebSocket('wss://data-stream.binance.vision/stream?streams='+sy.map(s=>s+'@miniTicker').join('/'));
-  wsV.onmessage=e=>{const d=JSON.parse(e.data).data;PX[d.s]=+d.c};wsV.onclose=()=>{simbV='';setTimeout(carteiraViva,3000)}}
+  if(wsV)wsV.close();wsV=new WebSocket('wss://data-stream.binance.vision/stream?streams='+sy.map(s=>s+'@aggTrade').join('/'));
+  wsV.onmessage=e=>{const d=JSON.parse(e.data).data;PX[d.s]=+d.p};  /* cada negócio na Binance: mexe na hora, igual ao Ao vivo */wsV.onclose=()=>{simbV='';setTimeout(carteiraViva,3000)}}
 function recalculaVivo(){
   if(S&&CART&&CART.ia&&CART.ia.posicoes){let pi=0;for(const [s,p] of Object.entries(CART.ia.posicoes)){const px=PX[s]||p.atual||p.entrada;pi+=p.lado*p.qtd*(px-p.entrada)}
     const v=(CART.ia.caixa??100)+pi,pc=v/100-1,u=pc>=0;$('kt').textContent=v.toFixed(2);$('bal').innerHTML=`${v.toFixed(2)}<small> usd</small>`;
