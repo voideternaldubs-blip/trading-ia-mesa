@@ -9,107 +9,269 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Lexend:wght@300;400;500;600&family=Doto:wght@800;900&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0F0E0C;--s1:#161512;--s2:#1D1B17;--s3:#25221D;--line:rgba(255,255,255,.08);--line2:rgba(255,255,255,.14);
-  --t1:#F2EEE6;--t2:#A8A29A;--t3:#6E6A63;--ac:#B56BFF;--up:#3DDC97;--dn:#FF5C6C;--warn:#F4B942;
-  --r1:10px;--r2:16px;--rp:999px;--e:cubic-bezier(.22,1,.36,1)}
+  --t1:#F2EEE6;--t2:#A8A29A;--t3:#6E6A63;--ac:#B56BFF;--up:#3DDC97;--dn:#FF5C6C;--warn:#F4B942;--e:cubic-bezier(.22,1,.36,1)}
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{background:var(--bg);color:var(--t1);font:400 14px/1.5 Lexend,sans-serif;-webkit-font-smoothing:antialiased}
-body::after{content:"";position:fixed;inset:0;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-.num{font-variant-numeric:tabular-nums}
-a{color:inherit;text-decoration:none}
-.top{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:14px;padding:14px clamp(14px,3vw,36px);background:rgba(15,14,12,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-.top .volta{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:var(--s2);border:1px solid var(--line)}
-.top h1{font:800 20px Montserrat;letter-spacing:.02em}
-.top p{color:var(--t2);font-size:12px}
-.top .rel{margin-left:auto;text-align:right;font-size:11px;color:var(--t3)}
-.top .rel b{display:block;font:600 16px Lexend;color:var(--t1)}
-main{max-width:1240px;margin:0 auto;padding:24px clamp(14px,3vw,36px) 64px;display:flex;flex-direction:column;gap:14px}
-.andar{position:relative;background:var(--s1);border:1px solid var(--line);border-radius:var(--r2);padding:18px 18px 18px 84px;animation:sobe .4s var(--e) both}
-@keyframes sobe{from{opacity:0;transform:translateY(10px)}}
-.andar .n{position:absolute;left:18px;top:18px;width:50px;height:50px;border-radius:12px;display:grid;place-items:center;background:var(--s2);border:1px solid var(--line2);font:900 22px Doto;color:var(--c,var(--t1))}
-.andar h2{font:800 15px Montserrat;letter-spacing:.06em;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.andar h2 small{font:400 12px Lexend;letter-spacing:0;color:var(--t3)}
-.andar .o{color:var(--t2);font-size:13px;margin-top:2px}
-.lista{margin-top:12px;display:flex;flex-direction:column;gap:6px}
-.lg{font-size:13px;color:#DDD7CC;padding:8px 12px;border-radius:var(--r1);background:var(--s2);border:1px solid var(--line)}
-.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
-.chip{font-size:12px;padding:5px 11px;border-radius:var(--rp);background:var(--s2);border:1px solid var(--line);color:var(--t2)}
-.chip b{color:var(--t1);font-weight:600}
-.cer{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;margin-top:12px}
-.ce{background:var(--s2);border:1px solid var(--line);border-radius:var(--r1);padding:12px}
-.ce b{font:700 13px Montserrat}.ce span{display:block;color:var(--t3);font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
-.ce .bar{height:4px;border-radius:var(--rp);background:var(--s3);margin-top:10px;overflow:hidden}.ce .bar i{display:block;height:100%;background:var(--ac)}
-.ce small{display:block;color:var(--t2);font-size:12px;margin-top:6px}
-.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:8px;margin-top:14px}
-.an{text-align:left;font:inherit;color:inherit;cursor:pointer;background:var(--s2);border:1px solid var(--line);border-radius:var(--r1);padding:12px;display:flex;flex-direction:column;gap:6px;transition:border-color .15s var(--e),transform .15s var(--e);min-height:44px}
-.an:hover{border-color:var(--line2)}.an:active{transform:scale(.98)}
-.an .l1{display:flex;align-items:center;gap:8px}
-.an .m{font:800 15px Montserrat}
-.dec{margin-left:auto;font:600 10px Lexend;letter-spacing:.1em;padding:3px 8px;border-radius:var(--rp)}
-.dec.COMPRA{color:var(--up);background:rgba(61,220,151,.1)}.dec.VENDA{color:var(--dn);background:rgba(255,92,108,.1)}.dec.FORA{color:var(--t3);background:rgba(255,255,255,.05)}
-.an .conf{display:flex;gap:3px}.an .conf i{width:14px;height:4px;border-radius:2px;background:var(--s3)}.an .conf i.on{background:var(--c)}
-.an .d{display:flex;justify-content:space-between;font-size:11px;color:var(--t3)}
-.an .ok{font-size:11px;color:var(--up)}.an .ve{font-size:11px;color:var(--warn)}
-.an.aberto{border-color:rgba(181,107,255,.5)}
-.det{grid-column:1/-1;background:var(--s3);border:1px solid var(--line2);border-radius:var(--r1);padding:14px;font-size:13.5px;color:#DDD7CC;display:none}
-.det.on{display:block}
-.det b{display:block;font:600 10px Lexend;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin:8px 0 4px}
-.det b:first-child{margin-top:0}
-.vazio{color:var(--t3);font-size:13px;margin-top:10px}
-.sk{background:linear-gradient(90deg,var(--s2),var(--s3),var(--s2));background-size:200% 100%;animation:sk 1.4s linear infinite;border-radius:6px;color:transparent}
-@keyframes sk{to{background-position:-200% 0}}
-@media (max-width:700px){.andar{padding:16px 14px 16px 14px}.andar .n{position:static;width:40px;height:40px;font-size:18px;margin-bottom:10px}.grade{grid-template-columns:repeat(2,1fr)}}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font:400 14px/1.5 Lexend,sans-serif;-webkit-font-smoothing:antialiased}
+#cena{position:fixed;inset:0;background:radial-gradient(120% 90% at 50% 35%,#1E1B24 0%,#0F0E0C 70%)}
+#cena canvas{display:block;touch-action:none}
+.top{position:fixed;z-index:5;left:12px;right:12px;top:12px;display:flex;align-items:center;gap:12px;padding:8px 12px 8px 8px;border-radius:999px;background:rgba(22,21,18,.78);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 0 0 1px var(--line);max-width:760px;margin:0 auto}
+.top a{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--s2);color:var(--t1)}
+.top h1{font:800 16px Montserrat;letter-spacing:.04em}.top p{font-size:11px;color:var(--t2)}
+.top .clk{margin-left:auto;font:800 14px Doto;color:var(--t1)}
+.andares{position:fixed;z-index:5;right:14px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:8px}
+.andares button{all:unset;cursor:pointer;width:54px;height:54px;border-radius:16px;display:grid;place-items:center;text-align:center;background:rgba(22,21,18,.82);box-shadow:0 0 0 1px var(--line);backdrop-filter:blur(12px);font:900 18px Doto;color:var(--t2);transition:all .25s var(--e)}
+.andares button small{display:block;font:600 8px Lexend;letter-spacing:.08em;margin-top:-6px}
+.andares button.at{background:var(--c,var(--ac));color:#0F0E0C;box-shadow:0 0 24px -4px var(--c,var(--ac))}
+.painel{position:fixed;z-index:6;left:14px;bottom:14px;width:min(380px,calc(100vw - 96px));max-height:calc(100vh - 110px);overflow:auto;border-radius:20px;padding:5px;background:linear-gradient(160deg,rgba(255,255,255,.09),rgba(255,255,255,.02));box-shadow:0 0 0 1px var(--line),0 30px 80px -30px rgba(0,0,0,.8);transition:transform .35s var(--e),opacity .25s var(--e)}
+.painel .in{border-radius:16px;background:linear-gradient(180deg,#1C1A17,#13120F);padding:18px}
+.painel h2{font:800 17px Montserrat;letter-spacing:.04em;display:flex;align-items:center;gap:10px}
+.painel h2 i{width:10px;height:10px;border-radius:50%;background:var(--c,var(--ac));box-shadow:0 0 10px var(--c,var(--ac))}
+.painel .s{color:var(--t2);font-size:13px;margin-top:4px}
+.painel .bl{margin-top:12px;padding:12px;border-radius:12px;background:rgba(255,255,255,.03);box-shadow:inset 0 0 0 1px var(--line);font-size:13px;color:#DDD7CC}
+.painel .bl b{display:block;font:600 10px Lexend;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:5px}
+.painel .x{float:right;width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,255,255,.06);color:var(--t1);font-size:18px;cursor:pointer}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.chip{font-size:12px;padding:4px 10px;border-radius:999px;background:var(--s2);box-shadow:inset 0 0 0 1px var(--line);color:var(--t2)}
+.chip b{color:var(--t1)}
+.num{font-variant-numeric:tabular-nums}.up{color:var(--up)}.dn{color:var(--dn)}
+.tag{pointer-events:auto;cursor:pointer;font:700 9px Montserrat;letter-spacing:.12em;color:#fff;padding:2px 7px;border-radius:999px;background:rgba(15,14,12,.78);box-shadow:inset 0 0 0 1px var(--c,rgba(255,255,255,.12));white-space:nowrap;transition:opacity .3s}
+.tag em{font-style:normal;color:var(--c)}
+.rot{pointer-events:none;font:800 11px Montserrat;letter-spacing:.2em;color:var(--t2);padding:3px 10px;border-radius:999px;background:rgba(15,14,12,.6)}
+.dica{position:fixed;z-index:4;left:50%;transform:translateX(-50%);top:70px;font-size:12px;color:var(--t3);background:rgba(15,14,12,.6);padding:4px 12px;border-radius:999px;pointer-events:none}
+@media (max-width:760px){
+  .andares{top:auto;bottom:12px;right:12px;left:12px;transform:none;flex-direction:row;justify-content:center}
+  .andares button{width:auto;flex:1;height:50px}
+  .painel{left:10px;right:10px;width:auto;bottom:74px;max-height:46vh}
+  .dica{top:64px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"}}</script>
 </head>
 <body>
+<div id="cena"></div>
 <header class="top">
-  <a class="volta" href="/" aria-label="voltar ao escritório"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></a>
-  <div><h1>Prédio de agentes</h1><p id="sub">um analista por moeda, cada IA na função que combina com ela</p></div>
-  <div class="rel">Brasília<b class="num" id="clk">--:--</b></div>
+  <a href="/" aria-label="voltar ao escritório"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></a>
+  <div><h1>PRÉDIO DE AGENTES</h1><p id="sub">carregando a equipe…</p></div>
+  <span class="clk num" id="clk">--:--</span>
 </header>
-<main id="m">
-  <section class="andar" style="--c:#E879F9"><div class="n">3</div><h2>DIRETORIA <small id="d3s"></small></h2><div class="o">Quando a IA pura fecha um trade, abre o próximo do método 1:3 nas moedas que o comitê aprovou.</div><div class="lista" id="d3"><span class="sk">carregando</span></div></section>
-  <section class="andar" style="--c:#F472B6"><div class="n">2</div><h2>COMITÊ DE RISCO <small>o cérebro mais forte confere cada veredito</small></h2><div class="o">Só aprova se a tendência de 4h e o valor esperado concordarem. O resto é vetado.</div><div class="chips" id="d2"></div></section>
-  <section class="andar" style="--c:#A78BFA"><div class="n">1</div><h2>ANALISTAS DE MOEDA <small id="d1s"></small></h2><div class="o">Cada um cuida de uma moeda: tendência, Máquina do Tempo dos dois lados, financiamento e notícias. Toque para ver o motivo.</div><div class="grade" id="d1"></div></section>
-  <section class="andar" style="--c:#22D3EE"><div class="n">T</div><h2>TÉRREO · ARANHA</h2><div class="o" id="d0">lendo notícias do mundo a cada 2 minutos</div></section>
-  <section class="andar" style="--c:#FBBF24"><div class="n">IA</div><h2>CÉREBROS <small>cota usada hoje · nunca passa do limite</small></h2><div class="cer" id="cer"></div></section>
-  <section class="andar" style="--c:#3DDC97"><div class="n">%</div><h2>PLACAR DOS CÉREBROS <small>quem acertou a direção 24h depois</small></h2><div class="cer" id="plac"></div></section>
-</main>
-<script>
+<div class="dica" id="dica">toque num andar · arraste para girar · pinça para zoom</div>
+<nav class="andares" id="nav"></nav>
+<aside class="painel" id="painel"><div class="in" id="pin"></div></aside>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
 const $=id=>document.getElementById(id);
 const RAW='https://raw.githubusercontent.com/voideternaldubs-blip/trading-ia-mesa/main/site/dados/';
 const API=n=>location.port==='8787'?'/api/'+n:RAW+n+'.json?t='+Math.floor(Date.now()/15000);
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const nf=(v,c=2)=>Number(v).toLocaleString('pt-BR',{minimumFractionDigits:c,maximumFractionDigits:c});
-function hBR(s){if(!s)return'';let t=String(s).replace(' ','T');if(!/[zZ]|[+-]\d\d:?\d\d$/.test(t))t+='Z';const d=new Date(t);return isNaN(d)?'':d.toLocaleTimeString('pt-BR',{timeZone:'America/Sao_Paulo',hour:'2-digit',minute:'2-digit'})}
-const PAPEL={analista:'analista de moeda',comite:'comitê de risco'};
-let P=null,C=null,aberto=null;
-async function puxa(){try{[P,C]=await Promise.all([fetch(API('predio'),{cache:'no-store'}).then(r=>r.json()),fetch(API('carteira'),{cache:'no-store'}).then(r=>r.json())])}catch(e){return}desenha()}
-function desenha(){if(!P||!P.andares)return;const A=P.andares,an=A.andar1.analistas||[];
-  $('sub').textContent=`${an.length} analistas · última reunião ${hBR(P.gerado)} (Brasília) · levou ${P.segundos||'-'} s`;
-  const ia=(C&&C.ia&&C.ia.posicoes)||{};
-  $('d3s').textContent=Object.keys(ia).length?`IA pura com ${Object.keys(ia).length} posições abertas`:'IA pura sem posição: próxima reunião decide';
-  $('d3').innerHTML=(A.andar3.log||[]).slice(0,6).map(l=>`<div class="lg">${esc(l)}</div>`).join('')||'<div class="vazio">A diretoria ainda não precisou agir: a IA pura está com as posições do trade atual abertas.</div>';
-  const apr=an.filter(a=>a.comite&&a.comite.aprova),vet=an.filter(a=>a.vetado);
-  $('d2').innerHTML=(apr.map(a=>`<span class="chip" style="border-color:rgba(61,220,151,.35)"><b>${esc(a.moeda)}</b> aprovado · ${esc(a.comite.cerebro||'')}</span>`).join('')+vet.slice(0,12).map(a=>`<span class="chip"><b>${esc(a.moeda)}</b> vetado</span>`).join(''))||'<span class="vazio">nada para o comitê julgar nesta rodada</span>';
-  const cnt={COMPRA:0,VENDA:0,FORA:0};an.forEach(a=>cnt[a.decisao]=(cnt[a.decisao]||0)+1);
-  $('d1s').textContent=`${cnt.COMPRA} compra · ${cnt.VENDA} venda · ${cnt.FORA} fora`;
-  const cor={COMPRA:'#3DDC97',VENDA:'#FF5C6C',FORA:'#6E6A63'};
-  $('d1').innerHTML=an.map((a,i)=>{const ev=a.decisao==='COMPRA'?a.valor_esperado_compra:a.decisao==='VENDA'?a.valor_esperado_venda:Math.max(a.valor_esperado_compra||0,a.valor_esperado_venda||0);
-    return `<button class="an${ia[a.simbolo]?' aberto':''}" style="--c:${cor[a.decisao]}" onclick="abre(${i})"><div class="l1"><span class="m">${esc(a.moeda)}</span><span class="dec ${a.decisao}">${a.decisao}</span></div>
-      <div class="conf">${[1,2,3,4,5].map(k=>`<i class="${k<=a.confianca?'on':''}"></i>`).join('')}</div>
-      <div class="d num"><span>valor esp. ${ev!=null?nf(ev):'-'}</span><span>${esc((a.cerebro||'').split(' ')[0])}</span></div>
-      ${a.comite?(a.comite.aprova?'<span class="ok">comitê aprovou</span>':'<span class="ve">comitê vetou</span>'):''}${ia[a.simbolo]?'<span class="ok" style="color:#B56BFF">posição aberta na IA pura</span>':''}</button>
-      <div class="det${aberto===i?' on':''}" id="det${i}"><b>Motivo do analista (${esc(a.cerebro)})</b>${esc(a.motivo||a.erro||'')}
-      ${a.comite?`<b>Comitê (${esc(a.comite.cerebro||'')})</b>${esc(a.comite.motivo)}`:''}
-      <b>Números</b><span class="num">tendência 4h ${a.tendencia_4h} · chance de alvo comprando ${nf((a.chance_alvo_compra||0)*100,0)}% · vendendo ${nf((a.chance_alvo_venda||0)*100,0)}% · financiamento ${a.financiamento_pct}% · 24h ${a.var_24h_pct}% · 7d ${a.var_7d_pct}%</span>
-      ${(a.noticias||[]).length?`<b>Notícias da moeda</b>${a.noticias.map(esc).join('<br>')}`:''}</div>`}).join('');
-  $('d0').textContent=`${A.terreo.noticias||0} notícias no relatório da aranha agora`;
-  $('cer').innerHTML=Object.entries(P.cerebros||{}).map(([n,c])=>`<div class="ce"><b>${esc(n)}</b><span>${PAPEL[c.papel]||c.papel}</span><div class="bar"><i style="width:${Math.min(100,c.usados_hoje/c.limite_dia*100)}%"></i></div><small class="num">${c.usados_hoje} de ${c.limite_dia} hoje</small></div>`).join('')||'<div class="vazio">sem cérebros</div>';
-  const pl=Object.entries(P.placar||{});
-  $('plac').innerHTML=pl.length?pl.sort((a,b)=>b[1].acerto_pct-a[1].acerto_pct).map(([n,p])=>`<div class="ce"><b>${esc(n)}</b><span>${p.vereditos} vereditos conferidos</span><small class="num" style="font-size:20px;color:${p.acerto_pct>=50?'#3DDC97':'#FF5C6C'}">${nf(p.acerto_pct,0)}% de acerto</small><small class="num">soma ${p.soma_pct>=0?'+':''}${nf(p.soma_pct)}%</small></div>`).join(''):'<div class="vazio">O placar começa 24 horas depois dos primeiros vereditos: cada palpite é conferido com o preço real.</div>';
+const hBR=s=>{if(!s)return'';let t=String(s).replace(' ','T');if(!/[zZ]|[+-]\d\d:?\d\d$/.test(t))t+='Z';const d=new Date(t);return isNaN(d)?'':d.toLocaleTimeString('pt-BR',{timeZone:'America/Sao_Paulo',hour:'2-digit',minute:'2-digit'})};
+const DEC={COMPRA:0x3DDC97,VENDA:0xFF5C6C,FORA:0x6E6A63};
+const H=3.4; // altura de cada andar
+const ANDARES=[
+  {id:'cob',n:'IA',nome:'CÉREBROS',cor:'#FBBF24',y:4*H,txt:'A sala dos servidores: cada IA com a cota usada hoje. Nunca passa do limite.'},
+  {id:'a3',n:'3',nome:'DIRETORIA',cor:'#E879F9',y:3*H,txt:'Quando a IA pura fecha um trade, abre o próximo do método 1:3 nas moedas que o comitê aprovou.'},
+  {id:'a2',n:'2',nome:'COMITÊ DE RISCO',cor:'#F472B6',y:2*H,txt:'O cérebro mais forte confere cada veredito. Só aprova se tendência e valor esperado concordarem.'},
+  {id:'a1',n:'1',nome:'ANALISTAS DE MOEDA',cor:'#A78BFA',y:1*H,txt:'Um analista por moeda. Verde = compra, vermelho = venda, cinza = fora. O acessório mostra qual IA ele é.'},
+  {id:'t',n:'T',nome:'TÉRREO · ARANHA',cor:'#22D3EE',y:0,txt:'A aranha e as operárias leem as notícias do mundo a cada 2 minutos e passam para os andares de cima.'}];
+
+/* ---------- cena ---------- */
+const box=$('cena');
+const ren=new THREE.WebGLRenderer({antialias:true,alpha:true});ren.setPixelRatio(Math.min(devicePixelRatio,2));box.appendChild(ren.domElement);
+const lab=new CSS2DRenderer();lab.domElement.style.cssText='position:absolute;inset:0;pointer-events:none';box.appendChild(lab.domElement);
+const cena=new THREE.Scene();cena.fog=new THREE.Fog(0x0F0E0C,40,90);
+const cam=new THREE.PerspectiveCamera(42,1,.1,200);cam.position.set(26,22,30);
+const ctl=new OrbitControls(cam,lab.domElement);lab.domElement.style.pointerEvents='auto';ctl.enableDamping=true;ctl.dampingFactor=.08;ctl.minDistance=6;ctl.maxDistance=70;ctl.maxPolarAngle=Math.PI*.48;ctl.target.set(0,7,0);
+cena.add(new THREE.HemisphereLight(0xb9a8ff,0x15120e,.9));
+const sol=new THREE.DirectionalLight(0xfff1dd,1.1);sol.position.set(14,30,18);cena.add(sol);
+const chao=new THREE.Mesh(new THREE.CircleGeometry(60,64),new THREE.MeshStandardMaterial({color:0x14120F,roughness:.95}));chao.rotation.x=-Math.PI/2;chao.position.y=-.14;cena.add(chao);
+const gr=new THREE.GridHelper(80,40,0x2A2620,0x1d1a16);gr.position.y=-.12;cena.add(gr);
+
+const W=16,DP=11;
+const G={}; // geometrias reaproveitadas
+G.cap=new THREE.CapsuleGeometry(.2,.34,5,10);G.cab=new THREE.SphereGeometry(.17,18,12);G.mesa=new THREE.BoxGeometry(1.05,.06,.6);G.tela=new THREE.BoxGeometry(.6,.36,.03);G.perna=new THREE.BoxGeometry(.04,.62,.04);
+const MAT=c=>new THREE.MeshStandardMaterial({color:c,roughness:.5,metalness:.2});
+const EM=(c,i=.6)=>new THREE.MeshStandardMaterial({color:c,emissive:c,emissiveIntensity:i,roughness:.4});
+const ANDAR={};
+ANDARES.forEach(a=>{
+  const g=new THREE.Group();g.position.y=a.y;cena.add(g);
+  const laje=new THREE.Mesh(new THREE.BoxGeometry(W,.22,DP),new THREE.MeshStandardMaterial({color:0x1F1C18,roughness:.6,metalness:.3,transparent:true,opacity:1}));laje.position.y=-.11;g.add(laje);
+  const borda=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(W+.06,.24,DP+.06)),new THREE.LineBasicMaterial({color:new THREE.Color(a.cor),transparent:true,opacity:.9}));borda.position.y=-.11;g.add(borda);
+  const vidroM=new THREE.MeshPhysicalMaterial({color:0x9fb6c8,transparent:true,opacity:.07,roughness:.1,metalness:0,side:THREE.DoubleSide,depthWrite:false});
+  if(a.id!=='cob'){[[0,H/2,-DP/2,0],[0,H/2,DP/2,0],[-W/2,H/2,0,Math.PI/2],[W/2,H/2,0,Math.PI/2]].forEach(([x,y,z,r])=>{const v=new THREE.Mesh(new THREE.PlaneGeometry(r?DP:W,H-.2),vidroM);v.position.set(x,y,z);v.rotation.y=r;g.add(v)});
+    [[-W/2,-DP/2],[W/2,-DP/2],[-W/2,DP/2],[W/2,DP/2]].forEach(([x,z])=>{const c=new THREE.Mesh(new THREE.BoxGeometry(.18,H,.18),MAT(0x2A2620));c.position.set(x,H/2,z);g.add(c)})}
+  const el=document.createElement('div');el.className='rot';el.textContent=(a.n.length===1?a.n+'º ':'')+a.nome;if(a.id==='t')el.textContent=a.nome;
+  const r=new CSS2DObject(el);r.position.set(-W/2+.3,H-.6,DP/2);g.add(r);
+  laje.userData={andar:a.id};
+  ANDAR[a.id]={...a,g,laje,borda,vidroM,itens:[]};
+});
+
+/* ---------- bonequinho ---------- */
+function boneco(cor){
+  const g=new THREE.Group();const m=EM(cor,.35);
+  const corpo=new THREE.Mesh(G.cap,m);corpo.position.y=.55;g.add(corpo);
+  const cab=new THREE.Mesh(G.cab,MAT(0xEDE7DB));cab.position.y=.98;g.add(cab);
+  const olho=new THREE.Mesh(new THREE.BoxGeometry(.2,.045,.05),new THREE.MeshBasicMaterial({color:cor}));olho.position.set(0,1,.15);g.add(olho);
+  return {g,corpo,cab,olho,m};
 }
-function abre(i){aberto=aberto===i?null:i;document.querySelectorAll('.det').forEach((d,k)=>d.classList.toggle('on',k===aberto))}
+function mesaCom(par,x,z,cor,ry=0){
+  const g=new THREE.Group();g.position.set(x,0,z);g.rotation.y=ry;par.add(g);
+  const t=new THREE.Mesh(G.mesa,MAT(0x2B2722));t.position.y=.62;g.add(t);
+  [[-.47,-.25],[.47,-.25],[-.47,.25],[.47,.25]].forEach(([a,b])=>{const p=new THREE.Mesh(G.perna,MAT(0x1a1714));p.position.set(a,.31,b);g.add(p)});
+  const telaM=EM(cor,.7);const tela=new THREE.Mesh(G.tela,telaM);tela.position.set(0,.9,.2);g.add(tela);
+  const b=boneco(cor);b.g.position.set(0,0,-.45);g.add(b.g);
+  return {...b,bg:b.g,g,telaM};
+}
+// acessórios por cérebro
+function acessorios(b){
+  const a={};
+  a['GPT-OSS']=new THREE.Mesh(new THREE.BoxGeometry(.3,.07,.08),EM(0x22D3EE,1.2));a['GPT-OSS'].position.set(0,1.0,.13);
+  a['Qwen']=new THREE.Mesh(new THREE.ConeGeometry(.17,.32,14),EM(0xA78BFA,.5));a['Qwen'].position.set(0,1.27,0);
+  a['GLM']=new THREE.Group();const h=new THREE.Mesh(new THREE.CylinderGeometry(.012,.012,.3,6),MAT(0x6E6A63));h.position.y=1.28;a['GLM'].add(h);const bo=new THREE.Mesh(new THREE.SphereGeometry(.05,10,8),EM(0xFB923C,1.4));bo.position.y=1.45;a['GLM'].add(bo);
+  a['Kimi']=new THREE.Mesh(new THREE.TorusGeometry(.2,.02,8,30),EM(0xF4B942,1.2));a['Kimi'].rotation.x=Math.PI/2;a['Kimi'].position.y=1.3;
+  Object.values(a).forEach(o=>{o.visible=false;b.g.add(o)});return a;
+}
+
+/* ---------- 1º ANDAR: 30 analistas ---------- */
+const ANALISTAS=[];
+for(let i=0;i<32;i++){const c=i%8,l=Math.floor(i/8);const x=-W/2+1.4+c*1.9,z=-DP/2+1.6+l*2.4;
+  const m=mesaCom(ANDAR.a1.g,x,z,0x6E6A63);m.ac=acessorios(m);
+  const el=document.createElement('div');el.className='tag';el.innerHTML='—';const tg=new CSS2DObject(el);tg.position.set(0,1.62,-.45);m.g.add(tg);
+  m.el=el;m.g.traverse(o=>o.userData.pick={tipo:'analista',i});el.onclick=()=>fichaAnalista(i);m.g.visible=false;m.fase=Math.random()*6;ANALISTAS.push(m)}
+
+/* ---------- 2º ANDAR: comitê ---------- */
+const mesaRedonda=new THREE.Mesh(new THREE.CylinderGeometry(1.8,1.8,.08,40),MAT(0x2B2722));mesaRedonda.position.y=.7;ANDAR.a2.g.add(mesaRedonda);
+const pe=new THREE.Mesh(new THREE.CylinderGeometry(.15,.25,.7,12),MAT(0x1a1714));pe.position.y=.35;ANDAR.a2.g.add(pe);
+const holo=new THREE.Mesh(new THREE.TorusGeometry(1.1,.03,8,60),EM(0xF472B6,1.2));holo.rotation.x=Math.PI/2;holo.position.y=1.6;ANDAR.a2.g.add(holo);
+const COMITE=[['GPT-OSS 120B',0xF4B942,-1],['Kimi K3.1',0xF472B6,1]].map(([nome,cor,s])=>{const b=boneco(cor);b.g.position.set(s*2.4,0,0);b.g.lookAt(0,0,0);ANDAR.a2.g.add(b.g);b.ac=acessorios(b);b.ac[nome.startsWith('GPT')?'GPT-OSS':'Kimi'].visible=true;
+  const coroa=new THREE.Mesh(new THREE.CylinderGeometry(.15,.17,.1,8,1,true),EM(0xF4B942,.8));coroa.material.side=THREE.DoubleSide;coroa.position.y=1.17;if(nome.startsWith('GPT'))b.g.add(coroa);
+  const el=document.createElement('div');el.className='tag';el.style.setProperty('--c','#F472B6');el.textContent=nome;const t=new CSS2DObject(el);t.position.y=1.65;b.g.add(t);
+  b.g.traverse(o=>o.userData.pick={tipo:'comite',nome});el.onclick=()=>fichaComite(nome);b.nome=nome;b.fase=Math.random()*6;return b});
+const CHIPS=new THREE.Group();ANDAR.a2.g.add(CHIPS);
+
+/* ---------- 3º ANDAR: diretoria ---------- */
+const mesaD=mesaCom(ANDAR.a3.g,0,.2,0xE879F9);mesaD.g.scale.setScalar(1.6);
+const coroaD=new THREE.Mesh(new THREE.CylinderGeometry(.15,.17,.1,8,1,true),EM(0xF4B942,.9));coroaD.material.side=THREE.DoubleSide;coroaD.position.y=1.17;mesaD.bg.add(coroaD);
+const telao=new THREE.Mesh(new THREE.PlaneGeometry(5,2.2),new THREE.MeshBasicMaterial({color:0x1a1124}));telao.position.set(0,2,-DP/2+.3);ANDAR.a3.g.add(telao);
+const elD=document.createElement('div');elD.className='tag';elD.style.setProperty('--c','#E879F9');elD.style.fontSize='13px';elD.style.padding='8px 14px';elD.innerHTML='IA PURA —';const tD=new CSS2DObject(elD);tD.position.set(0,2,-DP/2+.35);ANDAR.a3.g.add(tD);
+mesaD.g.traverse(o=>o.userData.pick={tipo:'diretoria'});elD.onclick=()=>fichaDiretoria();
+const elD2=document.createElement('div');elD2.className='tag';elD2.style.setProperty('--c','#E879F9');elD2.textContent='DIRETOR';const tD2=new CSS2DObject(elD2);tD2.position.set(0,2.75,-.7);ANDAR.a3.g.add(tD2);elD2.onclick=()=>fichaDiretoria();
+
+/* ---------- TÉRREO: aranha + operárias ---------- */
+function aranha(par,x,z,esc,cor){const g=new THREE.Group();g.position.set(x,0,z);g.scale.setScalar(esc);par.add(g);
+  const corpo=new THREE.Mesh(new THREE.SphereGeometry(.5,20,14),EM(cor,.35));corpo.scale.set(1,.6,1.25);corpo.position.y=.7;g.add(corpo);
+  const cab=new THREE.Mesh(new THREE.SphereGeometry(.3,16,12),EM(cor,.3));cab.position.set(0,.72,.62);g.add(cab);
+  [[-.1,.06],[.1,.06],[-.05,.15],[.05,.15]].forEach(([a,b])=>{const o=new THREE.Mesh(new THREE.SphereGeometry(.05,8,6),new THREE.MeshBasicMaterial({color:0xff4d6d}));o.position.set(a,.76+b,.88);g.add(o)});
+  const pernas=[];for(let k=0;k<8;k++){const lado=k<4?-1:1,i=k%4;const p=new THREE.Mesh(new THREE.CylinderGeometry(.035,.02,1.1,6),EM(cor,.5));p.position.set(lado*.6,.55,-.45+i*.3);p.rotation.z=lado*1.0;g.add(p);pernas.push(p)}
+  return {g,pernas,fase:Math.random()*6}}
+const ARANHA=aranha(ANDAR.t.g,0,0,1.8,0x22D3EE);ARANHA.g.traverse(o=>o.userData.pick={tipo:'aranha'});
+const OPER=[];for(let k=0;k<8;k++){const a=k/8*Math.PI*2;const m=mesaCom(ANDAR.t.g,Math.cos(a)*5.2,Math.sin(a)*3.6,0x22D3EE,-a+Math.PI/2);m.g.traverse(o=>o.userData.pick={tipo:'aranha'});OPER.push(m)}
+const elA=document.createElement('div');elA.className='tag';elA.style.setProperty('--c','#22D3EE');elA.textContent='ARANHA';const tA=new CSS2DObject(elA);tA.position.set(0,2.4,0);ANDAR.t.g.add(tA);elA.onclick=()=>fichaAranha();
+
+/* ---------- COBERTURA: servidores dos cérebros ---------- */
+const SERV=[];
+function montaServidores(lista){SERV.forEach(s=>ANDAR.cob.g.remove(s.g));SERV.length=0;
+  lista.forEach(([nome,c],i)=>{const g=new THREE.Group();g.position.set(-5+i*2.5,0,0);ANDAR.cob.g.add(g);
+    const caixa=new THREE.Mesh(new THREE.BoxGeometry(1.2,2.6,1),MAT(0x23201C));caixa.position.y=1.3;g.add(caixa);
+    const usado=Math.min(1,c.usados_hoje/c.limite_dia);
+    const luz=new THREE.Mesh(new THREE.BoxGeometry(1.22,2.4*Math.max(.04,1-usado),.02),EM(c.papel==='comite'?0xF472B6:0xA78BFA,1.1));luz.position.set(0,.1+1.2*Math.max(.04,1-usado),.51);g.add(luz);
+    for(let k=0;k<6;k++){const led=new THREE.Mesh(new THREE.BoxGeometry(.08,.08,.02),EM(0x3DDC97,1.5));led.position.set(-.4+k*.16,2.4,.51);g.add(led)}
+    const el=document.createElement('div');el.className='tag';el.style.setProperty('--c','#FBBF24');el.innerHTML=`${esc(nome)} <em>${c.usados_hoje}/${c.limite_dia}</em>`;const t=new CSS2DObject(el);t.position.y=3;g.add(t);
+    g.traverse(o=>o.userData.pick={tipo:'cerebro',nome});el.onclick=()=>fichaCerebro(nome);SERV.push({g,nome})})}
+
+/* ---------- dados ---------- */
+let P=null,C=null;
+async function puxa(){try{[P,C]=await Promise.all([fetch(API('predio'),{cache:'no-store'}).then(r=>r.json()),fetch(API('carteira'),{cache:'no-store'}).then(r=>r.json())])}catch(e){return}aplica()}
+function aplica(){if(!P||!P.andares)return;const an=P.andares.andar1.analistas||[];
+  $('sub').textContent=`${an.length} analistas · reunião das ${hBR(P.gerado)} (Brasília)`;
+  ANALISTAS.forEach((m,i)=>{const a=an[i];m.g.visible=!!a;if(!a)return;const cor=DEC[a.decisao]||0x6E6A63;
+    m.m.color.setHex(cor);m.m.emissive.setHex(cor);m.olho.material.color.setHex(cor);m.telaM.color.setHex(cor);m.telaM.emissive.setHex(cor);
+    const cb=(a.cerebro||'').split(' ')[0];Object.entries(m.ac).forEach(([k,o])=>o.visible=cb.startsWith(k));
+    const hx='#'+cor.toString(16).padStart(6,'0');m.el.style.setProperty('--c',hx);m.el.innerHTML=`${esc(a.moeda)} <em>${a.decisao==='FORA'?'·':a.decisao==='COMPRA'?'▲':'▼'}</em>`;
+    m.aberto=!!(C&&C.ia&&C.ia.posicoes&&C.ia.posicoes[a.simbolo])});
+  CHIPS.clear();const apr=an.filter(a=>a.comite&&a.comite.aprova);
+  apr.forEach((a,k)=>{const el=document.createElement('div');el.className='tag';el.style.setProperty('--c','#3DDC97');el.textContent=a.moeda+' ✓';const t=new CSS2DObject(el);const ang=k/Math.max(1,apr.length)*Math.PI*2;t.position.set(Math.cos(ang)*1.1,2.05,Math.sin(ang)*1.1);CHIPS.add(t)});
+  const ia=C&&C.ia||{};const ps=Object.keys(ia.posicoes||{});elD.innerHTML=`IA PURA <em>${nf(ia.caixa??100)} USD</em> · ${ps.length?ps.length+' posições':'sem posição'}`;
+  montaServidores(Object.entries(P.cerebros||{}));
+  if(painelAtual)painelAtual();
+  if(!foco)prediosInteiro();
+}
+
+/* ---------- painéis ---------- */
+let painelAtual=null;
+const fecha='<button class="x" aria-label="fechar" onclick="document.getElementById(\'painel\').style.display=\'none\'">×</button>';
+function mostra(html,cor){$('pin').innerHTML=html;$('painel').style.setProperty('--c',cor||'#B56BFF');$('painel').style.display='block'}
+function fichaAndar(id){const a=ANDAR[id];painelAtual=()=>fichaAndar(id);let extra='';
+  if(P&&P.andares){const an=P.andares.andar1.analistas||[];
+    if(id==='a1'){const c={COMPRA:0,VENDA:0,FORA:0};an.forEach(x=>c[x.decisao]++);extra=`<div class="bl"><b>Agora</b><span class="up">${c.COMPRA} compra</span> · <span class="dn">${c.VENDA} venda</span> · ${c.FORA} fora</div><div class="chips">${an.map((x,i)=>`<span class="chip" style="cursor:pointer" onclick="window.fA(${i})"><b>${esc(x.moeda)}</b> ${x.decisao==='FORA'?'fora':x.decisao.toLowerCase()}</span>`).join('')}</div>`}
+    if(id==='a2'){const ap=an.filter(x=>x.comite&&x.comite.aprova),ve=an.filter(x=>x.vetado);extra=`<div class="bl"><b>Aprovadas</b>${ap.map(x=>x.moeda).join(', ')||'nenhuma'}</div><div class="bl"><b>Vetadas</b>${ve.map(x=>x.moeda).join(', ')||'nenhuma'}</div>`}
+    if(id==='a3'){extra=`<div class="bl"><b>Últimas decisões</b>${(P.andares.andar3.log||[]).slice(0,5).map(esc).join('<br>')||'A IA pura está com o trade atual aberto; a diretoria age quando ele fechar.'}</div>`}
+    if(id==='t'){extra=`<div class="bl"><b>Relatório</b>${P.andares.terreo.noticias||0} notícias lidas e traduzidas agora</div>`}
+    if(id==='cob'){extra=Object.entries(P.cerebros||{}).map(([n,c])=>`<div class="bl"><b>${esc(n)} · ${c.papel==='comite'?'comitê':'analista'}</b>${c.usados_hoje} de ${c.limite_dia} perguntas hoje</div>`).join('')}}
+  mostra(`${fecha}<h2><i></i>${a.n.length===1&&a.id!=='t'?a.n+'º · ':''}${a.nome}</h2><div class="s">${a.txt}</div>${extra}`,a.cor)}
+function fichaAnalista(i){const a=P&&P.andares.andar1.analistas[i];if(!a)return;painelAtual=()=>fichaAnalista(i);foca('a1',ANALISTAS[i]);
+  const ev=a.decisao==='COMPRA'?a.valor_esperado_compra:a.decisao==='VENDA'?a.valor_esperado_venda:null;
+  mostra(`${fecha}<h2><i></i>ANALISTA ${esc(a.moeda)}</h2><div class="s">cérebro: <b>${esc(a.cerebro)}</b> · confiança ${a.confianca}/5</div>
+   <div class="bl"><b>Veredito</b><span class="${a.decisao==='COMPRA'?'up':a.decisao==='VENDA'?'dn':''}" style="font:800 18px Montserrat">${a.decisao}</span>${ev!=null?` · valor esperado ${nf(ev)}`:''}<br>${esc(a.motivo||a.erro||'')}</div>
+   ${a.comite?`<div class="bl"><b>Comitê (${esc(a.comite.cerebro||'')})</b>${a.comite.aprova?'<span class="up">APROVOU</span>':'<span class="dn">VETOU</span>'} · ${esc(a.comite.motivo)}</div>`:''}
+   <div class="bl num"><b>Números</b>preço ${a.preco} · 24h ${a.var_24h_pct}% · 7d ${a.var_7d_pct}%<br>tendência 4h ${a.tendencia_4h}<br>chance de alvo comprando ${nf((a.chance_alvo_compra||0)*100,0)}% · vendendo ${nf((a.chance_alvo_venda||0)*100,0)}%<br>financiamento ${a.financiamento_pct}%</div>
+   ${(a.noticias||[]).length?`<div class="bl"><b>Notícias da moeda</b>${a.noticias.map(esc).join('<br>')}</div>`:''}
+   ${ANALISTAS[i].aberto?'<div class="bl" style="color:#B56BFF">A IA pura tem posição aberta nesta moeda.</div>':''}`,'#'+(DEC[a.decisao]||0x6E6A63).toString(16).padStart(6,'0'))}
+window.fA=fichaAnalista;
+function fichaComite(nome){painelAtual=()=>fichaComite(nome);const an=(P&&P.andares.andar1.analistas)||[];const meus=an.filter(a=>a.comite&&a.comite.cerebro===nome);
+  mostra(`${fecha}<h2><i></i>${esc(nome)}</h2><div class="s">membro do comitê de risco: a segunda opinião antes de qualquer dinheiro entrar</div>
+   <div class="bl"><b>Julgou nesta reunião</b>${meus.map(a=>`${esc(a.moeda)}: ${a.comite.aprova?'<span class="up">aprovou</span>':'<span class="dn">vetou</span>'} · ${esc(a.comite.motivo)}`).join('<br>')||'nada nesta rodada'}</div>`,'#F472B6')}
+function fichaDiretoria(){painelAtual=fichaDiretoria;const ia=(C&&C.ia)||{};const ps=Object.entries(ia.posicoes||{});
+  mostra(`${fecha}<h2><i></i>DIRETORIA</h2><div class="s">abre o próximo trade da IA pura pelo método 1:3</div>
+   <div class="bl"><b>IA pura</b><span style="font:900 26px Doto">${nf(ia.caixa??100)}</span> USD em caixa · meta 1000</div>
+   <div class="bl"><b>Posições do trade atual</b>${ps.map(([s,p])=>`${s.replace('USDT','')} ${p.lado<0?'vendido':'comprado'} · entrada ${p.entrada} · stop ${p.stop} · alvo ${p.alvo}`).join('<br>')||'nenhuma: a próxima reunião decide'}</div>
+   <div class="bl"><b>Últimas decisões</b>${((P&&P.andares.andar3.log)||[]).slice(0,5).map(esc).join('<br>')||'ainda não precisou agir'}</div>`,'#E879F9')}
+function fichaAranha(){painelAtual=fichaAranha;mostra(`${fecha}<h2><i></i>ARANHA</h2><div class="s">a leitora de notícias e as 8 operárias</div><div class="bl"><b>O que faz</b>Lê mais de 25 fontes do mundo ao mesmo tempo a cada 2 minutos, traduz e marca quais moedas cada notícia mexe. Os analistas do 1º andar recebem as notícias da moeda deles.</div><div class="bl"><b>Agora</b>${(P&&P.andares.terreo.noticias)||0} notícias no relatório</div><div class="bl"><a href="/aranha" style="color:#22D3EE">Abrir a leitura da aranha ↗</a></div>`,'#22D3EE')}
+function fichaCerebro(nome){painelAtual=()=>fichaCerebro(nome);const c=(P&&P.cerebros||{})[nome]||{};const pl=(P&&P.placar||{})[nome];
+  mostra(`${fecha}<h2><i></i>${esc(nome)}</h2><div class="s">${c.papel==='comite'?'cérebro do comitê de risco':'cérebro dos analistas de moeda'}</div><div class="bl"><b>Cota hoje</b>${c.usados_hoje||0} de ${c.limite_dia||'-'} perguntas</div><div class="bl"><b>Placar (24h depois)</b>${pl?`${nf(pl.acerto_pct,0)}% de acerto em ${pl.vereditos} vereditos · soma ${nf(pl.soma_pct)}%`:'começa a contar 24 horas depois dos primeiros vereditos'}</div>`,'#FBBF24')}
+
+/* ---------- câmera: ir até o andar ---------- */
+let alvoCam=null,alvoTgt=null,foco=null;
+function vaiAndar(id){foco=id;const a=ANDAR[id];document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('at',b.dataset.a===id));
+  alvoTgt=new THREE.Vector3(0,a.y+1,0);alvoCam=new THREE.Vector3(9,a.y+9,14);
+  Object.values(ANDAR).forEach(o=>{const longe=o.y>a.y+.1;o.g.traverse(m=>{if(m.material&&m.material!==o.vidroM){m.material.transparent=true;m.material.opacity=longe?.07:1;m.material.depthWrite=!longe}});
+    o.g.traverse(m=>{if(m.isCSS2DObject&&!m.element.classList.contains('rot'))m.element.style.opacity=(o.id===a.id)?1:0;if(m.isCSS2DObject&&m.element.classList.contains('rot'))m.element.style.opacity=longe?0:1})});
+  fichaAndar(id);$('dica').style.display='none'}
+function prediosInteiro(){foco=null;alvoTgt=new THREE.Vector3(0,7,0);alvoCam=new THREE.Vector3(26,22,30);document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('at',b.dataset.a==='todo'));
+  Object.values(ANDAR).forEach(o=>o.g.traverse(m=>{if(m.material&&m.material!==o.vidroM){m.material.opacity=1;m.material.depthWrite=true}if(m.isCSS2DObject)m.element.style.opacity=m.element.classList.contains('rot')?1:0}));$('painel').style.display='none'}
+function foca(id,obj){if(foco!==id)vaiAndar(id);const p=new THREE.Vector3();obj.g.getWorldPosition(p);alvoTgt=p.clone().add(new THREE.Vector3(0,.8,0));alvoCam=p.clone().add(new THREE.Vector3(3.2,3.4,4.2))}
+$('nav').innerHTML=`<button data-a="todo" style="--c:#F2EEE6" class="at">⌂<small>TUDO</small></button>`+ANDARES.map(a=>`<button data-a="${a.id}" style="--c:${a.cor}">${a.n}<small>${a.nome.split(' ')[0]}</small></button>`).join('');
+$('nav').querySelectorAll('button').forEach(b=>b.onclick=()=>b.dataset.a==='todo'?prediosInteiro():vaiAndar(b.dataset.a));
+$('painel').style.display='none';
+
+/* ---------- toque ---------- */
+const ray=new THREE.Raycaster(),ptr=new THREE.Vector2();let pd=null;
+lab.domElement.addEventListener('pointerdown',e=>{pd=[e.clientX,e.clientY]});
+lab.domElement.addEventListener('pointerup',e=>{if(!pd||Math.hypot(e.clientX-pd[0],e.clientY-pd[1])>8)return;const r=lab.domElement.getBoundingClientRect();
+  ptr.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);ray.setFromCamera(ptr,cam);
+  const hits=ray.intersectObjects(cena.children,true).filter(h=>{let o=h.object;while(o&&!o.userData.pick&&!o.userData.andar)o=o.parent;if(!o)return false;h.p=o.userData;
+    const a=Object.values(ANDAR).find(x=>{let q=h.object;while(q){if(q===x.g)return true;q=q.parent}return false});return !(foco&&a&&a.y>ANDAR[foco].y+.1)});
+  const h=hits[0];if(!h)return;const p=h.p;
+  if(p.pick){({analista:()=>fichaAnalista(p.pick.i),comite:()=>fichaComite(p.pick.nome),diretoria:()=>{vaiAndar('a3');fichaDiretoria()},aranha:()=>{vaiAndar('t');fichaAranha()},cerebro:()=>{vaiAndar('cob');fichaCerebro(p.pick.nome)}})[p.pick.tipo]()}
+  else if(p.andar)vaiAndar(p.andar)});
+
+/* ---------- laço ---------- */
+function tamanho(){const w=box.clientWidth,h=box.clientHeight;cam.aspect=w/h;cam.updateProjectionMatrix();ren.setSize(w,h);lab.setSize(w,h)}
+addEventListener('resize',tamanho);tamanho();
+function quadro(t){
+  if(alvoCam){cam.position.lerp(alvoCam,.06);ctl.target.lerp(alvoTgt,.08);if(cam.position.distanceTo(alvoCam)<.05)alvoCam=null}
+  ctl.update();
+  ANALISTAS.forEach(m=>{if(!m.g.visible)return;const b=Math.sin(t/650+m.fase)*.03;m.cab.position.y=.98+b;m.cab.rotation.y=Math.sin(t/1600+m.fase)*.4;m.telaM.emissiveIntensity=.5+.35*Math.sin(t/500+m.fase);
+    if(m.aberto){m.m.emissiveIntensity=.55+.35*Math.sin(t/200)}});
+  COMITE.forEach(b=>{b.cab.rotation.y=Math.sin(t/1200+b.fase)*.5});
+  holo.rotation.z=t/1800;holo.position.y=1.6+Math.sin(t/700)*.08;
+  ARANHA.pernas.forEach((p,i)=>p.rotation.x=Math.sin(t/260+i)*.25);ARANHA.g.rotation.y=Math.sin(t/3000)*.4;
+  OPER.forEach((m,i)=>{m.telaM.emissiveIntensity=.5+.4*Math.sin(t/300+i)});
+  mesaD.telaM.emissiveIntensity=.6+.3*Math.sin(t/600);
+  ren.render(cena,cam);lab.render(cena,cam);requestAnimationFrame(quadro)}
+requestAnimationFrame(quadro);
 setInterval(()=>{$('clk').textContent=new Date().toLocaleTimeString('pt-BR',{timeZone:'America/Sao_Paulo',hour:'2-digit',minute:'2-digit'})},1000);
 puxa();setInterval(puxa,30000);
 </script>
