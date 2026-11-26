@@ -75,8 +75,9 @@ def supertrend(d, m, p):
         fl[i] = lb[i] if (lb[i] > fl[i - 1] or c[i - 1] < fl[i - 1]) else fl[i - 1]
         up[i] = c[i] > fu[i - 1] if not up[i - 1] else not (c[i] < fl[i - 1])
     return pd.Series(up, d.index)
-def cruza_acima(a, b): return (a > b) & (a.shift() <= b.shift())
-def cruza_abaixo(a, b): return (a < b) & (a.shift() >= b.shift())
+def _ant(x): return x.shift() if hasattr(x, 'shift') else x
+def cruza_acima(a, b): return (a > b) & (_ant(a) <= _ant(b))
+def cruza_abaixo(a, b): return (a < b) & (_ant(a) >= _ant(b))
 
 
 # ---------------- as estratégias (regras dos arquivos originais) ----------------
@@ -194,7 +195,11 @@ def main():
         dados = m5 if tf == "5m" else h1; mins = 5 if tf == "5m" else 60
         todos = []; por_moeda = []
         for m, d in dados.items():
-            r = roda(d, f, sl, roi, mins); todos += r; por_moeda.append(np.prod([1 + x for x in r]) - 1 if r else 0)
+            try:
+                r = roda(d, f, sl, roi, mins)
+            except Exception as ex:
+                print(f'  {nome} em {m}: pulei ({ex})'); r = []
+            todos += r; por_moeda.append(np.prod([1 + x for x in r]) - 1 if r else 0)
         g = [x for x in todos if x > 0]; p = [x for x in todos if x <= 0]
         pf = sum(g) / abs(sum(p)) if p else float("inf")
         linhas.append((nome, tf, len(todos), 100 * len(g) / max(1, len(todos)), 100 * np.mean(todos) if todos else 0, pf, 100 * np.mean(por_moeda)))
