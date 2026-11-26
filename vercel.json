@@ -1,0 +1,8 @@
+{
+  "buildCommand": "",
+  "installCommand": "",
+  "framework": null,
+  "outputDirectory": "site",
+  "cleanUrls": true,
+  "headers": [{"source": "/dados/(.*)", "headers": [{"key": "Cache-Control", "value": "no-store"}]}]
+}
