@@ -139,7 +139,17 @@ class H(SimpleHTTPRequestHandler):
             self.end_headers(); self.wfile.write(b); return
         if self.path.startswith("/api/aranha"):
             f = os.path.join(RAIZ, "data", "relatorio_aranha.json")
-            b = open(f, "rb").read() if os.path.exists(f) else b'{"noticias":[]}'
+            rel = json.load(open(f, encoding="utf-8")) if os.path.exists(f) else {"noticias": []}
+            try:
+                ia_ = json.load(open(os.path.join(RAIZ, "data", "analise_ia.json"), encoding="utf-8"))
+            except Exception:
+                ia_ = {"analises": {}, "briefing": None}
+            for n in rel.get("noticias", []):
+                n["ia"] = ia_["analises"].get(n["id"])
+            # as que a IA analisou e marcou como mais relevantes vêm primeiro
+            rel["noticias"].sort(key=lambda n: -((n.get("ia") or {}).get("relevancia") or 0))
+            rel["briefing"] = ia_.get("briefing")
+            b = json.dumps(rel, ensure_ascii=False).encode("utf-8")
             self.send_response(200)
             self.send_header("Content-Type", "application/json; charset=utf-8")
             self.send_header("Cache-Control", "no-store")
@@ -152,9 +162,15 @@ class H(SimpleHTTPRequestHandler):
 
 
 def ciclo_aranha():
-    """A aranha e os robôs rodam 24h na nuvem (GitHub Actions). Aqui o PC só puxa os resultados."""
+    """A aranha e os robôs rodam 24h na nuvem (GitHub Actions). Aqui o PC puxa os resultados
+    e roda a ARANHA ANALISTA (IA da NVIDIA) por cima das notícias."""
     import subprocess
     while True:
+        try:
+            subprocess.Popen([sys.executable, os.path.join(RAIZ, "equipe", "aranha_ia.py")], cwd=RAIZ,
+                             stdout=open(os.path.join(RAIZ, "data", "aranha_ia.log"), "a"), stderr=subprocess.STDOUT)
+        except Exception as e:
+            print("aranha ia:", e)
         try:
             env = dict(os.environ, GIT_TERMINAL_PROMPT="0")
             subprocess.run(["git", "fetch", "-q", "origin", "main"], cwd=RAIZ, timeout=90, env=env)

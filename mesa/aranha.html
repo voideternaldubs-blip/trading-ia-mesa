@@ -64,6 +64,20 @@
 .ctrl{display:flex;gap:8px;margin-top:10px}.btn{flex:1;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 6px 6px 16px;border-radius:999px;border:0;cursor:pointer;background:rgba(255,255,255,.06);color:var(--ink);font:600 11px Lexend;transition:transform .5s var(--ease)}
 .btn span{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.08);transition:transform .5s var(--ease)}.btn:hover span{transform:translate(2px,-1px) scale(1.05)}.btn:active{transform:scale(.98)}
 .btn.pri{background:var(--mg);color:#09090d}.btn.pri span{background:rgba(0,0,0,.15)}
+.iabox{border-radius:18px;padding:5px;background:linear-gradient(135deg,rgba(181,107,255,.22),rgba(46,230,255,.12));opacity:0;transform:translateY(16px);filter:blur(6px);transition:all .9s var(--ease)}
+.iabox.in{opacity:1;transform:none;filter:none}.iabox .ci{border-radius:14px;padding:14px 16px;background:rgba(10,9,18,.92)}
+.iahd{display:flex;align-items:center;gap:8px;font:700 9px Montserrat;letter-spacing:.22em;color:#c9a8ff}.iahd i{width:6px;height:6px;border-radius:50%;background:#b56bff;box-shadow:0 0 10px #b56bff;animation:pis 1.4s infinite}@keyframes pis{50%{opacity:.3}}
+.iares{font:500 14.5px/1.55 Lexend;color:#fff;margin:8px 0 10px}.iapq{font:300 13px/1.55 Lexend;color:#cfd2df}
+.imps{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.imp{display:flex;align-items:center;gap:6px;padding:6px 10px;border-radius:12px;font:600 11px Lexend;background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
+.imp b{font:900 13px Doto}.imp .f{letter-spacing:1px}.licao{margin-top:10px;padding:10px 12px;border-radius:12px;background:rgba(255,226,74,.07);box-shadow:inset 0 0 0 1px rgba(255,226,74,.2);font:400 12.5px/1.5 Lexend;color:#fff3b0}
+.licao b{font:700 9px Montserrat;letter-spacing:.2em;color:#ffe14a;display:block;margin-bottom:3px}
+#brief{position:fixed;inset:0;z-index:50;display:grid;place-items:center;background:rgba(4,4,6,.72);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);opacity:0;pointer-events:none;transition:opacity .7s var(--ease)}
+#brief.on{opacity:1;pointer-events:auto}.bcard{width:min(980px,92vw);max-height:86vh;overflow:auto;border-radius:28px;padding:6px;background:linear-gradient(160deg,rgba(255,255,255,.08),rgba(255,255,255,.02));box-shadow:0 0 0 1px rgba(255,255,255,.07),0 60px 120px -40px rgba(181,107,255,.4)}
+.bcore{border-radius:22px;padding:34px 40px;background:linear-gradient(180deg,#12111c,#08080d)}
+.bt{font:900 clamp(26px,3vw,42px)/1.08 Montserrat;letter-spacing:-.01em;margin:14px 0 6px}.bclima{display:inline-flex;gap:8px;align-items:center;padding:5px 12px;border-radius:999px;font:700 10px Montserrat;letter-spacing:.2em}
+.bgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}.bsec{padding:16px 18px;border-radius:18px;background:rgba(255,255,255,.03);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.bsec h3{margin:0 0 8px;font:700 10px Montserrat;letter-spacing:.24em;color:var(--mut)}.bsec p{margin:0;font:300 14px/1.65 Lexend;color:#e3e5ee}
+.bsec ul{margin:0;padding-left:18px;font:300 13.5px/1.7 Lexend;color:#e3e5ee}.bfoot{display:flex;justify-content:space-between;align-items:center;margin-top:22px}
 @media (max-width:900px){html,body{overflow:auto}.wrap{grid-template-columns:1fr;height:auto}.doccell{height:80vh}.island .kpi{display:none}}
 </style>
 </head>
@@ -75,7 +89,9 @@
   <div class="kpi"><span>Lidas</span><b id="kl" style="color:var(--mg)">0</b></div>
   <div class="kpi"><span>Na fila</span><b id="kq" style="color:var(--cy)">0</b></div>
   <div class="kpi"><span>Palavras-chave</span><b id="kw" style="color:var(--am)">0</b></div>
+  <button class="back" id="bb" style="border:0;cursor:pointer"><span>✦</span>Briefing do mundo</button>
 </nav>
+<div id="brief"><div class="bcard"><div class="bcore" id="bcore"></div></div></div>
 <main class="wrap">
   <section class="shell doccell"><div class="core">
     <div class="docbar"><span class="eyebrow"><i></i>A aranha está lendo</span><span class="eyebrow" id="dtipo" style="--c:var(--cy)"><i></i>—</span><span class="st" id="dst"></span></div>
@@ -112,14 +128,20 @@ function montaDoc(n){
 function montaRep(n){
   const dir={alta:['▲','var(--gr)','pressão de alta'],baixa:['▼','var(--rd)','pressão de baixa'],neutra:['●','var(--mut)','sem direção clara']}[n.direcao];
   const termos=n.termos.length?n.termos:['Papel (paper trading)'];
-  $('rep').innerHTML=`<div class="kf">DESCOBERTAS · KEY FINDINGS</div>
+  const ia=n.ia;const pontos=f=>'●'.repeat(f||1)+'○'.repeat(3-(f||1));
+  const iaHtml=ia?`<div class="iabox"><div class="ci"><div class="iahd"><i></i>A ARANHA ENTENDEU · IA</div>
+    <div class="iares">${ia.resumo||''}</div><div class="iapq"><b style="color:#fff;font-weight:600">Por que importa:</b> ${ia.por_que_importa||''}</div>
+    <div class="imps">${(ia.impactos||[]).map(x=>`<span class="imp" style="color:${x.direcao==='alta'?'var(--gr)':'var(--rd)'}"><b>${x.direcao==='alta'?'▲':'▼'} ${x.ativo}</b><span class="f">${pontos(x.forca)}</span><span style="color:var(--mut);font-weight:400">${x.prazo||''}</span></span>`).join('')}
+    <span class="imp" style="color:var(--mut)">confiança ${ia.confianca||'-'}</span></div>
+    ${ia.licao?`<div class="licao"><b>LIÇÃO DE MERCADO</b>${ia.licao}</div>`:''}</div></div>`:'';
+  $('rep').innerHTML=iaHtml+`<div class="kf">DESCOBERTAS · KEY FINDINGS</div>
   <div class="card"><div class="ci"><span class="tag" style="background:${n.cor}">${n.tipo}</span><div class="ttl">${n.titulo}</div></div></div>
   <div class="card"><div class="ci"><div class="lbl">O que isso significa</div><div class="txt">${n.significa}</div></div></div>
   <div class="card"><div class="ci"><div class="lbl">Quem é afetado</div><div class="chips">${n.ativos.map(a=>`<span class="chip" style="color:${dir[1]}">${dir[0]} ${a} <em style="color:var(--mut)">${dir[2]}</em></span>`).join('')}</div></div></div>
   <div class="card"><div class="ci"><div class="lbl">Como a mesa usa isso</div><div class="txt">${n.mesa_usa}</div></div></div>
   <div class="kf" style="margin-top:6px;color:var(--cy)">APRENDA</div>
   <div class="card"><div class="ci learn">${termos.map(t=>`<div class="term"><b>${t}</b><span>${R.glossario[t]||''}</span></div>`).join('')}</div></div>`;
-  [...$('rep').querySelectorAll('.card')].forEach((c,i)=>setTimeout(()=>c.classList.add('in'),350+i*260));
+  [...$('rep').querySelectorAll('.card,.iabox')].forEach((c,i)=>setTimeout(()=>c.classList.add('in'),350+i*260));
   $('rep').scrollTop=0;requestAnimationFrame(()=>$('rep').scrollTop=0);setTimeout(()=>$('rep').scrollTop=0,60);
 }
 
@@ -200,7 +222,18 @@ function fila(){$('fila').innerHTML=R.noticias.slice(0,24).map((_,i)=>`<i class=
 function prox(){if(pausa){timerProx=setTimeout(prox,2000);return}abre(idx+1)}
 $('bn').onclick=()=>{clearTimeout(timerProx);abre(idx+1)};
 $('bp').onclick=()=>{pausa=!pausa;$('bp').innerHTML=pausa?'Continuar leitura<span>▶</span>':'Pausar leitura<span>❚❚</span>'};
-async function carrega(){try{const r=await (await fetch('/api/aranha',{cache:'no-store'})).json();const novo=!R;R=r;if(novo)abre(0)}catch(e){}}
+function briefing(){
+  const b=R&&R.briefing;if(!b)return;const cor={medo:'#ff4d6d',cautela:'#ffb02e',neutro:'#9aa3b8',otimismo:'#2bff9a',euforia:'#ff2bd6'}[b.clima]||'#9aa3b8';
+  $('bcore').innerHTML=`<span class="eyebrow" style="--c:#b56bff"><i></i>Briefing do mundo · ${(b.quando||'').replace('T',' ')} UTC</span>
+   <div class="bt">${b.titulo||''}</div><span class="bclima" style="background:${cor}22;color:${cor};box-shadow:inset 0 0 0 1px ${cor}55">CLIMA: ${(b.clima||'').toUpperCase()}</span>
+   <div class="bgrid"><div class="bsec"><h3>O QUE ESTÁ ACONTECENDO</h3><p>${b.mundo||''}</p></div><div class="bsec"><h3>O QUE SIGNIFICA PRO DINHEIRO</h3><p>${b.dinheiro||''}</p></div>
+   <div class="bsec"><h3>O QUE A MESA ESTÁ FAZENDO</h3><p>${b.mesa||''}</p></div><div class="bsec"><h3>FIQUE DE OLHO</h3><ul>${(b.ficar_de_olho||[]).map(x=>`<li>${x}</li>`).join('')}</ul></div></div>
+   <div class="bgrid">${(b.aprenda||[]).map(x=>`<div class="term"><b>${x.termo}</b><span>${x.explicacao}</span></div>`).join('')}</div>
+   <div class="bfoot"><span style="color:var(--mut);font-size:11px">escrito pela IA da aranha (NVIDIA) a partir das notícias e da mesa</span><button class="btn pri" id="bfecha" style="flex:0 0 auto">Começar a leitura<span>↗</span></button></div>`;
+  $('brief').classList.add('on');$('bfecha').onclick=()=>{$('brief').classList.remove('on');pausa=false};pausa=true;
+}
+$('bb').onclick=briefing;
+async function carrega(){try{const r=await (await fetch('/api/aranha',{cache:'no-store'})).json();const novo=!R;R=r;if(novo){abre(0);setTimeout(briefing,900)}}catch(e){}}
 carrega();setInterval(carrega,5*60*1000);requestAnimationFrame(passo);
 addEventListener('resize',()=>{if(R)novaAranha()});
 </script>

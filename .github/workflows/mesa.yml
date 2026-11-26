@@ -42,6 +42,7 @@ jobs:
         run: |
           python -c "import aranha; c=aranha.db(); print('notícias', aranha.noticias(c)); aranha.mercado(c); c.commit()"
           cd mesa && python explicador.py
+          cd .. && python equipe/impacto.py || true
 
       - name: Robô de tendência cripto (a cada 4h)
         if: always()

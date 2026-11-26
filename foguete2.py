@@ -1,7 +1,7 @@
 """FOGUETE v2 — especificação do Claude web (modo Extra), implementada à risca. PAPEL, preço real da Binance Futures.
 100 USD = 50 no COFRE (separado, intocável) + 50 no FOGUETE (piso 15). Ciclo a cada 5 min (só risco);
 sinais só no fechamento das velas de 4h (o único timeframe com vantagem comprovada nos testes).
-Alavancagem CPPI: exposição G = min(m·colchão·σref/σcesta, 20·E). Meta: total ≥ 1000 → encerra.
+Alavancagem CPPI: exposição G = min(m·colchão·σref/σcesta, 20·E). Meta: total ≥ 3000 → encerra (meta do dono para dezembro).
 """
 import os, json, csv, math, time, requests, numpy as np
 from datetime import datetime, timezone, timedelta
@@ -14,7 +14,7 @@ DIARIO = os.path.join(AQUI, "diario")
 F = "https://fapi.binance.com"
 CFG = dict(horizontes=(80, 120, 200), max_pos=12, kappa=1.0, piso=15.0, m=20, lev_max=20, sigma_ref=0.025, cap_moeda=0.25,
            banda_G=0.15, banda_peso=0.25, stop_atr=4.0, taxa=0.0005, slip_stop=0.0005, mmr=0.01,
-           funding_max=0.0010, funding_corte=0.0015, crash_btc_1h=-0.06, cofre_pct=0.25, meta=1000.0)
+           funding_max=0.0010, funding_corte=0.0015, crash_btc_1h=-0.06, cofre_pct=0.25, meta=3000.0)
 FORA = {"USDC", "FDUSD", "TUSD", "USDP", "DAI", "EUR", "PAXG", "XAUT", "BTCDOM", "XAU", "XAG"}
 S = requests.Session()
 log = []
@@ -65,6 +65,13 @@ def montar_universo(st):
         f = {x["filterType"]: x for x in s["filters"]}
         filtros[s["symbol"]] = {"step": float(f["LOT_SIZE"]["stepSize"]), "min": float(f.get("MIN_NOTIONAL", {}).get("notional", 5))}
         ok[s["symbol"]] = 1
+    try:  # só moedas que existem também na Binance DEMO (onde as ordens são executadas)
+        import binance_demo
+        if binance_demo.chaves():
+            binance_demo.filtros("BTCUSDT")
+            ok = {s: 1 for s in ok if s in binance_demo._filtros}
+    except Exception:
+        pass
     tk = [t for t in get("/fapi/v1/ticker/24hr") if t["symbol"] in ok]
     tk.sort(key=lambda t: -float(t["quoteVolume"]))
     st["universo"] = {"lista": [t["symbol"] for t in tk if float(t["quoteVolume"]) >= 1e8][:30], "em": agora().isoformat()[:16]}
@@ -312,6 +319,19 @@ def salvar(st, px):
     G = sum(p["qtd"] * px.get(s, p["entrada"]) for s, p in st["posicoes"].items()) if px else 0
     st["hist"].append({"quando": agora().isoformat()[:16], "valor": round(T, 2), "foguete": round(E, 2), "exposicao": round(G, 2)})
     st["hist"] = st["hist"][-5000:]
+    # EXECUTOR: espelha as posições do foguete na Binance DEMO (ordens reais, dinheiro de teste)
+    try:
+        import binance_demo
+        if binance_demo.chaves() and c["status"] == "ATIVO":
+            feitos = binance_demo.sincroniza({s: p["lado"] * p["qtd"] for s, p in st["posicoes"].items()})
+            ok = [f for f in feitos if "erro" not in f]; ruins = [f for f in feitos if "erro" in f]
+            if ok: log.append(f"- 🏦 BINANCE DEMO: {len(ok)} ordens executadas ({', '.join(f['simbolo'].replace('USDT', '') + ' ' + f['lado'] for f in ok[:6])})")
+            for f in ruins[:3]: log.append(f"- ⚠️ BINANCE DEMO {f['simbolo']}: {f['erro'][:90]}")
+            st["demo"] = binance_demo.conta()
+        elif binance_demo.chaves() and c["status"] != "ATIVO":
+            binance_demo.sincroniza({})
+    except Exception as ex:
+        log.append(f"- ⚠️ BINANCE DEMO: {str(ex)[:120]}")
     tmp = EST + ".tmp"
     json.dump(st, open(tmp, "w", encoding="utf-8"), indent=1); os.replace(tmp, EST)
     res = f"FOGUETE v2 {agora():%H:%M} | total {T:.2f} (foguete {E:.2f} + cofre {c['cofre']:.2f}) | {len(st['posicoes'])} posições | exposição {G:.0f} USD | {c['status']}"
