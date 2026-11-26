@@ -114,6 +114,16 @@ class H(SimpleHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(b)
             return
+        if self.path.startswith("/api/carteira"):
+            def lj(p):
+                try: return json.load(open(p, encoding="utf-8"))
+                except Exception: return {}
+            c = lj(os.path.join(RAIZ, "data", "carteira.json")); a = lj(os.path.join(RAIZ, "acoes", "carteira_acoes.json"))
+            b = json.dumps({"cripto": {"caixa": c.get("caixa"), "cofre": c.get("cofre", 0), "pos": c.get("pos", {}), "ligado": c.get("ligado", True),
+                                       "hist": c.get("historico", [])[-200:]},
+                            "acoes": {"caixa": a.get("caixa"), "pos": a.get("pos", {}), "hist": a.get("hist", [])[-200:]}}, ensure_ascii=False).encode("utf-8")
+            self.send_response(200); self.send_header("Content-Type", "application/json; charset=utf-8"); self.send_header("Cache-Control", "no-store")
+            self.end_headers(); self.wfile.write(b); return
         if self.path.startswith("/api/aranha"):
             f = os.path.join(RAIZ, "data", "relatorio_aranha.json")
             b = open(f, "rb").read() if os.path.exists(f) else b'{"noticias":[]}'

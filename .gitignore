@@ -19,3 +19,5 @@ curvas_ls.csv
 series_motores.csv
 serie_piramide_*.csv
 resultado*.csv
+data/foguete*
+diario/foguete_*
