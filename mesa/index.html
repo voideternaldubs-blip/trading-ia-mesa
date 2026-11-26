@@ -266,7 +266,7 @@ const wb=$('web'),wc=wb.getContext('2d');let T={M:[],N:[],L:[]},tkI=0;
 function montaTeia(){
   if(!S)return;const t=S.teia,w=wb.clientWidth,h=wb.clientHeight,cx=w/2,cy=h*.46;
   const moedas=[...new Set(t.ligacoes.map(l=>l[1]))];
-  T.M=moedas.map((m,i)=>{const a=i/Math.max(1,moedas.length)*Math.PI*2-Math.PI/2,r=moedas.length>1?Math.min(w,h)*.15:0;return{id:m,x:cx+Math.cos(a)*r,y:cy+Math.sin(a)*r,n:t.ligacoes.filter(l=>l[1]===m).length}});
+  T.M=moedas.map((m,i)=>{const a=i/Math.max(1,moedas.length)*Math.PI*2-Math.PI/2,r=moedas.length>1?Math.min(w,h)*(moedas.length>6?.25:.15):0;return{id:m,x:cx+Math.cos(a)*r,y:cy+Math.sin(a)*r,n:t.ligacoes.filter(l=>l[1]===m).length}});
   T.N=t.noticias.map((n,i)=>{const a=i/t.noticias.length*Math.PI*2+i*.3,r=Math.min(w,h)*(.3+.1*((i*37)%10)/10);return{x:cx+Math.cos(a)*r*1.15,y:cy+Math.sin(a)*r*.9,p:n.perigo,f:n.forca,tit:n.titulo,fonte:n.fonte,ph:i}});
   T.L=t.ligacoes.map(([i,m])=>[T.N[i],T.M.find(x=>x.id===m)]).filter(x=>x[0]&&x[1]);
 }
