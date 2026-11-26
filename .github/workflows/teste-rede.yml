@@ -1,0 +1,9 @@
+name: Teste de rede (Binance)
+on: workflow_dispatch
+jobs:
+  t:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          for u in "https://fapi.binance.com/fapi/v1/ping" "https://demo-fapi.binance.com/fapi/v1/ping" "https://testnet.binancefuture.com/fapi/v1/ping" "https://data-api.binance.vision/api/v3/ping" "https://api.binance.com/api/v3/ping" "https://fapi.binance.com/fapi/v1/premiumIndex?symbol=BTCUSDT" "https://api.geckoterminal.com/api/v2/networks/solana/new_pools" "https://api.rugcheck.xyz/v1/stats/recent" "https://integrate.api.nvidia.com/v1/models"; do
+            echo "$(curl -s -m 15 -o /dev/null -w '%{http_code}' "$u")  $u"; done
