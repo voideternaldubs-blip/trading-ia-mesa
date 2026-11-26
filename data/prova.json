@@ -6,8 +6,8 @@
   {
    "robo": "Carteira do Prédio",
    "inicial": 100.0,
-   "atual": 76.71,
-   "retorno_pct": -23.29,
+   "atual": 76.77,
+   "retorno_pct": -23.23,
    "operacoes": 1,
    "acerto_pct": 0.0,
    "ganho_medio": null,
@@ -50,13 +50,13 @@
   {
    "robo": "IA pura (manual)",
    "inicial": 100.0,
-   "atual": 81.83,
-   "retorno_pct": -18.17,
+   "atual": 81.74,
+   "retorno_pct": -18.26,
    "operacoes": 6,
    "acerto_pct": 33.3,
    "ganho_medio": 1.0,
    "perda_media": -2.65,
-   "maior_queda_pct": -23.62
+   "maior_queda_pct": -23.7
   },
   {
    "robo": "Foguete de ações (Alpaca)",
