@@ -10,7 +10,7 @@
    "alvo": 166.24,
    "em": "2026-11-26T18:45",
    "tese": "GPT-OSS 20B disse VENDA (4/5): Tend\u00eancia negativa e valor esperado positivo para venda",
-   "conferido_ate": "2026-11-26T21:32",
+   "conferido_ate": "2026-11-26T21:34",
    "atual": 185.67
   },
   "BCHUSDT": {
@@ -21,8 +21,8 @@
    "alvo": 190.68,
    "em": "2026-11-26T18:45",
    "tese": "Qwen 27B disse VENDA (3/5): A tend\u00eancia de baixa e o valor esperado positivo indicam melhor chance de lucro na venda.",
-   "conferido_ate": "2026-11-26T21:32",
-   "atual": 211.06
+   "conferido_ate": "2026-11-26T21:34",
+   "atual": 211.28
   }
  },
  "fechadas": [
@@ -756,6 +756,10 @@
   {
    "quando": "2026-11-26T21:32",
    "valor": 70.01
+  },
+  {
+   "quando": "2026-11-26T21:34",
+   "valor": 69.43
   }
  ],
  "modo": "Carteira do Pr\u00e9dio: a diretoria abre trades 1:3 sozinha com as IAs implantadas"
