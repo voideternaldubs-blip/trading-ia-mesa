@@ -194,8 +194,11 @@ def maquina(v15, lado, n=500, stop=0.03, alvo=0.09, passos=None, bloco=4):
     rel = [(h / pc, l / pc, c / pc) for (_, _, _, pc), (_, h, l, c) in zip(v15, v15[1:])]
     if len(rel) < 50:
         return 0, 0
+    import math
+    deriva = math.exp(sum(math.log(x[2]) for x in rel) / len(rel))   # direção média do período
+    rel = [(h / deriva, l / deriva, c / deriva) for h, l, c in rel]     # fica só o balanço da moeda
     passos = passos or 400
-    a = s = 0
+    a = s = 0; soma_aberto = 0.0
     for _ in range(n):
         p = 1.0; k = 0; res = None
         while k < passos and res is None:
@@ -210,12 +213,17 @@ def maquina(v15, lado, n=500, stop=0.03, alvo=0.09, passos=None, bloco=4):
                     if l <= 1 - alvo: res = "a"; break
                 p *= rc; k += 1
         a += res == "a"; s += res == "s"
-    return a / n, s / n
+        if res is None:
+            soma_aberto += (p - 1) * lado
+    ev = (a * alvo - s * stop + soma_aberto) / n / stop
+    return a / n, s / n, ev
 
 
 SIS = """Você é o analista de UMA moeda num prédio de agentes de trading. Recebe os números da moeda e decide.
-Regras da casa: só a tendência (rompimentos de 80/120/200 candles de 4h) passou nos testes históricos; a Máquina do Tempo
-dá a chance de bater o alvo (9%) antes do stop (3%) em até 4 dias para cada lado; valor esperado = chance_alvo*3 - chance_stop.
+Regras da casa: só a TENDÊNCIA (rompimentos de 80/120/200 candles de 4h; +1 = alta, -1 = queda) passou nos testes históricos,
+então a direção vem dela. A Máquina do Tempo mede o balanço da moeda SEM supor direção (stop do tamanho da moeda, alvo 3x o stop)
+e dá o valor esperado em unidades de stop: perto de 0 é normal; muito negativo (abaixo de -0,15) é perigo.
+Veja também o histórico desta moeda (acertos e erros anteriores) e não repita erro.
 Seja frio e honesto: se não houver vantagem clara, decida FORA. Responda SÓ JSON:
 {"decisao":"COMPRA|VENDA|FORA","confianca":1,"motivo":"uma frase curta em português do Brasil, sem jargão"}
 confianca de 1 (fraca) a 5 (forte)."""
@@ -225,18 +233,19 @@ def analista(item):
     i, s, extra = item
     try:
         v4 = velas(s, "4h", 230)
-        v15 = velas(s, "15m", 0, inicio=int(time.time() * 1000) - 30 * 86400000)
+        v15 = velas(s, "15m", 0, inicio=int(time.time() * 1000) - 60 * 86400000)
+        trs = [max(h, pc) - min(l, pc) for (_, _, _, pc), (_, h, l, _) in zip(v4[-15:-1], v4[-14:])]
+        stop_pct = min(0.12, max(0.03, 2 * (sum(trs) / len(trs)) / v4[-1][3]))
         preco = v4[-1][3]
         tend = tendencia(v4)
-        ca_c, cs_c = maquina(v15, 1); ca_v, cs_v = maquina(v15, -1)
-        ev_c = ca_c * 3 - cs_c; ev_v = ca_v * 3 - cs_v
+        ca_c, cs_c, ev_c = maquina(v15, 1, stop=stop_pct, alvo=3 * stop_pct); ca_v, cs_v, ev_v = maquina(v15, -1, stop=stop_pct, alvo=3 * stop_pct)
         try:
             fund = float(requests.get(F + "/fapi/v1/premiumIndex", params={"symbol": s}, timeout=10).json()["lastFundingRate"]) * 100
         except Exception:
             fund = 0.0
         moeda = s.replace("USDT", "")
         nots = [n.get("titulo", "") for n in extra.get("noticias", []) if moeda in (n.get("ativos") or [])][:4]
-        dados = {"moeda": moeda, "preco": preco, "var_24h_pct": round((preco / v4[-7][3] - 1) * 100, 2), "var_7d_pct": round((preco / v4[-43][3] - 1) * 100, 2),
+        dados = {"moeda": moeda, "preco": preco, "stop_pct": round(stop_pct * 100, 2), "alvo_pct": round(stop_pct * 300, 2), "var_24h_pct": round((preco / v4[-7][3] - 1) * 100, 2), "var_7d_pct": round((preco / v4[-43][3] - 1) * 100, 2),
                  "tendencia_4h": round(tend, 2), "chance_alvo_compra": round(ca_c, 2), "chance_stop_compra": round(cs_c, 2),
                  "chance_alvo_venda": round(ca_v, 2), "chance_stop_venda": round(cs_v, 2), "valor_esperado_compra": round(ev_c, 2),
                  "valor_esperado_venda": round(ev_v, 2), "financiamento_pct": round(fund, 4), "noticias": nots,
@@ -288,15 +297,15 @@ def diretoria(analises, log):
     fech = e.get("fechadas", [])[-4:]
     perdas = sum(1 for f in fech if f.get("resultado", 0) < 0)
     cauteloso = len(fech) >= 2 and perdas >= 2 and sum(f.get("resultado", 0) for f in fech) < 0
-    ev_min, conf_min, fator = (0.30, 4, 0.6) if cauteloso else (0.15, 3, 1.0)
-    log.append("diretoria aprendeu: " + (f"{perdas} perdas nos últimos {len(fech)} fechamentos -> MODO CAUTELOSO (só confiança >=4, valor esperado >=0,30, risco x0,6)" if cauteloso else "últimos fechamentos ok -> modo normal"))
+    ev_min, conf_min, fator = (0.0, 4, 0.6) if cauteloso else (-0.10, 3, 1.0)
+    log.append("diretoria aprendeu: " + (f"{perdas} perdas nos últimos {len(fech)} fechamentos -> MODO CAUTELOSO (só confiança >=4, valor esperado >=0, risco x0,6)" if cauteloso else "últimos fechamentos ok -> modo normal"))
     ok = []
     for a in analises:
         if a.get("erro") or a["decisao"] == "FORA" or a["confianca"] < conf_min or a.get("vetado"):
             continue
         lado = 1 if a["decisao"] == "COMPRA" else -1
         ev = a["valor_esperado_compra"] if lado > 0 else a["valor_esperado_venda"]
-        if ev > ev_min and a["tendencia_4h"] * lado > 0:   # IA + tendência + máquina do tempo concordam
+        if ev > ev_min and a["tendencia_4h"] * lado >= 0.66:   # IA + tendência + máquina do tempo concordam
             ok.append((ev * a["confianca"], lado, a))
     ocupadas = set()   # moedas de outras carteiras (Foguete e IA manual): não dá para operar a mesma moeda
     for _f in ("foguete2.json", "ia_pura.json"):
@@ -309,11 +318,12 @@ def diretoria(analises, log):
     # RISCO: arrisca mais quando vale a pena (não toda hora).
     #  sinal FORTE (comitê aprovou, confiança >= 4 e valor esperado >= 0,4 em média) -> 50% da carteira
     #  sinal comum -> 30%;  depois de um acerto (caixa > 100) -> aposta o lucro inteiro se for maior
-    forte = sum(1 for _, _, a in ok if a["confianca"] >= 4) >= max(1, len(ok) // 2) and sum((a["valor_esperado_compra"] if l > 0 else a["valor_esperado_venda"]) for _, l, a in ok) / len(ok) >= 0.4
+    provado = sum(1 for n, w in PESO.items() if w > 0.55) >= 1 and len([1 for h in json.load(open(SAIDA, encoding="utf-8")).get("historico", []) if h.get("resultado") is not None]) >= 40 if os.path.exists(SAIDA) else False
+    forte = provado and sum(1 for _, _, a in ok if a["confianca"] >= 4) >= max(1, len(ok) // 2) and sum((a["valor_esperado_compra"] if l > 0 else a["valor_esperado_venda"]) for _, l, a in ok) / len(ok) >= 0.4
     base = (0.5 if forte else 0.3) * caixa
     risco = (max(base, caixa - 100) if caixa > 100 else base) * fator
     log.append(f"diretoria: sinal {'FORTE' if forte else 'comum'} -> arrisca {risco:.0f} USD para ganhar ~{risco * 3:.0f}")
-    expo_total = risco / 0.03
+    ok = ok[:3]   # no máximo 3 moedas por trade
     info = {x["symbol"]: x for x in b._req("GET", "/fapi/v1/exchangeInfo", assinado=False)["symbols"]}
     import math
     for s_, (_, lado, a) in zip(range(len(ok)), ok):
@@ -330,9 +340,10 @@ def diretoria(analises, log):
             tick = float([f for f in info[s]["filters"] if f["filterType"] == "PRICE_FILTER"][0]["tickSize"]); d = max(0, -int(round(math.log10(tick))))
             b._req("POST", "/fapi/v1/leverage", symbol=s, leverage=20)
             px = float(b._req("GET", "/fapi/v1/ticker/price", assinado=False, symbol=s)["price"])
-            b.ordem(s, lado * (expo_total / len(ok)) / px)
+            sp = a.get("stop_pct", 3) / 100   # stop do tamanho da moeda
+            b.ordem(s, lado * ((risco / len(ok)) / sp) / px)
             pr = b._req("GET", "/fapi/v2/positionRisk", symbol=s)[0]; q = abs(float(pr["positionAmt"])); ent = float(pr["entryPrice"])
-            st = round(ent * (1 - 0.03 * lado), d); tp = round(ent * (1 + 0.09 * lado), d)
+            st = round(ent * (1 - sp * lado), d); tp = round(ent * (1 + 3 * sp * lado), d)
             lado_ord = "SELL" if lado > 0 else "BUY"
             for tipo, tr in (("STOP_MARKET", st), ("TAKE_PROFIT_MARKET", tp)):
                 b._req("POST", "/fapi/v1/algoOrder", algoType="CONDITIONAL", symbol=s, side=lado_ord, type=tipo, triggerPrice=f"{tr:.{d}f}", closePosition="true", workingType="MARK_PRICE")
@@ -361,7 +372,8 @@ def main():
         ia = json.load(open(os.path.join(D, "carteira_predio.json"), encoding="utf-8"))
     except Exception:
         pass
-    moedas = list(dict.fromkeys(list(ia.get("posicoes", {})) + [t["symbol"] for t in tk[:30]]))[:32]
+    liquidas = [t["symbol"] for t in tk if float(t["quoteVolume"]) >= 1e8]
+    moedas = list(dict.fromkeys(list(ia.get("posicoes", {})) + liquidas[:30]))[:32]
     rel = {}
     try:
         rel = json.load(open(os.path.join(D, "relatorio_aranha.json"), encoding="utf-8"))
