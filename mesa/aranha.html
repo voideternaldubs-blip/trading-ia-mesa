@@ -80,6 +80,13 @@
 .bsec ul{margin:0;padding-left:18px;font:300 13.5px/1.7 Lexend;color:#e3e5ee}.bfoot{display:flex;justify-content:space-between;align-items:center;margin-top:22px}
 @media (max-width:900px){html,body{overflow:auto}.wrap{grid-template-columns:1fr;height:auto}.doccell{height:80vh}.island .kpi{display:none}}
 </style>
+<script>/* horário de Brasília em tudo */
+window.BRT=(s,seg)=>{if(!s)return'';let t=typeof s==='number'?s:String(s).trim().replace(' ','T');if(typeof t==='string'&&!/[zZ]|[+-]\d\d:?\d\d$/.test(t))t+='Z';const d=new Date(t);if(isNaN(d))return String(s);
+return d.toLocaleTimeString('pt-BR',{timeZone:'America/Sao_Paulo',hour:'2-digit',minute:'2-digit',...(seg?{second:'2-digit'}:{})})};
+window.BRTD=s=>{if(!s)return'';let t=String(s).trim().replace(' ','T');if(!/[zZ]|[+-]\d\d:?\d\d$/.test(t))t+='Z';const d=new Date(t);if(isNaN(d))return String(s);
+return d.toLocaleString('pt-BR',{timeZone:'America/Sao_Paulo',day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})};
+window.BRT_OFF=-3*3600; /* gráficos: desloca o eixo para Brasília */
+</script>
 </head>
 <body>
 <div class="orb o1"></div><div class="orb o2"></div>
@@ -118,7 +125,7 @@ function montaDoc(n){
   const wrap=t=>t.split(/(\s+)/).map(w=>{if(/^\s+$/.test(w))return w;const limpo=w.replace(/[“”"'‘’(),.:;!?]/g,'');
     const num=RX_NUM.test(limpo)&&/\d/.test(limpo),k=num||CHAVE.test(limpo)||n.ativos.some(a=>limpo.toLowerCase()===a.toLowerCase());
     return `<span class="w${k?' key':''}${num?' num':''}">${w}</span>`}).join('');
-  sheet.innerHTML=`<div class="fonte"><span>${n.fonte}</span><span>${n.quando} UTC</span><span>${n.ativos.join(' · ')}</span></div>
+  sheet.innerHTML=`<div class="fonte"><span>${n.fonte}</span><span>${BRTD(n.quando)} (Brasília)</span><span>${n.ativos.join(' · ')}</span></div>
     <h1>${wrap(n.titulo)}</h1>${pars.map(p=>`<p>${wrap(p)}</p>`).join('')||'<p>'+wrap('(Esta fonte só publica o título. A aranha lê o título e explica ao lado.)')+'</p>'}
     <div class="orig"><b>ORIGINAL EM INGLÊS</b>${n.titulo_en}</div><canvas id="spider"></canvas>`;
   $('dtipo').innerHTML=`<i></i>${n.tipo}`;$('dtipo').style.setProperty('--c',n.cor);
@@ -224,7 +231,7 @@ $('bn').onclick=()=>{clearTimeout(timerProx);abre(idx+1)};
 $('bp').onclick=()=>{pausa=!pausa;$('bp').innerHTML=pausa?'Continuar leitura<span>▶</span>':'Pausar leitura<span>❚❚</span>'};
 function briefing(){
   const b=R&&R.briefing;if(!b)return;const cor={medo:'#ff4d6d',cautela:'#ffb02e',neutro:'#9aa3b8',otimismo:'#2bff9a',euforia:'#ff2bd6'}[b.clima]||'#9aa3b8';
-  $('bcore').innerHTML=`<span class="eyebrow" style="--c:#b56bff"><i></i>Briefing do mundo · ${(b.quando||'').replace('T',' ')} UTC</span>
+  $('bcore').innerHTML=`<span class="eyebrow" style="--c:#b56bff"><i></i>Briefing do mundo · ${BRTD(b.quando)} (Brasília)</span>
    <div class="bt">${b.titulo||''}</div><span class="bclima" style="background:${cor}22;color:${cor};box-shadow:inset 0 0 0 1px ${cor}55">CLIMA: ${(b.clima||'').toUpperCase()}</span>
    <div class="bgrid"><div class="bsec"><h3>O QUE ESTÁ ACONTECENDO</h3><p>${b.mundo||''}</p></div><div class="bsec"><h3>O QUE SIGNIFICA PRO DINHEIRO</h3><p>${b.dinheiro||''}</p></div>
    <div class="bsec"><h3>O QUE A MESA ESTÁ FAZENDO</h3><p>${b.mesa||''}</p></div><div class="bsec"><h3>FIQUE DE OLHO</h3><ul>${(b.ficar_de_olho||[]).map(x=>`<li>${x}</li>`).join('')}</ul></div></div>

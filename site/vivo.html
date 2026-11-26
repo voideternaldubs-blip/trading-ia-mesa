@@ -83,6 +83,13 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;background:ra
 .ev{padding:12px 14px;display:flex;flex-direction:column}.elist{flex:1;overflow:hidden;display:flex;flex-direction:column;gap:2px;margin-top:6px}
 .e{display:grid;grid-template-columns:40px 70px 1fr;gap:8px;font-size:10.5px;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.03)}.e .q{color:var(--dim);font-family:Doto;font-weight:900}.e .w{font:700 9px Montserrat;letter-spacing:.12em}.e .x{color:#c4ccd8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 </style>
+<script>const API=n=>location.port==='8787'?'/api/'+n:'https://raw.githubusercontent.com/voideternaldubs-blip/trading-ia-mesa/main/site/dados/'+n+'.json?t='+Math.floor(Date.now()/20000);/* horário de Brasília em tudo */
+window.BRT=(s,seg)=>{if(!s)return'';let t=typeof s==='number'?s:String(s).trim().replace(' ','T');if(typeof t==='string'&&!/[zZ]|[+-]\d\d:?\d\d$/.test(t))t+='Z';const d=new Date(t);if(isNaN(d))return String(s);
+return d.toLocaleTimeString('pt-BR',{timeZone:'America/Sao_Paulo',hour:'2-digit',minute:'2-digit',...(seg?{second:'2-digit'}:{})})};
+window.BRTD=s=>{if(!s)return'';let t=String(s).trim().replace(' ','T');if(!/[zZ]|[+-]\d\d:?\d\d$/.test(t))t+='Z';const d=new Date(t);if(isNaN(d))return String(s);
+return d.toLocaleString('pt-BR',{timeZone:'America/Sao_Paulo',day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})};
+window.BRT_OFF=-3*3600; /* gráficos: desloca o eixo para Brasília */
+</script>
 </head>
 <body>
 <div class="app">
@@ -96,7 +103,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;background:ra
     <div class="kv"><span class="lbl">Latência</span><b class="num" id="hlat" style="color:var(--data)">—</b></div>
     <div class="sp"></div>
     <nav class="nav"><a href="/">Mesa</a><a href="/aranha.html">Aranha</a><a class="at" href="/vivo.html">Ao vivo</a></nav>
-    <div class="kv" style="text-align:right"><span class="lbl">UTC</span><b class="num" id="clk">--:--:--</b></div>
+    <div class="kv" style="text-align:right"><span class="lbl">BRASÍLIA</span><b class="num" id="clk">--:--:--</b></div>
   </header>
 
   <div class="pn st"><span class="tag" id="stag" style="color:var(--up)">SENTINELA</span><span class="msg" id="smsg">carregando…</span></div>
@@ -133,7 +140,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;background:ra
   </section>
 </div>
 
-<script>const API=n=>location.port==='8787'?'/api/'+n:'/dados/'+n+'.json';
+<script>
 const $=id=>document.getElementById(id);
 let MOEDAS=["BTC","ETH","SOL","BNB","XRP","DOGE","AVAX","LINK","ADA","SUI"];let EXTRA=[];
 const COR={CHEFE:'#D946EF',ARANHA:'#22D3EE',ANALISTA:'#A78BFA',VET:'#FBBF24',RUG:'#FB7185',SNIPER:'#34D399',"SAÍDA":'#60A5FA',RISCO:'#F472B6',"CALENDÁRIO":'#A3E635',SEC:'#EAB308',FILLS:'#2DD4BF',SENTINELA:'#FB923C'};
@@ -155,15 +162,15 @@ function criaGrafico(){
 }
 async function carregaHist(){
   const r=await (await fetch(`https://data-api.binance.vision/api/v3/klines?symbol=${sel}USDT&interval=${iv}&limit=400`)).json();
-  cs.setData(r.map(k=>({time:k[0]/1000,open:+k[1],high:+k[2],low:+k[3],close:+k[4]})));
-  vs.setData(r.map(k=>({time:k[0]/1000,value:+k[5],color:+k[4]>=+k[1]?'rgba(40,217,154,.28)':'rgba(255,85,119,.28)'})));
+  cs.setData(r.map(k=>({time:k[0]/1000+BRT_OFF,open:+k[1],high:+k[2],low:+k[3],close:+k[4]})));
+  vs.setData(r.map(k=>({time:k[0]/1000+BRT_OFF,value:+k[5],color:+k[4]>=+k[1]?'rgba(40,217,154,.28)':'rgba(255,85,119,.28)'})));
   linhasPosicao();
 }
 function linhasPosicao(){
   if(entryLine){cs.removePriceLine(entryLine);entryLine=null}if(stopLine){cs.removePriceLine(stopLine);stopLine=null}
-  const q=cart?.foguete?.pos?.[sel+'USDT'];let leg='';
-  if(q){const longo=q.lado>0;entryLine=cs.createPriceLine({price:q.entrada,color:'#43C9E8',lineWidth:1,lineStyle:2,axisLabelVisible:true,title:longo?'FOGUETE comprado':'FOGUETE vendido'});
-    stopLine=cs.createPriceLine({price:q.stop,color:'#FF5577',lineWidth:1,lineStyle:1,axisLabelVisible:true,title:'STOP 4 ATR'});
+  const q=cart?.ia?.posicoes?.[sel+'USDT']||cart?.foguete?.pos?.[sel+'USDT'];let leg='';
+  if(q){const longo=q.lado>0;entryLine=cs.createPriceLine({price:q.entrada,color:'#43C9E8',lineWidth:1,lineStyle:2,axisLabelVisible:true,title:(cart?.ia?.posicoes?.[sel+'USDT']?'IA ':'FOGUETE ')+(longo?'comprado':'vendido')});
+    stopLine=cs.createPriceLine({price:q.stop,color:'#FF5577',lineWidth:1,lineStyle:1,axisLabelVisible:true,title:'STOP'});
     $('leg').innerHTML=`<span><i style="background:#43C9E8"></i>entrada ${fp(q.entrada)}</span><span><i style="background:#FF5577"></i>stop ${fp(q.stop)}</span>`;return}
   const p=cart?.cripto?.pos?.[sel];
   if(p){const longo=p.qtd>0;entryLine=cs.createPriceLine({price:p.preco,color:'#43C9E8',lineWidth:1,lineStyle:2,axisLabelVisible:true,title:longo?'ENTRADA (comprado)':'ENTRADA (vendido)'});
@@ -181,7 +188,7 @@ function conecta(){
   ws.onopen=()=>{$('conn').classList.add('on');$('conn').querySelector('span').textContent='BINANCE · AO VIVO'};
   ws.onclose=()=>{$('conn').classList.remove('on');$('conn').querySelector('span').textContent='BINANCE · RECONECTANDO';setTimeout(()=>{if(ws.readyState===3)conecta()},2500)};
   ws.onmessage=ev=>{const {stream,data:d}=JSON.parse(ev.data);
-    if(stream.includes('@kline')){const k=d.k;cs.update({time:k.t/1000,open:+k.o,high:+k.h,low:+k.l,close:+k.c});vs.update({time:k.t/1000,value:+k.v,color:+k.c>=+k.o?'rgba(40,217,154,.28)':'rgba(255,85,119,.28)'})}
+    if(stream.includes('@kline')){const k=d.k;cs.update({time:k.t/1000+BRT_OFF,open:+k.o,high:+k.h,low:+k.l,close:+k.c});vs.update({time:k.t/1000+BRT_OFF,value:+k.v,color:+k.c>=+k.o?'rgba(40,217,154,.28)':'rgba(255,85,119,.28)'})}
     else if(stream.includes('@aggTrade')){lat.push(Date.now()-d.T);if(lat.length>30)lat.shift();novoNegocio(d)}
     else if(stream.includes('@miniTicker')){tick(d.s.replace('USDT',''),+d.c,+d.o)}};
 }
@@ -189,7 +196,7 @@ let ultTrade=0;
 function novoNegocio(d){
   const agora=performance.now();if(agora-ultTrade<120)return;ultTrade=agora;
   const p=+d.p,q=+d.q,v=p*q,venda=d.m;const el=document.createElement('div');el.className='tr';
-  el.innerHTML=`<span class="t">${new Date(d.T).toISOString().slice(14,19)}</span><span class="${venda?'dn':'up'}">${fp(p)}</span><span>${q<1?q.toFixed(4):q.toFixed(2)}</span><span style="text-align:right;color:${v>50000?'#F4B942':'#8A96A8'}">$${v>=1000?(v/1000).toFixed(1)+'k':v.toFixed(0)}</span>`;
+  el.innerHTML=`<span class="t">${BRT(d.T,1)}</span><span class="${venda?'dn':'up'}">${fp(p)}</span><span>${q<1?q.toFixed(4):q.toFixed(2)}</span><span style="text-align:right;color:${v>50000?'#F4B942':'#8A96A8'}">$${v>=1000?(v/1000).toFixed(1)+'k':v.toFixed(0)}</span>`;
   const t=$('trades');t.prepend(el);while(t.children.length>16)t.lastChild.remove();
   if(v>100000){acende('ANALISTA',`baleia: ${venda?'venda':'compra'} de $${(v/1000).toFixed(0)}k em ${sel}`)}
 }
@@ -203,6 +210,12 @@ function tick(m,c,o){
 /* ---------- posições e capital, marcados a mercado ao vivo ---------- */
 function atualizaPosicoes(){
   if(!cart)return;const fg=cart.foguete||{},fc=fg.conta||{},fp2=fg.pos||{};let pnlTot=0,expo=0,html='',n=0;
+  /* IA PURA (as operações escolhidas pelo Claude) — primeiro da lista, ao vivo */
+  const ia=cart.ia||{},ip=ia.posicoes||{},pb=ia.prob||{};let iaPnl=0,ih='';
+  for(const [sym,p] of Object.entries(ip)){const m=sym.replace('USDT','');const px=ultimo[m]||p.atual||p.entrada,pnl=p.lado*p.qtd*(px-p.entrada),pct=(px/p.entrada-1)*p.lado*100;iaPnl+=pnl;
+    const pr=pb[sym];ih+=`<div class="p${m===sel?' sel':''}" data-m="${m}" style="border-left:2px solid #B56BFF"><span class="sym">${m} <small style="color:#B56BFF">IA</small></span><span><span class="side ${p.lado>0?'l':'s'}">${p.lado>0?'COMPRADO':'VENDIDO'}</span></span><span class="pnl ${pnl>=0?'up':'dn'}" id="pi_${m}">${pnl>=0?'+':''}${pnl.toFixed(2)}</span>
+      <div class="det"><span>alvo ${fp(p.alvo)} · stop ${fp(p.stop)}${pr?` · chance alvo ${(pr.chance_alvo*100).toFixed(0)}%`:''}</span><span class="${pct>=0?'up':'dn'}">${pct>=0?'+':''}${pct.toFixed(2)}%</span></div></div>`}
+  if(ih){const tot=(ia.caixa||100)+iaPnl;html+=`<div style="padding:8px 12px;color:#B56BFF;font-weight:700;font-size:12px;letter-spacing:.08em">IA PURA (CLAUDE) · ${tot.toFixed(2)} USD <span class="${tot>=100?'up':'dn'}">(${tot>=100?'+':''}${(tot-100).toFixed(2)})</span> · meta 1000</div>`+ih+`<div style="padding:8px 12px;color:#43C9E8;font-weight:700;font-size:12px;letter-spacing:.08em">FOGUETE v2</div>`}
   for(const [sym,p] of Object.entries(fp2)){const m=sym.replace('USDT','');const px=ultimo[m]||p.entrada,pnl=p.lado*p.qtd*(px-p.entrada),pct=(px/p.entrada-1)*p.lado*100;pnlTot+=pnl;expo+=p.qtd*px;n++;
     html+=`<div class="p${m===sel?' sel':''}" data-m="${m}"><span class="sym">${m}</span><span><span class="side ${p.lado>0?'l':'s'}">${p.lado>0?'COMPRADO':'VENDIDO'}</span></span><span class="pnl ${pnl>=0?'up':'dn'}" id="pp_${m}">${pnl>=0?'+':''}${pnl.toFixed(2)}</span>
       <div class="det"><span>${(p.qtd*px).toFixed(0)} USD · entrada ${fp(p.entrada)} · stop ${fp(p.stop)}</span><span class="${pct>=0?'up':'dn'}">${pct>=0?'+':''}${pct.toFixed(2)}%</span></div></div>`}
@@ -252,12 +265,12 @@ function desenhaFluxo(t){
 /* ---------- dados da mesa ---------- */
 async function puxa(){
   try{[cart,estado]=await Promise.all([fetch(API('carteira'),{cache:'no-store'}).then(r=>r.json()),fetch(API('estado'),{cache:'no-store'}).then(r=>r.json())])}catch(e){return}
-  const ex=Object.keys((cart.foguete||{}).pos||{}).map(s=>s.replace('USDT','')).filter(m=>!MOEDAS.includes(m));
+  const ex=[...new Set([...Object.keys((cart.foguete||{}).pos||{}),...Object.keys((cart.ia||{}).posicoes||{})])].map(s=>s.replace('USDT','')).filter(m=>!MOEDAS.includes(m));
   if(ex.join()!==EXTRA.join()){EXTRA=ex;conecta()}
   atualizaPosicoes();linhasPosicao();
   const cont={};estado.agentes.forEach(a=>{cont[a.nome]=a.acoes;if(!$('a_'+a.nome)?.classList.contains('on'))$('at_'+a.nome).textContent=a.ultimo||PAPEL[a.nome]});
   FLUXO.forEach(n=>$('fl_'+n).textContent=cont[n]??0);
-  $('elist').innerHTML=estado.eventos.slice(-14).reverse().map(e=>`<div class="e"><span class="q">${(e.quando.slice(11)||'').slice(0,5)}</span><span class="w" style="color:${COR[e.agente]}">${e.agente}</span><span class="x">${e.texto}</span></div>`).join('');
+  $('elist').innerHTML=estado.eventos.slice(-14).reverse().map(e=>`<div class="e"><span class="q">${BRT(e.quando)}</span><span class="w" style="color:${COR[e.agente]}">${e.agente}</span><span class="x">${e.texto}</span></div>`).join('');
   const h=(cart.cripto.hist||[]).map(x=>x.valor);perf.setData(h.map((v,i)=>({time:i+1,value:v})));perf.timeScale().fitContent();
   status();
 }
@@ -283,8 +296,8 @@ $('iv').innerHTML=['1m','5m','15m','1h','4h'].map(x=>`<button data-i="${x}" clas
 $('iv').querySelectorAll('button').forEach(b=>b.onclick=()=>{iv=b.dataset.i;$('iv').querySelectorAll('button').forEach(x=>x.classList.toggle('at',x===b));carregaHist();conecta()});
 $('tiles').innerHTML=MOEDAS.map(m=>`<div class="tile${m===sel?' at':''}" data-m="${m}"><span class="s">${m}</span><span class="v num">—</span></div>`).join('');
 $('tiles').querySelectorAll('.tile').forEach(t=>t.onclick=()=>troca(t.dataset.m));
-criaGrafico();carregaHist();conecta();puxa();setInterval(puxa,15000);
-setInterval(()=>{$('clk').textContent=new Date().toISOString().slice(11,19);if(lat.length){$('hlat').textContent=Math.round(lat.reduce((a,b)=>a+b,0)/lat.length)+'ms'}},1000);
+criaGrafico();carregaHist();conecta();puxa();setInterval(puxa,20000);
+setInterval(()=>{$('clk').textContent=BRT(Date.now(),1);if(lat.length){$('hlat').textContent=Math.round(lat.reduce((a,b)=>a+b,0)/lat.length)+'ms'}},1000);
 setInterval(()=>{const n=['ARANHA','ANALISTA','RISCO','SENTINELA','FILLS'][Math.floor(Math.random()*5)];acende(n,null,1200)},2800);
 (function loop(t){desenhaFluxo(t);requestAnimationFrame(loop)})(0);
 </script>

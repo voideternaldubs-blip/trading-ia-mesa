@@ -104,6 +104,13 @@ html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font:400 13
   .office{height:62vh}.teia{height:48vh}.total{height:42vh}.island{gap:12px;padding-left:14px}.kpi.hide{display:none}}
 </style>
 <script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.164.1/build/three.module.js","three/addons/":"https://unpkg.com/three@0.164.1/examples/jsm/"}}</script>
+<script>const API=n=>location.port==='8787'?'/api/'+n:'https://raw.githubusercontent.com/voideternaldubs-blip/trading-ia-mesa/main/site/dados/'+n+'.json?t='+Math.floor(Date.now()/20000);/* horário de Brasília em tudo */
+window.BRT=(s,seg)=>{if(!s)return'';let t=typeof s==='number'?s:String(s).trim().replace(' ','T');if(typeof t==='string'&&!/[zZ]|[+-]\d\d:?\d\d$/.test(t))t+='Z';const d=new Date(t);if(isNaN(d))return String(s);
+return d.toLocaleTimeString('pt-BR',{timeZone:'America/Sao_Paulo',hour:'2-digit',minute:'2-digit',...(seg?{second:'2-digit'}:{})})};
+window.BRTD=s=>{if(!s)return'';let t=String(s).trim().replace(' ','T');if(!/[zZ]|[+-]\d\d:?\d\d$/.test(t))t+='Z';const d=new Date(t);if(isNaN(d))return String(s);
+return d.toLocaleString('pt-BR',{timeZone:'America/Sao_Paulo',day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})};
+window.BRT_OFF=-3*3600; /* gráficos: desloca o eixo para Brasília */
+</script>
 </head>
 <body>
 <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div><div class="grain"></div>
@@ -156,7 +163,7 @@ html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font:400 13
   </div></section>
 </main>
 
-<script type="module">const API=n=>location.port==='8787'?'/api/'+n:'/dados/'+n+'.json';
+<script type="module">const API=n=>location.port==='8787'?'/api/'+n:'https://raw.githubusercontent.com/voideternaldubs-blip/trading-ia-mesa/main/site/dados/'+n+'.json?t='+Math.floor(Date.now()/20000);
 import * as THREE from 'three';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
@@ -326,7 +333,7 @@ async function puxa(){
   S.eventos.forEach(e=>{const k=e.quando+e.texto;if(vistos.has(k))return;vistos.add(k);
     const d=primeira?atraso:0;atraso+=650;setTimeout(()=>{acende(e.agente);if(e.agente!=='CHEFE')pacote(e.agente)},Math.min(d,9000))});
   primeira=false;
-  $('log').innerHTML=S.eventos.slice(-9).reverse().map((e,i)=>`<div class="row" style="animation-delay:${i*60}ms"><span class="h">${e.quando.slice(11)||e.quando.slice(5)}</span><span class="a" style="color:${COR[e.agente]}"><i></i>${e.agente}</span><span class="x">${e.texto}</span></div>`).join('');
+  $('log').innerHTML=S.eventos.slice(-9).reverse().map((e,i)=>`<div class="row" style="animation-delay:${i*60}ms"><span class="h">${BRT(e.quando)}</span><span class="a" style="color:${COR[e.agente]}"><i></i>${e.agente}</span><span class="x">${e.texto}</span></div>`).join('');
   if(!T.M.length)montaTeia();
 }
 /* ================= AO VIVO: preço da Binance a cada segundo, sem esperar a nuvem ================= */
@@ -351,7 +358,7 @@ setInterval(recalculaVivo,1000);carteiraViva();setInterval(carteiraViva,60000);
 try{hist=JSON.parse(localStorage.getItem('mesa_hist')||'[]')}catch(e){}
 // entre eventos reais, a equipe mantém a rotina: aranha varre, analista confere, risco audita
 setInterval(()=>{const n=['ARANHA','ANALISTA','RISCO','VET'][Math.floor(Math.random()*4)];acende(n,1100);if(Math.random()<.35)pacote(n)},3200);
-setInterval(()=>{$('clk').textContent=new Date().toISOString().slice(11,19)},1000);
+setInterval(()=>{$('clk').textContent=BRT(Date.now(),1)},1000);
 puxa();setInterval(puxa,15000);requestAnimationFrame(quadro);
 </script>
 </body>

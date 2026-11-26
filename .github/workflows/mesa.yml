@@ -3,7 +3,12 @@ name: Mesa de Agentes 24h
 on:
   schedule:
     - cron: "*/15 * * * *"  # a cada 15 min (repositório público = minutos ilimitados); o cron-job.org dispara também
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      forcar:
+        description: "forçar robôs lentos (tendência, ações, SEC) fora da janela"
+        type: boolean
+        default: false
 
 concurrency:
   group: mesa
@@ -11,11 +16,12 @@ concurrency:
 
 permissions:
   contents: write
+  actions: write   # a rodada dispara a próxima (motor em corrente, sem depender do agendador do GitHub)
 
 jobs:
   rodar:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 80
     env:
       PYTHONIOENCODING: utf-8
       TZ: UTC
@@ -75,26 +81,26 @@ jobs:
         if: always()
         run: |
           H=$(date -u +%H)
-          M=$(date -u +%M); if { [ $((10#$H % 4)) -eq 0 ] && [ $((10#$M)) -lt 15 ]; } || [ "${{ github.event_name }}" = "workflow_dispatch" ]; then python robo.py; else echo "fora do horário ($H UTC)"; fi
+          M=$(date -u +%M); if { [ $((10#$H % 4)) -eq 0 ] && [ $((10#$M)) -lt 15 ]; } || [ "${{ inputs.forcar }}" = "true" ]; then python robo.py; else echo "fora do horário ($H UTC)"; fi
 
       - name: Robô de ações + Alpaca (pregão de NY)
         if: always()
         run: |
           H=$(date -u +%H); D=$(date -u +%u)
-          M=$(date -u +%M); if { [ "$D" -le 5 ] && [ "$H" -eq 20 ] && [ $((10#$M)) -lt 15 ]; } || [ "${{ github.event_name }}" = "workflow_dispatch" ]; then cd acoes && python robo_acoes.py; else echo "fora do pregão ($D/$H UTC)"; fi
+          M=$(date -u +%M); if { [ "$D" -le 5 ] && [ "$H" -eq 20 ] && [ $((10#$M)) -lt 15 ]; } || [ "${{ inputs.forcar }}" = "true" ]; then cd acoes && python robo_acoes.py; else echo "fora do pregão ($D/$H UTC)"; fi
 
       - name: FOGUETE DE AÇÕES (rotação de ETFs alavancados, Alpaca)
         if: always()
         run: |
           H=$(date -u +%H); D=$(date -u +%u); M=$(date -u +%M)
-          if { [ "$D" -le 5 ] && [ "$H" -eq 19 ] && [ $((10#$M)) -lt 15 ]; } || [ "${{ github.event_name }}" = "workflow_dispatch" ]; then cd acoes && python rotacao.py; else echo "fora da janela"; fi
+          if { [ "$D" -le 5 ] && [ "$H" -eq 19 ] && [ $((10#$M)) -lt 15 ]; } || [ "${{ inputs.forcar }}" = "true" ]; then cd acoes && python rotacao.py; else echo "fora da janela"; fi
 
       - name: CALENDÁRIO + SEC + FILLS + SENTINELA
         if: always()
         run: |
           cd equipe
           python calendario.py || true
-          H=$(date -u +%H); M=$(date -u +%M); if { [ $((10#$H % 2)) -eq 0 ] && [ $((10#$M)) -lt 15 ]; } || [ "${{ github.event_name }}" = "workflow_dispatch" ]; then python sec.py || true; fi
+          H=$(date -u +%H); M=$(date -u +%M); if { [ $((10#$H % 2)) -eq 0 ] && [ $((10#$M)) -lt 15 ]; } || [ "${{ inputs.forcar }}" = "true" ]; then python sec.py || true; fi
           python fills.py || true
           python sentinela.py || true
           python prova.py || true
@@ -117,3 +123,16 @@ jobs:
           git diff --cached --quiet && exit 0
           git commit -q -m "mesa: rodada $(date -u +%Y-%m-%dT%H:%M)Z"
           for i in 1 2 3; do git pull -q --rebase -X theirs && git push -q && break; sleep 5; done
+
+      - name: MOTOR RÁPIDO (40 min sem parar, ciclo de 2 min)
+        if: always()
+        env:
+          BINANCE_KEY: ${{ secrets.BINANCE_KEY }}
+          BINANCE_SECRET: ${{ secrets.BINANCE_SECRET }}
+        run: python motor.py --minutos 40 || true
+
+      - name: PRÓXIMA RODADA (a corrente não para)
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run mesa.yml --ref main || gh workflow run mesa.yml --ref main

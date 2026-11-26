@@ -62,11 +62,17 @@ def marcar(titulo):
 
 def noticias(c):
     novas = 0
-    for f in FEEDS:
+    from concurrent.futures import ThreadPoolExecutor
+    def baixa(f):  # todas as fontes AO MESMO TEMPO (antes: uma por vez, 43 s)
         try:
-            raiz = ET.fromstring(requests.get(f, headers=UA, timeout=20).content)
+            return f, ET.fromstring(requests.get(f, headers=UA, timeout=12).content)
         except Exception as e:
-            print("feed falhou", f, e); continue
+            print("feed falhou", f, str(e)[:80]); return f, None
+    with ThreadPoolExecutor(max_workers=24) as ex:
+        baixados = list(ex.map(baixa, FEEDS))
+    for f, raiz in baixados:
+        if raiz is None:
+            continue
         for it in list(raiz.iter("item"))[:40]:
             tit, link = (it.findtext("title") or "").strip(), (it.findtext("link") or "").strip()
             resumo = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", it.findtext("description") or "")).strip()[:900]

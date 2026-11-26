@@ -21,7 +21,11 @@ def carteira():
     f = ler(os.path.join(RAIZ, "data", "foguete2.json"), None) or ler(os.path.join(SITE, "dados", "foguete.json"), {})
     return {"cripto": {"caixa": c.get("caixa"), "cofre": c.get("cofre", 0), "pos": c.get("pos", {}), "ligado": c.get("ligado", True), "hist": c.get("historico", [])[-200:]},
             "acoes": {"caixa": a.get("caixa"), "pos": a.get("pos", {}), "hist": a.get("hist", [])[-200:]},
-            "foguete": {"conta": f.get("conta", {}), "pos": f.get("posicoes", {}), "hist": f.get("hist", [])[-300:]}}
+            "foguete": {"conta": f.get("conta", {}), "pos": f.get("posicoes", {}), "hist": f.get("hist", [])[-300:]},
+            "ia": {**{k: v for k, v in ler(os.path.join(RAIZ, "data", "ia_pura.json"), {}).items() if k in ("caixa", "posicoes", "fechadas", "modo")},
+                   "hist": ler(os.path.join(RAIZ, "data", "ia_pura.json"), {}).get("hist", [])[-200:],
+                   "prob": ler(os.path.join(RAIZ, "data", "probabilidades.json"), {}).get("posicoes", {})},
+            "atualizado": __import__("datetime").datetime.now(__import__("datetime").timezone.utc).isoformat()[:19]}
 
 
 def aranha():
@@ -51,10 +55,10 @@ def tudo():
     # páginas: no Vercel os dados vêm de /dados/*.json; no PC (porta 8787) continuam vindo da /api
     for pg in ("index.html", "aranha.html", "vivo.html"):
         s = open(os.path.join(AQUI, pg), encoding="utf-8").read()
-        s = s.replace("<script>", "<script>const API=n=>location.port==='8787'?'/api/'+n:'/dados/'+n+'.json';", 1) if "const API=" not in s else s
+        s = s.replace("<script>", "<script>const API=n=>location.port==='8787'?'/api/'+n:'https://raw.githubusercontent.com/voideternaldubs-blip/trading-ia-mesa/main/site/dados/'+n+'.json?t='+Math.floor(Date.now()/20000);", 1) if "const API=" not in s else s
         s = re.sub(r"fetch\('/api/(estado|aranha|carteira)'", lambda m: f"fetch(API('{m.group(1)}')", s)
         if pg == "index.html":  # o index tem script module próprio
-            s = s.replace('<script type="module">', "<script type=\"module\">const API=n=>location.port==='8787'?'/api/'+n:'/dados/'+n+'.json';", 1)
+            s = s.replace('<script type="module">', "<script type=\"module\">const API=n=>location.port==='8787'?'/api/'+n:'https://raw.githubusercontent.com/voideternaldubs-blip/trading-ia-mesa/main/site/dados/'+n+'.json?t='+Math.floor(Date.now()/20000);", 1)
         open(os.path.join(SITE, pg), "w", encoding="utf-8").write(s)
     json.dump({"cleanUrls": True, "headers": [{"source": "/dados/(.*)", "headers": [{"key": "Cache-Control", "value": "no-store"}]}]},
               open(os.path.join(SITE, "vercel.json"), "w"), indent=1)
