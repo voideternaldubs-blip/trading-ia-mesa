@@ -145,7 +145,7 @@ window.BRT_OFF=-3*3600; /* gráficos: desloca o eixo para Brasília */
   <a href="/vivo.html" class="vivo-btn">AO VIVO<span>↗</span></a>
   <a href="/predio" class="vivo-btn" style="background:#B56BFF">PRÉDIO<span>↗</span></a>
   <div class="live"><b></b>ao vivo</div>
-  <div class="kpi"><span>IA pura</span><b id="kt">—</b></div>
+  <div class="kpi"><span>Prédio</span><b id="kt">—</b></div>
   <div class="kpi hide"><span>Notícias</span><b id="kn" style="color:var(--cy)">—</b></div>
   <div class="kpi hide"><span>Medo / Ganância</span><b id="kf" style="color:var(--am)">—</b></div>
   <div class="chip-s" id="sent"><i></i><span>sentinela…</span></div>
@@ -155,7 +155,7 @@ window.BRT_OFF=-3*3600; /* gráficos: desloca o eixo para Brasília */
 
 <main class="bento">
   <section class="shell total" style="grid-area:total;animation-delay:.05s"><div class="core">
-    <span class="eyebrow" style="--c:var(--gr)"><i></i>IA pura · 100 → meta 1000</span>
+    <span class="eyebrow" style="--c:var(--gr)"><i></i>Carteira do Prédio · 100 → meta 1000</span>
     <div class="big" id="bal">—</div>
     <div class="delta" id="dl"></div>
     <div class="sub" id="bs"></div>
@@ -196,7 +196,7 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
 
-const COR={CHEFE:'#ff2bd6',ARANHA:'#2ee6ff',ANALISTA:'#9b7bff',"PREVISÃO":'#ffb02e',"IA PURA":'#B56BFF',SNIPER:'#2bff9a',"SAÍDA":'#5ab8ff',RISCO:'#ff7aa8',"CALENDÁRIO":'#c8ff2e',SEC:'#ffd86b',FILLS:'#7cf3c9',SENTINELA:'#ff8a3d'};
+const COR={CHEFE:'#ff2bd6',ARANHA:'#2ee6ff',ANALISTA:'#9b7bff',"PREVISÃO":'#ffb02e',"CARTEIRA":'#B56BFF',SNIPER:'#2bff9a',"SAÍDA":'#5ab8ff',RISCO:'#ff7aa8',"CALENDÁRIO":'#c8ff2e',SEC:'#ffd86b',FILLS:'#7cf3c9',SENTINELA:'#ff8a3d'};
 const NOMES=Object.keys(COR);
 const $=id=>document.getElementById(id);
 let S=null,hist=[],vistos=new Set(),primeira=true;
@@ -242,7 +242,7 @@ function traje(nome,g,c){
       extra.push(add(new THREE.SphereGeometry(.2,24,16),M(0xFBBF24,1.2,{transparent:true,opacity:.75}),.45,1.03,.05));
       add(new THREE.CylinderGeometry(.12,.14,.05,16),M(0x2A2620),.45,.85,.05);
       add(new THREE.ConeGeometry(.2,.42,18),M(0x3B2A6B,.2),0,hy+.33,hz);break;
-    case 'IA PURA':
+    case 'CARTEIRA':
       extra.push(add(new THREE.IcosahedronGeometry(.26,0),M(0xB56BFF,1.1,{wireframe:true}),0,hy,hz));
       extra.push(add(new THREE.TorusGeometry(.36,.012,8,48),B(0xB56BFF),0,hy+.05,hz,Math.PI/2.4));break;
     case 'SNIPER':
@@ -315,7 +315,7 @@ const QUEM={
   ARANHA:['Leitora de notícias','Varre mais de 25 fontes do mundo (Bloomberg, Reuters, Fed, SEC, Binance) a cada 2 minutos, todas ao mesmo tempo, traduz e marca quais moedas e ações cada notícia mexe.'],
   ANALISTA:['Analista de tendência','Mede a tendência de cada moeda com o método que passou nos testes (rompimentos de 80, 120 e 200 candles de 4h) e diz se a hora é de comprar, vender ou ficar de fora.'],
   'PREVISÃO':['A máquina do tempo','Para cada posição aberta, sorteia 10.000 futuros com o jeito real do mercado dos últimos 60 dias e calcula a chance de bater o alvo antes do stop.'],
-  'IA PURA':['A carteira do Claude','Opera 100 USD de teste na Binance com entradas escolhidas a dedo, no método 1:3, e só entra quando a previsão mostra valor esperado positivo. Meta: 1000 até 30/11.'],
+  CARTEIRA:['A Carteira do Prédio','Recebe as decisões da diretoria: 100 USD de teste na Binance, método 1:3, e só entra quando analistas, comitê e Máquina do Tempo concordam. Arrisca mais quando o sinal é forte. Meta: 1000 até 30/11.'],
   SNIPER:['Executor de entradas','Manda as ordens de entrada pra Binance no tamanho que o risco aprovou.'],
   'SAÍDA':['Guardião dos stops','Cuida dos stops e alvos. As ordens ficam gravadas na própria Binance, então funcionam mesmo se a nuvem atrasar.'],
   RISCO:['Gerente de risco','Decide o tamanho de cada aposta e a alavancagem, e veta o que passa do limite. Hoje a IA arrisca no máximo uns 30 por rodada.'],
@@ -382,7 +382,7 @@ function quadro(t){
     a.cab.rotation.y=Math.sin(t/1700+a.fase)*.35;
     a.linhas.forEach((l,i)=>{l.material.opacity=on?.85:.18;l.scale.x=.4+.6*((Math.sin(t/(on?120:520)+i*1.7+a.fase)+1)/2)});
     a.el.classList.toggle('on',on);
-    (a.extra||[]).forEach((x,i)=>{if(n==='IA PURA'){x.rotation.y=t/900+i}else if(n==='ANALISTA'){x.scale.y=.6+.5*((Math.sin(t/(on?180:700)+i*1.3)+1)/2)}else if(n==='PREVISÃO'){x.material.emissiveIntensity=.8+.6*Math.sin(t/400)}else if(n==='SENTINELA'){x.visible=Math.sin(t/300)>-.2}else if(n==='ARANHA'){x.rotation.x=Math.sin(t/(on?90:400)+i)*.25}else if(n==='SAÍDA'){x.rotation.z=Math.sin(t/900)*.2}else if(n==='RISCO'){x.position.y=1.04+Math.sin(t/600+i*Math.PI)*.04}});
+    (a.extra||[]).forEach((x,i)=>{if(n==='CARTEIRA'){x.rotation.y=t/900+i}else if(n==='ANALISTA'){x.scale.y=.6+.5*((Math.sin(t/(on?180:700)+i*1.3)+1)/2)}else if(n==='PREVISÃO'){x.material.emissiveIntensity=.8+.6*Math.sin(t/400)}else if(n==='SENTINELA'){x.visible=Math.sin(t/300)>-.2}else if(n==='ARANHA'){x.rotation.x=Math.sin(t/(on?90:400)+i)*.25}else if(n==='SAÍDA'){x.rotation.z=Math.sin(t/900)*.2}else if(n==='RISCO'){x.position.y=1.04+Math.sin(t/600+i*Math.PI)*.04}});
   }
   for(let i=pacotes.length-1;i>=0;i--){const p=pacotes[i],k=Math.min(1,(t-p.t0)/p.dur),e=k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2;
     p.m.position.copy(p.curva.getPoint(e));p.rastro.forEach((r,j)=>r.position.copy(p.curva.getPoint(Math.max(0,e-j*.018))));
@@ -471,7 +471,7 @@ function recalculaVivo(){
   for(const [s,p] of Object.entries(f.pos||{})){const px=PX[s]||p.entrada;pnl+=p.lado*p.qtd*(px-p.entrada)}
   const fog=(c.caixa||0)+pnl+(c.cofre||0);
   cartaoVivo('Foguete v2',fog);
-  if(CART.ia&&CART.ia.posicoes){let pi=0;for(const [s,p] of Object.entries(CART.ia.posicoes)){const px=PX[s]||p.atual||p.entrada;pi+=p.lado*p.qtd*(px-p.entrada)}cartaoVivo('IA pura',(CART.ia.caixa??100)+pi)}
+  if(CART.ia&&CART.ia.posicoes){let pi=0;for(const [s,p] of Object.entries(CART.ia.posicoes)){const px=PX[s]||p.atual||p.entrada;pi+=p.lado*p.qtd*(px-p.entrada)}cartaoVivo('Carteira do Prédio',(CART.ia.caixa??100)+pi)}
 }
 function cartaoVivo(nome,val){ /* cada cartão recebe SÓ o próprio número ao vivo */
   const card=[...document.querySelectorAll('.ms')].find(e=>e.querySelector('.t').textContent.startsWith(nome));if(!card)return;
@@ -482,7 +482,7 @@ function cartaoVivo(nome,val){ /* cada cartão recebe SÓ o próprio número ao 
 setInterval(recalculaVivo,1000);carteiraViva();setInterval(carteiraViva,20000);
 try{hist=JSON.parse(localStorage.getItem('mesa_hist')||'[]')}catch(e){}
 // entre eventos reais, a equipe mantém a rotina: aranha varre, analista confere, risco audita
-setInterval(()=>{const n=['ARANHA','ANALISTA','RISCO','PREVISÃO','IA PURA'][Math.floor(Math.random()*5)];acende(n,1100);if(Math.random()<.35)pacote(n)},3200);
+setInterval(()=>{const n=['ARANHA','ANALISTA','RISCO','PREVISÃO','CARTEIRA'][Math.floor(Math.random()*5)];acende(n,1100);if(Math.random()<.35)pacote(n)},3200);
 setInterval(()=>{$('clk').textContent=BRT(Date.now(),1)},1000);
 puxa();setInterval(puxa,20000);requestAnimationFrame(quadro);
 </script>

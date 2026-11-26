@@ -5,7 +5,7 @@ TÉRREO      ARANHA (notícias, já roda no motor)
             (chance de alvo x stop dos dois lados), financiamento e notícias da moeda, e pede o veredito a uma IA
             (Groq: GPT-OSS 120B / GPT-OSS 20B / Qwen; NVIDIA: GLM / Kimi — rodízio, todas grátis).
 2º ANDAR    COMITÊ DE RISCO: ranqueia por valor esperado e votos.
-3º ANDAR    DIRETORIA: quando a IA pura está sem posição, abre o próximo trade do método 1:3 nas melhores
+3º ANDAR    DIRETORIA: quando a Carteira do Prédio está sem posição, abre o próximo trade do método 1:3 nas melhores
             (só onde tendência + Máquina do Tempo + IA concordam e o valor esperado é positivo).
 PLACAR      cada veredito é guardado com o preço; 24h depois o prédio confere quem acertou.
 Saída: data/predio.json"""
@@ -272,15 +272,15 @@ def confere_placar(antigo, precos):
     return hist[-3000:], por
 
 
-# ---------------- diretoria: abre o próximo trade da IA pura ----------------
+# ---------------- diretoria: abre o próximo trade da CARTEIRA DO PRÉDIO ----------------
 def diretoria(analises, log):
     try:
         import binance_demo as b
-        e = json.load(open(os.path.join(D, "ia_pura.json"), encoding="utf-8"))
+        e = json.load(open(os.path.join(D, "carteira_predio.json"), encoding="utf-8"))
     except Exception as ex:
         log.append(f"diretoria sem acesso: {str(ex)[:80]}"); return
     if e.get("posicoes"):
-        log.append(f"diretoria: IA pura já tem {len(e['posicoes'])} posições abertas, espera elas fecharem"); return
+        log.append(f"diretoria: a Carteira do Prédio já tem {len(e['posicoes'])} posições abertas, espera elas fecharem"); return
     caixa = float(e.get("caixa", 100))
     if caixa < 20:
         log.append("diretoria: caixa abaixo de 20, não abre mais nada"); return
@@ -298,9 +298,14 @@ def diretoria(analises, log):
         ev = a["valor_esperado_compra"] if lado > 0 else a["valor_esperado_venda"]
         if ev > ev_min and a["tendencia_4h"] * lado > 0:   # IA + tendência + máquina do tempo concordam
             ok.append((ev * a["confianca"], lado, a))
+    ocupadas = set()   # moedas de outras carteiras (Foguete e IA manual): não dá para operar a mesma moeda
+    for _f in ("foguete2.json", "ia_pura.json"):
+        try: ocupadas |= set(json.load(open(os.path.join(D, _f), encoding="utf-8")).get("posicoes", {}))
+        except Exception: pass
+    ok = [x for x in ok if x[2]["simbolo"] not in ocupadas]
     ok.sort(key=lambda x: -x[0]); ok = ok[:4]
     if not ok:
-        log.append("diretoria: nenhuma moeda com IA + tendência + máquina do tempo concordando; fica fora"); return
+        log.append("diretoria: nenhuma moeda LIVRE com IA + tendência + máquina do tempo concordando; fica fora"); return
     # RISCO: arrisca mais quando vale a pena (não toda hora).
     #  sinal FORTE (comitê aprovou, confiança >= 4 e valor esperado >= 0,4 em média) -> 50% da carteira
     #  sinal comum -> 30%;  depois de um acerto (caixa > 100) -> aposta o lucro inteiro se for maior
@@ -316,7 +321,7 @@ def diretoria(analises, log):
         if s not in info:
             continue
         e["posicoes"][s] = {"lado": lado, "qtd": 0, "entrada": 0, "stop": 0, "alvo": 0}
-    json.dump(e, open(os.path.join(D, "ia_pura.json"), "w", encoding="utf-8"), indent=1)   # reserva antes de operar
+    json.dump(e, open(os.path.join(D, "carteira_predio.json"), "w", encoding="utf-8"), indent=1)   # reserva antes de operar
     for _, lado, a in ok:
         s = a["simbolo"]
         if s not in info:
@@ -332,12 +337,12 @@ def diretoria(analises, log):
             for tipo, tr in (("STOP_MARKET", st), ("TAKE_PROFIT_MARKET", tp)):
                 b._req("POST", "/fapi/v1/algoOrder", algoType="CONDITIONAL", symbol=s, side=lado_ord, type=tipo, triggerPrice=f"{tr:.{d}f}", closePosition="true", workingType="MARK_PRICE")
             e["posicoes"][s] = {"lado": lado, "qtd": q, "entrada": ent, "stop": st, "alvo": tp, "em": datetime.now(timezone.utc).isoformat()[:16],
-                                "tese": f"prédio: {a['cerebro']} disse {a['decisao']} ({a['confianca']}/5): {a['motivo']}"}
+                                "tese": f"{a['cerebro']} disse {a['decisao']} ({a['confianca']}/5): {a['motivo']}"}
             log.append(f"DIRETORIA abriu {s} {'COMPRADO' if lado > 0 else 'VENDIDO'} a {ent:g} | stop {st:g} alvo {tp:g} | {a['motivo'][:90]}")
         except Exception as ex:
             e["posicoes"].pop(s, None); log.append(f"diretoria falhou em {s}: {str(ex)[:90]}")
     e["fase"] = int(e.get("fase", 1)) + 1
-    json.dump(e, open(os.path.join(D, "ia_pura.json"), "w", encoding="utf-8"), indent=1)
+    json.dump(e, open(os.path.join(D, "carteira_predio.json"), "w", encoding="utf-8"), indent=1)
 
 
 def main():
@@ -353,7 +358,7 @@ def main():
                  if t["symbol"] in fut and t["symbol"] not in ESTAVEIS), key=lambda t: -float(t["quoteVolume"]))
     ia = {}
     try:
-        ia = json.load(open(os.path.join(D, "ia_pura.json"), encoding="utf-8"))
+        ia = json.load(open(os.path.join(D, "carteira_predio.json"), encoding="utf-8"))
     except Exception:
         pass
     moedas = list(dict.fromkeys(list(ia.get("posicoes", {})) + [t["symbol"] for t in tk[:30]]))[:32]
@@ -404,7 +409,7 @@ Responda SÓ JSON: {"aprova":true,"motivo":"uma frase curta em português do Bra
                "terreo": {"nome": "ARANHA", "trabalho": "notícias do mundo", "noticias": len(rel.get("noticias", []))},
                "andar1": {"nome": "ANALISTAS DE MOEDA", "trabalho": "um analista por moeda", "analistas": analises},
                "andar2": {"nome": "COMITÊ DE RISCO", "trabalho": "ranking por valor esperado", "ranking": [a["simbolo"] for a in ranking[:10]]},
-               "andar3": {"nome": "DIRETORIA", "trabalho": "abre o próximo trade da IA pura", "log": log}},
+               "andar3": {"nome": "DIRETORIA", "trabalho": "abre o próximo trade da Carteira do Prédio", "log": log}},
            "placar": placar, "historico": hist,
            "aprendizado": {"pesos": {n: round(v, 3) for n, v in PESO.items()}, "banidos": sorted(BANIDOS),
                            "moedas_com_historico": len(HIST_MOEDA),

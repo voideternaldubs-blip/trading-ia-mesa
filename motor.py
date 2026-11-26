@@ -1,5 +1,5 @@
 """MOTOR RÁPIDO — roda dentro da nuvem sem parar por N minutos.
-A cada ciclo (~2 min): ARANHA coleta (todas as fontes em paralelo) + explica, IA PURA confere stop/alvo,
+A cada ciclo (~2 min): ARANHA coleta (todas as fontes em paralelo) + explica, as carteiras conferem stop/alvo,
 CHEFE e PROVA atualizam o placar, o site recebe os dados novos (via GitHub, sem gastar publicação da Vercel).
 A cada 5 min: FOGUETE v2 (ciclo de risco). A cada 15 min: MÁQUINA DO TEMPO.
 Uso: python motor.py --minutos 40"""
@@ -8,7 +8,7 @@ from datetime import datetime, timezone
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 PY = sys.executable
-SALVAR = ["data/relatorio_aranha.json", "data/carteira.json", "data/prova.json", "data/foguete2.json", "data/ia_pura.json",
+SALVAR = ["data/relatorio_aranha.json", "data/carteira.json", "data/prova.json", "data/foguete2.json", "data/ia_pura.json", "data/carteira_predio.json",
           "data/probabilidades.json", "data/predio.json", "data/cotas_ia.json", "data/foguete2_trades.csv", "data/foguete2_exec.json", "data/sentinela.json", "diario", "site"]
 
 
@@ -58,7 +58,8 @@ def main(minutos):
         if proc_pred is None and time.time() - ult_pred >= 1790:
             proc_pred = subprocess.Popen([PY, "predio.py", "--sem-diretoria"], cwd=AQUI, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
             ult_pred = time.time(); print("  PRÉDIO         começou (roda em paralelo)", flush=True)
-        roda("IA PURA", ["ia_pura.py"])
+        roda("CARTEIRA PRÉDIO", ["ia_pura.py", "data/carteira_predio.json"])
+        roda("IA MANUAL", ["ia_pura.py"])
         if time.time() - ult_maq >= 890:
             roda("MÁQUINA TEMPO", [os.path.join("equipe", "maquina_tempo.py")]); ult_maq = time.time()
         roda("PROVA", ["prova.py"], cwd=os.path.join(AQUI, "equipe"))

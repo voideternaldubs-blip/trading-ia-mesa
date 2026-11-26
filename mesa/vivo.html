@@ -143,7 +143,7 @@ window.BRT_OFF=-3*3600; /* gráficos: desloca o eixo para Brasília */
 <script>
 const $=id=>document.getElementById(id);
 let MOEDAS=["BTC","ETH","SOL","BNB","XRP","DOGE","AVAX","LINK","ADA","SUI"];let EXTRA=[];
-const COR={CHEFE:'#D946EF',ARANHA:'#22D3EE',ANALISTA:'#A78BFA',"PREVISÃO":'#FBBF24',"IA PURA":'#B56BFF',SNIPER:'#34D399',"SAÍDA":'#60A5FA',RISCO:'#F472B6',"CALENDÁRIO":'#A3E635',SEC:'#EAB308',FILLS:'#2DD4BF',SENTINELA:'#FB923C'};
+const COR={CHEFE:'#D946EF',ARANHA:'#22D3EE',ANALISTA:'#A78BFA',"PREVISÃO":'#FBBF24',"CARTEIRA":'#B56BFF',SNIPER:'#34D399',"SAÍDA":'#60A5FA',RISCO:'#F472B6',"CALENDÁRIO":'#A3E635',SEC:'#EAB308',FILLS:'#2DD4BF',SENTINELA:'#FB923C'};
 let sel="BTC",iv="1m",ws=null,chart,cs,vs,entryLine=null,stopLine=null,ultimo={},abertura={},cart=null,estado=null,lat=[];
 
 /* ---------- formatação ---------- */
@@ -169,7 +169,7 @@ async function carregaHist(){
 function linhasPosicao(){
   if(entryLine){cs.removePriceLine(entryLine);entryLine=null}if(stopLine){cs.removePriceLine(stopLine);stopLine=null}
   const q=cart?.ia?.posicoes?.[sel+'USDT']||cart?.foguete?.pos?.[sel+'USDT'];let leg='';
-  if(q){const longo=q.lado>0;entryLine=cs.createPriceLine({price:q.entrada,color:'#43C9E8',lineWidth:1,lineStyle:2,axisLabelVisible:true,title:(cart?.ia?.posicoes?.[sel+'USDT']?'IA ':'FOGUETE ')+(longo?'comprado':'vendido')});
+  if(q){const longo=q.lado>0;entryLine=cs.createPriceLine({price:q.entrada,color:'#43C9E8',lineWidth:1,lineStyle:2,axisLabelVisible:true,title:(cart?.ia?.posicoes?.[sel+'USDT']?'PRÉDIO ':'FOGUETE ')+(longo?'comprado':'vendido')});
     stopLine=cs.createPriceLine({price:q.stop,color:'#FF5577',lineWidth:1,lineStyle:1,axisLabelVisible:true,title:'STOP'});
     $('leg').innerHTML=`<span><i style="background:#43C9E8"></i>entrada ${fp(q.entrada)}</span><span><i style="background:#FF5577"></i>stop ${fp(q.stop)}</span>`;return}
   const p=cart?.cripto?.pos?.[sel];
@@ -210,12 +210,12 @@ function tick(m,c,o){
 /* ---------- posições e capital, marcados a mercado ao vivo ---------- */
 function atualizaPosicoes(){
   if(!cart)return;const fg=cart.foguete||{},fc=fg.conta||{},fp2=fg.pos||{};let pnlTot=0,expo=0,html='',n=0;
-  /* IA PURA (as operações escolhidas pelo Claude) — primeiro da lista, ao vivo */
+  /* CARTEIRA DO PRÉDIO (decisões da diretoria) — primeiro da lista, ao vivo */
   const ia=cart.ia||{},ip=ia.posicoes||{},pb=ia.prob||{};let iaPnl=0,ih='';
   for(const [sym,p] of Object.entries(ip)){const m=sym.replace('USDT','');const px=ultimo[m]||p.atual||p.entrada,pnl=p.lado*p.qtd*(px-p.entrada),pct=(px/p.entrada-1)*p.lado*100;iaPnl+=pnl;
-    const pr=pb[sym];ih+=`<div class="p${m===sel?' sel':''}" data-m="${m}" style="border-left:2px solid #B56BFF"><span class="sym">${m} <small style="color:#B56BFF">IA</small></span><span><span class="side ${p.lado>0?'l':'s'}">${p.lado>0?'COMPRADO':'VENDIDO'}</span></span><span class="pnl ${pnl>=0?'up':'dn'}" id="pi_${m}">${pnl>=0?'+':''}${pnl.toFixed(2)}</span>
+    const pr=pb[sym];ih+=`<div class="p${m===sel?' sel':''}" data-m="${m}" style="border-left:2px solid #B56BFF"><span class="sym">${m} <small style="color:#B56BFF">PRÉDIO</small></span><span><span class="side ${p.lado>0?'l':'s'}">${p.lado>0?'COMPRADO':'VENDIDO'}</span></span><span class="pnl ${pnl>=0?'up':'dn'}" id="pi_${m}">${pnl>=0?'+':''}${pnl.toFixed(2)}</span>
       <div class="det"><span>alvo ${fp(p.alvo)} · stop ${fp(p.stop)}${pr?` · chance alvo ${(pr.chance_alvo*100).toFixed(0)}%`:''}</span><span class="${pct>=0?'up':'dn'}">${pct>=0?'+':''}${pct.toFixed(2)}%</span></div></div>`}
-  if(ih){const tot=(ia.caixa||100)+iaPnl;html+=`<div style="padding:8px 12px;color:#B56BFF;font-weight:700;font-size:12px;letter-spacing:.08em">IA PURA (CLAUDE) · ${tot.toFixed(2)} USD <span class="${tot>=100?'up':'dn'}">(${tot>=100?'+':''}${(tot-100).toFixed(2)})</span> · meta 1000</div>`+ih+`<div style="padding:8px 12px;color:#43C9E8;font-weight:700;font-size:12px;letter-spacing:.08em">FOGUETE v2</div>`}
+  if(ih){const tot=(ia.caixa||100)+iaPnl;html+=`<div style="padding:8px 12px;color:#B56BFF;font-weight:700;font-size:12px;letter-spacing:.08em">CARTEIRA DO PRÉDIO · ${tot.toFixed(2)} USD <span class="${tot>=100?'up':'dn'}">(${tot>=100?'+':''}${(tot-100).toFixed(2)})</span> · meta 1000</div>`+ih+`<div style="padding:8px 12px;color:#43C9E8;font-weight:700;font-size:12px;letter-spacing:.08em">FOGUETE v2</div>`}
   for(const [sym,p] of Object.entries(fp2)){const m=sym.replace('USDT','');const px=ultimo[m]||p.entrada,pnl=p.lado*p.qtd*(px-p.entrada),pct=(px/p.entrada-1)*p.lado*100;pnlTot+=pnl;expo+=p.qtd*px;n++;
     html+=`<div class="p${m===sel?' sel':''}" data-m="${m}"><span class="sym">${m}</span><span><span class="side ${p.lado>0?'l':'s'}">${p.lado>0?'COMPRADO':'VENDIDO'}</span></span><span class="pnl ${pnl>=0?'up':'dn'}" id="pp_${m}">${pnl>=0?'+':''}${pnl.toFixed(2)}</span>
       <div class="det"><span>${(p.qtd*px).toFixed(0)} USD · entrada ${fp(p.entrada)} · stop ${fp(p.stop)}</span><span class="${pct>=0?'up':'dn'}">${pct>=0?'+':''}${pct.toFixed(2)}%</span></div></div>`}
@@ -246,7 +246,7 @@ function atualizaCapital(html,n){
 function troca(m){sel=m;document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('at',b.dataset.m===m));document.querySelectorAll('.tile').forEach(t=>t.classList.toggle('at',t.dataset.m===m));$('tapelbl').textContent='Negócios ao vivo · '+m;$('trades').innerHTML='';carregaHist();conecta();atualizaPosicoes()}
 
 /* ---------- agentes ---------- */
-const PAPEL={CHEFE:'decide e fecha o placar',ARANHA:'lendo notícias do mundo',ANALISTA:'mede tendência e rompimentos',"PREVISÃO":'10.000 futuros por posição',"IA PURA":'carteira do Claude 100→1000',SNIPER:'executa entradas',"SAÍDA":'stops e alvos',RISCO:'tamanho e alavancagem',"CALENDÁRIO":'agenda do Fed e balanços',SEC:'documentos oficiais',FILLS:'confere execuções',SENTINELA:'vigia a equipe'};
+const PAPEL={CHEFE:'decide e fecha o placar',ARANHA:'lendo notícias do mundo',ANALISTA:'mede tendência e rompimentos',"PREVISÃO":'10.000 futuros por posição',"CARTEIRA":'carteira do prédio 100→1000',SNIPER:'executa entradas',"SAÍDA":'stops e alvos',RISCO:'tamanho e alavancagem',"CALENDÁRIO":'agenda do Fed e balanços',SEC:'documentos oficiais',FILLS:'confere execuções',SENTINELA:'vigia a equipe'};
 $('alist').innerHTML=Object.keys(COR).map(n=>`<div class="a" id="a_${n}" style="--c:${COR[n]}"><i></i><b>${n}</b><span id="at_${n}">${PAPEL[n]}</span></div>`).join('');
 function acende(n,txt,ms=2600){const a=$('a_'+n);if(!a)return;if(txt)$('at_'+n).textContent=txt;a.classList.add('on');clearTimeout(a._t);a._t=setTimeout(()=>{a.classList.remove('on')},ms);
   const st=document.querySelector(`.stage[data-n="${n}"]`);if(st){st.classList.add('on');setTimeout(()=>st.classList.remove('on'),ms)}}

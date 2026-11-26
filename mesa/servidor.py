@@ -18,7 +18,7 @@ AGENTES = {
     "ARANHA": "Varre notícias e dados do mercado",
     "ANALISTA": "Sinais de tendência testados",
     "PREVISÃO": "Máquina do tempo: 10.000 futuros por posição",
-    "IA PURA": "A carteira do Claude: 100 -> meta 1000",
+    "CARTEIRA": "Carteira do Prédio: 100 -> meta 1000",
     "SNIPER": "Executa as entradas",
     "SAÍDA": "Stops, alvos e realização",
     "RISCO": "Tamanho, alavancagem e vetos",
@@ -40,13 +40,13 @@ def equipe_extra():
     k, s, f, v = ler_json("calendario.json"), ler_json("sec.json"), ler_json("fills.json"), ler_json("sentinela.json")
     docs = s.get("documentos", [])
     prox = [e for e in k.get("eventos", []) if e.get("quando", "") >= datetime.now(timezone.utc).isoformat()[:16]]
-    ia, pb, fg, rel = ler_json("ia_pura.json"), ler_json("probabilidades.json"), ler_json("foguete2.json"), ler_json("relatorio_aranha.json")
+    ia, pb, fg, rel = ler_json("carteira_predio.json"), ler_json("probabilidades.json"), ler_json("foguete2.json"), ler_json("relatorio_aranha.json")
     ip = ia.get("posicoes", {}); valor = (ia.get("hist") or [{}])[-1].get("valor", 100)
     pp = pb.get("posicoes", {})
     fpos = fg.get("posicoes", {}); vend = sum(1 for p in fpos.values() if p.get("lado", 0) < 0)
     nots = rel.get("noticias", [])
     vivo = {
-        "IA PURA": (len(ia.get("fechadas", [])) + len(ip), f"{valor:.2f} USD ({valor - 100:+.2f}) · meta 1000 · " + ", ".join(f"{s.replace('USDT', '')} {'vendido' if p['lado'] < 0 else 'comprado'}" for s, p in ip.items())),
+        "CARTEIRA": (len(ia.get("fechadas", [])) + len(ip), f"{valor:.2f} USD ({valor - 100:+.2f}) · meta 1000 · " + (", ".join(f"{s.replace('USDT', '')} {'vendido' if p['lado'] < 0 else 'comprado'}" for s, p in ip.items()) or "sem posição: a diretoria decide na próxima reunião")),
         "PREVISÃO": (len(pp), " · ".join(f"{s.replace('USDT', '')} alvo {v['chance_alvo'] * 100:.0f}%" for s, v in pp.items()) or "calculando..."),
         "ANALISTA": (len(fpos), f"tendência: {vend} vendidas, {len(fpos) - vend} compradas no foguete"),
         "RISCO": (len(ip), f"IA arrisca {sum(abs(p['qtd'] * (p['stop'] - p['entrada'])) for p in ip.values()):.0f} USD p/ ganhar {sum(abs(p['qtd'] * (p['entrada'] - p['alvo'])) for p in ip.values()):.0f}" if ip else "sem risco aberto"),
@@ -65,7 +65,7 @@ def agente_do_evento(t):
     s = t.lower()
     if s.startswith("posições") or "posições:" in s: return "RISCO"
     if "→ posição" in s: return "SAÍDA" if "zerada" in s else "SNIPER"
-    if "ia pura" in s: return "IA PURA"
+    if "carteira do prédio" in s: return "CARTEIRA"
     if "veto" in s: return "RISCO"
     if "stop" in s or "venda" in s or "vendeu" in s or "vende " in s or "sumiu" in s or "tempo" in s: return "SAÍDA"
     if "compra" in s: return "SNIPER"
@@ -126,7 +126,7 @@ def estado():
     for nome, (n, txt) in extra.items():
         cont[nome] = n; ultimo[nome] = txt
     cont["ARANHA"] = t["total_noticias"]
-    ia = ler_json("ia_pura.json")
+    ia = ler_json("carteira_predio.json")
     return {
         "agora": datetime.now(timezone.utc).isoformat(),
         "mesas": ms,
@@ -221,8 +221,10 @@ def ciclo_aranha():
             # só os DADOS que a nuvem produz; o código local nunca é tocado
             subprocess.run(["git", "checkout", "FETCH_HEAD", "--", "data/aranha.db", "data/carteira.json", "data/relatorio_aranha.json",
                             "data/calendario.json", "data/sec.json", "data/fills.json", "data/sentinela.json",
+                            "data/ia_pura.json", "data/prova.json", "data/foguete2.json", "data/foguete2_exec.json", "data/probabilidades.json",
+                            "data/predio.json", "data/cotas_ia.json", "site/dados",
                             "acoes/carteira_acoes.json", "diario"], cwd=RAIZ, timeout=60, env=env, capture_output=True, creationflags=0x08000000)
-            subprocess.run(["git", "reset", "-q", "--", "data", "acoes/carteira_acoes.json", "diario"], cwd=RAIZ, timeout=30, env=env, capture_output=True, creationflags=0x08000000)
+            subprocess.run(["git", "reset", "-q", "--", "data", "acoes/carteira_acoes.json", "diario", "site/dados"], cwd=RAIZ, timeout=30, env=env, capture_output=True, creationflags=0x08000000)
         except Exception as e:
             print("sync:", e)
         time.sleep(10 * 60)

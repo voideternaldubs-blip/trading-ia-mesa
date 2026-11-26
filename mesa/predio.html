@@ -72,7 +72,7 @@ const DEC={COMPRA:0x3DDC97,VENDA:0xFF5C6C,FORA:0x6E6A63};
 const H=3.4; // altura de cada andar
 const ANDARES=[
   {id:'cob',n:'IA',nome:'CÉREBROS',cor:'#FBBF24',y:4*H,txt:'A sala dos servidores: cada IA com a cota usada hoje. Nunca passa do limite.'},
-  {id:'a3',n:'3',nome:'DIRETORIA',cor:'#E879F9',y:3*H,txt:'Quando a IA pura fecha um trade, abre o próximo do método 1:3 nas moedas que o comitê aprovou.'},
+  {id:'a3',n:'3',nome:'DIRETORIA',cor:'#E879F9',y:3*H,txt:'Quando a Carteira do Prédio fecha um trade, abre o próximo do método 1:3 nas moedas livres que o comitê aprovou.'},
   {id:'a2',n:'2',nome:'COMITÊ DE RISCO',cor:'#F472B6',y:2*H,txt:'O cérebro mais forte confere cada veredito. Só aprova se tendência e valor esperado concordarem.'},
   {id:'a1',n:'1',nome:'ANALISTAS DE MOEDA',cor:'#A78BFA',y:1*H,txt:'Um analista por moeda. Verde = compra, vermelho = venda, cinza = fora. O acessório mostra qual IA ele é.'},
   {id:'t',n:'T',nome:'TÉRREO · ARANHA',cor:'#22D3EE',y:0,txt:'A aranha e as operárias leem as notícias do mundo a cada 2 minutos e passam para os andares de cima.'}];
@@ -193,7 +193,7 @@ function aplica(){if(!P||!P.andares)return;const an=P.andares.andar1.analistas||
     m.aberto=!!(C&&C.ia&&C.ia.posicoes&&C.ia.posicoes[a.simbolo])});
   CHIPS.clear();const apr=an.filter(a=>a.comite&&a.comite.aprova);
   apr.forEach((a,k)=>{const el=document.createElement('div');el.className='tag';el.style.setProperty('--c','#3DDC97');el.textContent=a.moeda+' ✓';const t=new CSS2DObject(el);const ang=k/Math.max(1,apr.length)*Math.PI*2;t.position.set(Math.cos(ang)*1.1,2.05,Math.sin(ang)*1.1);CHIPS.add(t)});
-  const ia=C&&C.ia||{};const ps=Object.keys(ia.posicoes||{});elD.innerHTML=`IA PURA <em>${nf(ia.caixa??100)} USD</em> · ${ps.length?ps.length+' posições':'sem posição'}`;
+  const ia=C&&C.ia||{};const ps=Object.keys(ia.posicoes||{});elD.innerHTML=`CARTEIRA DO PRÉDIO <em>${nf(ia.caixa??100)} USD</em> · ${ps.length?ps.length+' posições':'sem posição'}`;
   montaServidores(Object.entries(P.cerebros||{}));
   if(painelAtual)painelAtual();
   if(!foco)prediosInteiro();
@@ -218,14 +218,14 @@ function fichaAnalista(i){const a=P&&P.andares.andar1.analistas[i];if(!a)return;
    ${a.comite?`<div class="bl"><b>Comitê (${esc(a.comite.cerebro||'')})</b>${a.comite.aprova?'<span class="up">APROVOU</span>':'<span class="dn">VETOU</span>'} · ${esc(a.comite.motivo)}</div>`:''}
    <div class="bl num"><b>Números</b>preço ${a.preco} · 24h ${a.var_24h_pct}% · 7d ${a.var_7d_pct}%<br>tendência 4h ${a.tendencia_4h}<br>chance de alvo comprando ${nf((a.chance_alvo_compra||0)*100,0)}% · vendendo ${nf((a.chance_alvo_venda||0)*100,0)}%<br>financiamento ${a.financiamento_pct}%</div>
    ${(a.noticias||[]).length?`<div class="bl"><b>Notícias da moeda</b>${a.noticias.map(esc).join('<br>')}</div>`:''}
-   ${ANALISTAS[i].aberto?'<div class="bl" style="color:#B56BFF">A IA pura tem posição aberta nesta moeda.</div>':''}`,'#'+(DEC[a.decisao]||0x6E6A63).toString(16).padStart(6,'0'))}
+   ${ANALISTAS[i].aberto?'<div class="bl" style="color:#B56BFF">A Carteira do Prédio tem posição aberta nesta moeda.</div>':''}`,'#'+(DEC[a.decisao]||0x6E6A63).toString(16).padStart(6,'0'))}
 window.fA=fichaAnalista;
 function fichaComite(nome){painelAtual=()=>fichaComite(nome);const an=(P&&P.andares.andar1.analistas)||[];const meus=an.filter(a=>a.comite&&a.comite.cerebro===nome);
   mostra(`${fecha}<h2><i></i>${esc(nome)}</h2><div class="s">membro do comitê de risco: a segunda opinião antes de qualquer dinheiro entrar</div>
    <div class="bl"><b>Julgou nesta reunião</b>${meus.map(a=>`${esc(a.moeda)}: ${a.comite.aprova?'<span class="up">aprovou</span>':'<span class="dn">vetou</span>'} · ${esc(a.comite.motivo)}`).join('<br>')||'nada nesta rodada'}</div>`,'#F472B6')}
 function fichaDiretoria(){painelAtual=fichaDiretoria;const ia=(C&&C.ia)||{};const ps=Object.entries(ia.posicoes||{});
-  mostra(`${fecha}<h2><i></i>DIRETORIA</h2><div class="s">abre o próximo trade da IA pura pelo método 1:3</div>
-   <div class="bl"><b>IA pura</b><span style="font:900 26px Doto">${nf(ia.caixa??100)}</span> USD em caixa · meta 1000</div>
+  mostra(`${fecha}<h2><i></i>DIRETORIA</h2><div class="s">abre o próximo trade da Carteira do Prédio pelo método 1:3</div>
+   <div class="bl"><b>Carteira do Prédio</b><span style="font:900 26px Doto">${nf(ia.caixa??100)}</span> USD em caixa · meta 1000</div>
    <div class="bl"><b>Posições do trade atual</b>${ps.map(([s,p])=>`${s.replace('USDT','')} ${p.lado<0?'vendido':'comprado'} · entrada ${p.entrada} · stop ${p.stop} · alvo ${p.alvo}`).join('<br>')||'nenhuma: a próxima reunião decide'}</div>
    <div class="bl"><b>Últimas decisões</b>${((P&&P.andares.andar3.log)||[]).slice(0,5).map(esc).join('<br>')||'ainda não precisou agir'}</div>`,'#E879F9')}
 function fichaAranha(){painelAtual=fichaAranha;mostra(`${fecha}<h2><i></i>ARANHA</h2><div class="s">a leitora de notícias e as 8 operárias</div><div class="bl"><b>O que faz</b>Lê mais de 25 fontes do mundo ao mesmo tempo a cada 2 minutos, traduz e marca quais moedas cada notícia mexe. Os analistas do 1º andar recebem as notícias da moeda deles.</div><div class="bl"><b>Agora</b>${(P&&P.andares.terreo.noticias)||0} notícias no relatório</div><div class="bl"><a href="/aranha" style="color:#22D3EE">Abrir a leitura da aranha ↗</a></div>`,'#22D3EE')}

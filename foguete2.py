@@ -77,7 +77,10 @@ def montar_universo(st):
     tk = [{"symbol": s, "quoteVolume": v} for s, v in vol.items()]
     tk.sort(key=lambda t: -float(t["quoteVolume"]))
     try:
-        reserv = set(json.load(open(os.path.join(AQUI, "data", "ia_pura.json"), encoding="utf-8")).get("posicoes", {}))
+        reserv = set()
+        for _f in ("ia_pura.json", "carteira_predio.json"):
+            try: reserv |= set(json.load(open(os.path.join(AQUI, "data", _f), encoding="utf-8")).get("posicoes", {}))
+            except Exception: pass
     except Exception:
         reserv = set()
     st["universo"] = {"lista": [t["symbol"] for t in tk if float(t["quoteVolume"]) >= 1e8 and t["symbol"] not in reserv][:30], "em": agora().isoformat()[:16]}

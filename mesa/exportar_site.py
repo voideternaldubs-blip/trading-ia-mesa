@@ -22,8 +22,8 @@ def carteira():
     return {"cripto": {"caixa": c.get("caixa"), "cofre": c.get("cofre", 0), "pos": c.get("pos", {}), "ligado": c.get("ligado", True), "hist": c.get("historico", [])[-200:]},
             "acoes": {"caixa": a.get("caixa"), "pos": a.get("pos", {}), "hist": a.get("hist", [])[-200:]},
             "foguete": {"conta": f.get("conta", {}), "pos": f.get("posicoes", {}), "hist": f.get("hist", [])[-300:]},
-            "ia": {**{k: v for k, v in ler(os.path.join(RAIZ, "data", "ia_pura.json"), {}).items() if k in ("caixa", "posicoes", "fechadas", "modo")},
-                   "hist": ler(os.path.join(RAIZ, "data", "ia_pura.json"), {}).get("hist", [])[-200:],
+            "ia": {**{k: v for k, v in ler(os.path.join(RAIZ, "data", "carteira_predio.json"), {}).items() if k in ("caixa", "posicoes", "fechadas", "modo")},
+                   "hist": ler(os.path.join(RAIZ, "data", "carteira_predio.json"), {}).get("hist", [])[-200:],
                    "prob": ler(os.path.join(RAIZ, "data", "probabilidades.json"), {}).get("posicoes", {})},
             "atualizado": __import__("datetime").datetime.now(__import__("datetime").timezone.utc).isoformat()[:19]}
 

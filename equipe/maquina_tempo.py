@@ -30,7 +30,10 @@ def simula(v, preco, stop, alvo, lado, passos, n=10000, bloco=4):
     finais.sort()
     return alvo_n / n, stop_n / n, finais[n // 2]
 def main():
-    e = json.load(open(os.path.join(RAIZ, "data", "ia_pura.json"), encoding="utf-8"))
+    e = {"posicoes": {}}
+    for _f in ("carteira_predio.json", "ia_pura.json"):
+        try: e["posicoes"].update(json.load(open(os.path.join(RAIZ, "data", _f), encoding="utf-8")).get("posicoes", {}))
+        except Exception: pass
     passos = max(1, int((FIM - datetime.now(timezone.utc)).total_seconds() // 900))
     out = {"gerado": datetime.now(timezone.utc).isoformat()[:16], "prazo": FIM.isoformat()[:16], "posicoes": {}}
     ganho_esp = 0
