@@ -134,30 +134,8 @@
   "erro": "Binance demo 400: {\"code\":-1121,\"msg\":\"Invalid symbol.\"}"
  },
  {
-  "quando": "2026-11-26T12:12",
-  "simbolo": "NEARUSDT",
-  "lado": "SELL",
-  "qtd": 6.0,
-  "preco": 0.0,
-  "status": "FILLED",
-  "id": 665686051
- },
- {
-  "quando": "2026-11-26T12:12",
-  "simbolo": "ZECUSDT",
-  "lado": "SELL",
-  "qtd": 0.012,
-  "preco": 0.0,
-  "status": "FILLED",
-  "id": 3003625177
- },
- {
-  "quando": "2026-11-26T12:12",
+  "quando": "2026-11-26T12:20",
   "simbolo": "SOLUSDT",
-  "lado": "BUY",
-  "qtd": 0.2,
-  "preco": 0.0,
-  "status": "FILLED",
-  "id": 4251533060
+  "erro": "Binance demo 400: {\"code\":-4164,\"msg\":\"Order's notional must be no smaller than 5 (unless you choose reduce only).\"}"
  }
 ]
