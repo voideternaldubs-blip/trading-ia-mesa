@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0F0E0C">
+<title>Prédio · Mesa de Agentes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Lexend:wght@300;400;500;600&family=Doto:wght@800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0F0E0C;--s1:#161512;--s2:#1D1B17;--s3:#25221D;--line:rgba(255,255,255,.08);--line2:rgba(255,255,255,.14);
+  --t1:#F2EEE6;--t2:#A8A29A;--t3:#6E6A63;--ac:#B56BFF;--up:#3DDC97;--dn:#FF5C6C;--warn:#F4B942;
+  --r1:10px;--r2:16px;--rp:999px;--e:cubic-bezier(.22,1,.36,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--t1);font:400 14px/1.5 Lexend,sans-serif;-webkit-font-smoothing:antialiased}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.num{font-variant-numeric:tabular-nums}
+a{color:inherit;text-decoration:none}
+.top{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:14px;padding:14px clamp(14px,3vw,36px);background:rgba(15,14,12,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.top .volta{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:var(--s2);border:1px solid var(--line)}
+.top h1{font:800 20px Montserrat;letter-spacing:.02em}
+.top p{color:var(--t2);font-size:12px}
+.top .rel{margin-left:auto;text-align:right;font-size:11px;color:var(--t3)}
+.top .rel b{display:block;font:600 16px Lexend;color:var(--t1)}
+main{max-width:1240px;margin:0 auto;padding:24px clamp(14px,3vw,36px) 64px;display:flex;flex-direction:column;gap:14px}
+.andar{position:relative;background:var(--s1);border:1px solid var(--line);border-radius:var(--r2);padding:18px 18px 18px 84px;animation:sobe .4s var(--e) both}
+@keyframes sobe{from{opacity:0;transform:translateY(10px)}}
+.andar .n{position:absolute;left:18px;top:18px;width:50px;height:50px;border-radius:12px;display:grid;place-items:center;background:var(--s2);border:1px solid var(--line2);font:900 22px Doto;color:var(--c,var(--t1))}
+.andar h2{font:800 15px Montserrat;letter-spacing:.06em;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.andar h2 small{font:400 12px Lexend;letter-spacing:0;color:var(--t3)}
+.andar .o{color:var(--t2);font-size:13px;margin-top:2px}
+.lista{margin-top:12px;display:flex;flex-direction:column;gap:6px}
+.lg{font-size:13px;color:#DDD7CC;padding:8px 12px;border-radius:var(--r1);background:var(--s2);border:1px solid var(--line)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.chip{font-size:12px;padding:5px 11px;border-radius:var(--rp);background:var(--s2);border:1px solid var(--line);color:var(--t2)}
+.chip b{color:var(--t1);font-weight:600}
+.cer{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;margin-top:12px}
+.ce{background:var(--s2);border:1px solid var(--line);border-radius:var(--r1);padding:12px}
+.ce b{font:700 13px Montserrat}.ce span{display:block;color:var(--t3);font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
+.ce .bar{height:4px;border-radius:var(--rp);background:var(--s3);margin-top:10px;overflow:hidden}.ce .bar i{display:block;height:100%;background:var(--ac)}
+.ce small{display:block;color:var(--t2);font-size:12px;margin-top:6px}
+.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:8px;margin-top:14px}
+.an{text-align:left;font:inherit;color:inherit;cursor:pointer;background:var(--s2);border:1px solid var(--line);border-radius:var(--r1);padding:12px;display:flex;flex-direction:column;gap:6px;transition:border-color .15s var(--e),transform .15s var(--e);min-height:44px}
+.an:hover{border-color:var(--line2)}.an:active{transform:scale(.98)}
+.an .l1{display:flex;align-items:center;gap:8px}
+.an .m{font:800 15px Montserrat}
+.dec{margin-left:auto;font:600 10px Lexend;letter-spacing:.1em;padding:3px 8px;border-radius:var(--rp)}
+.dec.COMPRA{color:var(--up);background:rgba(61,220,151,.1)}.dec.VENDA{color:var(--dn);background:rgba(255,92,108,.1)}.dec.FORA{color:var(--t3);background:rgba(255,255,255,.05)}
+.an .conf{display:flex;gap:3px}.an .conf i{width:14px;height:4px;border-radius:2px;background:var(--s3)}.an .conf i.on{background:var(--c)}
+.an .d{display:flex;justify-content:space-between;font-size:11px;color:var(--t3)}
+.an .ok{font-size:11px;color:var(--up)}.an .ve{font-size:11px;color:var(--warn)}
+.an.aberto{border-color:rgba(181,107,255,.5)}
+.det{grid-column:1/-1;background:var(--s3);border:1px solid var(--line2);border-radius:var(--r1);padding:14px;font-size:13.5px;color:#DDD7CC;display:none}
+.det.on{display:block}
+.det b{display:block;font:600 10px Lexend;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin:8px 0 4px}
+.det b:first-child{margin-top:0}
+.vazio{color:var(--t3);font-size:13px;margin-top:10px}
+.sk{background:linear-gradient(90deg,var(--s2),var(--s3),var(--s2));background-size:200% 100%;animation:sk 1.4s linear infinite;border-radius:6px;color:transparent}
+@keyframes sk{to{background-position:-200% 0}}
+@media (max-width:700px){.andar{padding:16px 14px 16px 14px}.andar .n{position:static;width:40px;height:40px;font-size:18px;margin-bottom:10px}.grade{grid-template-columns:repeat(2,1fr)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="volta" href="/" aria-label="voltar ao escritório"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></a>
+  <div><h1>Prédio de agentes</h1><p id="sub">um analista por moeda, cada IA na função que combina com ela</p></div>
+  <div class="rel">Brasília<b class="num" id="clk">--:--</b></div>
+</header>
+<main id="m">
+  <section class="andar" style="--c:#E879F9"><div class="n">3</div><h2>DIRETORIA <small id="d3s"></small></h2><div class="o">Quando a IA pura fecha um trade, abre o próximo do método 1:3 nas moedas que o comitê aprovou.</div><div class="lista" id="d3"><span class="sk">carregando</span></div></section>
+  <section class="andar" style="--c:#F472B6"><div class="n">2</div><h2>COMITÊ DE RISCO <small>o cérebro mais forte confere cada veredito</small></h2><div class="o">Só aprova se a tendência de 4h e o valor esperado concordarem. O resto é vetado.</div><div class="chips" id="d2"></div></section>
+  <section class="andar" style="--c:#A78BFA"><div class="n">1</div><h2>ANALISTAS DE MOEDA <small id="d1s"></small></h2><div class="o">Cada um cuida de uma moeda: tendência, Máquina do Tempo dos dois lados, financiamento e notícias. Toque para ver o motivo.</div><div class="grade" id="d1"></div></section>
+  <section class="andar" style="--c:#22D3EE"><div class="n">T</div><h2>TÉRREO · ARANHA</h2><div class="o" id="d0">lendo notícias do mundo a cada 2 minutos</div></section>
+  <section class="andar" style="--c:#FBBF24"><div class="n">IA</div><h2>CÉREBROS <small>cota usada hoje · nunca passa do limite</small></h2><div class="cer" id="cer"></div></section>
+  <section class="andar" style="--c:#3DDC97"><div class="n">%</div><h2>PLACAR DOS CÉREBROS <small>quem acertou a direção 24h depois</small></h2><div class="cer" id="plac"></div></section>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const RAW='https://raw.githubusercontent.com/voideternaldubs-blip/trading-ia-mesa/main/site/dados/';
+const API=n=>location.port==='8787'?'/api/'+n:RAW+n+'.json?t='+Math.floor(Date.now()/15000);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const nf=(v,c=2)=>Number(v).toLocaleString('pt-BR',{minimumFractionDigits:c,maximumFractionDigits:c});
+function hBR(s){if(!s)return'';let t=String(s).replace(' ','T');if(!/[zZ]|[+-]\d\d:?\d\d$/.test(t))t+='Z';const d=new Date(t);return isNaN(d)?'':d.toLocaleTimeString('pt-BR',{timeZone:'America/Sao_Paulo',hour:'2-digit',minute:'2-digit'})}
+const PAPEL={analista:'analista de moeda',comite:'comitê de risco'};
+let P=null,C=null,aberto=null;
+async function puxa(){try{[P,C]=await Promise.all([fetch(API('predio'),{cache:'no-store'}).then(r=>r.json()),fetch(API('carteira'),{cache:'no-store'}).then(r=>r.json())])}catch(e){return}desenha()}
+function desenha(){if(!P||!P.andares)return;const A=P.andares,an=A.andar1.analistas||[];
+  $('sub').textContent=`${an.length} analistas · última reunião ${hBR(P.gerado)} (Brasília) · levou ${P.segundos||'-'} s`;
+  const ia=(C&&C.ia&&C.ia.posicoes)||{};
+  $('d3s').textContent=Object.keys(ia).length?`IA pura com ${Object.keys(ia).length} posições abertas`:'IA pura sem posição: próxima reunião decide';
+  $('d3').innerHTML=(A.andar3.log||[]).slice(0,6).map(l=>`<div class="lg">${esc(l)}</div>`).join('')||'<div class="vazio">A diretoria ainda não precisou agir: a IA pura está com as posições do trade atual abertas.</div>';
+  const apr=an.filter(a=>a.comite&&a.comite.aprova),vet=an.filter(a=>a.vetado);
+  $('d2').innerHTML=(apr.map(a=>`<span class="chip" style="border-color:rgba(61,220,151,.35)"><b>${esc(a.moeda)}</b> aprovado · ${esc(a.comite.cerebro||'')}</span>`).join('')+vet.slice(0,12).map(a=>`<span class="chip"><b>${esc(a.moeda)}</b> vetado</span>`).join(''))||'<span class="vazio">nada para o comitê julgar nesta rodada</span>';
+  const cnt={COMPRA:0,VENDA:0,FORA:0};an.forEach(a=>cnt[a.decisao]=(cnt[a.decisao]||0)+1);
+  $('d1s').textContent=`${cnt.COMPRA} compra · ${cnt.VENDA} venda · ${cnt.FORA} fora`;
+  const cor={COMPRA:'#3DDC97',VENDA:'#FF5C6C',FORA:'#6E6A63'};
+  $('d1').innerHTML=an.map((a,i)=>{const ev=a.decisao==='COMPRA'?a.valor_esperado_compra:a.decisao==='VENDA'?a.valor_esperado_venda:Math.max(a.valor_esperado_compra||0,a.valor_esperado_venda||0);
+    return `<button class="an${ia[a.simbolo]?' aberto':''}" style="--c:${cor[a.decisao]}" onclick="abre(${i})"><div class="l1"><span class="m">${esc(a.moeda)}</span><span class="dec ${a.decisao}">${a.decisao}</span></div>
+      <div class="conf">${[1,2,3,4,5].map(k=>`<i class="${k<=a.confianca?'on':''}"></i>`).join('')}</div>
+      <div class="d num"><span>valor esp. ${ev!=null?nf(ev):'-'}</span><span>${esc((a.cerebro||'').split(' ')[0])}</span></div>
+      ${a.comite?(a.comite.aprova?'<span class="ok">comitê aprovou</span>':'<span class="ve">comitê vetou</span>'):''}${ia[a.simbolo]?'<span class="ok" style="color:#B56BFF">posição aberta na IA pura</span>':''}</button>
+      <div class="det${aberto===i?' on':''}" id="det${i}"><b>Motivo do analista (${esc(a.cerebro)})</b>${esc(a.motivo||a.erro||'')}
+      ${a.comite?`<b>Comitê (${esc(a.comite.cerebro||'')})</b>${esc(a.comite.motivo)}`:''}
+      <b>Números</b><span class="num">tendência 4h ${a.tendencia_4h} · chance de alvo comprando ${nf((a.chance_alvo_compra||0)*100,0)}% · vendendo ${nf((a.chance_alvo_venda||0)*100,0)}% · financiamento ${a.financiamento_pct}% · 24h ${a.var_24h_pct}% · 7d ${a.var_7d_pct}%</span>
+      ${(a.noticias||[]).length?`<b>Notícias da moeda</b>${a.noticias.map(esc).join('<br>')}`:''}</div>`}).join('');
+  $('d0').textContent=`${A.terreo.noticias||0} notícias no relatório da aranha agora`;
+  $('cer').innerHTML=Object.entries(P.cerebros||{}).map(([n,c])=>`<div class="ce"><b>${esc(n)}</b><span>${PAPEL[c.papel]||c.papel}</span><div class="bar"><i style="width:${Math.min(100,c.usados_hoje/c.limite_dia*100)}%"></i></div><small class="num">${c.usados_hoje} de ${c.limite_dia} hoje</small></div>`).join('')||'<div class="vazio">sem cérebros</div>';
+  const pl=Object.entries(P.placar||{});
+  $('plac').innerHTML=pl.length?pl.sort((a,b)=>b[1].acerto_pct-a[1].acerto_pct).map(([n,p])=>`<div class="ce"><b>${esc(n)}</b><span>${p.vereditos} vereditos conferidos</span><small class="num" style="font-size:20px;color:${p.acerto_pct>=50?'#3DDC97':'#FF5C6C'}">${nf(p.acerto_pct,0)}% de acerto</small><small class="num">soma ${p.soma_pct>=0?'+':''}${nf(p.soma_pct)}%</small></div>`).join(''):'<div class="vazio">O placar começa 24 horas depois dos primeiros vereditos: cada palpite é conferido com o preço real.</div>';
+}
+function abre(i){aberto=aberto===i?null:i;document.querySelectorAll('.det').forEach((d,k)=>d.classList.toggle('on',k===aberto))}
+setInterval(()=>{$('clk').textContent=new Date().toLocaleTimeString('pt-BR',{timeZone:'America/Sao_Paulo',hour:'2-digit',minute:'2-digit'})},1000);
+puxa();setInterval(puxa,30000);
+</script>
+</body>
+</html>

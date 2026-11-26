@@ -9,7 +9,7 @@ from datetime import datetime, timezone
 AQUI = os.path.dirname(os.path.abspath(__file__))
 PY = sys.executable
 SALVAR = ["data/relatorio_aranha.json", "data/carteira.json", "data/prova.json", "data/foguete2.json", "data/ia_pura.json",
-          "data/probabilidades.json", "data/foguete2_trades.csv", "data/foguete2_exec.json", "data/sentinela.json", "diario", "site"]
+          "data/probabilidades.json", "data/predio.json", "data/cotas_ia.json", "data/foguete2_trades.csv", "data/foguete2_exec.json", "data/sentinela.json", "diario", "site"]
 
 
 def roda(nome, args, cwd=AQUI, limite=240):
@@ -41,6 +41,7 @@ def main(minutos):
     fim = time.time() + minutos * 60
     n = 0
     ult_fog = ult_maq = 0
+    ult_pred = 0; proc_pred = None
     while time.time() < fim:
         n += 1
         t0 = time.time()
@@ -49,6 +50,14 @@ def main(minutos):
         roda("EXPLICADOR", ["explicador.py"], cwd=os.path.join(AQUI, "mesa"))
         if time.time() - ult_fog >= 290:
             roda("FOGUETE v2", ["foguete2.py"]); ult_fog = time.time()
+        # PRÉDIO: 30+ analistas (um por moeda) em paralelo, a cada 30 min, sem segurar o motor
+        if proc_pred is not None and proc_pred.poll() is not None:
+            print(f"  PRÉDIO         terminou: {(proc_pred.stdout.read() or '').strip().splitlines()[-1:]}", flush=True)
+            proc_pred = None
+            roda("DIRETORIA", ["predio.py", "--so-diretoria"])   # na sequência, antes do gerente da carteira
+        if proc_pred is None and time.time() - ult_pred >= 1790:
+            proc_pred = subprocess.Popen([PY, "predio.py", "--sem-diretoria"], cwd=AQUI, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+            ult_pred = time.time(); print("  PRÉDIO         começou (roda em paralelo)", flush=True)
         roda("IA PURA", ["ia_pura.py"])
         if time.time() - ult_maq >= 890:
             roda("MÁQUINA TEMPO", [os.path.join("equipe", "maquina_tempo.py")]); ult_maq = time.time()

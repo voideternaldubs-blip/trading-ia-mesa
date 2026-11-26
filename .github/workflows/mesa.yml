@@ -127,6 +127,8 @@ jobs:
       - name: MOTOR RÁPIDO (40 min sem parar, ciclo de 2 min)
         if: always()
         env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
           BINANCE_KEY: ${{ secrets.BINANCE_KEY }}
           BINANCE_SECRET: ${{ secrets.BINANCE_SECRET }}
         run: python motor.py --minutos 40 || true

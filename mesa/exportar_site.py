@@ -49,11 +49,13 @@ def so_foguete():
 
 def tudo():
     os.makedirs(os.path.join(SITE, "dados"), exist_ok=True)
-    dados = {"estado": servidor.estado(), "aranha": aranha(), "carteira": carteira()}
+    pr = ler(os.path.join(RAIZ, "data", "predio.json"), {})
+    pr.pop("historico", None)
+    dados = {"estado": servidor.estado(), "aranha": aranha(), "carteira": carteira(), "predio": pr}
     for k, v in dados.items():
         json.dump(v, open(os.path.join(SITE, "dados", f"{k}.json"), "w", encoding="utf-8"), ensure_ascii=False)
     # páginas: no Vercel os dados vêm de /dados/*.json; no PC (porta 8787) continuam vindo da /api
-    for pg in ("index.html", "aranha.html", "vivo.html"):
+    for pg in ("index.html", "aranha.html", "vivo.html", "predio.html"):
         s = open(os.path.join(AQUI, pg), encoding="utf-8").read()
         s = s.replace("<script>", "<script>const API=n=>location.port==='8787'?'/api/'+n:'https://raw.githubusercontent.com/voideternaldubs-blip/trading-ia-mesa/main/site/dados/'+n+'.json?t='+Math.floor(Date.now()/20000);", 1) if "const API=" not in s else s
         s = re.sub(r"fetch\('/api/(estado|aranha|carteira)'", lambda m: f"fetch(API('{m.group(1)}')", s)
