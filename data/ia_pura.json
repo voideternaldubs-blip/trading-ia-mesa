@@ -11,7 +11,7 @@
    "em": "2026-11-26T13:52",
    "tese": "vendido a favor da tend\u00eancia de queda (m\u00e1quina do tempo: valor esperado positivo)",
    "conferido_ate": "2026-11-26T22:46",
-   "atual": 0.6699
+   "atual": 0.6698
   },
   "LINKUSDT": {
    "lado": -1,
@@ -33,7 +33,7 @@
    "em": "2026-11-26T13:52",
    "tese": "vendido a favor da tend\u00eancia de queda (m\u00e1quina do tempo: valor esperado positivo)",
    "conferido_ate": "2026-11-26T22:46",
-   "atual": 94.62
+   "atual": 94.64
   }
  },
  "fechadas": [
@@ -1160,6 +1160,10 @@
   {
    "quando": "2026-11-26T22:46",
    "valor": 84.98
+  },
+  {
+   "quando": "2026-11-26T22:46",
+   "valor": 84.87
   },
   {
    "quando": "2026-11-26T22:46",
