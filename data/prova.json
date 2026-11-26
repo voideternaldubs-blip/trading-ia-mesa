@@ -39,8 +39,8 @@
   {
    "robo": "IA pura (Claude)",
    "inicial": 100.0,
-   "atual": 102.04,
-   "retorno_pct": 2.04,
+   "atual": 101.62,
+   "retorno_pct": 1.62,
    "operacoes": 5,
    "acerto_pct": 40.0,
    "ganho_medio": 1.0,
