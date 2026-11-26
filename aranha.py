@@ -97,7 +97,7 @@ def resumo(c, horas=12):
     desde = datetime.fromtimestamp(time.time() - horas * 3600, timezone.utc).isoformat()
     out = {m: {"perigo": [], "forca": []} for m in MOEDAS}
     for tit, ms, p, fo in c.execute("select titulo, moedas, perigo, forca from noticias where quando>=?", (desde,)):
-        for m in filter(None, ms.split(",")):
+        for m in filter(lambda x: x in out, ms.split(",")):
             if p: out[m]["perigo"].append(tit)
             if fo: out[m]["forca"].append(tit)
     ult = {}
