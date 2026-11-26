@@ -2,7 +2,8 @@ name: Mesa de Agentes 24h
 
 on:
   schedule:
-    - cron: "7 * * * *"   # de hora em hora (UTC)
+    - cron: "7 * * * *"    # de hora em hora (UTC)
+    - cron: "37 * * * *"   # reforço: o agendador do GitHub pula rodadas em horário de pico
   workflow_dispatch: {}
 
 concurrency:
@@ -55,7 +56,9 @@ jobs:
         if: always()
         env:
           NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
-        run: timeout 600 python equipe/aranha_ia.py || true
+        run: |
+          H=$(date -u +%H)
+          if [ $((10#$H % 3)) -eq 0 ] || [ "${{ github.event_name }}" = "workflow_dispatch" ]; then timeout 300 python equipe/aranha_ia.py || true; else echo "IA roda a cada 3h"; fi
 
       - name: Robô de tendência cripto (a cada 4h)
         if: always()
