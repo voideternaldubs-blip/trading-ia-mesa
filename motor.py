@@ -31,7 +31,7 @@ def salva(extra=()):
         return
     g("commit", "-q", "-m", f"motor: {datetime.now(timezone.utc):%Y-%m-%dT%H:%M}Z")
     for _ in range(3):
-        if g("pull", "-q", "--rebase", "-X", "theirs").returncode == 0 and g("push", "-q").returncode == 0:
+        if g("pull", "-q", "--rebase", "--autostash", "-X", "theirs").returncode == 0 and g("push", "-q").returncode == 0:
             print("  salvo e publicado", flush=True); return
         time.sleep(4)
     print("  não consegui salvar nesta volta (tento na próxima)", flush=True)
