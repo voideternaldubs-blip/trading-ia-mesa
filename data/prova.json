@@ -6,8 +6,8 @@
   {
    "robo": "Carteira do Prédio",
    "inicial": 100.0,
-   "atual": 79.63,
-   "retorno_pct": -20.37,
+   "atual": 79.69,
+   "retorno_pct": -20.31,
    "operacoes": 1,
    "acerto_pct": 0.0,
    "ganho_medio": null,
@@ -50,8 +50,8 @@
   {
    "robo": "IA pura (manual)",
    "inicial": 100.0,
-   "atual": 90.21,
-   "retorno_pct": -9.79,
+   "atual": 90.17,
+   "retorno_pct": -9.83,
    "operacoes": 5,
    "acerto_pct": 40.0,
    "ganho_medio": 1.0,
