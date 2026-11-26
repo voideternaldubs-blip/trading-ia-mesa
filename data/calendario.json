@@ -1,0 +1,62 @@
+{
+ "gerado": "2026-11-26T05:23",
+ "eventos": [
+  {
+   "quando": "2026-11-23T09:45",
+   "titulo": "Flash Manufacturing PMI",
+   "nome": "Flash Manufacturing PMI",
+   "explica": "Indicador econômico dos EUA. Impacto conforme a surpresa em relação ao esperado.",
+   "impacto": "médio",
+   "previsto": "54.5",
+   "anterior": "56.0"
+  },
+  {
+   "quando": "2026-11-23T09:45",
+   "titulo": "Flash Services PMI",
+   "nome": "Flash Services PMI",
+   "explica": "Indicador econômico dos EUA. Impacto conforme a surpresa em relação ao esperado.",
+   "impacto": "médio",
+   "previsto": "55.6",
+   "anterior": "57.9"
+  },
+  {
+   "quando": "2026-11-24T10:00",
+   "titulo": "CB Consumer Confidence",
+   "nome": "CB Consumer Confidence",
+   "explica": "Indicador econômico dos EUA. Impacto conforme a surpresa em relação ao esperado.",
+   "impacto": "médio",
+   "previsto": "92.4",
+   "anterior": "91.7"
+  },
+  {
+   "quando": "2026-11-25T08:30",
+   "titulo": "Core PCE Price Index m/m",
+   "nome": "Inflação PCE (a preferida do Fed)",
+   "explica": "O índice de inflação que o Fed mais olha para decidir os juros.",
+   "impacto": "alto",
+   "previsto": "0.3%",
+   "anterior": "0.3%"
+  },
+  {
+   "quando": "2026-11-25T08:30",
+   "titulo": "Prelim GDP q/q",
+   "nome": "PIB",
+   "explica": "O tamanho da economia. Crescimento fraco assusta; forte demais pode manter juros altos.",
+   "impacto": "alto",
+   "previsto": "3.5%",
+   "anterior": "3.4%"
+  },
+  {
+   "quando": "2026-11-25T08:30",
+   "titulo": "Prelim GDP Price Index q/q",
+   "nome": "PIB",
+   "explica": "O tamanho da economia. Crescimento fraco assusta; forte demais pode manter juros altos.",
+   "impacto": "médio",
+   "previsto": "2.3%",
+   "anterior": "2.3%"
+  }
+ ],
+ "balancos": [],
+ "hoje_alto_impacto": [],
+ "aviso": "Sem evento de alto impacto hoje."
+}
