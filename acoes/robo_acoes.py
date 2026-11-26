@@ -50,7 +50,11 @@ def main():
                         if alvo == 0 and etf in atuais:
                             alpaca.zera(etf)
                         else:
-                            alpaca.ordem_valor(etf, dif)
+                            o = alpaca.ordem_valor(etf, dif)
+                            refs_f = os.path.join(AQUI, "ordens.json")
+                            refs = json.load(open(refs_f)) if os.path.exists(refs_f) else {}
+                            refs[o["id"]] = {"ativo": etf, "preco_ref": preco[etf], "usd": round(dif, 2), "dia": datetime.now(timezone.utc).isoformat()[:16]}
+                            json.dump(refs, open(refs_f, "w"), indent=1)
                         log.append(f"- ALPACA: ordem {'compra' if dif > 0 else 'venda'} {etf} {abs(dif):.2f} USD enviada")
             else:
                 log.append("- ALPACA: bolsa fechada, sincroniza na próxima rodada")
