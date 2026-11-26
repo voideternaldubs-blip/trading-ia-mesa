@@ -18,12 +18,19 @@ def main():
         saida = None
         for x in k:
             o, h, l = float(x[1]), float(x[2]), float(x[3])
-            if p["lado"] * (h - p["entrada"]) / p["entrada"] >= 0.05 and p["stop"] < p["entrada"]:
+            fav = (h - p["entrada"]) if p["lado"] > 0 else (p["entrada"] - l)
+            if fav / p["entrada"] >= 0.05 and p["lado"] * (p["entrada"] - p["stop"]) > 0:
                 p["stop"] = p["entrada"]; log.append(f"- 🔒 {s}: +5%, stop subiu para a entrada ({p['entrada']:g})")
-            if l <= p["stop"]:
-                saida = (min(o, p["stop"]), "stop"); break
-            if h >= p["alvo"]:
-                saida = (max(o, p["alvo"]), "alvo"); break
+            if p["lado"] > 0:
+                if l <= p["stop"]:
+                    saida = (min(o, p["stop"]), "stop"); break
+                if h >= p["alvo"]:
+                    saida = (max(o, p["alvo"]), "alvo"); break
+            else:
+                if h >= p["stop"]:
+                    saida = (max(o, p["stop"]), "stop"); break
+                if l <= p["alvo"]:
+                    saida = (min(o, p["alvo"]), "alvo"); break
         if k:
             p["conferido_ate"] = datetime.fromtimestamp(int(k[-1][0]) / 1000, timezone.utc).isoformat()[:16]
         if saida:

@@ -1,69 +1,94 @@
 {
  "inicial": 100.0,
- "caixa": 100.0,
+ "caixa": 96.82,
  "posicoes": {
   "SUIUSDT": {
-   "lado": 1,
-   "qtd": 449.4,
-   "entrada": 0.670059903608,
-   "stop": 0.6476,
-   "alvo": 0.7277,
-   "trailing_pct": 0.04,
-   "ativa_em": 0.7036,
-   "em": "2026-11-26T12:40",
-   "conferido_ate": "2026-11-26T12:59",
-   "atual": 0.6675
+   "lado": -1,
+   "qtd": 449.1,
+   "entrada": 0.6653,
+   "stop": 0.6853,
+   "alvo": 0.6054,
+   "em": "2026-11-26T13:52",
+   "tese": "vendido a favor da tend\u00eancia de queda (m\u00e1quina do tempo: valor esperado positivo)",
+   "conferido_ate": "2026-11-26T13:52",
+   "atual": 0.6676
   },
   "HYPEUSDT": {
-   "lado": 1,
-   "qtd": 4.91,
-   "entrada": 61.2714502138,
-   "stop": 59.323,
-   "alvo": 66.662,
-   "trailing_pct": 0.04,
-   "ativa_em": 64.335,
-   "em": "2026-11-26T12:40",
-   "conferido_ate": "2026-11-26T12:59",
-   "atual": 61.166
-  },
-  "SSVUSDT": {
-   "lado": 1,
-   "qtd": 50.59,
-   "entrada": 2.635,
-   "stop": 2.55,
-   "alvo": 2.866,
-   "trailing_pct": 0.06,
-   "ativa_em": 2.767,
-   "em": "2026-11-26T12:45",
-   "conferido_ate": "2026-11-26T12:59",
-   "atual": 2.631
+   "lado": -1,
+   "qtd": 4.07,
+   "entrada": 61.329,
+   "stop": 63.169,
+   "alvo": 55.809,
+   "em": "2026-11-26T13:52",
+   "tese": "vendido a favor da tend\u00eancia de queda (m\u00e1quina do tempo: valor esperado positivo)",
+   "conferido_ate": "2026-11-26T13:52",
+   "atual": 61.327
   },
   "LINKUSDT": {
-   "lado": 1,
-   "qtd": 14.4,
-   "entrada": 9.247,
-   "stop": 8.965,
-   "alvo": 10.074,
-   "trailing_pct": 0.04,
-   "ativa_em": 9.709,
-   "em": "2026-11-26T12:45",
-   "conferido_ate": "2026-11-26T12:59",
-   "atual": 9.241
+   "lado": -1,
+   "qtd": 24.34,
+   "entrada": 9.209,
+   "stop": 9.485,
+   "alvo": 8.38,
+   "em": "2026-11-26T13:52",
+   "tese": "vendido a favor da tend\u00eancia de queda (m\u00e1quina do tempo: valor esperado positivo)",
+   "conferido_ate": "2026-11-26T13:52",
+   "atual": 9.244
   },
   "AAVEUSDT": {
-   "lado": 1,
-   "qtd": 1.4,
-   "entrada": 96.22032258065,
-   "stop": 92.92,
-   "alvo": 104.41,
-   "trailing_pct": 0.04,
-   "ativa_em": 101.03,
-   "em": "2026-11-26T12:45",
-   "conferido_ate": "2026-11-26T12:59",
-   "atual": 95.77
+   "lado": -1,
+   "qtd": 2.2,
+   "entrada": 95.04,
+   "stop": 97.89,
+   "alvo": 86.49,
+   "em": "2026-11-26T13:52",
+   "tese": "vendido a favor da tend\u00eancia de queda (m\u00e1quina do tempo: valor esperado positivo)",
+   "conferido_ate": "2026-11-26T13:52",
+   "atual": 95.15
   }
  },
- "fechadas": [],
+ "fechadas": [
+  {
+   "simbolo": "SUIUSDT",
+   "entrada": 0.670059903608,
+   "saida": 0.66775842,
+   "motivo": "virada p/ venda (m\u00e1quina do tempo)",
+   "resultado": -1.18,
+   "quando": "2026-11-26T13:52"
+  },
+  {
+   "simbolo": "LINKUSDT",
+   "entrada": 9.247,
+   "saida": 9.24,
+   "motivo": "virada p/ venda (m\u00e1quina do tempo)",
+   "resultado": -0.17,
+   "quando": "2026-11-26T13:52"
+  },
+  {
+   "simbolo": "SSVUSDT",
+   "entrada": 2.635,
+   "saida": 2.67477273,
+   "motivo": "virada p/ venda (m\u00e1quina do tempo)",
+   "resultado": 1.94,
+   "quando": "2026-11-26T13:52"
+  },
+  {
+   "simbolo": "AAVEUSDT",
+   "entrada": 96.22032258065,
+   "saida": 95.19,
+   "motivo": "virada p/ venda (m\u00e1quina do tempo)",
+   "resultado": -1.51,
+   "quando": "2026-11-26T13:52"
+  },
+  {
+   "simbolo": "HYPEUSDT",
+   "entrada": 61.2714502138,
+   "saida": 61.31667914,
+   "motivo": "virada p/ venda (m\u00e1quina do tempo)",
+   "resultado": 0.07,
+   "quando": "2026-11-26T13:52"
+  }
+ ],
  "tese": "Medo extremo (11) + repique de 24h com volume e funding neutro: aposta em alta de al\u00edvio de alguns dias nas alts mais fortes fora do foguete (que est\u00e1 vendido). Stop -5%, alvo topo de 5 dias.",
  "inicio": "2026-11-26T12:40",
  "hist": [
@@ -74,8 +99,12 @@
   {
    "quando": "2026-11-26T12:59",
    "valor": 97.41
+  },
+  {
+   "quando": "2026-11-26T13:52",
+   "valor": 94.7
   }
  ],
- "modo": "METODO 1:3 (Kurdi): trade1 arrisca ~30 p/ ganhar ~90 -> 190; trade2 arrisca o lucro (90) p/ +270 -> 460; trade3 arrisca 200 p/ +600 -> ~1060",
+ "modo": "METODO 1:3 a favor da tend\u00eancia (vendido); probabilidades pela m\u00e1quina do tempo",
  "fase": 1
 }

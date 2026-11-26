@@ -58,6 +58,10 @@ jobs:
           BINANCE_SECRET: ${{ secrets.BINANCE_SECRET }}
         run: python ia_pura.py || true
 
+      - name: MÁQUINA DO TEMPO (probabilidade de alvo x stop)
+        if: always()
+        run: python equipe/maquina_tempo.py || true
+
       - name: ARANHA ANALISTA (IA da NVIDIA)
         if: always()
         env:
@@ -109,7 +113,7 @@ jobs:
           rm -f data/alpaca.env
           git config user.name "mesa-de-agentes"
           git config user.email "mesa@users.noreply.github.com"
-          for f in data/aranha.db data/carteira.json data/relatorio_aranha.json data/calendario.json data/sec.json data/fills.json data/sentinela.json data/prova.json data/foguete2.json data/ia_pura.json data/foguete2_trades.csv data/foguete2_exec.json data/analise_ia.json acoes/carteira_acoes.json acoes/carteira_rotacao.json acoes/ordens.json diario site; do [ -e "$f" ] && git add "$f"; done; true
+          for f in data/aranha.db data/carteira.json data/relatorio_aranha.json data/calendario.json data/sec.json data/fills.json data/sentinela.json data/prova.json data/foguete2.json data/ia_pura.json data/probabilidades.json data/foguete2_trades.csv data/foguete2_exec.json data/analise_ia.json acoes/carteira_acoes.json acoes/carteira_rotacao.json acoes/ordens.json diario site; do [ -e "$f" ] && git add "$f"; done; true
           git diff --cached --quiet && exit 0
           git commit -q -m "mesa: rodada $(date -u +%Y-%m-%dT%H:%M)Z"
           for i in 1 2 3; do git pull -q --rebase -X theirs && git push -q && break; sleep 5; done
