@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A ARANHA · lendo o mercado</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800;900&family=Lexend:wght@300;400;500;600&family=Doto:wght@700;900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#040406;--ink:#eef0f6;--mut:#7d8196;--dim:#4a4e60;--hair:rgba(255,255,255,.07);--mg:#ff2bd6;--cy:#2ee6ff;--gr:#2bff9a;--rd:#ff4d6d;--am:#ffb02e;--ease:cubic-bezier(.32,.72,0,1);--r:26px}
+*{box-sizing:border-box}html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font:400 13px/1.5 Lexend,system-ui,sans-serif;overflow:hidden;-webkit-font-smoothing:antialiased}
+.orb{position:fixed;border-radius:50%;filter:blur(100px);opacity:.5;pointer-events:none}
+.o1{width:44vw;height:44vw;left:-14vw;top:-20vw;background:radial-gradient(circle,#ff2bd650,transparent 65%)}.o2{width:40vw;height:40vw;right:-12vw;bottom:-18vw;background:radial-gradient(circle,#2ee6ff38,transparent 65%)}
+.island{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:30;display:flex;align-items:center;gap:20px;padding:7px 8px 7px 8px;border-radius:999px;background:rgba(14,15,22,.6);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 0 0 1px var(--hair),0 30px 80px -30px rgba(255,43,214,.35)}
+.back{display:flex;align-items:center;gap:10px;padding:6px 14px 6px 6px;border-radius:999px;background:rgba(255,255,255,.05);color:var(--ink);text-decoration:none;font:600 11px Lexend;transition:transform .5s var(--ease)}
+.back span{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.08);transition:transform .5s var(--ease)}.back:hover span{transform:translateX(-3px)}.back:active{transform:scale(.97)}
+.brand{font:900 15px Montserrat;letter-spacing:.3em}.brand i{color:var(--mg);font-style:normal}
+.kpi{display:flex;flex-direction:column;line-height:1}.kpi span{font:500 9px Lexend;letter-spacing:.22em;color:var(--dim);text-transform:uppercase}.kpi b{font:900 17px Doto;margin-top:4px}
+.wrap{position:relative;z-index:1;height:100dvh;padding:76px 16px 16px;display:grid;grid-template-columns:1.25fr 1fr;gap:14px}
+.shell{border-radius:var(--r);padding:6px;background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.015) 40%,rgba(255,255,255,.04));box-shadow:0 0 0 1px var(--hair),0 40px 80px -40px #000;min-height:0;animation:rise 1.1s var(--ease) both}
+@keyframes rise{from{opacity:0;transform:translateY(24px);filter:blur(8px)}}
+.core{position:relative;height:100%;border-radius:calc(var(--r) - 6px);overflow:hidden;background:linear-gradient(180deg,rgba(17,18,27,.92),rgba(9,10,15,.96));box-shadow:inset 0 1px 1px rgba(255,255,255,.07)}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:5px 11px;border-radius:999px;background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px rgba(255,255,255,.07);font:500 9px Lexend;letter-spacing:.24em;text-transform:uppercase;color:var(--mut)}
+.eyebrow i{width:5px;height:5px;border-radius:50%;background:var(--c,var(--mg));box-shadow:0 0 8px var(--c,var(--mg))}
+
+/* documento (papel) */
+.docbar{position:absolute;top:0;left:0;right:0;z-index:6;display:flex;align-items:center;gap:10px;padding:14px 18px;background:linear-gradient(180deg,rgba(9,10,15,.98),rgba(9,10,15,0))}
+.docbar .st{margin-left:auto;font:900 13px Doto;color:var(--mg)}
+#doc{position:absolute;inset:0;overflow:hidden;padding:64px 26px 26px}
+.sheet{position:relative;background:#fbfaf6;color:#1b1b22;border-radius:6px;padding:44px 52px 60px;min-height:100%;box-shadow:0 30px 60px -20px rgba(0,0,0,.7);transition:transform .9s var(--ease),opacity .9s var(--ease),filter .9s var(--ease)}
+.sheet.sai{transform:translateY(-40px) rotate(-1.2deg);opacity:0;filter:blur(6px)}.sheet.entra{transform:translateY(60px);opacity:0}
+.sheet .fonte{font:600 10px Lexend;letter-spacing:.2em;text-transform:uppercase;color:#8a8a99;display:flex;gap:14px}
+.sheet h1{font:800 clamp(22px,2.1vw,32px)/1.18 Montserrat;letter-spacing:-.01em;margin:14px 0 18px;color:#111}
+.sheet p{font:400 17px/1.75 "Source Serif 4",Georgia,serif;margin:0 0 16px;color:#2a2a33}
+.sheet .orig{margin-top:26px;padding-top:16px;border-top:1px solid #e4e2da;font:300 12.5px/1.6 Lexend;color:#9a99a6}
+.sheet .orig b{font:600 9px Lexend;letter-spacing:.2em;color:#b5b4c0;display:block;margin-bottom:6px}
+.w{transition:background .6s var(--ease),box-shadow .6s var(--ease),color .6s}
+.w.hl{background:linear-gradient(transparent 12%,#fff36a 12%,#fff36a 88%,transparent 88%);color:#000}
+.w.tk{box-shadow:inset 0 0 0 1.4px #ff2bd6;border-radius:2px}
+.w.num.hl{background:#ff2bd6;color:#fff;border-radius:3px;padding:0 3px}
+#spider{position:absolute;left:0;top:0;pointer-events:none;z-index:4}
+.pop{position:absolute;z-index:5;font:900 15px Doto;color:#fff;background:#ff2bd6;padding:4px 10px;border-radius:999px;box-shadow:0 0 22px #ff2bd6aa;animation:pop 2.4s var(--ease) forwards;pointer-events:none;white-space:nowrap}
+@keyframes pop{0%{opacity:0;transform:translate(-50%,0) scale(.6)}15%{opacity:1;transform:translate(-50%,-26px) scale(1)}80%{opacity:1}100%{opacity:0;transform:translate(-50%,-60px) scale(.95)}}
+
+/* relatório */
+.rep .core{display:flex;flex-direction:column;padding:16px}
+.rhead{display:flex;align-items:center;gap:10px;margin-bottom:12px}.rhead .logo{font:800 13px Montserrat;letter-spacing:.06em;display:flex;align-items:center;gap:8px}
+.rhead .logo svg{width:22px;height:22px}
+.rbody{flex:1;overflow:auto;overflow-anchor:none;display:flex;flex-direction:column;gap:10px;padding-right:4px;scrollbar-width:thin;scrollbar-color:#2a2d3a transparent}
+.kf{font:700 10px Montserrat;letter-spacing:.24em;color:var(--mg);margin:4px 2px 2px}
+.card{border-radius:18px;padding:5px;background:rgba(255,255,255,.035);box-shadow:inset 0 0 0 1px rgba(255,255,255,.05);opacity:0;transform:translateY(16px);filter:blur(6px);transition:all .9s var(--ease)}
+.card.in{opacity:1;transform:none;filter:none}
+.card .ci{border-radius:14px;padding:14px 16px;background:rgba(8,9,14,.7);box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+.tag{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;font:700 9px Montserrat;letter-spacing:.18em;color:#06060a}
+.ttl{font:700 16px/1.35 Montserrat;margin-top:10px;color:#fff}
+.lbl{font:600 9px Lexend;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin-bottom:6px}
+.txt{font:300 13.5px/1.6 Lexend;color:#d3d6e2}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:12px;background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);font:900 13px Doto}
+.chip em{font:600 10px Lexend;font-style:normal}
+.learn{display:grid;gap:8px}.term{border-radius:14px;padding:12px 14px;background:linear-gradient(135deg,rgba(255,43,214,.08),rgba(46,230,255,.05));box-shadow:inset 0 0 0 1px rgba(255,43,214,.18)}
+.term b{font:700 12px Montserrat;color:#fff;display:block;margin-bottom:4px}.term span{font:300 12.5px/1.55 Lexend;color:#cfd2df}
+.fila{display:flex;gap:6px;margin-top:10px;overflow:hidden}.fila i{flex:1;height:3px;border-radius:3px;background:rgba(255,255,255,.08);overflow:hidden;position:relative}
+.fila i.ok{background:var(--mg)}.fila i.now::after{content:"";position:absolute;inset:0;background:var(--mg);transform-origin:left;animation:bar var(--d,12s) linear forwards}@keyframes bar{from{transform:scaleX(0)}}
+.ctrl{display:flex;gap:8px;margin-top:10px}.btn{flex:1;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 6px 6px 16px;border-radius:999px;border:0;cursor:pointer;background:rgba(255,255,255,.06);color:var(--ink);font:600 11px Lexend;transition:transform .5s var(--ease)}
+.btn span{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.08);transition:transform .5s var(--ease)}.btn:hover span{transform:translate(2px,-1px) scale(1.05)}.btn:active{transform:scale(.98)}
+.btn.pri{background:var(--mg);color:#09090d}.btn.pri span{background:rgba(0,0,0,.15)}
+@media (max-width:900px){html,body{overflow:auto}.wrap{grid-template-columns:1fr;height:auto}.doccell{height:80vh}.island .kpi{display:none}}
+</style>
+</head>
+<body>
+<div class="orb o1"></div><div class="orb o2"></div>
+<nav class="island">
+  <a class="back" href="/"><span>←</span>Mesa</a>
+  <div class="brand">A RA<i>N</i>HA</div>
+  <div class="kpi"><span>Lidas</span><b id="kl" style="color:var(--mg)">0</b></div>
+  <div class="kpi"><span>Na fila</span><b id="kq" style="color:var(--cy)">0</b></div>
+  <div class="kpi"><span>Palavras-chave</span><b id="kw" style="color:var(--am)">0</b></div>
+</nav>
+<main class="wrap">
+  <section class="shell doccell"><div class="core">
+    <div class="docbar"><span class="eyebrow"><i></i>A aranha está lendo</span><span class="eyebrow" id="dtipo" style="--c:var(--cy)"><i></i>—</span><span class="st" id="dst"></span></div>
+    <div id="doc"><div class="sheet" id="sheet"></div></div>
+  </div></section>
+  <section class="shell rep" style="animation-delay:.12s"><div class="core">
+    <div class="rhead"><div class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="#ff2bd6" stroke-width="1.4"><circle cx="12" cy="12" r="2.6"/><path d="M12 9.4V3M12 14.6V21M9.6 11 4 7M14.4 11 20 7M9.6 13 4 17M14.4 13 20 17M10 12H2M14 12h8"/></svg>RELATÓRIO DA ARANHA</div><span class="eyebrow" style="margin-left:auto;--c:var(--gr)"><i></i>em português simples</span></div>
+    <div class="rbody" id="rep"></div>
+    <div class="fila" id="fila"></div>
+    <div class="ctrl"><button class="btn" id="bp">Pausar leitura<span>❚❚</span></button><button class="btn pri" id="bn">Próxima notícia<span>↗</span></button></div>
+  </div></section>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+let R=null,idx=0,pausa=false,lidas=0,kwTotal=0,timerProx=null;
+const docEl=$('doc'),sheet=$('sheet');
+
+/* ---------- palavras que a aranha caça ---------- */
+const RX_NUM=/^(US\$|R\$|\$)?[\d][\d.,]*(%|k|mi|bi)?$/i;
+const CHAVE=/^(bitcoin|btc|ethereum|eth|solana|sol|xrp|nvidia|nasdaq|s&p|tesla|apple|microsoft|amd|tsmc|meta|google|amazon|fed|sec|etf|etfs|ceo|tarifa|tarifas|juros|inflação|hack|hacker|hackers|ataque|ataques|roubo|roubados|golpe|processo|investigação|lucro|receita|queda|cai|caiu|caem|despenca|despencou|sobe|subiu|alta|recorde|bilhões|milhões|trilhão|trilhões|chips|semicondutores|china|trump|liquidez|alavancagem|vendido|comprado|mineração|regulação|acordo|banco|bancos|baleias|investidores|ações)$/i;
+
+function montaDoc(n){
+  const pars=(n.resumo||'').split(/(?<=[.!?])\s+(?=[A-ZÁÉÍÓÚ])/).reduce((a,s)=>{if(!a.length||a.at(-1).length>260)a.push(s);else a[a.length-1]+=' '+s;return a},[]);
+  const wrap=t=>t.split(/(\s+)/).map(w=>{if(/^\s+$/.test(w))return w;const limpo=w.replace(/[“”"'‘’(),.:;!?]/g,'');
+    const num=RX_NUM.test(limpo)&&/\d/.test(limpo),k=num||CHAVE.test(limpo)||n.ativos.some(a=>limpo.toLowerCase()===a.toLowerCase());
+    return `<span class="w${k?' key':''}${num?' num':''}">${w}</span>`}).join('');
+  sheet.innerHTML=`<div class="fonte"><span>${n.fonte}</span><span>${n.quando} UTC</span><span>${n.ativos.join(' · ')}</span></div>
+    <h1>${wrap(n.titulo)}</h1>${pars.map(p=>`<p>${wrap(p)}</p>`).join('')||'<p>'+wrap('(Esta fonte só publica o título. A aranha lê o título e explica ao lado.)')+'</p>'}
+    <div class="orig"><b>ORIGINAL EM INGLÊS</b>${n.titulo_en}</div><canvas id="spider"></canvas>`;
+  $('dtipo').innerHTML=`<i></i>${n.tipo}`;$('dtipo').style.setProperty('--c',n.cor);
+}
+
+/* ---------- relatório ---------- */
+function montaRep(n){
+  const dir={alta:['▲','var(--gr)','pressão de alta'],baixa:['▼','var(--rd)','pressão de baixa'],neutra:['●','var(--mut)','sem direção clara']}[n.direcao];
+  const termos=n.termos.length?n.termos:['Papel (paper trading)'];
+  $('rep').innerHTML=`<div class="kf">DESCOBERTAS · KEY FINDINGS</div>
+  <div class="card"><div class="ci"><span class="tag" style="background:${n.cor}">${n.tipo}</span><div class="ttl">${n.titulo}</div></div></div>
+  <div class="card"><div class="ci"><div class="lbl">O que isso significa</div><div class="txt">${n.significa}</div></div></div>
+  <div class="card"><div class="ci"><div class="lbl">Quem é afetado</div><div class="chips">${n.ativos.map(a=>`<span class="chip" style="color:${dir[1]}">${dir[0]} ${a} <em style="color:var(--mut)">${dir[2]}</em></span>`).join('')}</div></div></div>
+  <div class="card"><div class="ci"><div class="lbl">Como a mesa usa isso</div><div class="txt">${n.mesa_usa}</div></div></div>
+  <div class="kf" style="margin-top:6px;color:var(--cy)">APRENDA</div>
+  <div class="card"><div class="ci learn">${termos.map(t=>`<div class="term"><b>${t}</b><span>${R.glossario[t]||''}</span></div>`).join('')}</div></div>`;
+  [...$('rep').querySelectorAll('.card')].forEach((c,i)=>setTimeout(()=>c.classList.add('in'),350+i*260));
+  $('rep').scrollTop=0;requestAnimationFrame(()=>$('rep').scrollTop=0);setTimeout(()=>$('rep').scrollTop=0,60);
+}
+
+/* ---------- a aranha ---------- */
+let cv,cx,keys=[],alvo=0,spi=null,last=0;
+function novaAranha(){
+  cv=$('spider');cx=cv.getContext('2d');const r=sheet.getBoundingClientRect(),dpr=Math.min(devicePixelRatio,2);
+  cv.width=sheet.scrollWidth*dpr;cv.height=sheet.scrollHeight*dpr;cv.style.width=sheet.scrollWidth+'px';cv.style.height=sheet.scrollHeight+'px';cx.scale(dpr,dpr);
+  const ws=[...sheet.querySelectorAll('.w')];
+  keys=[...sheet.querySelectorAll('.w.key')];$('kw').textContent=kwTotal;
+  const p0=keys[0]?centro(keys[0]):{x:sheet.clientWidth/2,y:80};
+  spi={x:p0.x-120,y:p0.y-140,a:0.6,ws,legs:[]};
+  const L=[{ang:-2.5,len:118},{ang:-2.0,len:132},{ang:-1.15,len:132},{ang:-.6,len:118},{ang:2.5,len:118},{ang:2.0,len:132},{ang:1.15,len:132},{ang:.6,len:118}];
+  L.forEach((l,i)=>{const f=pontoPerna(l);spi.legs.push({...l,fx:f.x,fy:f.y,sx:f.x,sy:f.y,tx:f.x,ty:f.y,t:1,grupo:[0,2,5,7].includes(i)?0:1})});
+  alvo=0;
+}
+function centro(el){const o=sheet.getBoundingClientRect(),r=el.getBoundingClientRect();return{x:r.left-o.left+r.width/2,y:r.top-o.top+r.height/2}}
+function pontoPerna(l){const a=spi.a+l.ang;return{x:spi.x+Math.cos(a)*l.len,y:spi.y+Math.sin(a)*l.len}}
+function palavraPerto(x,y,raio=46){let m=null,d=raio;for(const w of spi.ws){const c=centro(w),dd=Math.hypot(c.x-x,c.y-y);if(dd<d){d=dd;m=[w,c]}}return m}
+function pop(txt,x,y){const e=document.createElement('div');e.className='pop';e.textContent=txt;e.style.left=x+'px';e.style.top=y+'px';sheet.appendChild(e);setTimeout(()=>e.remove(),2500)}
+
+function passo(t){
+  const dt=Math.min(50,t-(last||t));last=t;
+  if(spi&&!pausa){
+    const destino=keys[alvo]?centro(keys[alvo]):{x:sheet.clientWidth*.5,y:sheet.scrollHeight-60};
+    const dx=destino.x-spi.x,dy=destino.y-spi.y,d=Math.hypot(dx,dy);
+    if(d>6){const v=Math.min(d,0.11*dt);spi.x+=dx/d*v;spi.y+=dy/d*v;let da=Math.atan2(dy,dx)-spi.a;da=Math.atan2(Math.sin(da),Math.cos(da));spi.a+=da*0.06}
+    else if(keys[alvo]){const k=keys[alvo];if(!k.classList.contains('hl')){k.classList.add('hl');kwTotal++;$('kw').textContent=kwTotal;if(k.classList.contains('num'))pop(k.textContent.trim(),destino.x,destino.y-18)}alvo++}
+    // patas: andam em dois grupos, alternando
+    const grupoAtivo=Math.floor(t/170)%2;
+    spi.legs.forEach(l=>{
+      if(l.t<1){l.t=Math.min(1,l.t+dt/150);const e=1-Math.pow(1-l.t,3);l.fx=l.sx+(l.tx-l.sx)*e;l.fy=l.sy+(l.ty-l.sy)*e;if(l.t>=1&&l.alvoW){l.alvoW.classList.add('tk')}return}
+      const ideal=pontoPerna({ang:l.ang,len:l.len*.92});
+      if(Math.hypot(ideal.x-l.fx,ideal.y-l.fy)>62&&l.grupo===grupoAtivo){
+        const pw=palavraPerto(ideal.x+Math.cos(spi.a)*30,ideal.y+Math.sin(spi.a)*30);
+        l.sx=l.fx;l.sy=l.fy;l.tx=pw?pw[1].x:ideal.x;l.ty=pw?pw[1].y:ideal.y;l.alvoW=pw?pw[0]:null;l.t=0}
+    });
+    // câmera acompanha
+    const ideal=spi.y-docEl.clientHeight*0.42;docEl.scrollTop+=(ideal-docEl.scrollTop)*0.06;
+  }
+  desenha(t);requestAnimationFrame(passo);
+}
+function desenha(t){
+  if(!cx)return;cx.clearRect(0,0,cv.width,cv.height);if(!spi)return;
+  const ca=Math.cos(spi.a),sa=Math.sin(spi.a);
+  spi.legs.forEach((l,i)=>{
+    const lado=l.ang<0?-1:1,hx=spi.x+ca*(-6+(i%4)*6)-sa*lado*7,hy=spi.y+sa*(-6+(i%4)*6)+ca*lado*7;
+    const fx=l.fx,fy=l.fy,dx=fx-hx,dy=fy-hy,d=Math.min(Math.hypot(dx,dy),l.len*1.25),L1=l.len*.62,L2=l.len*.68;
+    const a0=Math.atan2(dy,dx),cosA=Math.max(-1,Math.min(1,(L1*L1+d*d-L2*L2)/(2*L1*d))),kn=a0-lado*Math.acos(cosA);
+    const kx=hx+Math.cos(kn)*L1,ky=hy+Math.sin(kn)*L1;
+    cx.strokeStyle='#ff2bd6';cx.lineWidth=2.2;cx.lineCap='round';cx.shadowColor='#ff2bd6';cx.shadowBlur=6;
+    cx.beginPath();cx.moveTo(hx,hy);cx.lineTo(kx,ky);cx.lineTo(fx,fy);cx.stroke();cx.shadowBlur=0;
+    cx.fillStyle='#ff2bd6';cx.beginPath();cx.arc(kx,ky,2.6,0,7);cx.fill();
+    cx.fillStyle='#ffe14a';cx.beginPath();cx.arc(fx,fy,3,0,7);cx.fill();
+  });
+  // corpo: cápsula preta com faixa magenta (como no vídeo)
+  cx.save();cx.translate(spi.x,spi.y);cx.rotate(spi.a);
+  cx.shadowColor='rgba(0,0,0,.45)';cx.shadowBlur=14;cx.shadowOffsetY=6;
+  cx.fillStyle='#0c0c12';cx.beginPath();cx.roundRect(-30,-9,46,18,9);cx.fill();cx.shadowBlur=0;cx.shadowOffsetY=0;
+  cx.fillStyle='#ff2bd6';cx.beginPath();cx.roundRect(-24,-2.4,28,4.8,3);cx.fill();
+  cx.fillStyle='#0c0c12';cx.beginPath();cx.ellipse(22,0,9,7.5,0,0,7);cx.fill();
+  const pisca=Math.sin(t/700)>0.96?0.3:1;cx.fillStyle='#ff2bd6';cx.globalAlpha=pisca;cx.beginPath();cx.arc(26,-3,1.8,0,7);cx.arc(26,3,1.8,0,7);cx.fill();cx.globalAlpha=1;
+  cx.restore();
+}
+
+/* ---------- ciclo de leitura ---------- */
+function abre(i){
+  if(!R||!R.noticias.length)return;idx=(i+R.noticias.length)%R.noticias.length;const n=R.noticias[idx];
+  sheet.classList.add('sai');
+  setTimeout(()=>{montaDoc(n);sheet.classList.remove('sai');sheet.classList.add('entra');docEl.scrollTop=0;
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{sheet.classList.remove('entra');novaAranha()}));
+    montaRep(n);lidas++;$('kl').textContent=lidas;$('kq').textContent=R.noticias.length-1-idx;fila();
+    $('dst').textContent=`${idx+1}/${R.noticias.length}`;
+    clearTimeout(timerProx);const dur=Math.max(14000,keys.length*1700+9000);document.documentElement.style.setProperty('--d',dur+'ms');
+    timerProx=setTimeout(prox,dur)},700);
+}
+function fila(){$('fila').innerHTML=R.noticias.slice(0,24).map((_,i)=>`<i class="${i<idx?'ok':i===idx?'now':''}"></i>`).join('')}
+function prox(){if(pausa){timerProx=setTimeout(prox,2000);return}abre(idx+1)}
+$('bn').onclick=()=>{clearTimeout(timerProx);abre(idx+1)};
+$('bp').onclick=()=>{pausa=!pausa;$('bp').innerHTML=pausa?'Continuar leitura<span>▶</span>':'Pausar leitura<span>❚❚</span>'};
+async function carrega(){try{const r=await (await fetch('/api/aranha',{cache:'no-store'})).json();const novo=!R;R=r;if(novo)abre(0)}catch(e){}}
+carrega();setInterval(carrega,5*60*1000);requestAnimationFrame(passo);
+addEventListener('resize',()=>{if(R)novaAranha()});
+</script>
+</body>
+</html>

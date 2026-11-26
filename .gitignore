@@ -1,0 +1,21 @@
+# segredos
+data/alpaca.env
+*.env
+# dados grandes / regeneráveis
+data/fut/
+data/*_4h.csv
+data/medo_ganancia.csv
+*.log
+__pycache__/
+# memecoin roda só no PC
+data/meme_*
+diario/meme_*
+# estudo e terceiros
+estudo/
+agentes/
+# saídas locais
+painel.html
+curvas_ls.csv
+series_motores.csv
+serie_piramide_*.csv
+resultado*.csv
