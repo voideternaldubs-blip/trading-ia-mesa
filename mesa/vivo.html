@@ -104,10 +104,10 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;background:ra
   <section class="main">
     <div class="col">
       <div class="pn cap">
-        <span class="lbl">Capital da mesa · papel, preço real</span>
+        <span class="lbl">Foguete v2 · papel, preço real</span>
         <div class="big num" id="cap">—</div>
         <div id="capd" style="font:600 12px Lexend"></div>
-        <div class="row"><div><span class="lbl">Em risco</span><b id="risco">—</b></div><div><span class="lbl">Cofre</span><b id="cofre" style="color:var(--warn)">—</b></div><div><span class="lbl">Escada</span><b id="esc" style="color:var(--ai)">—</b></div></div>
+        <div class="row"><div><span class="lbl">Em risco</span><b id="risco">—</b></div><div><span class="lbl">Cofre</span><b id="cofre" style="color:var(--warn)">—</b></div><div><span class="lbl">Alavancagem</span><b id="esc" style="color:var(--ai)">—</b></div></div>
       </div>
       <div class="pn pos"><div class="h"><span class="lbl">Posições abertas · ao vivo</span><span class="lbl" id="npos"></span></div><div class="plist" id="plist"></div></div>
     </div>
@@ -135,7 +135,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;background:ra
 
 <script>
 const $=id=>document.getElementById(id);
-const MOEDAS=["BTC","ETH","SOL","BNB","XRP","DOGE","AVAX","LINK","ADA","SUI"];
+let MOEDAS=["BTC","ETH","SOL","BNB","XRP","DOGE","AVAX","LINK","ADA","SUI"];let EXTRA=[];
 const COR={CHEFE:'#D946EF',ARANHA:'#22D3EE',ANALISTA:'#A78BFA',VET:'#FBBF24',RUG:'#FB7185',SNIPER:'#34D399',"SAÍDA":'#60A5FA',RISCO:'#F472B6',"CALENDÁRIO":'#A3E635',SEC:'#EAB308',FILLS:'#2DD4BF',SENTINELA:'#FB923C'};
 let sel="BTC",iv="1m",ws=null,chart,cs,vs,entryLine=null,stopLine=null,ultimo={},abertura={},cart=null,estado=null,lat=[];
 
@@ -161,7 +161,11 @@ async function carregaHist(){
 }
 function linhasPosicao(){
   if(entryLine){cs.removePriceLine(entryLine);entryLine=null}if(stopLine){cs.removePriceLine(stopLine);stopLine=null}
-  const p=cart?.cripto?.pos?.[sel];let leg='';
+  const q=cart?.foguete?.pos?.[sel+'USDT'];let leg='';
+  if(q){const longo=q.lado>0;entryLine=cs.createPriceLine({price:q.entrada,color:'#43C9E8',lineWidth:1,lineStyle:2,axisLabelVisible:true,title:longo?'FOGUETE comprado':'FOGUETE vendido'});
+    stopLine=cs.createPriceLine({price:q.stop,color:'#FF5577',lineWidth:1,lineStyle:1,axisLabelVisible:true,title:'STOP 4 ATR'});
+    $('leg').innerHTML=`<span><i style="background:#43C9E8"></i>entrada ${fp(q.entrada)}</span><span><i style="background:#FF5577"></i>stop ${fp(q.stop)}</span>`;return}
+  const p=cart?.cripto?.pos?.[sel];
   if(p){const longo=p.qtd>0;entryLine=cs.createPriceLine({price:p.preco,color:'#43C9E8',lineWidth:1,lineStyle:2,axisLabelVisible:true,title:longo?'ENTRADA (comprado)':'ENTRADA (vendido)'});
     const st=p.preco*(longo?0.88:1.12);stopLine=cs.createPriceLine({price:st,color:'#FF5577',lineWidth:1,lineStyle:1,axisLabelVisible:true,title:'STOP -12%'});
     leg=`<span><i style="background:#43C9E8"></i>entrada ${fp(p.preco)}</span><span><i style="background:#FF5577"></i>stop ${fp(st)}</span>`}
@@ -172,7 +176,7 @@ function linhasPosicao(){
 /* ---------- websocket ao vivo ---------- */
 function conecta(){
   if(ws)ws.close();
-  const streams=[`${sel.toLowerCase()}usdt@kline_${iv}`,`${sel.toLowerCase()}usdt@aggTrade`,...MOEDAS.map(m=>`${m.toLowerCase()}usdt@miniTicker`)].join('/');
+  const streams=[`${sel.toLowerCase()}usdt@kline_${iv}`,`${sel.toLowerCase()}usdt@aggTrade`,...[...new Set([...MOEDAS,...EXTRA])].map(m=>`${m.toLowerCase()}usdt@miniTicker`)].join('/');
   ws=new WebSocket('wss://data-stream.binance.vision/stream?streams='+streams);
   ws.onopen=()=>{$('conn').classList.add('on');$('conn').querySelector('span').textContent='BINANCE · AO VIVO'};
   ws.onclose=()=>{$('conn').classList.remove('on');$('conn').querySelector('span').textContent='BINANCE · RECONECTANDO';setTimeout(()=>{if(ws.readyState===3)conecta()},2500)};
@@ -198,20 +202,31 @@ function tick(m,c,o){
 
 /* ---------- posições e capital, marcados a mercado ao vivo ---------- */
 function atualizaPosicoes(){
-  if(!cart)return;const c=cart.cripto,pos=c.pos||{};let valorPos=0,html='',n=0;
+  if(!cart)return;const fg=cart.foguete||{},fc=fg.conta||{},fp2=fg.pos||{};let pnlTot=0,expo=0,html='',n=0;
+  for(const [sym,p] of Object.entries(fp2)){const m=sym.replace('USDT','');const px=ultimo[m]||p.entrada,pnl=p.lado*p.qtd*(px-p.entrada),pct=(px/p.entrada-1)*p.lado*100;pnlTot+=pnl;expo+=p.qtd*px;n++;
+    html+=`<div class="p${m===sel?' sel':''}" data-m="${m}"><span class="sym">${m}</span><span><span class="side ${p.lado>0?'l':'s'}">${p.lado>0?'COMPRADO':'VENDIDO'}</span></span><span class="pnl ${pnl>=0?'up':'dn'}" id="pp_${m}">${pnl>=0?'+':''}${pnl.toFixed(2)}</span>
+      <div class="det"><span>${(p.qtd*px).toFixed(0)} USD · entrada ${fp(p.entrada)} · stop ${fp(p.stop)}</span><span class="${pct>=0?'up':'dn'}">${pct>=0?'+':''}${pct.toFixed(2)}%</span></div></div>`}
+  window._fg={pnlTot,expo,n,caixa:fc.caixa||0,cofre:fc.cofre||0,status:fc.status};
+  return atualizaCapital(html,n);
+}
+function atualizaCripto(){
+  const c=cart.cripto,pos=c.pos||{};let valorPos=0,html='',n=0;
   for(const [m,p] of Object.entries(pos)){const px=ultimo[m]||p.preco,v=p.qtd*px,pnl=p.qtd*(px-p.preco),pct=(px/p.preco-1)*(p.qtd>0?1:-1)*100;valorPos+=v;n++;
     html+=`<div class="p${m===sel?' sel':''}" data-m="${m}"><span class="sym">${m}</span><span><span class="side ${p.qtd>0?'l':'s'}">${p.qtd>0?'COMPRADO':'VENDIDO'}</span></span><span class="pnl ${pnl>=0?'up':'dn'}" id="pp_${m}">${pnl>=0?'+':''}${pnl.toFixed(2)}</span>
       <div class="det"><span>${Math.abs(p.qtd*px).toFixed(2)} USD · entrada ${fp(p.preco)}</span><span class="${pct>=0?'up':'dn'}">${pct>=0?'+':''}${pct.toFixed(2)}%</span></div></div>`}
+  return html;
+}
+function atualizaCapital(html,n){
   const pl=$('plist');const antes={};pl.querySelectorAll('.pnl').forEach(e=>antes[e.id]=parseFloat(e.textContent));
   pl.innerHTML=html||'<div style="padding:16px;color:#566175">Sem posições abertas: o robô está esperando sinal.</div>';
   pl.querySelectorAll('.pnl').forEach(e=>{const a=antes[e.id],v=parseFloat(e.textContent);if(a!==undefined&&a!==v)flash(e,v-a)});
   pl.querySelectorAll('.p').forEach(e=>e.onclick=()=>troca(e.dataset.m));
-  const emRisco=(c.caixa||0)+valorPos,cofre=c.cofre||0,total=emRisco+cofre,acoes=(cart.acoes.hist.at(-1)||{}).valor||100;
-  const geral=total+acoes+(estado?estado.mesas.filter(x=>x.nome.startsWith('Memecoin')).reduce((s,x)=>s+x.valor,0):0);
-  const base=estado?estado.base:300;
-  $('cap').textContent=total.toFixed(2);$('capd').innerHTML=`<span class="${total>=100?'up':'dn'}">${total>=100?'+':''}${(total-100).toFixed(2)} USD (${((total/100-1)*100).toFixed(2)}%)</span> <span style="color:#566175">· mesa cripto</span>`;
+  const f=window._fg,emRisco=f.caixa+f.pnlTot,cofre=f.cofre,total=emRisco+cofre;
+  const geral=estado?estado.mesas.reduce((s,x)=>s+(x.nome.startsWith('Foguete')?0:x.valor),0)+total:total;
+  const base=estado?estado.base:100;
+  $('cap').textContent=total.toFixed(2);$('capd').innerHTML=`<span class="${total>=100?'up':'dn'}">${total>=100?'+':''}${(total-100).toFixed(2)} USD (${((total/100-1)*100).toFixed(2)}%)</span> <span style="color:#566175">· foguete v2 · ${f.status||''}</span>`;
   $('risco').textContent=emRisco.toFixed(2);$('cofre').textContent=cofre.toFixed(2);
-  const esc=Math.min(7,3+Math.max(0,(total/100-1)/.5));$('esc').textContent=esc.toFixed(1)+'x';
+  $('esc').textContent=(f.expo/Math.max(emRisco,1e-6)).toFixed(1)+'x';
   $('hcap').textContent=geral.toFixed(2);const gp=geral-base;$('hpnl').textContent=(gp>=0?'+':'')+gp.toFixed(2);$('hpnl').className='num '+(gp>=0?'up':'dn');
   $('hpos').textContent=n;$('npos').textContent=n+' abertas';
 }
@@ -237,6 +252,8 @@ function desenhaFluxo(t){
 /* ---------- dados da mesa ---------- */
 async function puxa(){
   try{[cart,estado]=await Promise.all([fetch('/api/carteira',{cache:'no-store'}).then(r=>r.json()),fetch('/api/estado',{cache:'no-store'}).then(r=>r.json())])}catch(e){return}
+  const ex=Object.keys((cart.foguete||{}).pos||{}).map(s=>s.replace('USDT','')).filter(m=>!MOEDAS.includes(m));
+  if(ex.join()!==EXTRA.join()){EXTRA=ex;conecta()}
   atualizaPosicoes();linhasPosicao();
   const cont={};estado.agentes.forEach(a=>{cont[a.nome]=a.acoes;if(!$('a_'+a.nome)?.classList.contains('on'))$('at_'+a.nome).textContent=a.ultimo||PAPEL[a.nome]});
   FLUXO.forEach(n=>$('fl_'+n).textContent=cont[n]??0);

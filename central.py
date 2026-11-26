@@ -28,11 +28,13 @@ def mesas():
         out.append({"nome": "Ações EUA", "mercado": "TQQQ · SOXL · UPRO (filtro média 200)", "valor": a["hist"][-1]["valor"],
                     "posicoes": list(a["pos"]) or ["caixa (mercado abaixo da média 200)"],
                     "curva": [x["valor"] for x in a["hist"][-120:]], "quando": a["hist"][-1]["dia"]})
-    fg = ler(os.path.join(D, "foguete.json"))
+    fg = ler(os.path.join(D, "foguete2.json"))
     if fg and fg.get("hist"):
-        out.append({"nome": "Foguete multi-moeda", "mercado": "10 moedas · alavancado · rotação de lucro", "valor": fg["hist"][-1]["valor"],
-                    "posicoes": [f"{m} {'comprado' if p['lado'] > 0 else 'vendido'}" for m, p in fg["pos"].items()] or ["esperando tendência clara"],
-                    "curva": [x["valor"] for x in fg["hist"][-120:]], "quando": fg["hist"][-1]["quando"], "extra": f"cofre {fg.get('cofre', 0):.2f}"})
+        h = fg["hist"][-1]
+        out.append({"nome": "Foguete v2 (CPPI)", "mercado": "até 12 moedas · alavancagem CPPI · cofre separado", "valor": h["valor"],
+                    "posicoes": [f"{s.replace('USDT', '')} {'C' if p['lado'] > 0 else 'V'}" for s, p in fg["posicoes"].items()] or [fg["conta"]["status"]],
+                    "curva": [x["valor"] for x in fg["hist"][-120:]], "quando": h["quando"],
+                    "extra": f"foguete {h.get('foguete', 0):.2f} + cofre {fg['conta']['cofre']:.2f} · exposição {h.get('exposicao', 0):.0f}"})
     for modo in ("rigoroso", "solto"):
         e = ler(os.path.join(D, f"meme_{modo}.json"))
         if not e:

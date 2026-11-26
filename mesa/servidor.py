@@ -105,6 +105,17 @@ class H(SimpleHTTPRequestHandler):
     def log_message(self, *a):
         pass
 
+    def do_POST(self):
+        """Recebe textos copiados do navegador (respostas do ChatGPT/Claude web) e salva em estudo/notas/."""
+        if not self.path.startswith("/api/nota"):
+            self.send_response(404); self.end_headers(); return
+        n = int(self.headers.get("Content-Length", 0))
+        txt = self.rfile.read(min(n, 2_000_000)).decode("utf-8", "replace")
+        pasta = os.path.join(RAIZ, "estudo", "notas"); os.makedirs(pasta, exist_ok=True)
+        nome = re.sub(r"[^a-z0-9_-]", "", (self.path.split("nome=")[-1] if "nome=" in self.path else "nota").lower())[:40] or "nota"
+        open(os.path.join(pasta, f"{nome}.md"), "w", encoding="utf-8").write(txt)
+        self.send_response(200); self.send_header("Access-Control-Allow-Origin", "*"); self.end_headers(); self.wfile.write(b"ok")
+
     def do_GET(self):
         if self.path.startswith("/api/estado"):
             b = json.dumps(estado(), ensure_ascii=False).encode("utf-8")
@@ -121,7 +132,9 @@ class H(SimpleHTTPRequestHandler):
             c = lj(os.path.join(RAIZ, "data", "carteira.json")); a = lj(os.path.join(RAIZ, "acoes", "carteira_acoes.json"))
             b = json.dumps({"cripto": {"caixa": c.get("caixa"), "cofre": c.get("cofre", 0), "pos": c.get("pos", {}), "ligado": c.get("ligado", True),
                                        "hist": c.get("historico", [])[-200:]},
-                            "acoes": {"caixa": a.get("caixa"), "pos": a.get("pos", {}), "hist": a.get("hist", [])[-200:]}}, ensure_ascii=False).encode("utf-8")
+                            "acoes": {"caixa": a.get("caixa"), "pos": a.get("pos", {}), "hist": a.get("hist", [])[-200:]},
+                            "foguete": (lambda f: {"conta": f.get("conta", {}), "pos": f.get("posicoes", {}), "hist": f.get("hist", [])[-300:]})(lj(os.path.join(RAIZ, "data", "foguete2.json")))},
+                           ensure_ascii=False).encode("utf-8")
             self.send_response(200); self.send_header("Content-Type", "application/json; charset=utf-8"); self.send_header("Cache-Control", "no-store")
             self.end_headers(); self.wfile.write(b); return
         if self.path.startswith("/api/aranha"):
