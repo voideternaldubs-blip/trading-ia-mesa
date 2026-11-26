@@ -63,6 +63,28 @@ _n = _chave_nvidia()
 if _n:
     CEREBROS["Kimi K3.1"] = dict(base=NV, modelo="moonshotai/kimi-k3.1-pro", chave=_n, papeis=("comite",), por_min=20, por_dia=3000, tok_min=10**9)
     CEREBROS["GLM 5.3"] = dict(base=NV, modelo="z-ai/glm-5.3-flash", chave=_n, papeis=("analista",), por_min=30, por_dia=5000, tok_min=10**9)
+# ---------- APRENDIZADO: o prédio aprende com os próprios erros ----------
+PESO = {}        # cérebro -> chance de acerto aprendida (Laplace: (acertos+1)/(vereditos+2))
+BANIDOS = set()  # cérebros que erram demais saem da função de analista (ficam só de reserva)
+HIST_MOEDA = {}  # moeda -> últimos vereditos conferidos (cérebro, decisão, resultado)
+
+
+def aprende(hist):
+    PESO.clear(); BANIDOS.clear(); HIST_MOEDA.clear()
+    por = {}
+    for h in hist:
+        if h.get("resultado") is None:
+            continue
+        p = por.setdefault(h.get("cerebro", "?"), [0, 0]); p[0] += 1; p[1] += h["resultado"] > 0
+        HIST_MOEDA.setdefault(h["simbolo"], []).append((h.get("cerebro"), h["decisao"], h["resultado"]))
+    for n, (v, a) in por.items():
+        PESO[n] = (a + 1) / (v + 2)
+        if v >= 30 and a / v < 0.45:
+            BANIDOS.add(n)
+    for k in HIST_MOEDA:
+        HIST_MOEDA[k] = HIST_MOEDA[k][-6:]
+
+
 COTA = os.path.join(D, "cotas_ia.json")
 _lk = threading.Lock()
 try:
@@ -95,6 +117,11 @@ def pergunta(sistema, texto, papel="analista", i=0, tok=1400):
     """Escolhe um cérebro do PAPEL com cota livre (rodízio); se todos do papel estiverem cheios, espera;
     se não der, usa qualquer outro com cota. Devolve (nome, texto)."""
     nomes = [n for n, c in CEREBROS.items() if papel in c["papeis"]] or list(CEREBROS)
+    if papel == "analista":
+        bons = [n for n in nomes if n not in BANIDOS] or nomes
+        roleta = [n for n in bons for _ in range(max(1, round(PESO.get(n, .5) * 10)))]   # peso aprendido
+        prim = roleta[i % len(roleta)] if roleta else None
+        nomes = ([prim] if prim else []) + [n for n in bons if n != prim] + [n for n in nomes if n in BANIDOS]
     outros = [n for n in CEREBROS if n not in nomes]
     nomes = nomes[i % len(nomes):] + nomes[:i % len(nomes)]
     for tentativa in range(40):
@@ -107,7 +134,8 @@ def pergunta(sistema, texto, papel="analista", i=0, tok=1400):
             try:
                 r = requests.post(c["base"] + "/chat/completions", headers={"Authorization": "Bearer " + c["chave"]},
                                   json={"model": c["modelo"], "temperature": 0.2, "max_tokens": 700,
-                                        "messages": [{"role": "system", "content": sistema}, {"role": "user", "content": texto}]}, timeout=90)
+                                        "messages": [{"role": "system", "content": sistema + (f"\nVocê é o cérebro {nome}. Seu acerto conferido até agora: {PESO[nome] * 100:.0f}%. Aprenda com o histórico desta moeda que vem nos dados: não repita o erro." if nome in PESO else "")},
+                                                     {"role": "user", "content": texto}]}, timeout=90)
                 if r.status_code == 429:
                     _ruim[nome] = time.time() + 30; continue
                 r.raise_for_status()
@@ -212,7 +240,8 @@ def analista(item):
                  "tendencia_4h": round(tend, 2), "chance_alvo_compra": round(ca_c, 2), "chance_stop_compra": round(cs_c, 2),
                  "chance_alvo_venda": round(ca_v, 2), "chance_stop_venda": round(cs_v, 2), "valor_esperado_compra": round(ev_c, 2),
                  "valor_esperado_venda": round(ev_v, 2), "financiamento_pct": round(fund, 4), "noticias": nots,
-                 "medo_ganancia": extra.get("fg")}
+                 "medo_ganancia": extra.get("fg"),
+                 "historico_desta_moeda": [{"cerebro": c, "disse": dcs, "resultado_24h_pct": r} for c, dcs, r in HIST_MOEDA.get(s, [])]}
         cerebro, txt = pergunta(SIS, json.dumps(dados, ensure_ascii=False), "analista", i)
         j = json_de(txt) or {}
         dec = str(j.get("decisao", "FORA")).upper()
@@ -255,13 +284,19 @@ def diretoria(analises, log):
     caixa = float(e.get("caixa", 100))
     if caixa < 20:
         log.append("diretoria: caixa abaixo de 20, não abre mais nada"); return
+    # ADAPTAÇÃO: olha os últimos trades fechados da carteira
+    fech = e.get("fechadas", [])[-4:]
+    perdas = sum(1 for f in fech if f.get("resultado", 0) < 0)
+    cauteloso = len(fech) >= 2 and perdas >= 2 and sum(f.get("resultado", 0) for f in fech) < 0
+    ev_min, conf_min, fator = (0.30, 4, 0.6) if cauteloso else (0.15, 3, 1.0)
+    log.append("diretoria aprendeu: " + (f"{perdas} perdas nos últimos {len(fech)} fechamentos -> MODO CAUTELOSO (só confiança >=4, valor esperado >=0,30, risco x0,6)" if cauteloso else "últimos fechamentos ok -> modo normal"))
     ok = []
     for a in analises:
-        if a.get("erro") or a["decisao"] == "FORA" or a["confianca"] < 3 or a.get("vetado"):
+        if a.get("erro") or a["decisao"] == "FORA" or a["confianca"] < conf_min or a.get("vetado"):
             continue
         lado = 1 if a["decisao"] == "COMPRA" else -1
         ev = a["valor_esperado_compra"] if lado > 0 else a["valor_esperado_venda"]
-        if ev > 0.15 and a["tendencia_4h"] * lado > 0:   # IA + tendência + máquina do tempo concordam
+        if ev > ev_min and a["tendencia_4h"] * lado > 0:   # IA + tendência + máquina do tempo concordam
             ok.append((ev * a["confianca"], lado, a))
     ok.sort(key=lambda x: -x[0]); ok = ok[:4]
     if not ok:
@@ -271,7 +306,7 @@ def diretoria(analises, log):
     #  sinal comum -> 30%;  depois de um acerto (caixa > 100) -> aposta o lucro inteiro se for maior
     forte = sum(1 for _, _, a in ok if a["confianca"] >= 4) >= max(1, len(ok) // 2) and sum((a["valor_esperado_compra"] if l > 0 else a["valor_esperado_venda"]) for _, l, a in ok) / len(ok) >= 0.4
     base = (0.5 if forte else 0.3) * caixa
-    risco = max(base, caixa - 100) if caixa > 100 else base
+    risco = (max(base, caixa - 100) if caixa > 100 else base) * fator
     log.append(f"diretoria: sinal {'FORTE' if forte else 'comum'} -> arrisca {risco:.0f} USD para ganhar ~{risco * 3:.0f}")
     expo_total = risco / 0.03
     info = {x["symbol"]: x for x in b._req("GET", "/fapi/v1/exchangeInfo", assinado=False)["symbols"]}
@@ -333,6 +368,10 @@ def main():
     except Exception:
         pass
     extra = {"noticias": rel.get("noticias", []), "fg": fg}
+    precos0 = {t["symbol"]: float(t["lastPrice"]) for t in tk}
+    hist0, _ = confere_placar(antigo, precos0)
+    aprende(hist0)
+    antigo["historico"] = hist0
     with ThreadPoolExecutor(max_workers=8) as ex:
         analises = list(ex.map(analista, [(i, s, extra) for i, s in enumerate(moedas)]))
     precos = {a["simbolo"]: a.get("preco") for a in analises if a.get("preco")}
@@ -366,7 +405,13 @@ Responda SÓ JSON: {"aprova":true,"motivo":"uma frase curta em português do Bra
                "andar1": {"nome": "ANALISTAS DE MOEDA", "trabalho": "um analista por moeda", "analistas": analises},
                "andar2": {"nome": "COMITÊ DE RISCO", "trabalho": "ranking por valor esperado", "ranking": [a["simbolo"] for a in ranking[:10]]},
                "andar3": {"nome": "DIRETORIA", "trabalho": "abre o próximo trade da IA pura", "log": log}},
-           "placar": placar, "historico": hist}
+           "placar": placar, "historico": hist,
+           "aprendizado": {"pesos": {n: round(v, 3) for n, v in PESO.items()}, "banidos": sorted(BANIDOS),
+                           "moedas_com_historico": len(HIST_MOEDA),
+                           "regras": ["cérebro que acerta mais analisa mais moedas (peso = acertos+1 / vereditos+2)",
+                                      "cérebro com menos de 45% de acerto depois de 30 vereditos sai da função de analista",
+                                      "cada analista recebe o histórico de acertos e erros da própria moeda e o próprio acerto",
+                                      "diretoria: 2 perdas nos últimos fechamentos -> modo cauteloso (mais exigente e arrisca 60%)"]}}
     salva_cota()
     json.dump(out, open(SAIDA, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     comp = sum(a["decisao"] == "COMPRA" for a in analises); ven = sum(a["decisao"] == "VENDA" for a in analises)
