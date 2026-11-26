@@ -20,6 +20,16 @@ jobs:
       PYTHONIOENCODING: utf-8
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: dados          # dados vivem no ramo "dados" (não gasta publicação da Vercel)
+          fetch-depth: 0
+
+      - name: Código novo (main) por cima dos dados
+        run: |
+          git config user.name "mesa-de-agentes"
+          git config user.email "mesa@users.noreply.github.com"
+          git fetch -q origin main
+          git merge -q --no-edit -X ours origin/main
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -35,4 +45,4 @@ jobs:
           git add data/estrategias.json
           git diff --cached --quiet && exit 0
           git commit -q -m "laboratório: ranking das estratégias $(date -u +%Y-%m-%d)"
-          for i in 1 2 3 4 5; do git pull -q --rebase --autostash -X theirs && git push -q && break; sleep 7; done
+          for i in 1 2 3 4 5; do git pull -q --rebase --autostash -X theirs origin dados && git push -q origin HEAD:dados && break; sleep 7; done

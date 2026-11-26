@@ -63,7 +63,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
 const $=id=>document.getElementById(id);
-const RAW='https://raw.githubusercontent.com/voideternaldubs-blip/trading-ia-mesa/main/site/dados/';
+const RAW='https://raw.githubusercontent.com/voideternaldubs-blip/trading-ia-mesa/dados/site/dados/';
 const API=n=>location.port==='8787'?'/api/'+n:RAW+n+'.json?t='+Math.floor(Date.now()/15000);
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const nf=(v,c=2)=>Number(v).toLocaleString('pt-BR',{minimumFractionDigits:c,maximumFractionDigits:c});

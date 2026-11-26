@@ -80,7 +80,7 @@
 .bsec ul{margin:0;padding-left:18px;font:300 13.5px/1.7 Lexend;color:#e3e5ee}.bfoot{display:flex;justify-content:space-between;align-items:center;margin-top:22px}
 @media (max-width:900px){html,body{overflow:auto}.wrap{grid-template-columns:1fr;height:auto}.doccell{height:80vh}.island .kpi{display:none}}
 </style>
-<script>const API=n=>location.port==='8787'?'/api/'+n:'https://raw.githubusercontent.com/voideternaldubs-blip/trading-ia-mesa/main/site/dados/'+n+'.json?t='+Math.floor(Date.now()/20000);/* horário de Brasília em tudo */
+<script>const API=n=>location.port==='8787'?'/api/'+n:'https://raw.githubusercontent.com/voideternaldubs-blip/trading-ia-mesa/dados/site/dados/'+n+'.json?t='+Math.floor(Date.now()/20000);/* horário de Brasília em tudo */
 window.BRT=(s,seg)=>{if(!s)return'';let t=typeof s==='number'?s:String(s).trim().replace(' ','T');if(typeof t==='string'&&!/[zZ]|[+-]\d\d:?\d\d$/.test(t))t+='Z';const d=new Date(t);if(isNaN(d))return String(s);
 return d.toLocaleTimeString('pt-BR',{timeZone:'America/Sao_Paulo',hour:'2-digit',minute:'2-digit',...(seg?{second:'2-digit'}:{})})};
 window.BRTD=s=>{if(!s)return'';let t=String(s).trim().replace(' ','T');if(!/[zZ]|[+-]\d\d:?\d\d$/.test(t))t+='Z';const d=new Date(t);if(isNaN(d))return String(s);

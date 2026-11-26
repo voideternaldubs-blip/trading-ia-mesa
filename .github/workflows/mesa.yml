@@ -27,6 +27,16 @@ jobs:
       TZ: UTC
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: dados          # dados vivem no ramo "dados" (não gasta publicação da Vercel)
+          fetch-depth: 0
+
+      - name: Código novo (main) por cima dos dados
+        run: |
+          git config user.name "mesa-de-agentes"
+          git config user.email "mesa@users.noreply.github.com"
+          git fetch -q origin main
+          git merge -q --no-edit -X ours origin/main
 
       - uses: actions/setup-python@v5
         with:
@@ -124,7 +134,18 @@ jobs:
           for f in data/aranha.db data/carteira.json data/relatorio_aranha.json data/calendario.json data/sec.json data/fills.json data/sentinela.json data/prova.json data/foguete2.json data/ia_pura.json data/carteira_predio.json data/probabilidades.json data/foguete2_trades.csv data/foguete2_exec.json data/analise_ia.json acoes/carteira_acoes.json acoes/carteira_rotacao.json acoes/ordens.json diario site; do [ -e "$f" ] && git add "$f"; done; true
           git diff --cached --quiet && exit 0
           git commit -q -m "mesa: rodada $(date -u +%Y-%m-%dT%H:%M)Z"
-          for i in 1 2 3; do git pull -q --rebase -X theirs && git push -q && break; sleep 5; done
+          for i in 1 2 3; do git pull -q --rebase --autostash -X theirs origin dados && git push -q origin HEAD:dados && break; sleep 5; done
+
+      - name: Publica o site na Vercel quando a página mudou (no máximo a cada 3 h)
+        if: always()
+        run: |
+          git fetch -q origin main
+          A=$(curl -s https://mesa-de-agentes-pi.vercel.app/ | md5sum | cut -c1-32)
+          B=$(git show origin/main:site/index.html | md5sum | cut -c1-32)
+          U=$(cat data/ultimo_publica 2>/dev/null || echo 0); AGORA=$(date +%s)
+          if [ "$A" != "$B" ] && [ $((AGORA-U)) -gt 10800 ]; then
+            git worktree add -q /tmp/pub origin/main && (cd /tmp/pub && git commit -q --allow-empty -m "publica site" && git push -q origin HEAD:main) && echo $AGORA > data/ultimo_publica && git add data/ultimo_publica && git commit -qm "marca publicação" && git push -q origin HEAD:dados || true
+          else echo "site em dia ou publicado há menos de 3 h"; fi
 
       - name: MOTOR RÁPIDO (40 min sem parar, ciclo de 2 min)
         if: always()

@@ -57,10 +57,10 @@ def tudo():
     # páginas: no Vercel os dados vêm de /dados/*.json; no PC (porta 8787) continuam vindo da /api
     for pg in ("index.html", "aranha.html", "vivo.html", "predio.html"):
         s = open(os.path.join(AQUI, pg), encoding="utf-8").read()
-        s = s.replace("<script>", "<script>const API=n=>location.port==='8787'?'/api/'+n:'https://raw.githubusercontent.com/voideternaldubs-blip/trading-ia-mesa/main/site/dados/'+n+'.json?t='+Math.floor(Date.now()/20000);", 1) if "const API=" not in s else s
+        s = s.replace("<script>", "<script>const API=n=>location.port==='8787'?'/api/'+n:'https://raw.githubusercontent.com/voideternaldubs-blip/trading-ia-mesa/dados/site/dados/'+n+'.json?t='+Math.floor(Date.now()/20000);", 1) if "const API=" not in s else s
         s = re.sub(r"fetch\('/api/(estado|aranha|carteira)'", lambda m: f"fetch(API('{m.group(1)}')", s)
         if pg == "index.html":  # o index tem script module próprio
-            s = s.replace('<script type="module">', "<script type=\"module\">const API=n=>location.port==='8787'?'/api/'+n:'https://raw.githubusercontent.com/voideternaldubs-blip/trading-ia-mesa/main/site/dados/'+n+'.json?t='+Math.floor(Date.now()/20000);", 1)
+            s = s.replace('<script type="module">', "<script type=\"module\">const API=n=>location.port==='8787'?'/api/'+n:'https://raw.githubusercontent.com/voideternaldubs-blip/trading-ia-mesa/dados/site/dados/'+n+'.json?t='+Math.floor(Date.now()/20000);", 1)
         open(os.path.join(SITE, pg), "w", encoding="utf-8").write(s)
     json.dump({"cleanUrls": True, "headers": [{"source": "/dados/(.*)", "headers": [{"key": "Cache-Control", "value": "no-store"}]}]},
               open(os.path.join(SITE, "vercel.json"), "w"), indent=1)
