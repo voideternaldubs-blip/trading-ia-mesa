@@ -128,14 +128,14 @@ class H(SimpleHTTPRequestHandler):
 
 
 def ciclo_aranha():
-    """A aranha trabalha sozinha: coleta, traduz e explica a cada 20 minutos."""
+    """A aranha e os robôs rodam 24h na nuvem (GitHub Actions). Aqui o PC só puxa os resultados."""
+    import subprocess
     while True:
         try:
-            c = aranha.db(); aranha.noticias(c); aranha.mercado(c); c.commit(); c.close()
-            explicador.relatorio()
+            subprocess.run(["git", "pull", "-q", "--rebase", "--autostash"], cwd=RAIZ, timeout=120)
         except Exception as e:
-            print("aranha:", e)
-        time.sleep(20 * 60)
+            print("sync:", e)
+        time.sleep(10 * 60)
 
 
 if __name__ == "__main__":

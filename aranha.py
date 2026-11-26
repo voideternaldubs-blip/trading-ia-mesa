@@ -12,10 +12,23 @@ NOMES = {"BTC": "bitcoin", "ETH": "ethereum", "SOL": "solana", "BNB": "bnb|binan
 FEEDS = ["https://cointelegraph.com/rss", "https://decrypt.co/feed",
          "https://news.google.com/rss/search?q=crypto+OR+bitcoin+when:1d&hl=en-US&gl=US&ceid=US:en",
          "https://news.google.com/rss/search?q=nvidia+OR+nasdaq+OR+%22stock+market%22+when:1d&hl=en-US&gl=US&ceid=US:en",
-         "https://news.google.com/rss/search?q=stocks+earnings+OR+fed+OR+tariffs+when:1d&hl=en-US&gl=US&ceid=US:en"]
+         "https://news.google.com/rss/search?q=stocks+earnings+OR+fed+OR+tariffs+when:1d&hl=en-US&gl=US&ceid=US:en",
+         # ---- o MUNDO: economia global, geopolítica, commodities, câmbio, bancos centrais
+         "https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=en-US&gl=US&ceid=US:en",
+         "https://news.google.com/rss/headlines/section/topic/WORLD?hl=en-US&gl=US&ceid=US:en",
+         "https://news.google.com/rss/search?q=oil+OR+gold+OR+dollar+OR+yuan+OR+euro+markets+when:1d&hl=en-US&gl=US&ceid=US:en",
+         "https://news.google.com/rss/search?q=ECB+OR+%22Bank+of+Japan%22+OR+PBOC+OR+%22Bank+of+England%22+when:1d&hl=en-US&gl=US&ceid=US:en",
+         "https://news.google.com/rss/search?q=war+OR+sanctions+OR+election+markets+when:1d&hl=en-US&gl=US&ceid=US:en",
+         "https://news.google.com/rss/search?q=Ibovespa+OR+Petrobras+OR+Vale+OR+Selic+when:1d&hl=en-US&gl=US&ceid=US:en",
+         "https://feeds.bbci.co.uk/news/business/rss.xml",
+         "https://www.cnbc.com/id/100003114/device/rss/rss.html"]
 ACOES = {"NVDA": r"nvidia|jensen huang|nvda", "NASDAQ": r"nasdaq|tech stocks", "S&P500": r"s&p 500|s&p500|spy|wall street|stock market|dow jones",
          "TSLA": r"tesla|tsla", "AAPL": r"apple|aapl", "MSFT": r"microsoft|msft", "AMD": r"amd", "TSM": r"tsmc|taiwan semiconductor",
-         "META": r"meta", "GOOGL": r"google|alphabet", "AMZN": r"amazon", "FED": r"fed|federal reserve|powell|interest rate|rate cut|inflation"}
+         "META": r"meta", "GOOGL": r"google|alphabet", "AMZN": r"amazon", "FED": r"fed|federal reserve|powell|interest rate|rate cut|inflation",
+         "PETRÓLEO": r"oil|crude|opec|brent", "OURO": r"gold|bullion", "DÓLAR": r"dollar|usd|greenback", "EURO/BCE": r"euro|ecb|lagarde|eurozone",
+         "CHINA": r"china|chinese|yuan|beijing|pboc|xi jinping", "JAPÃO": r"japan|yen|nikkei|bank of japan|boj", "EUROPA": r"europe|eu|germany|france|uk|britain|ftse|dax",
+         "BRASIL": r"brazil|ibovespa|petrobras|vale|selic|lula|real brasileiro", "GUERRA": r"war|military|missile|attack on|ukraine|russia|israel|iran|gaza|taiwan strait",
+         "TRUMP/EUA": r"trump|white house|congress|treasury secretary"}
 # palavras de perigo (agente RUG/RISCO) e de força
 PERIGO = r"hack|exploit|drain|stolen|rug ?pull|delist|lawsuit|sec sues|charged|insolv|bankrupt|halt(ed)? withdrawals|depeg|outage|attack"
 FORCA = r"etf approv|approved|partnership|listing on|lists|record high|all-time high|inflows|upgrade live|mainnet launch|adopt"

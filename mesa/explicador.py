@@ -11,12 +11,24 @@ TIPOS = [
     ("ATAQUE / ROUBO", r"hack|exploit|drain|stolen|attack|breach|scam|rug", "#ff4d6d",
      "Alguém roubou ou atacou uma plataforma, carteira ou rede. Quando isso acontece, quem tem dinheiro ali costuma vender com medo e o preço da moeda envolvida cai.",
      "O agente RUG/RISCO bloqueia compras novas na moeda citada até a poeira baixar."),
-    ("JUSTIÇA / REGULAÇÃO", r"\bsec\b|lawsuit|sues|charged|settle|court|regulat|ban|probe|investigat|congress|senate|bill", "#ffb02e",
+    ("JUSTIÇA / REGULAÇÃO", r"\bsec\b|lawsuit|sues|charged|settle|court|regulat|\bban\b|\bbans\b|probe|investigat|congress|senate|bill", "#ffb02e",
      "Governo, tribunal ou órgão regulador (como a SEC, a 'CVM' dos EUA) mexeu no assunto. Isso cria incerteza: o mercado não gosta de não saber as regras.",
      "Conta como alerta de risco: a mesa fica mais cautelosa com o ativo citado."),
     ("TARIFAS / GUERRA COMERCIAL", r"tariff|trade war|export control|sanction", "#ff7aa8",
      "Os EUA (ou outro país) estão taxando produtos de fora ou proibindo vendas. Isso encarece coisas, assusta investidores e costuma derrubar ações de tecnologia e cripto no curto prazo.",
      "Notícia macro: afeta o mercado inteiro, não uma moeda só. O filtro de tendência percebe a queda e reduz a exposição."),
+    ("GUERRA / GEOPOLÍTICA", r"war|military|missile|troops|ukraine|russia|israel|iran|gaza|taiwan|north korea|sanction|ceasefire|nato", "#ff4d6d",
+     "Conflito ou tensão entre países. Guerra assusta o mercado: investidores fogem do risco (ações, cripto) e correm para proteção (ouro, dólar). Se envolve região de petróleo, o petróleo sobe.",
+     "Notícia de risco global: a mesa reduz o apetite e espera o preço confirmar antes de agir."),
+    ("PETRÓLEO / OURO / MATÉRIAS-PRIMAS", r"oil|crude|opec|brent|gold|bullion|copper|commodit|wheat|natural gas", "#ffb02e",
+     "Preço de matérias-primas. Petróleo caro = gasolina e frete mais caros = inflação = juros altos por mais tempo. Ouro subindo = gente com medo, buscando proteção.",
+     "Termômetro do medo e da inflação no mundo; afeta bolsas e cripto de forma indireta."),
+    ("MOEDAS / CÂMBIO", r"dollar|yen|euro|yuan|currency|forex|exchange rate|real brasileiro|peso", "#2ee6ff",
+     "Valor das moedas entre si. Dólar forte costuma pressionar ações, cripto e países emergentes (como o Brasil). Dólar fraco costuma ajudar.",
+     "Ajuda a entender por que tudo sobe ou cai junto em certos dias."),
+    ("BRASIL", r"brazil|ibovespa|petrobras|vale|selic|lula|b3", "#2bff9a",
+     "Notícia da economia brasileira: Ibovespa (a bolsa daqui), Petrobras, Vale, Selic (juros do Brasil). Mexe com o real e com o seu bolso.",
+     "Contexto: a mesa opera fora do Brasil, mas o câmbio muda quanto vale o seu lucro em reais."),
     ("JUROS / ECONOMIA", r"\bfed\b|federal reserve|powell|interest rate|rate cut|rate hike|inflation|cpi|jobs report|recession|treasury", "#9b7bff",
      "O Banco Central americano (Fed) controla os juros. Juros altos = dinheiro mais caro = menos gente comprando ações e cripto. Juros caindo costuma animar o mercado.",
      "Muda o 'clima' geral. A mesa não aposta na notícia; espera o preço confirmar a direção."),
@@ -57,6 +69,14 @@ GLOSSARIO = {
     "Memecoin": "Moeda criada por piada/hype, sem produto. Pode subir 100x ou ir a zero em horas.",
     "Resultado trimestral": "Relatório que a empresa publica a cada 3 meses com vendas e lucro. Faz a ação pular para cima ou para baixo.",
     "CEO": "O chefe principal da empresa.",
+    "Petróleo": "A matéria-prima mais importante do mundo. Se sobe, quase tudo fica mais caro (inflação). Quem decide boa parte da produção é a OPEP.",
+    "Ouro": "O 'porto seguro'. Quando o mundo fica com medo (guerra, crise), muita gente compra ouro e o preço sobe.",
+    "Dólar forte": "Quando o dólar sobe frente às outras moedas. Costuma derrubar ações, cripto e moedas de países como o Brasil.",
+    "Banco Central": "Quem controla os juros de um país: Fed (EUA), BCE (Europa), Banco do Japão, Banco Central do Brasil (Selic). Juros mexem com todos os preços.",
+    "Selic": "A taxa de juros básica do Brasil. Selic alta = renda fixa rende mais e a bolsa brasileira sofre.",
+    "Ibovespa": "O índice da bolsa brasileira (B3), com as maiores empresas daqui, como Petrobras, Vale e bancos.",
+    "Sanções": "Punições econômicas de um país contra outro (proibir comércio, congelar dinheiro). Podem mexer com petróleo, chips e mercados inteiros.",
+    "Geopolítica": "A política entre países: guerras, alianças, eleições, disputas. O mercado reage porque muda o risco de tudo.",
 }
 TERMOS = {
     "ETF": r"\betf", "Bitcoin": r"bitcoin|\bbtc\b", "Alavancagem": r"leverag|alavanc", "Financiamento (funding)": r"funding",
@@ -103,10 +123,20 @@ def classifica(t):
             "Só registro: alimenta o estudo de impacto.")
 
 
-def relatorio(limite=36):
+def relatorio(limite=60):
     c = db()
-    linhas = c.execute("select link, quando, fonte, titulo, moedas, perigo, forca, coalesce(resumo,'') from noticias "
-                       "where moedas!='' order by (resumo!='') desc, quando desc limit ?", (limite,)).fetchall()
+    # as mais recentes de cada assunto, para a aranha ler de tudo (mundo, Brasil, ações, cripto)
+    recentes = c.execute("select link, quando, fonte, titulo, moedas, perigo, forca, coalesce(resumo,'') from noticias "
+                         "where moedas!='' order by quando desc, (resumo!='') desc limit 400").fetchall()
+    por_assunto, linhas, vistos = {}, [], set()
+    for r in recentes:
+        por_assunto.setdefault(r[4].split(",")[0], []).append(r)
+    while len(linhas) < limite and any(por_assunto.values()):
+        for k in list(por_assunto):
+            if por_assunto[k] and len(linhas) < limite:
+                r = por_assunto[k].pop(0)
+                if r[3] not in vistos:
+                    vistos.add(r[3]); linhas.append(r)
     out = []
     for link, quando, fonte, tit, ms, p, fo, resumo in linhas:
         tit_limpo = re.sub(r"\s+-\s+[^-]{2,40}$", "", tit)  # tira " - Yahoo Finance"
