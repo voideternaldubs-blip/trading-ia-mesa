@@ -6,13 +6,13 @@
   {
    "robo": "Carteira do Prédio",
    "inicial": 100.0,
-   "atual": 71.09,
-   "retorno_pct": -28.91,
+   "atual": 71.04,
+   "retorno_pct": -28.96,
    "operacoes": 1,
    "acerto_pct": 0.0,
    "ganho_medio": null,
    "perda_media": -16.91,
-   "maior_queda_pct": -28.91
+   "maior_queda_pct": -28.96
   },
   {
    "robo": "Foguete v2 (Binance demo)",
