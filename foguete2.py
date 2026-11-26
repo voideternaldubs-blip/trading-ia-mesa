@@ -1,7 +1,7 @@
 """FOGUETE v2 — especificação do Claude web (modo Extra), implementada à risca. PAPEL, preço real da Binance Futures.
 100 USD = 50 no COFRE (separado, intocável) + 50 no FOGUETE (piso 15). Ciclo a cada 5 min (só risco);
 sinais só no fechamento das velas de 4h (o único timeframe com vantagem comprovada nos testes).
-Alavancagem CPPI: exposição G = min(m·colchão·σref/σcesta, 20·E). Meta: total ≥ 3000 → encerra (meta do dono para dezembro).
+Alavancagem CPPI: exposição G = min(m·colchão·σref/σcesta, 20·E). Meta: total ≥ 1000 → encerra (meta do dono: 100 → 1000 em dezembro).
 """
 import os, json, csv, math, time, requests, numpy as np
 from datetime import datetime, timezone, timedelta
@@ -14,7 +14,7 @@ DIARIO = os.path.join(AQUI, "diario")
 F = "https://testnet.binancefuture.com"  # demo da Binance com preço real; acessível também da nuvem (EUA)
 CFG = dict(horizontes=(80, 120, 200), max_pos=12, kappa=1.0, piso=15.0, m=20, lev_max=20, sigma_ref=0.025, cap_moeda=0.25,
            banda_G=0.15, banda_peso=0.25, stop_atr=4.0, taxa=0.0005, slip_stop=0.0005, mmr=0.01,
-           funding_max=0.0010, funding_corte=0.0015, crash_btc_1h=-0.06, cofre_pct=0.25, meta=3000.0)
+           funding_max=0.0010, funding_corte=0.0015, crash_btc_1h=-0.06, cofre_pct=0.25, meta=1000.0)
 FORA = {"USDC", "FDUSD", "TUSD", "USDP", "DAI", "EUR", "PAXG", "XAUT", "BTCDOM", "XAU", "XAG"}
 S = requests.Session()
 log = []
