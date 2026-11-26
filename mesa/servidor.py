@@ -133,7 +133,13 @@ def ciclo_aranha():
     import subprocess
     while True:
         try:
-            subprocess.run(["git", "pull", "-q", "--rebase", "--autostash"], cwd=RAIZ, timeout=120)
+            env = dict(os.environ, GIT_TERMINAL_PROMPT="0")
+            subprocess.run(["git", "fetch", "-q", "origin", "main"], cwd=RAIZ, timeout=90, env=env)
+            # só os DADOS que a nuvem produz; o código local nunca é tocado
+            subprocess.run(["git", "checkout", "FETCH_HEAD", "--", "data/aranha.db", "data/carteira.json", "data/relatorio_aranha.json",
+                            "data/calendario.json", "data/sec.json", "data/fills.json", "data/sentinela.json",
+                            "acoes/carteira_acoes.json", "diario"], cwd=RAIZ, timeout=60, env=env, capture_output=True)
+            subprocess.run(["git", "reset", "-q", "--", "data", "acoes/carteira_acoes.json", "diario"], cwd=RAIZ, timeout=30, env=env, capture_output=True)
         except Exception as e:
             print("sync:", e)
         time.sleep(10 * 60)
