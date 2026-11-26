@@ -168,17 +168,17 @@ def ciclo_aranha():
     while True:
         try:
             subprocess.Popen([sys.executable, os.path.join(RAIZ, "equipe", "aranha_ia.py")], cwd=RAIZ,
-                             stdout=open(os.path.join(RAIZ, "data", "aranha_ia.log"), "a"), stderr=subprocess.STDOUT)
+                             stdout=open(os.path.join(RAIZ, "data", "aranha_ia.log"), "a"), stderr=subprocess.STDOUT, creationflags=0x08000000)
         except Exception as e:
             print("aranha ia:", e)
         try:
             env = dict(os.environ, GIT_TERMINAL_PROMPT="0")
-            subprocess.run(["git", "fetch", "-q", "origin", "main"], cwd=RAIZ, timeout=90, env=env)
+            subprocess.run(["git", "fetch", "-q", "origin", "main"], cwd=RAIZ, timeout=90, env=env, creationflags=0x08000000)
             # só os DADOS que a nuvem produz; o código local nunca é tocado
             subprocess.run(["git", "checkout", "FETCH_HEAD", "--", "data/aranha.db", "data/carteira.json", "data/relatorio_aranha.json",
                             "data/calendario.json", "data/sec.json", "data/fills.json", "data/sentinela.json",
-                            "acoes/carteira_acoes.json", "diario"], cwd=RAIZ, timeout=60, env=env, capture_output=True)
-            subprocess.run(["git", "reset", "-q", "--", "data", "acoes/carteira_acoes.json", "diario"], cwd=RAIZ, timeout=30, env=env, capture_output=True)
+                            "acoes/carteira_acoes.json", "diario"], cwd=RAIZ, timeout=60, env=env, capture_output=True, creationflags=0x08000000)
+            subprocess.run(["git", "reset", "-q", "--", "data", "acoes/carteira_acoes.json", "diario"], cwd=RAIZ, timeout=30, env=env, capture_output=True, creationflags=0x08000000)
         except Exception as e:
             print("sync:", e)
         time.sleep(10 * 60)

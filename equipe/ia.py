@@ -1,3 +1,4 @@
+SEM_JANELA = 0x08000000  # CREATE_NO_WINDOW: nenhuma janela preta piscando no Windows
 """Cérebro dos agentes: modelos grátis da NVIDIA via OmniRoute local (combo nvidia-gratis).
 A chave vem da variável OMNIROUTE_API_KEY (carregada do arquivo de chaves do dono; nunca gravada aqui)."""
 import os, re, json, subprocess, requests
@@ -11,7 +12,7 @@ def _chave():
         return k
     bat = os.path.join(os.path.expanduser("~"), ".bv-chaves.bat")
     if os.path.exists(bat):
-        out = subprocess.run(f'cmd /v:on /c "call "{bat}" >nul 2>&1 && echo !OMNIROUTE_API_KEY!"', capture_output=True, text=True).stdout.strip()
+        out = subprocess.run(f'cmd /v:on /c "call "{bat}" >nul 2>&1 && echo !OMNIROUTE_API_KEY!"', capture_output=True, text=True, creationflags=0x08000000).stdout.strip()
         if out and "!" not in out:
             os.environ["OMNIROUTE_API_KEY"] = out
             return out
