@@ -40,23 +40,35 @@ def carregar(p, padrao):
         return padrao
 
 
-def main(max_novas=20, lote=5):
+def operario(grupo):
+    """Um dos 9 OPERÁRIOS (modelo rápido) analisa um lote de notícias."""
+    SEP = chr(10)
+    partes = []
+    for n in grupo:
+        partes.append(SEP.join([f'id: {n["id"]}', f'fonte: {n["fonte"]}' + (" (FONTE OFICIAL)" if n.get("primaria") else ""),
+                                f'título: {n["titulo"]}', f'resumo: {n.get("resumo", "")[:600]}', f'ativos citados: {", ".join(n["ativos"])}']))
+    texto = (SEP * 2).join(partes)
+    try:
+        j = ia.json_de(ia.pergunta(SIS_NOTICIA, texto, modelo="z-ai/glm-5.3-flash", max_tokens=2200, timeout=150)) or {}
+        ids = {n["id"] for n in grupo}
+        return [a for a in j.get("analises", []) if a.get("id") in ids]
+    except Exception as ex:
+        print("operário falhou:", str(ex)[:100]); return []
+
+
+def main(max_novas=45, lote=5, operarios=9):
+    from concurrent.futures import ThreadPoolExecutor
     rel = carregar(REL, {})
     out = carregar(SAIDA, {"analises": {}, "briefing": None})
     ns = [n for n in rel.get("noticias", []) if n["id"] not in out["analises"]][:max_novas]
+    lotes = [ns[i:i + lote] for i in range(0, len(ns), lote)]
     feitas = 0
-    for i in range(0, len(ns), lote):
-        grupo = ns[i:i + lote]
-        texto = "\n\n".join(f'id: {n["id"]}\nfonte: {n["fonte"]}\ntítulo: {n["titulo"]}\nresumo: {n.get("resumo", "")[:600]}\nativos citados: {", ".join(n["ativos"])}' for n in grupo)
-        try:
-            j = ia.json_de(ia.pergunta(SIS_NOTICIA, texto, max_tokens=2200, timeout=120)) or {}
-            for a in j.get("analises", []):
-                if a.get("id") in {n["id"] for n in grupo}:
-                    a["quando"] = datetime.now(timezone.utc).isoformat()[:16]
-                    out["analises"][a["id"]] = a; feitas += 1
-        except Exception as ex:
-            print("análise falhou:", str(ex)[:120])
-        time.sleep(1)
+    # MAESTRO + 9 OPERÁRIOS: os lotes são analisados em paralelo
+    with ThreadPoolExecutor(max_workers=operarios) as ex:
+        for res in ex.map(operario, lotes):
+            for a in res:
+                a["quando"] = datetime.now(timezone.utc).isoformat()[:16]
+                out["analises"][a["id"]] = a; feitas += 1
     # briefing do mundo
     try:
         mesa = carregar(os.path.join(RAIZ, "data", "carteira.json"), {})
@@ -68,7 +80,7 @@ def main(max_novas=20, lote=5):
         contexto = (f"MANCHETES RECENTES:\n{manchetes}\n\nMESA: foguete multi-moeda com posições: {posf or 'nenhuma'}; "
                     f"robô de tendência cripto: {len(mesa.get('pos', {}))} posições; ações TQQQ/SOXL/UPRO em caixa porque os índices estão abaixo da média de 200 dias. "
                     f"Calendário: {cal.get('aviso', '')}. Sentinela: {sent.get('resumo', '')}.")
-        b = ia.json_de(ia.pergunta(SIS_BRIEF, contexto, max_tokens=1400, timeout=120))
+        b = ia.json_de(ia.pergunta(SIS_BRIEF, contexto, modelo="moonshotai/kimi-k3.1-pro", max_tokens=1600, timeout=240))             or ia.json_de(ia.pergunta(SIS_BRIEF, contexto, max_tokens=1400, timeout=150))
         if b:
             b["quando"] = datetime.now(timezone.utc).isoformat()[:16]
             out["briefing"] = b
