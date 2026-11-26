@@ -266,7 +266,13 @@ def diretoria(analises, log):
     ok.sort(key=lambda x: -x[0]); ok = ok[:4]
     if not ok:
         log.append("diretoria: nenhuma moeda com IA + tendência + máquina do tempo concordando; fica fora"); return
-    risco = max(0.3 * caixa, caixa - 100) if caixa > 100 else 0.3 * caixa   # método 1:3: arrisca o lucro (ou 30% no começo)
+    # RISCO: arrisca mais quando vale a pena (não toda hora).
+    #  sinal FORTE (comitê aprovou, confiança >= 4 e valor esperado >= 0,4 em média) -> 50% da carteira
+    #  sinal comum -> 30%;  depois de um acerto (caixa > 100) -> aposta o lucro inteiro se for maior
+    forte = sum(1 for _, _, a in ok if a["confianca"] >= 4) >= max(1, len(ok) // 2) and sum((a["valor_esperado_compra"] if l > 0 else a["valor_esperado_venda"]) for _, l, a in ok) / len(ok) >= 0.4
+    base = (0.5 if forte else 0.3) * caixa
+    risco = max(base, caixa - 100) if caixa > 100 else base
+    log.append(f"diretoria: sinal {'FORTE' if forte else 'comum'} -> arrisca {risco:.0f} USD para ganhar ~{risco * 3:.0f}")
     expo_total = risco / 0.03
     info = {x["symbol"]: x for x in b._req("GET", "/fapi/v1/exchangeInfo", assinado=False)["symbols"]}
     import math
