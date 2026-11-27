@@ -50,8 +50,8 @@
   {
    "robo": "IA pura (manual)",
    "inicial": 100.0,
-   "atual": 74.27,
-   "retorno_pct": -25.73,
+   "atual": 74.29,
+   "retorno_pct": -25.71,
    "operacoes": 8,
    "acerto_pct": 25.0,
    "ganho_medio": 1.0,
