@@ -1,14 +1,14 @@
 {
- "gerado": "2026-11-27T09:56",
+ "gerado": "2026-11-27T10:12",
  "prazo": "2026-11-30T23:59",
  "posicoes": {
   "AAVEUSDT": {
-   "preco": 97.31,
-   "chance_alvo": 0.06,
-   "chance_stop": 0.914,
-   "nenhum": 0.025,
-   "valor_esperado": 0.27
+   "preco": 97.23,
+   "chance_alvo": 0.067,
+   "chance_stop": 0.906,
+   "nenhum": 0.027,
+   "valor_esperado": 0.26
   }
  },
- "valor_esperado_total": 0.27
+ "valor_esperado_total": 0.26
 }
