@@ -1485,5 +1485,14 @@
   "preco": 0.0,
   "status": "FILLED",
   "id": 2686397722
+ },
+ {
+  "quando": "2026-11-27T05:39",
+  "simbolo": "SOLUSDT",
+  "lado": "BUY",
+  "qtd": 0.01,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 4251940349
  }
 ]
