@@ -1,6 +1,6 @@
 {
- "gerado": "2026-11-27T18:02",
- "segundos": 94,
+ "gerado": "2026-11-27T18:19",
+ "segundos": 103,
  "cerebros": {
   "GPT-OSS 120B": {
    "papel": "comite",
@@ -10,12 +10,12 @@
   "GPT-OSS 20B": {
    "papel": "analista",
    "limite_dia": 900,
-   "usados_hoje": 159
+   "usados_hoje": 163
   },
   "Qwen 27B": {
    "papel": "analista",
    "limite_dia": 900,
-   "usados_hoje": 80
+   "usados_hoje": 81
   },
   "Kimi K3.1": {
    "papel": "comite",
@@ -25,7 +25,7 @@
   "GLM 5.3": {
    "papel": "analista",
    "limite_dia": 5000,
-   "usados_hoje": 63
+   "usados_hoje": 64
   }
  },
  "andares": {
@@ -40,24 +40,24 @@
    "analistas": [
     {
      "moeda": "BTC",
-     "preco": 59849.99,
+     "preco": 59904.27,
      "stop_pct": 3.91,
-     "alvo_pct": 11.73,
-     "var_24h_pct": -1.43,
-     "var_7d_pct": 2.21,
+     "alvo_pct": 11.72,
+     "var_24h_pct": -1.34,
+     "var_7d_pct": 2.3,
      "tendencia_4h": -0.67,
-     "chance_alvo_compra": 0.03,
-     "chance_stop_compra": 0.36,
+     "chance_alvo_compra": 0.04,
+     "chance_stop_compra": 0.4,
      "chance_alvo_venda": 0.01,
-     "chance_stop_venda": 0.42,
-     "valor_esperado_compra": 0.1,
-     "valor_esperado_venda": 0.0,
+     "chance_stop_venda": 0.45,
+     "valor_esperado_compra": 0.07,
+     "valor_esperado_venda": -0.07,
      "financiamento_pct": 0.01,
      "noticias": [
-      "Bitcoin se beneficiaria “massivamente” se o Fed fizesse esse movimento inesperado",
-      "Claude AI prevê o preço do XRP se o Bitcoin cair para US$ 50.000",
-      "Quanto valerá 1 Bitcoin em 2035?",
-      "Quanto valerá 1 Bitcoin em 2035?"
+      "CryptoQuant diz que a recuperação do preço do bitcoin precisa do crescimento da oferta de USDT",
+      "Escolhas da Gemini AI que podem dobrar primeiro em 2027: Bitcoin, Ethereum ou Solana",
+      "Bitcoin repete a liquidação do Dia de Ação de Graças de 2018: também acompanhará o declínio de dezembro?",
+      "Bitcoin se beneficiaria “massivamente” se o Fed fizesse esse movimento inesperado"
      ],
      "medo_ganancia": 12.0,
      "historico_desta_moeda": [
@@ -69,29 +69,30 @@
      ],
      "simbolo": "BTCUSDT",
      "decisao": "FORA",
-     "confianca": 1,
-     "motivo": "",
+     "confianca": 4,
+     "motivo": "Sem vantagem clara, melhor ficar fora",
      "cerebro": "GPT-OSS 20B",
-     "quando": "2026-11-27T18:01",
+     "quando": "2026-11-27T18:17",
      "ev_escolhido": 0
     },
     {
      "moeda": "ETH",
-     "preco": 1671.21,
+     "preco": 1671.26,
      "stop_pct": 4.79,
      "alvo_pct": 14.38,
-     "var_24h_pct": -1.96,
-     "var_7d_pct": 3.93,
+     "var_24h_pct": -1.95,
+     "var_7d_pct": 3.94,
      "tendencia_4h": -0.67,
      "chance_alvo_compra": 0.04,
-     "chance_stop_compra": 0.48,
+     "chance_stop_compra": 0.4,
      "chance_alvo_venda": 0.02,
-     "chance_stop_venda": 0.45,
-     "valor_esperado_compra": -0.05,
-     "valor_esperado_venda": -0.03,
+     "chance_stop_venda": 0.43,
+     "valor_esperado_compra": 0.13,
+     "valor_esperado_venda": 0.02,
      "financiamento_pct": 0.01,
      "noticias": [
       "O que há no roteiro Ethereum: Glamsterdam, Hegotá e além",
+      "Escolhas da Gemini AI que podem dobrar primeiro em 2027: Bitcoin, Ethereum ou Solana",
       "Ethereum define data de 15 de dezembro para atualização atrasada do Glamsterdam Testnet"
      ],
      "medo_ganancia": 12.0,
@@ -104,27 +105,27 @@
      ],
      "simbolo": "ETHUSDT",
      "decisao": "FORA",
-     "confianca": 5,
-     "motivo": "Sem vantagem estatística clara e histórico recente de erro na venda.",
+     "confianca": 2,
+     "motivo": "Tendência de queda fraca e valor esperado baixo não justificam o risco de entrar agora.",
      "cerebro": "Qwen 27B",
-     "quando": "2026-11-27T18:01",
+     "quando": "2026-11-27T18:17",
      "ev_escolhido": 0
     },
     {
      "moeda": "ZEC",
-     "preco": 745.52,
-     "stop_pct": 11.42,
-     "alvo_pct": 34.26,
-     "var_24h_pct": 3.91,
-     "var_7d_pct": -2.01,
+     "preco": 748.3,
+     "stop_pct": 11.38,
+     "alvo_pct": 34.13,
+     "var_24h_pct": 4.3,
+     "var_7d_pct": -1.64,
      "tendencia_4h": -0.67,
      "chance_alvo_compra": 0.02,
-     "chance_stop_compra": 0.36,
+     "chance_stop_compra": 0.33,
      "chance_alvo_venda": 0.0,
-     "chance_stop_venda": 0.36,
-     "valor_esperado_compra": -0.01,
-     "valor_esperado_venda": 0.0,
-     "financiamento_pct": 0.01,
+     "chance_stop_venda": 0.41,
+     "valor_esperado_compra": 0.07,
+     "valor_esperado_venda": -0.08,
+     "financiamento_pct": 0.0088,
      "noticias": [],
      "medo_ganancia": 12.0,
      "historico_desta_moeda": [
@@ -136,28 +137,30 @@
      ],
      "simbolo": "ZECUSDT",
      "decisao": "FORA",
-     "confianca": 1,
-     "motivo": "",
-     "cerebro": "GLM 5.3",
-     "quando": "2026-11-27T18:02",
+     "confianca": 4,
+     "motivo": "Trend negativa e EV negativo, melhor ficar fora",
+     "cerebro": "GPT-OSS 20B",
+     "quando": "2026-11-27T18:19",
      "ev_escolhido": 0
     },
     {
      "moeda": "SOL",
-     "preco": 72.03,
-     "stop_pct": 4.61,
-     "alvo_pct": 13.83,
-     "var_24h_pct": 1.05,
-     "var_7d_pct": 5.58,
+     "preco": 71.89,
+     "stop_pct": 4.62,
+     "alvo_pct": 13.86,
+     "var_24h_pct": 0.86,
+     "var_7d_pct": 5.38,
      "tendencia_4h": -0.67,
      "chance_alvo_compra": 0.07,
-     "chance_stop_compra": 0.46,
+     "chance_stop_compra": 0.48,
      "chance_alvo_venda": 0.04,
-     "chance_stop_venda": 0.51,
+     "chance_stop_venda": 0.48,
      "valor_esperado_compra": 0.09,
-     "valor_esperado_venda": -0.03,
+     "valor_esperado_venda": 0.02,
      "financiamento_pct": 0.01,
-     "noticias": [],
+     "noticias": [
+      "Escolhas da Gemini AI que podem dobrar primeiro em 2027: Bitcoin, Ethereum ou Solana"
+     ],
      "medo_ganancia": 12.0,
      "historico_desta_moeda": [
       {
@@ -169,29 +172,29 @@
      "simbolo": "SOLUSDT",
      "decisao": "FORA",
      "confianca": 4,
-     "motivo": "Trend negativa e histórico de perda, não há vantagem clara",
+     "motivo": "Sem vantagem clara, tendência negativa e alto risco de stop",
      "cerebro": "GPT-OSS 20B",
-     "quando": "2026-11-27T18:01",
+     "quando": "2026-11-27T18:17",
      "ev_escolhido": 0
     },
     {
      "moeda": "XRP",
-     "preco": 0.9486,
+     "preco": 0.9484,
      "stop_pct": 4.7,
-     "alvo_pct": 14.1,
-     "var_24h_pct": -0.45,
-     "var_7d_pct": 6.0,
+     "alvo_pct": 14.11,
+     "var_24h_pct": -0.47,
+     "var_7d_pct": 5.98,
      "tendencia_4h": -0.67,
-     "chance_alvo_compra": 0.06,
-     "chance_stop_compra": 0.45,
+     "chance_alvo_compra": 0.04,
+     "chance_stop_compra": 0.43,
      "chance_alvo_venda": 0.02,
      "chance_stop_venda": 0.47,
-     "valor_esperado_compra": 0.03,
-     "valor_esperado_venda": 0.02,
+     "valor_esperado_compra": 0.04,
+     "valor_esperado_venda": -0.03,
      "financiamento_pct": 0.01,
      "noticias": [
+      "Preço XRP em 27 de novembro de 2026 às 12h EST Mercado de previsão de criptografia",
       "Preço XRP em 27 de novembro de 2026 às 10h EST Mercado de previsão de criptografia",
-      "Claude AI prevê o preço do XRP se o Bitcoin cair para US$ 50.000",
       "Preço XRP em 27 de novembro de 2026 às 8h EST Mercado de previsão de criptografia",
       "Preço XRP em 27 de novembro de 2026 às 9h EST Mercado de previsão de criptografia"
      ],
@@ -204,18 +207,12 @@
       }
      ],
      "simbolo": "XRPUSDT",
-     "decisao": "VENDA",
-     "confianca": 3,
-     "motivo": "Tendência negativa indica venda",
+     "decisao": "FORA",
+     "confianca": 1,
+     "motivo": "",
      "cerebro": "GPT-OSS 20B",
-     "quando": "2026-11-27T18:01",
-     "ev_escolhido": 0.02,
-     "comite": {
-      "aprova": false,
-      "motivo": "tendência e valor esperado discordam",
-      "cerebro": "GPT-OSS 120B"
-     },
-     "vetado": true
+     "quando": "2026-11-27T18:17",
+     "ev_escolhido": 0
     }
    ]
   },
@@ -6420,6 +6417,51 @@
    "cerebro": "GPT-OSS 20B",
    "preco": 0.9486,
    "quando": "2026-11-27T18:01",
+   "resultado": null
+  },
+  {
+   "simbolo": "BTCUSDT",
+   "decisao": "FORA",
+   "confianca": 4,
+   "cerebro": "GPT-OSS 20B",
+   "preco": 59904.27,
+   "quando": "2026-11-27T18:17",
+   "resultado": null
+  },
+  {
+   "simbolo": "ETHUSDT",
+   "decisao": "FORA",
+   "confianca": 2,
+   "cerebro": "Qwen 27B",
+   "preco": 1671.26,
+   "quando": "2026-11-27T18:17",
+   "resultado": null
+  },
+  {
+   "simbolo": "ZECUSDT",
+   "decisao": "FORA",
+   "confianca": 4,
+   "cerebro": "GPT-OSS 20B",
+   "preco": 748.3,
+   "quando": "2026-11-27T18:19",
+   "resultado": null
+  },
+  {
+   "simbolo": "SOLUSDT",
+   "decisao": "FORA",
+   "confianca": 4,
+   "cerebro": "GPT-OSS 20B",
+   "preco": 71.89,
+   "quando": "2026-11-27T18:17",
+   "resultado": null
+  },
+  {
+   "simbolo": "XRPUSDT",
+   "decisao": "FORA",
+   "confianca": 1,
+   "cerebro": "GPT-OSS 20B",
+   "preco": 0.9484,
+   "quando": "2026-11-27T18:17",
    "resultado": null
   }
  ],
