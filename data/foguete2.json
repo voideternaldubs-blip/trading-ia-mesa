@@ -4351,6 +4351,12 @@
    "valor": 89.9,
    "foguete": 39.9,
    "exposicao": 328.28
+  },
+  {
+   "quando": "2026-11-27T06:31",
+   "valor": 89.83,
+   "foguete": 39.83,
+   "exposicao": 328.35
   }
  ],
  "filtros": {
@@ -4405,7 +4411,7 @@
  },
  "demo": {
   "saldo": 4917.07059363,
-  "pnl_aberto": -10.44788174,
-  "disponivel": 4879.20167443
+  "pnl_aberto": -10.47293872,
+  "disponivel": 4879.15800463
  }
 }

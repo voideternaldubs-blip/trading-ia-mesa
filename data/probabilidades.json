@@ -4,11 +4,11 @@
  "posicoes": {
   "AAVEUSDT": {
    "preco": 96.72,
-   "chance_alvo": 0.124,
-   "chance_stop": 0.834,
-   "nenhum": 0.042,
-   "valor_esperado": 0.59
+   "chance_alvo": 0.118,
+   "chance_stop": 0.843,
+   "nenhum": 0.04,
+   "valor_esperado": 0.44
   }
  },
- "valor_esperado_total": 0.59
+ "valor_esperado_total": 0.44
 }
