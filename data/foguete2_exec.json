@@ -735,5 +735,34 @@
   "quando": "2026-11-26T23:54",
   "simbolo": "NEARUSDT",
   "erro": "Binance demo 400: {\"code\":-4164,\"msg\":\"Order's notional must be no smaller than 5 (unless you choose reduce only).\"}"
+ },
+ {
+  "quando": "2026-11-27T00:00",
+  "simbolo": "ZECUSDT",
+  "erro": "Binance demo 400: {\"code\":-4164,\"msg\":\"Order's notional must be no smaller than 5 (unless you choose reduce only).\"}"
+ },
+ {
+  "quando": "2026-11-27T00:00",
+  "simbolo": "NEARUSDT",
+  "erro": "Binance demo 400: {\"code\":-4164,\"msg\":\"Order's notional must be no smaller than 5 (unless you choose reduce only).\"}"
+ },
+ {
+  "quando": "2026-11-27T00:00",
+  "simbolo": "ETHUSDT",
+  "erro": "Binance demo 400: {\"code\":-4164,\"msg\":\"Order's notional must be no smaller than 20 (unless you choose reduce only).\"}"
+ },
+ {
+  "quando": "2026-11-27T00:00",
+  "simbolo": "UNIUSDT",
+  "erro": "Binance demo 400: {\"code\":-4164,\"msg\":\"Order's notional must be no smaller than 5 (unless you choose reduce only).\"}"
+ },
+ {
+  "quando": "2026-11-27T00:00",
+  "simbolo": "ADAUSDT",
+  "lado": "BUY",
+  "qtd": 56.0,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 1343631598
  }
 ]

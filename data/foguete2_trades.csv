@@ -28,3 +28,4 @@ quando,moeda,acao,qtd,preco,nocional,resultado,motivo
 2026-11-26T23:00,UNIUSDT,AUMENTA,1.0,4.641354,4.64,-0.0023,CPPI ajusta exposição
 2026-11-26T23:00,ZECUSDT,AUMENTA,0.005,692.663495,3.46,-0.0017,CPPI ajusta exposição
 2026-11-26T23:00,NEARUSDT,AUMENTA,1.0,3.052473,3.05,-0.0015,CPPI ajusta exposição
+2026-11-27T00:00,ADAUSDT,REDUZ,56.0,0.1485484,8.32,-0.0247,ajuste de peso
