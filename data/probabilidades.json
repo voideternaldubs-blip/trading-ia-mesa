@@ -4,25 +4,25 @@
  "posicoes": {
   "TAOUSDT": {
    "preco": 186.8,
-   "chance_alvo": 0.086,
-   "chance_stop": 0.89,
-   "nenhum": 0.024,
-   "valor_esperado": 1.63
+   "chance_alvo": 0.083,
+   "chance_stop": 0.893,
+   "nenhum": 0.023,
+   "valor_esperado": 1.48
   },
   "SUIUSDT": {
-   "preco": 0.6821,
-   "chance_alvo": 0.057,
+   "preco": 0.6822,
+   "chance_alvo": 0.06,
    "chance_stop": 0.926,
-   "nenhum": 0.017,
-   "valor_esperado": 0.64
+   "nenhum": 0.014,
+   "valor_esperado": 0.77
   },
   "AAVEUSDT": {
-   "preco": 96.37,
+   "preco": 96.41,
    "chance_alvo": 0.155,
-   "chance_stop": 0.797,
-   "nenhum": 0.047,
-   "valor_esperado": 0.64
+   "chance_stop": 0.801,
+   "nenhum": 0.044,
+   "valor_esperado": 0.7
   }
  },
- "valor_esperado_total": 2.9
+ "valor_esperado_total": 2.94
 }
