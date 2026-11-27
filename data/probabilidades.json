@@ -3,12 +3,12 @@
  "prazo": "2026-11-30T23:59",
  "posicoes": {
   "AAVEUSDT": {
-   "preco": 96.77,
-   "chance_alvo": 0.111,
-   "chance_stop": 0.845,
-   "nenhum": 0.044,
-   "valor_esperado": 0.37
+   "preco": 96.81,
+   "chance_alvo": 0.103,
+   "chance_stop": 0.855,
+   "nenhum": 0.041,
+   "valor_esperado": 0.28
   }
  },
- "valor_esperado_total": 0.37
+ "valor_esperado_total": 0.28
 }
