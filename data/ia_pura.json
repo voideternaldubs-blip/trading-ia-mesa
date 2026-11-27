@@ -11,7 +11,7 @@
    "em": "2026-11-26T13:52",
    "tese": "vendido a favor da tend\u00eancia de queda (m\u00e1quina do tempo: valor esperado positivo)",
    "conferido_ate": "2026-11-27T02:19",
-   "atual": 0.6778
+   "atual": 0.6779
   },
   "LINKUSDT": {
    "lado": -1,
@@ -22,7 +22,7 @@
    "em": "2026-11-26T13:52",
    "tese": "vendido a favor da tend\u00eancia de queda (m\u00e1quina do tempo: valor esperado positivo)",
    "conferido_ate": "2026-11-27T02:19",
-   "atual": 9.443
+   "atual": 9.442
   },
   "AAVEUSDT": {
    "lado": -1,
@@ -33,7 +33,7 @@
    "em": "2026-11-26T13:52",
    "tese": "vendido a favor da tend\u00eancia de queda (m\u00e1quina do tempo: valor esperado positivo)",
    "conferido_ate": "2026-11-27T02:19",
-   "atual": 95.6
+   "atual": 95.59
   }
  },
  "fechadas": [
@@ -2075,6 +2075,10 @@
   },
   {
    "quando": "2026-11-27T02:19",
+   "valor": 76.53
+  },
+  {
+   "quando": "2026-11-27T02:20",
    "valor": 76.53
   }
  ],
