@@ -1,5 +1,5 @@
 {
- "gerado": "2026-11-27T06:53",
+ "gerado": "2026-11-27T06:55",
  "fim": "2026-11-30",
  "dias_restantes": 3,
  "robos": [
@@ -17,8 +17,8 @@
   {
    "robo": "Foguete v2 (Binance demo)",
    "inicial": 100.0,
-   "atual": 90.52,
-   "retorno_pct": -9.48,
+   "atual": 90.14,
+   "retorno_pct": -9.86,
    "operacoes": 37,
    "acerto_pct": 8.1,
    "ganho_medio": 0.09,
@@ -50,8 +50,8 @@
   {
    "robo": "IA pura (manual)",
    "inicial": 100.0,
-   "atual": 69.98,
-   "retorno_pct": -30.02,
+   "atual": 69.67,
+   "retorno_pct": -30.33,
    "operacoes": 8,
    "acerto_pct": 25.0,
    "ganho_medio": 1.0,
