@@ -1,13 +1,13 @@
 {
- "gerado": "2026-11-27T00:09",
+ "gerado": "2026-11-27T00:10",
  "fim": "2026-11-30",
  "dias_restantes": 3,
  "robos": [
   {
    "robo": "Carteira do Prédio",
    "inicial": 100.0,
-   "atual": 78.14,
-   "retorno_pct": -21.86,
+   "atual": 78.17,
+   "retorno_pct": -21.83,
    "operacoes": 1,
    "acerto_pct": 0.0,
    "ganho_medio": null,
@@ -50,8 +50,8 @@
   {
    "robo": "IA pura (manual)",
    "inicial": 100.0,
-   "atual": 86.65,
-   "retorno_pct": -13.35,
+   "atual": 86.67,
+   "retorno_pct": -13.33,
    "operacoes": 6,
    "acerto_pct": 33.3,
    "ganho_medio": 1.0,
