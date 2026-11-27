@@ -17,8 +17,8 @@
   {
    "robo": "Foguete v2 (Binance demo)",
    "inicial": 100.0,
-   "atual": 95.85,
-   "retorno_pct": -4.15,
+   "atual": 96.4,
+   "retorno_pct": -3.6,
    "operacoes": 50,
    "acerto_pct": 14.0,
    "ganho_medio": 0.06,
@@ -50,8 +50,8 @@
   {
    "robo": "IA pura (manual)",
    "inicial": 100.0,
-   "atual": 74.55,
-   "retorno_pct": -25.45,
+   "atual": 74.57,
+   "retorno_pct": -25.43,
    "operacoes": 8,
    "acerto_pct": 25.0,
    "ganho_medio": 1.0,
