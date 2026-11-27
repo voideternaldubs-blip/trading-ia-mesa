@@ -1889,5 +1889,15 @@
   "preco": 0.0,
   "status": "FILLED",
   "id": 3551533656
+ },
+ {
+  "quando": "2026-11-27T15:44",
+  "simbolo": "ETHUSDT",
+  "erro": "Binance demo 400: {\"code\":-4164,\"msg\":\"Order's notional must be no smaller than 20 (unless you choose reduce only).\"}"
+ },
+ {
+  "quando": "2026-11-27T15:44",
+  "simbolo": "BTCUSDT",
+  "erro": "Binance demo 400: {\"code\":-4164,\"msg\":\"Order's notional must be no smaller than 50 (unless you choose reduce only).\"}"
  }
 ]
