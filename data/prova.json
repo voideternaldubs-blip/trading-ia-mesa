@@ -1,5 +1,5 @@
 {
- "gerado": "2026-11-27T23:24",
+ "gerado": "2026-11-27T23:26",
  "fim": "2026-11-30",
  "dias_restantes": 3,
  "robos": [
@@ -50,13 +50,13 @@
   {
    "robo": "IA pura (manual)",
    "inicial": 100.0,
-   "atual": 71.23,
-   "retorno_pct": -28.77,
+   "atual": 71.34,
+   "retorno_pct": -28.66,
    "operacoes": 8,
    "acerto_pct": 25.0,
    "ganho_medio": 1.0,
    "perda_media": -4.47,
-   "maior_queda_pct": -36.18
+   "maior_queda_pct": -35.84
   },
   {
    "robo": "Foguete de ações (Alpaca)",
