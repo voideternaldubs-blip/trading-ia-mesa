@@ -10,7 +10,7 @@
    "alvo": 86.49,
    "em": "2026-11-26T13:52",
    "tese": "vendido a favor da tend\u00eancia de queda (m\u00e1quina do tempo: valor esperado positivo)",
-   "conferido_ate": "2026-11-27T18:35",
+   "conferido_ate": "2026-11-27T18:37",
    "atual": 94.17
   }
  },
@@ -6673,6 +6673,10 @@
   },
   {
    "quando": "2026-11-27T18:35",
+   "valor": 74.75
+  },
+  {
+   "quando": "2026-11-27T18:37",
    "valor": 74.75
   }
  ],
