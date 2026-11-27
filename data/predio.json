@@ -1,6 +1,6 @@
 {
- "gerado": "2026-11-27T20:22",
- "segundos": 98,
+ "gerado": "2026-11-27T20:51",
+ "segundos": 43,
  "cerebros": {
   "GPT-OSS 120B": {
    "papel": "comite",
@@ -10,12 +10,12 @@
   "GPT-OSS 20B": {
    "papel": "analista",
    "limite_dia": 900,
-   "usados_hoje": 179
+   "usados_hoje": 181
   },
   "Qwen 27B": {
    "papel": "analista",
    "limite_dia": 900,
-   "usados_hoje": 95
+   "usados_hoje": 97
   },
   "Kimi K3.1": {
    "papel": "comite",
@@ -25,7 +25,7 @@
   "GLM 5.3": {
    "papel": "analista",
    "limite_dia": 5000,
-   "usados_hoje": 74
+   "usados_hoje": 75
   }
  },
  "andares": {
@@ -40,24 +40,24 @@
    "analistas": [
     {
      "moeda": "BTC",
-     "preco": 59784.77,
+     "preco": 59808.01,
      "stop_pct": 3.58,
      "alvo_pct": 10.73,
-     "var_24h_pct": -1.31,
-     "var_7d_pct": 1.41,
+     "var_24h_pct": -1.27,
+     "var_7d_pct": 1.45,
      "tendencia_4h": -0.67,
      "chance_alvo_compra": 0.03,
-     "chance_stop_compra": 0.48,
-     "chance_alvo_venda": 0.03,
-     "chance_stop_venda": 0.47,
-     "valor_esperado_compra": -0.02,
-     "valor_esperado_venda": -0.05,
+     "chance_stop_compra": 0.44,
+     "chance_alvo_venda": 0.01,
+     "chance_stop_venda": 0.49,
+     "valor_esperado_compra": 0.05,
+     "valor_esperado_venda": -0.08,
      "financiamento_pct": 0.01,
      "noticias": [
-      "Baleias Bitcoin se acumulam no BTC apesar da redução da margem de lucro",
-      "Bitcoin ou XRP: o que está mais perto de voltar ao seu ponto mais alto?",
-      "Baleias Bitcoin acumulam 121.000 BTC no quarto trimestre: elas esperam uma reversão a seguir?",
-      "4 gráficos assustadores de Bitcoin que sugerem que este mercado em baixa é diferente"
+      "A IA poderia quebrar o Bitcoin? Ainda não, afirma a empresa de pesquisa K33",
+      "IREN está fazendo a transição da mineração de Bitcoin para a AI Cloud",
+      "Preço do Bitcoin cai com US$ 183 milhões em liquidações antes do vencimento de opções de US$ 6,8 bilhões",
+      "Bitcoin cai abaixo de US$ 60 mil após chips da Nvidia serem encontrados na China"
      ],
      "medo_ganancia": 12.0,
      "historico_desta_moeda": [
@@ -85,51 +85,41 @@
        "cerebro": "GPT-OSS 20B",
        "disse": "VENDA",
        "resultado_24h_pct": 1.45
+      },
+      {
+       "cerebro": "GLM 5.3",
+       "disse": "VENDA",
+       "resultado_24h_pct": 1.65
       }
      ],
      "simbolo": "BTCUSDT",
-     "decisao": "VENDA",
-     "confianca": 3,
-     "motivo": "Trend aponta baixa, então vendemos.",
+     "decisao": "FORA",
+     "confianca": 1,
+     "motivo": "",
      "cerebro": "GPT-OSS 20B",
-     "quando": "2026-11-27T20:20",
-     "ev_escolhido": -0.05,
-     "comite": {
-      "aprova": true,
-      "motivo": "Trend e valor esperado indicam queda, confirma venda",
-      "cerebro": "GPT-OSS 120B"
-     }
+     "quando": "2026-11-27T20:50",
+     "ev_escolhido": 0
     },
     {
      "moeda": "ETH",
-     "preco": 1667.38,
-     "stop_pct": 4.3,
-     "alvo_pct": 12.91,
-     "var_24h_pct": -1.33,
-     "var_7d_pct": 2.73,
+     "preco": 1667.22,
+     "stop_pct": 4.33,
+     "alvo_pct": 12.98,
+     "var_24h_pct": -1.34,
+     "var_7d_pct": 2.72,
      "tendencia_4h": -0.67,
      "chance_alvo_compra": 0.05,
-     "chance_stop_compra": 0.46,
-     "chance_alvo_venda": 0.02,
-     "chance_stop_venda": 0.49,
+     "chance_stop_compra": 0.48,
+     "chance_alvo_venda": 0.03,
+     "chance_stop_venda": 0.52,
      "valor_esperado_compra": 0.03,
-     "valor_esperado_venda": -0.07,
+     "valor_esperado_venda": -0.1,
      "financiamento_pct": 0.01,
      "noticias": [
       "O que há no roteiro Ethereum: Glamsterdam, Hegotá e além"
      ],
      "medo_ganancia": 12.0,
      "historico_desta_moeda": [
-      {
-       "cerebro": "GLM 5.3",
-       "disse": "VENDA",
-       "resultado_24h_pct": 1.46
-      },
-      {
-       "cerebro": "GLM 5.3",
-       "disse": "VENDA",
-       "resultado_24h_pct": 1.77
-      },
       {
        "cerebro": "GLM 5.3",
        "disse": "VENDA",
@@ -149,44 +139,44 @@
        "cerebro": "GPT-OSS 20B",
        "disse": "VENDA",
        "resultado_24h_pct": 1.95
+      },
+      {
+       "cerebro": "GPT-OSS 20B",
+       "disse": "VENDA",
+       "resultado_24h_pct": 2.2
+      },
+      {
+       "cerebro": "GPT-OSS 20B",
+       "disse": "VENDA",
+       "resultado_24h_pct": 2.28
       }
      ],
      "simbolo": "ETHUSDT",
      "decisao": "FORA",
      "confianca": 5,
-     "motivo": "Tendência fraca e histórico recente de erros em vendas, sem vantagem clara para operar.",
+     "motivo": "A tendência aponta queda, mas o histórico recente mostra que vendas nessa moeda estão errando consistentemente, indicando reversão ou falta de vantagem clara.",
      "cerebro": "Qwen 27B",
-     "quando": "2026-11-27T20:22",
+     "quando": "2026-11-27T20:50",
      "ev_escolhido": 0
     },
     {
      "moeda": "ZEC",
-     "preco": 741.42,
-     "stop_pct": 10.68,
-     "alvo_pct": 32.04,
-     "var_24h_pct": 8.63,
-     "var_7d_pct": -2.48,
+     "preco": 739.1,
+     "stop_pct": 10.73,
+     "alvo_pct": 32.19,
+     "var_24h_pct": 8.29,
+     "var_7d_pct": -2.79,
      "tendencia_4h": -0.67,
-     "chance_alvo_compra": 0.03,
-     "chance_stop_compra": 0.43,
+     "chance_alvo_compra": 0.02,
+     "chance_stop_compra": 0.39,
      "chance_alvo_venda": 0.0,
-     "chance_stop_venda": 0.42,
-     "valor_esperado_compra": 0.04,
-     "valor_esperado_venda": -0.03,
-     "financiamento_pct": 0.0092,
+     "chance_stop_venda": 0.43,
+     "valor_esperado_compra": -0.05,
+     "valor_esperado_venda": -0.09,
+     "financiamento_pct": 0.0061,
      "noticias": [],
      "medo_ganancia": 12.0,
      "historico_desta_moeda": [
-      {
-       "cerebro": "GPT-OSS 20B",
-       "disse": "VENDA",
-       "resultado_24h_pct": -5.58
-      },
-      {
-       "cerebro": "GPT-OSS 20B",
-       "disse": "VENDA",
-       "resultado_24h_pct": -5.16
-      },
       {
        "cerebro": "GLM 5.3",
        "disse": "VENDA",
@@ -206,39 +196,44 @@
        "cerebro": "GLM 5.3",
        "disse": "VENDA",
        "resultado_24h_pct": -3.52
+      },
+      {
+       "cerebro": "GLM 5.3",
+       "disse": "VENDA",
+       "resultado_24h_pct": -2.55
+      },
+      {
+       "cerebro": "GLM 5.3",
+       "disse": "VENDA",
+       "resultado_24h_pct": -2.95
       }
      ],
      "simbolo": "ZECUSDT",
      "decisao": "FORA",
-     "confianca": 2,
-     "motivo": "A tendência de queda é fraca e o valor esperado está próximo de zero, sem vantagem clara para entrar.",
-     "cerebro": "Qwen 27B",
-     "quando": "2026-11-27T20:20",
+     "confianca": 1,
+     "motivo": "",
+     "cerebro": "GLM 5.3",
+     "quando": "2026-11-27T20:51",
      "ev_escolhido": 0
     },
     {
      "moeda": "SOL",
-     "preco": 72.04,
-     "stop_pct": 4.2,
-     "alvo_pct": 12.61,
-     "var_24h_pct": 1.42,
-     "var_7d_pct": 4.59,
+     "preco": 72.02,
+     "stop_pct": 4.21,
+     "alvo_pct": 12.64,
+     "var_24h_pct": 1.39,
+     "var_7d_pct": 4.56,
      "tendencia_4h": -0.67,
      "chance_alvo_compra": 0.06,
-     "chance_stop_compra": 0.58,
-     "chance_alvo_venda": 0.04,
-     "chance_stop_venda": 0.53,
-     "valor_esperado_compra": -0.12,
-     "valor_esperado_venda": -0.0,
+     "chance_stop_compra": 0.52,
+     "chance_alvo_venda": 0.05,
+     "chance_stop_venda": 0.54,
+     "valor_esperado_compra": 0.07,
+     "valor_esperado_venda": -0.03,
      "financiamento_pct": 0.0063,
      "noticias": [],
      "medo_ganancia": 12.0,
      "historico_desta_moeda": [
-      {
-       "cerebro": "Qwen 27B",
-       "disse": "VENDA",
-       "resultado_24h_pct": -1.32
-      },
       {
        "cerebro": "Qwen 27B",
        "disse": "VENDA",
@@ -263,49 +258,43 @@
        "cerebro": "GLM 5.3",
        "disse": "VENDA",
        "resultado_24h_pct": -1.11
+      },
+      {
+       "cerebro": "GLM 5.3",
+       "disse": "VENDA",
+       "resultado_24h_pct": -0.87
       }
      ],
      "simbolo": "SOLUSDT",
      "decisao": "FORA",
-     "confianca": 1,
-     "motivo": "",
+     "confianca": 3,
+     "motivo": "Sem vantagem clara, tendência negativa e histórico negativo.",
      "cerebro": "GPT-OSS 20B",
-     "quando": "2026-11-27T20:20",
+     "quando": "2026-11-27T20:50",
      "ev_escolhido": 0
     },
     {
      "moeda": "XRP",
-     "preco": 0.9484,
+     "preco": 0.9502,
      "stop_pct": 4.41,
-     "alvo_pct": 13.24,
-     "var_24h_pct": 0.49,
-     "var_7d_pct": 4.14,
+     "alvo_pct": 13.22,
+     "var_24h_pct": 0.68,
+     "var_7d_pct": 4.34,
      "tendencia_4h": -0.67,
-     "chance_alvo_compra": 0.06,
-     "chance_stop_compra": 0.53,
+     "chance_alvo_compra": 0.09,
+     "chance_stop_compra": 0.46,
      "chance_alvo_venda": 0.03,
-     "chance_stop_venda": 0.52,
-     "valor_esperado_compra": -0.04,
-     "valor_esperado_venda": -0.08,
+     "chance_stop_venda": 0.49,
+     "valor_esperado_compra": 0.2,
+     "valor_esperado_venda": 0.01,
      "financiamento_pct": 0.01,
      "noticias": [
       "Preço XRP em 27 de novembro de 2026 às 15h EST Mercado de previsão de criptografia",
-      "Bitcoin ou XRP: o que está mais perto de voltar ao seu ponto mais alto?",
       "Preço XRP em 27 de novembro de 2026 às 12h EST Mercado de previsão de criptografia",
       "Preço XRP em 27 de novembro de 2026 às 10h EST Mercado de previsão de criptografia"
      ],
      "medo_ganancia": 12.0,
      "historico_desta_moeda": [
-      {
-       "cerebro": "GPT-OSS 20B",
-       "disse": "VENDA",
-       "resultado_24h_pct": 0.25
-      },
-      {
-       "cerebro": "GPT-OSS 20B",
-       "disse": "VENDA",
-       "resultado_24h_pct": 0.71
-      },
       {
        "cerebro": "GLM 5.3",
        "disse": "VENDA",
@@ -325,14 +314,24 @@
        "cerebro": "GPT-OSS 20B",
        "disse": "VENDA",
        "resultado_24h_pct": 0.35
+      },
+      {
+       "cerebro": "GPT-OSS 20B",
+       "disse": "VENDA",
+       "resultado_24h_pct": 0.43
+      },
+      {
+       "cerebro": "GPT-OSS 20B",
+       "disse": "VENDA",
+       "resultado_24h_pct": 0.23
       }
      ],
      "simbolo": "XRPUSDT",
      "decisao": "FORA",
      "confianca": 5,
-     "motivo": "A tendência aponta queda, mas o valor esperado é negativo e o histórico recente mostra que vendas não estão gerando lucro.",
+     "motivo": "A tendência de queda é fraca e o histórico mostra que vendas recentes não geraram lucro, indicando falta de vantagem clara.",
      "cerebro": "Qwen 27B",
-     "quando": "2026-11-27T20:22",
+     "quando": "2026-11-27T20:50",
      "ev_escolhido": 0
     }
    ]
@@ -340,9 +339,7 @@
   "andar2": {
    "nome": "COMITÊ DE RISCO",
    "trabalho": "ranking por valor esperado",
-   "ranking": [
-    "BTCUSDT"
-   ]
+   "ranking": []
   },
   "andar3": {
    "nome": "DIRETORIA",
@@ -355,22 +352,22 @@
  },
  "placar": {
   "GPT-OSS 20B": {
-   "vereditos": 62,
-   "acertos": 28,
-   "soma_pct": 73.21,
-   "acerto_pct": 45.2
+   "vereditos": 80,
+   "acertos": 38,
+   "soma_pct": 76.83,
+   "acerto_pct": 47.5
   },
   "Qwen 27B": {
-   "vereditos": 46,
-   "acertos": 17,
-   "soma_pct": -22.16,
-   "acerto_pct": 37.0
+   "vereditos": 53,
+   "acertos": 23,
+   "soma_pct": -9.95,
+   "acerto_pct": 43.4
   },
   "GLM 5.3": {
-   "vereditos": 30,
-   "acertos": 14,
-   "soma_pct": 6.8,
-   "acerto_pct": 46.7
+   "vereditos": 41,
+   "acertos": 18,
+   "soma_pct": -3.19,
+   "acerto_pct": 43.9
   }
  },
  "historico": [
@@ -2541,7 +2538,7 @@
    "cerebro": "GPT-OSS 20B",
    "preco": 185.1,
    "quando": "2026-11-26T20:34",
-   "resultado": null
+   "resultado": -0.22
   },
   {
    "simbolo": "BCHUSDT",
@@ -2550,7 +2547,7 @@
    "cerebro": "Qwen 27B",
    "preco": 209.4,
    "quando": "2026-11-26T20:34",
-   "resultado": null
+   "resultado": 1.1
   },
   {
    "simbolo": "BTCUSDT",
@@ -2568,7 +2565,7 @@
    "cerebro": "GPT-OSS 20B",
    "preco": 1704.66,
    "quando": "2026-11-26T20:34",
-   "resultado": null
+   "resultado": 2.2
   },
   {
    "simbolo": "ZECUSDT",
@@ -2577,7 +2574,7 @@
    "cerebro": "GLM 5.3",
    "preco": 720.75,
    "quando": "2026-11-26T20:34",
-   "resultado": null
+   "resultado": -2.55
   },
   {
    "simbolo": "SOLUSDT",
@@ -2595,7 +2592,7 @@
    "cerebro": "GPT-OSS 20B",
    "preco": 3.088,
    "quando": "2026-11-26T20:34",
-   "resultado": null
+   "resultado": 0.97
   },
   {
    "simbolo": "XRPUSDT",
@@ -2604,7 +2601,7 @@
    "cerebro": "GPT-OSS 20B",
    "preco": 0.9543,
    "quando": "2026-11-26T20:34",
-   "resultado": null
+   "resultado": 0.43
   },
   {
    "simbolo": "BNBUSDT",
@@ -2613,7 +2610,7 @@
    "cerebro": "GLM 5.3",
    "preco": 555.89,
    "quando": "2026-11-26T20:34",
-   "resultado": null
+   "resultado": 0.45
   },
   {
    "simbolo": "SUIUSDT",
@@ -2622,7 +2619,7 @@
    "cerebro": "GPT-OSS 20B",
    "preco": 0.6751,
    "quando": "2026-11-26T20:34",
-   "resultado": null
+   "resultado": 0.27
   },
   {
    "simbolo": "INITUSDT",
@@ -2649,7 +2646,7 @@
    "cerebro": "GLM 5.3",
    "preco": 4.711,
    "quando": "2026-11-26T20:34",
-   "resultado": null
+   "resultado": -2.59
   },
   {
    "simbolo": "DOGEUSDT",
@@ -2703,7 +2700,7 @@
    "cerebro": "GLM 5.3",
    "preco": 9.28,
    "quando": "2026-11-26T20:35",
-   "resultado": null
+   "resultado": -1.2
   },
   {
    "simbolo": "AAVEUSDT",
@@ -2712,7 +2709,7 @@
    "cerebro": "GLM 5.3",
    "preco": 95.4,
    "quando": "2026-11-26T20:34",
-   "resultado": null
+   "resultado": 0.12
   },
   {
    "simbolo": "SSVUSDT",
@@ -2730,7 +2727,7 @@
    "cerebro": "GLM 5.3",
    "preco": 0.04001,
    "quando": "2026-11-26T20:34",
-   "resultado": null
+   "resultado": 5.12
   },
   {
    "simbolo": "WLDUSDT",
@@ -2784,7 +2781,7 @@
    "cerebro": "GLM 5.3",
    "preco": 0.1204,
    "quando": "2026-11-26T20:35",
-   "resultado": null
+   "resultado": -4.65
   },
   {
    "simbolo": "MEUSDT",
@@ -2811,7 +2808,7 @@
    "cerebro": "GPT-OSS 20B",
    "preco": 185.3,
    "quando": "2026-11-26T20:45",
-   "resultado": null
+   "resultado": -0.11
   },
   {
    "simbolo": "BCHUSDT",
@@ -2820,7 +2817,7 @@
    "cerebro": "Qwen 27B",
    "preco": 209.2,
    "quando": "2026-11-26T20:45",
-   "resultado": null
+   "resultado": 1.0
   },
   {
    "simbolo": "BTCUSDT",
@@ -2829,7 +2826,7 @@
    "cerebro": "GLM 5.3",
    "preco": 60810.31,
    "quando": "2026-11-26T20:46",
-   "resultado": null
+   "resultado": 1.65
   },
   {
    "simbolo": "ETHUSDT",
@@ -2838,7 +2835,7 @@
    "cerebro": "GPT-OSS 20B",
    "preco": 1706.1,
    "quando": "2026-11-26T20:45",
-   "resultado": null
+   "resultado": 2.28
   },
   {
    "simbolo": "ZECUSDT",
@@ -2847,7 +2844,7 @@
    "cerebro": "GLM 5.3",
    "preco": 717.92,
    "quando": "2026-11-26T20:46",
-   "resultado": null
+   "resultado": -2.95
   },
   {
    "simbolo": "SOLUSDT",
@@ -2856,7 +2853,7 @@
    "cerebro": "GLM 5.3",
    "preco": 71.39,
    "quando": "2026-11-26T20:46",
-   "resultado": null
+   "resultado": -0.87
   },
   {
    "simbolo": "NEARUSDT",
@@ -2865,7 +2862,7 @@
    "cerebro": "GPT-OSS 20B",
    "preco": 3.092,
    "quando": "2026-11-26T20:45",
-   "resultado": null
+   "resultado": 1.1
   },
   {
    "simbolo": "XRPUSDT",
@@ -2874,7 +2871,7 @@
    "cerebro": "GPT-OSS 20B",
    "preco": 0.9524,
    "quando": "2026-11-26T20:45",
-   "resultado": null
+   "resultado": 0.23
   },
   {
    "simbolo": "BNBUSDT",
@@ -2883,7 +2880,7 @@
    "cerebro": "GPT-OSS 20B",
    "preco": 556.41,
    "quando": "2026-11-26T20:47",
-   "resultado": null
+   "resultado": 0.54
   },
   {
    "simbolo": "SUIUSDT",
@@ -2892,7 +2889,7 @@
    "cerebro": "GPT-OSS 20B",
    "preco": 0.6758,
    "quando": "2026-11-26T20:45",
-   "resultado": null
+   "resultado": 0.37
   },
   {
    "simbolo": "INITUSDT",
@@ -2919,7 +2916,7 @@
    "cerebro": "GLM 5.3",
    "preco": 4.714,
    "quando": "2026-11-26T20:46",
-   "resultado": null
+   "resultado": -2.52
   },
   {
    "simbolo": "DOGEUSDT",
@@ -2946,7 +2943,7 @@
    "cerebro": "GPT-OSS 20B",
    "preco": 0.1019,
    "quando": "2026-11-26T20:46",
-   "resultado": null
+   "resultado": -2.06
   },
   {
    "simbolo": "ADAUSDT",
@@ -2955,7 +2952,7 @@
    "cerebro": "Qwen 27B",
    "preco": 0.1509,
    "quando": "2026-11-26T20:46",
-   "resultado": null
+   "resultado": 1.19
   },
   {
    "simbolo": "LTCUSDT",
@@ -2964,7 +2961,7 @@
    "cerebro": "GPT-OSS 20B",
    "preco": 43.83,
    "quando": "2026-11-26T20:48",
-   "resultado": null
+   "resultado": -0.75
   },
   {
    "simbolo": "LINKUSDT",
@@ -2973,7 +2970,7 @@
    "cerebro": "GPT-OSS 20B",
    "preco": 9.286,
    "quando": "2026-11-26T20:46",
-   "resultado": null
+   "resultado": -1.13
   },
   {
    "simbolo": "AAVEUSDT",
@@ -2982,7 +2979,7 @@
    "cerebro": "Qwen 27B",
    "preco": 95.51,
    "quando": "2026-11-26T20:47",
-   "resultado": null
+   "resultado": 0.23
   },
   {
    "simbolo": "SSVUSDT",
@@ -3000,7 +2997,7 @@
    "cerebro": "Qwen 27B",
    "preco": 0.03976,
    "quando": "2026-11-26T20:47",
-   "resultado": null
+   "resultado": 4.53
   },
   {
    "simbolo": "WLDUSDT",
@@ -3009,7 +3006,7 @@
    "cerebro": "GPT-OSS 20B",
    "preco": 0.2446,
    "quando": "2026-11-26T20:47",
-   "resultado": null
+   "resultado": -0.61
   },
   {
    "simbolo": "INJUSDT",
@@ -3018,7 +3015,7 @@
    "cerebro": "Qwen 27B",
    "preco": 6.305,
    "quando": "2026-11-26T20:48",
-   "resultado": null
+   "resultado": -1.13
   },
   {
    "simbolo": "PAXGUSDT",
@@ -3036,7 +3033,7 @@
    "cerebro": "GPT-OSS 20B",
    "preco": 0.04542,
    "quando": "2026-11-26T20:47",
-   "resultado": null
+   "resultado": -4.07
   },
   {
    "simbolo": "MOVEUSDT",
@@ -3054,7 +3051,7 @@
    "cerebro": "GPT-OSS 20B",
    "preco": 0.1203,
    "quando": "2026-11-26T20:48",
-   "resultado": null
+   "resultado": -4.74
   },
   {
    "simbolo": "MEUSDT",
@@ -3063,7 +3060,7 @@
    "cerebro": "GPT-OSS 20B",
    "preco": 0.04271,
    "quando": "2026-11-26T20:47",
-   "resultado": null
+   "resultado": 8.92
   },
   {
    "simbolo": "ZROUSDT",
@@ -3072,7 +3069,7 @@
    "cerebro": "Qwen 27B",
    "preco": 1.115,
    "quando": "2026-11-26T20:47",
-   "resultado": null
+   "resultado": 5.29
   },
   {
    "simbolo": "TAOUSDT",
@@ -6862,15 +6859,61 @@
    "preco": 0.9484,
    "quando": "2026-11-27T20:22",
    "resultado": null
+  },
+  {
+   "simbolo": "BTCUSDT",
+   "decisao": "FORA",
+   "confianca": 1,
+   "cerebro": "GPT-OSS 20B",
+   "preco": 59808.01,
+   "quando": "2026-11-27T20:50",
+   "resultado": null
+  },
+  {
+   "simbolo": "ETHUSDT",
+   "decisao": "FORA",
+   "confianca": 5,
+   "cerebro": "Qwen 27B",
+   "preco": 1667.22,
+   "quando": "2026-11-27T20:50",
+   "resultado": null
+  },
+  {
+   "simbolo": "ZECUSDT",
+   "decisao": "FORA",
+   "confianca": 1,
+   "cerebro": "GLM 5.3",
+   "preco": 739.1,
+   "quando": "2026-11-27T20:51",
+   "resultado": null
+  },
+  {
+   "simbolo": "SOLUSDT",
+   "decisao": "FORA",
+   "confianca": 3,
+   "cerebro": "GPT-OSS 20B",
+   "preco": 72.02,
+   "quando": "2026-11-27T20:50",
+   "resultado": null
+  },
+  {
+   "simbolo": "XRPUSDT",
+   "decisao": "FORA",
+   "confianca": 5,
+   "cerebro": "Qwen 27B",
+   "preco": 0.9502,
+   "quando": "2026-11-27T20:50",
+   "resultado": null
   }
  ],
  "aprendizado": {
   "pesos": {
-   "GPT-OSS 20B": 0.453,
-   "Qwen 27B": 0.375,
-   "GLM 5.3": 0.469
+   "GPT-OSS 20B": 0.476,
+   "Qwen 27B": 0.436,
+   "GLM 5.3": 0.442
   },
   "banidos": [
+   "GLM 5.3",
    "Qwen 27B"
   ],
   "moedas_com_historico": 30,
