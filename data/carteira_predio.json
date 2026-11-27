@@ -10,7 +10,7 @@
    "alvo": 166.24,
    "em": "2026-11-26T18:45",
    "tese": "GPT-OSS 20B disse VENDA (4/5): Tend\u00eancia negativa e valor esperado positivo para venda",
-   "conferido_ate": "2026-11-27T04:42",
+   "conferido_ate": "2026-11-27T04:44",
    "atual": 186.75
   }
  },
@@ -2528,6 +2528,10 @@
   },
   {
    "quando": "2026-11-27T04:42",
+   "valor": 53.53
+  },
+  {
+   "quando": "2026-11-27T04:44",
    "valor": 53.53
   }
  ],
