@@ -1,21 +1,21 @@
 {
- "gerado": "2026-11-27T07:55",
- "segundos": 99,
+ "gerado": "2026-11-27T08:25",
+ "segundos": 100,
  "cerebros": {
   "GPT-OSS 120B": {
    "papel": "comite",
    "limite_dia": 900,
-   "usados_hoje": 9
+   "usados_hoje": 10
   },
   "GPT-OSS 20B": {
    "papel": "analista",
    "limite_dia": 900,
-   "usados_hoje": 73
+   "usados_hoje": 76
   },
   "Qwen 27B": {
    "papel": "analista",
    "limite_dia": 900,
-   "usados_hoje": 46
+   "usados_hoje": 47
   },
   "Kimi K3.1": {
    "papel": "comite",
@@ -25,7 +25,7 @@
   "GLM 5.3": {
    "papel": "analista",
    "limite_dia": 5000,
-   "usados_hoje": 34
+   "usados_hoje": 35
   }
  },
  "andares": {
@@ -40,124 +40,132 @@
    "analistas": [
     {
      "moeda": "BTC",
-     "preco": 61753.11,
-     "stop_pct": 3.31,
-     "alvo_pct": 9.92,
-     "var_24h_pct": 2.03,
-     "var_7d_pct": -0.17,
+     "preco": 62011.49,
+     "stop_pct": 3.23,
+     "alvo_pct": 9.68,
+     "var_24h_pct": 2.14,
+     "var_7d_pct": 0.33,
      "tendencia_4h": -0.67,
-     "chance_alvo_compra": 0.04,
-     "chance_stop_compra": 0.43,
-     "chance_alvo_venda": 0.02,
-     "chance_stop_venda": 0.5,
-     "valor_esperado_compra": 0.05,
+     "chance_alvo_compra": 0.05,
+     "chance_stop_compra": 0.49,
+     "chance_alvo_venda": 0.03,
+     "chance_stop_venda": 0.51,
+     "valor_esperado_compra": 0.02,
      "valor_esperado_venda": -0.05,
-     "financiamento_pct": 0.0018,
+     "financiamento_pct": -0.0046,
      "noticias": [
-      "Bitcoin Girds por US$ 58.000 em batalha conforme relatório de empregos nos EUA e audiência da Nvidia ocupam o centro do palco",
-      "Bitcoin e Ether se recuperam à medida que os mercados se estabilizam",
-      "Desenvolvedor do Bitcoin Core detalha ataque que vincula um endereço de carteira a um IP de nó",
-      "O que o token BlackRock Bitcoin ETF da Binance pode fazer como garantia"
+      "O que é criptografia UBR? Solana Token perto de US$ 2 mostra avaliação de US$ 2 bilhões",
+      "A exposição ao IP da carteira Bitcoin custa de 18 a 34 centavos em testes",
+      "Bitcoin enfrenta uma crescente redução na oferta à medida que a demanda enfraquece",
+      "AO VIVO – Crypto News Today: Por que o Bitcoin está em alta? O rali do ouro e de Wall Street alimenta o salto do BTC"
      ],
      "medo_ganancia": 12.0,
      "historico_desta_moeda": [],
      "simbolo": "BTCUSDT",
      "decisao": "FORA",
      "confianca": 2,
-     "motivo": "Trend indica queda e a expectativa de ganho é negativa",
+     "motivo": "Sem vantagem clara e tendência negativa",
      "cerebro": "GPT-OSS 20B",
-     "quando": "2026-11-27T07:53",
+     "quando": "2026-11-27T08:23",
      "ev_escolhido": 0
     },
     {
      "moeda": "ETH",
-     "preco": 1735.67,
-     "stop_pct": 4.08,
-     "alvo_pct": 12.24,
-     "var_24h_pct": 2.72,
-     "var_7d_pct": -0.98,
+     "preco": 1739.38,
+     "stop_pct": 3.9,
+     "alvo_pct": 11.71,
+     "var_24h_pct": 2.29,
+     "var_7d_pct": -0.55,
      "tendencia_4h": -0.67,
      "chance_alvo_compra": 0.06,
      "chance_stop_compra": 0.53,
-     "chance_alvo_venda": 0.03,
-     "chance_stop_venda": 0.48,
-     "valor_esperado_compra": -0.03,
-     "valor_esperado_venda": -0.01,
-     "financiamento_pct": 0.0064,
+     "chance_alvo_venda": 0.07,
+     "chance_stop_venda": 0.51,
+     "valor_esperado_compra": -0.05,
+     "valor_esperado_venda": 0.07,
+     "financiamento_pct": 0.0029,
      "noticias": [
       "Desenvolvedores do Ethereum agendam atualização do Glamsterdam para a rede de teste Hoodi em 15 de dezembro",
       "O preço do Ethereum sobe 3% conforme os desenvolvedores confirmam o teste de 15 de dezembro para atualização do Glamsterdam",
-      "O cofundador da Ethereum enfrenta a próxima ameaça à segurança da Crypto. Quem é Vitalik Buterin?",
-      "Os desenvolvedores do Ethereum definiram o lançamento do Hoodi de Glamsterdam para meados de dezembro, após atrasos"
+      "O cofundador da Ethereum enfrenta a próxima ameaça à segurança da Crypto. Quem é Vitalik Buterin?"
      ],
      "medo_ganancia": 12.0,
      "historico_desta_moeda": [],
      "simbolo": "ETHUSDT",
      "decisao": "FORA",
-     "confianca": 5,
-     "motivo": "A tendência de queda é forte e o valor esperado é negativo para ambos os lados, indicando falta de vantagem clara.",
+     "confianca": 2,
+     "motivo": "A tendência de queda não é forte o suficiente para garantir vantagem e o risco de perda é alto.",
      "cerebro": "Qwen 27B",
-     "quando": "2026-11-27T07:53",
+     "quando": "2026-11-27T08:23",
      "ev_escolhido": 0
     },
     {
      "moeda": "ZEC",
-     "preco": 742.5,
-     "stop_pct": 10.61,
-     "alvo_pct": 31.83,
-     "var_24h_pct": -0.42,
-     "var_7d_pct": -12.94,
+     "preco": 752.83,
+     "stop_pct": 10.42,
+     "alvo_pct": 31.26,
+     "var_24h_pct": 3.61,
+     "var_7d_pct": -8.47,
      "tendencia_4h": -0.67,
-     "chance_alvo_compra": 0.04,
-     "chance_stop_compra": 0.36,
+     "chance_alvo_compra": 0.03,
+     "chance_stop_compra": 0.39,
      "chance_alvo_venda": 0.01,
-     "chance_stop_venda": 0.39,
-     "valor_esperado_compra": 0.14,
-     "valor_esperado_venda": 0.01,
-     "financiamento_pct": 0.01,
+     "chance_stop_venda": 0.43,
+     "valor_esperado_compra": 0.04,
+     "valor_esperado_venda": -0.04,
+     "financiamento_pct": 0.005,
      "noticias": [],
      "medo_ganancia": 12.0,
      "historico_desta_moeda": [],
      "simbolo": "ZECUSDT",
      "decisao": "FORA",
      "confianca": 3,
-     "motivo": "Trend baixa, chance de alvo muito baixa, não há vantagem clara",
+     "motivo": "Nenhum sinal de vantagem clara na tendência nem no valor esperado",
      "cerebro": "GPT-OSS 20B",
-     "quando": "2026-11-27T07:55",
+     "quando": "2026-11-27T08:25",
      "ev_escolhido": 0
     },
     {
      "moeda": "SOL",
-     "preco": 73.29,
-     "stop_pct": 4.25,
-     "alvo_pct": 12.76,
-     "var_24h_pct": 3.46,
-     "var_7d_pct": 0.85,
+     "preco": 73.53,
+     "stop_pct": 4.06,
+     "alvo_pct": 12.18,
+     "var_24h_pct": 3.74,
+     "var_7d_pct": 2.41,
      "tendencia_4h": -0.67,
      "chance_alvo_compra": 0.08,
-     "chance_stop_compra": 0.52,
-     "chance_alvo_venda": 0.03,
-     "chance_stop_venda": 0.5,
-     "valor_esperado_compra": 0.03,
-     "valor_esperado_venda": -0.03,
+     "chance_stop_compra": 0.55,
+     "chance_alvo_venda": 0.06,
+     "chance_stop_venda": 0.51,
+     "valor_esperado_compra": -0.03,
+     "valor_esperado_venda": 0.09,
      "financiamento_pct": 0.01,
-     "noticias": [],
+     "noticias": [
+      "O que é criptografia UBR? Solana Token perto de US$ 2 mostra avaliação de US$ 2 bilhões"
+     ],
      "medo_ganancia": 12.0,
      "historico_desta_moeda": [],
      "simbolo": "SOLUSDT",
-     "decisao": "FORA",
+     "decisao": "VENDA",
      "confianca": 3,
-     "motivo": "Sem vantagem clara diante da tendência negativa e valor esperado negativo",
+     "motivo": "Tendência negativa e valor esperado positivo para venda",
      "cerebro": "GPT-OSS 20B",
-     "quando": "2026-11-27T07:53",
-     "ev_escolhido": 0
+     "quando": "2026-11-27T08:23",
+     "ev_escolhido": 0.09,
+     "comite": {
+      "aprova": true,
+      "motivo": "Tendência e valor esperado confirmam a venda",
+      "cerebro": "GPT-OSS 120B"
+     }
     }
    ]
   },
   "andar2": {
    "nome": "COMITÊ DE RISCO",
    "trabalho": "ranking por valor esperado",
-   "ranking": []
+   "ranking": [
+    "SOLUSDT"
+   ]
   },
   "andar3": {
    "nome": "DIRETORIA",
@@ -5244,6 +5252,42 @@
    "cerebro": "GPT-OSS 20B",
    "preco": 73.29,
    "quando": "2026-11-27T07:53",
+   "resultado": null
+  },
+  {
+   "simbolo": "BTCUSDT",
+   "decisao": "FORA",
+   "confianca": 2,
+   "cerebro": "GPT-OSS 20B",
+   "preco": 62011.49,
+   "quando": "2026-11-27T08:23",
+   "resultado": null
+  },
+  {
+   "simbolo": "ETHUSDT",
+   "decisao": "FORA",
+   "confianca": 2,
+   "cerebro": "Qwen 27B",
+   "preco": 1739.38,
+   "quando": "2026-11-27T08:23",
+   "resultado": null
+  },
+  {
+   "simbolo": "ZECUSDT",
+   "decisao": "FORA",
+   "confianca": 3,
+   "cerebro": "GPT-OSS 20B",
+   "preco": 752.83,
+   "quando": "2026-11-27T08:25",
+   "resultado": null
+  },
+  {
+   "simbolo": "SOLUSDT",
+   "decisao": "VENDA",
+   "confianca": 3,
+   "cerebro": "GPT-OSS 20B",
+   "preco": 73.53,
+   "quando": "2026-11-27T08:23",
    "resultado": null
   }
  ],
