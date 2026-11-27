@@ -1,6 +1,6 @@
 {
- "gerado": "2026-11-27T08:25",
- "segundos": 100,
+ "gerado": "2026-11-27T08:36",
+ "segundos": 97,
  "cerebros": {
   "GPT-OSS 120B": {
    "papel": "comite",
@@ -10,12 +10,12 @@
   "GPT-OSS 20B": {
    "papel": "analista",
    "limite_dia": 900,
-   "usados_hoje": 76
+   "usados_hoje": 79
   },
   "Qwen 27B": {
    "papel": "analista",
    "limite_dia": 900,
-   "usados_hoje": 47
+   "usados_hoje": 48
   },
   "Kimi K3.1": {
    "papel": "comite",
@@ -25,7 +25,7 @@
   "GLM 5.3": {
    "papel": "analista",
    "limite_dia": 5000,
-   "usados_hoje": 35
+   "usados_hoje": 36
   }
  },
  "andares": {
@@ -40,50 +40,50 @@
    "analistas": [
     {
      "moeda": "BTC",
-     "preco": 62011.49,
-     "stop_pct": 3.23,
-     "alvo_pct": 9.68,
-     "var_24h_pct": 2.14,
-     "var_7d_pct": 0.33,
+     "preco": 61801.19,
+     "stop_pct": 3.24,
+     "alvo_pct": 9.72,
+     "var_24h_pct": 1.79,
+     "var_7d_pct": -0.01,
      "tendencia_4h": -0.67,
      "chance_alvo_compra": 0.05,
-     "chance_stop_compra": 0.49,
+     "chance_stop_compra": 0.5,
      "chance_alvo_venda": 0.03,
-     "chance_stop_venda": 0.51,
-     "valor_esperado_compra": 0.02,
-     "valor_esperado_venda": -0.05,
-     "financiamento_pct": -0.0046,
+     "chance_stop_venda": 0.52,
+     "valor_esperado_compra": 0.01,
+     "valor_esperado_venda": -0.06,
+     "financiamento_pct": -0.0023,
      "noticias": [
+      "Ações globais ampliam recuperação enquanto Pequim reafirma apoio ao mercado; Ouro e Bitcoin sobem",
+      "Fornecimento de Tether diminui US$ 8,1 bilhões porque falta combustível para recuperação do Bitcoin",
       "O que é criptografia UBR? Solana Token perto de US$ 2 mostra avaliação de US$ 2 bilhões",
-      "A exposição ao IP da carteira Bitcoin custa de 18 a 34 centavos em testes",
-      "Bitcoin enfrenta uma crescente redução na oferta à medida que a demanda enfraquece",
-      "AO VIVO – Crypto News Today: Por que o Bitcoin está em alta? O rali do ouro e de Wall Street alimenta o salto do BTC"
+      "A exposição ao IP da carteira Bitcoin custa de 18 a 34 centavos em testes"
      ],
      "medo_ganancia": 12.0,
      "historico_desta_moeda": [],
      "simbolo": "BTCUSDT",
      "decisao": "FORA",
-     "confianca": 2,
-     "motivo": "Sem vantagem clara e tendência negativa",
+     "confianca": 3,
+     "motivo": "Sem vantagem clara, melhor ficar fora",
      "cerebro": "GPT-OSS 20B",
-     "quando": "2026-11-27T08:23",
+     "quando": "2026-11-27T08:34",
      "ev_escolhido": 0
     },
     {
      "moeda": "ETH",
-     "preco": 1739.38,
-     "stop_pct": 3.9,
-     "alvo_pct": 11.71,
-     "var_24h_pct": 2.29,
-     "var_7d_pct": -0.55,
+     "preco": 1731.65,
+     "stop_pct": 3.94,
+     "alvo_pct": 11.83,
+     "var_24h_pct": 1.84,
+     "var_7d_pct": -0.99,
      "tendencia_4h": -0.67,
-     "chance_alvo_compra": 0.06,
-     "chance_stop_compra": 0.53,
-     "chance_alvo_venda": 0.07,
-     "chance_stop_venda": 0.51,
-     "valor_esperado_compra": -0.05,
-     "valor_esperado_venda": 0.07,
-     "financiamento_pct": 0.0029,
+     "chance_alvo_compra": 0.07,
+     "chance_stop_compra": 0.56,
+     "chance_alvo_venda": 0.04,
+     "chance_stop_venda": 0.56,
+     "valor_esperado_compra": -0.04,
+     "valor_esperado_venda": -0.12,
+     "financiamento_pct": 0.005,
      "noticias": [
       "Desenvolvedores do Ethereum agendam atualização do Glamsterdam para a rede de teste Hoodi em 15 de dezembro",
       "O preço do Ethereum sobe 3% conforme os desenvolvedores confirmam o teste de 15 de dezembro para atualização do Glamsterdam",
@@ -93,52 +93,52 @@
      "historico_desta_moeda": [],
      "simbolo": "ETHUSDT",
      "decisao": "FORA",
-     "confianca": 2,
-     "motivo": "A tendência de queda não é forte o suficiente para garantir vantagem e o risco de perda é alto.",
+     "confianca": 5,
+     "motivo": "A tendência de queda e o valor esperado negativo indicam risco alto sem vantagem clara para operar.",
      "cerebro": "Qwen 27B",
-     "quando": "2026-11-27T08:23",
+     "quando": "2026-11-27T08:34",
      "ev_escolhido": 0
     },
     {
      "moeda": "ZEC",
-     "preco": 752.83,
-     "stop_pct": 10.42,
-     "alvo_pct": 31.26,
-     "var_24h_pct": 3.61,
-     "var_7d_pct": -8.47,
+     "preco": 748.91,
+     "stop_pct": 10.47,
+     "alvo_pct": 31.42,
+     "var_24h_pct": 3.07,
+     "var_7d_pct": -8.95,
      "tendencia_4h": -0.67,
      "chance_alvo_compra": 0.03,
-     "chance_stop_compra": 0.39,
+     "chance_stop_compra": 0.4,
      "chance_alvo_venda": 0.01,
-     "chance_stop_venda": 0.43,
-     "valor_esperado_compra": 0.04,
-     "valor_esperado_venda": -0.04,
-     "financiamento_pct": 0.005,
+     "chance_stop_venda": 0.46,
+     "valor_esperado_compra": 0.06,
+     "valor_esperado_venda": -0.08,
+     "financiamento_pct": 0.0091,
      "noticias": [],
      "medo_ganancia": 12.0,
      "historico_desta_moeda": [],
      "simbolo": "ZECUSDT",
      "decisao": "FORA",
      "confianca": 3,
-     "motivo": "Nenhum sinal de vantagem clara na tendência nem no valor esperado",
+     "motivo": "Trend indica queda e expectativa negativa, então melhor ficar fora.",
      "cerebro": "GPT-OSS 20B",
-     "quando": "2026-11-27T08:25",
+     "quando": "2026-11-27T08:36",
      "ev_escolhido": 0
     },
     {
      "moeda": "SOL",
-     "preco": 73.53,
-     "stop_pct": 4.06,
-     "alvo_pct": 12.18,
-     "var_24h_pct": 3.74,
-     "var_7d_pct": 2.41,
+     "preco": 73.22,
+     "stop_pct": 4.09,
+     "alvo_pct": 12.26,
+     "var_24h_pct": 3.3,
+     "var_7d_pct": 1.98,
      "tendencia_4h": -0.67,
      "chance_alvo_compra": 0.08,
-     "chance_stop_compra": 0.55,
-     "chance_alvo_venda": 0.06,
-     "chance_stop_venda": 0.51,
-     "valor_esperado_compra": -0.03,
-     "valor_esperado_venda": 0.09,
+     "chance_stop_compra": 0.56,
+     "chance_alvo_venda": 0.05,
+     "chance_stop_venda": 0.53,
+     "valor_esperado_compra": 0.02,
+     "valor_esperado_venda": -0.03,
      "financiamento_pct": 0.01,
      "noticias": [
       "O que é criptografia UBR? Solana Token perto de US$ 2 mostra avaliação de US$ 2 bilhões"
@@ -146,26 +146,19 @@
      "medo_ganancia": 12.0,
      "historico_desta_moeda": [],
      "simbolo": "SOLUSDT",
-     "decisao": "VENDA",
-     "confianca": 3,
-     "motivo": "Tendência negativa e valor esperado positivo para venda",
+     "decisao": "FORA",
+     "confianca": 2,
+     "motivo": "Sem vantagem clara, tendência negativa e valor esperado negativo",
      "cerebro": "GPT-OSS 20B",
-     "quando": "2026-11-27T08:23",
-     "ev_escolhido": 0.09,
-     "comite": {
-      "aprova": true,
-      "motivo": "Tendência e valor esperado confirmam a venda",
-      "cerebro": "GPT-OSS 120B"
-     }
+     "quando": "2026-11-27T08:34",
+     "ev_escolhido": 0
     }
    ]
   },
   "andar2": {
    "nome": "COMITÊ DE RISCO",
    "trabalho": "ranking por valor esperado",
-   "ranking": [
-    "SOLUSDT"
-   ]
+   "ranking": []
   },
   "andar3": {
    "nome": "DIRETORIA",
@@ -5288,6 +5281,42 @@
    "cerebro": "GPT-OSS 20B",
    "preco": 73.53,
    "quando": "2026-11-27T08:23",
+   "resultado": null
+  },
+  {
+   "simbolo": "BTCUSDT",
+   "decisao": "FORA",
+   "confianca": 3,
+   "cerebro": "GPT-OSS 20B",
+   "preco": 61801.19,
+   "quando": "2026-11-27T08:34",
+   "resultado": null
+  },
+  {
+   "simbolo": "ETHUSDT",
+   "decisao": "FORA",
+   "confianca": 5,
+   "cerebro": "Qwen 27B",
+   "preco": 1731.65,
+   "quando": "2026-11-27T08:34",
+   "resultado": null
+  },
+  {
+   "simbolo": "ZECUSDT",
+   "decisao": "FORA",
+   "confianca": 3,
+   "cerebro": "GPT-OSS 20B",
+   "preco": 748.91,
+   "quando": "2026-11-27T08:36",
+   "resultado": null
+  },
+  {
+   "simbolo": "SOLUSDT",
+   "decisao": "FORA",
+   "confianca": 2,
+   "cerebro": "GPT-OSS 20B",
+   "preco": 73.22,
+   "quando": "2026-11-27T08:34",
    "resultado": null
   }
  ],
