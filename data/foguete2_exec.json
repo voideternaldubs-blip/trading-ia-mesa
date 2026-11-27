@@ -1807,5 +1807,87 @@
   "quando": "2026-11-27T15:32",
   "simbolo": "ETHUSDT",
   "erro": "Binance demo 400: {\"code\":-4164,\"msg\":\"Order's notional must be no smaller than 20 (unless you choose reduce only).\"}"
+ },
+ {
+  "quando": "2026-11-27T15:38",
+  "simbolo": "NEARUSDT",
+  "lado": "BUY",
+  "qtd": 1.0,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 666171329
+ },
+ {
+  "quando": "2026-11-27T15:38",
+  "simbolo": "BTCUSDT",
+  "erro": "Binance demo 400: {\"code\":-4164,\"msg\":\"Order's notional must be no smaller than 50 (unless you choose reduce only).\"}"
+ },
+ {
+  "quando": "2026-11-27T15:38",
+  "simbolo": "WLDUSDT",
+  "lado": "BUY",
+  "qtd": 28.0,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 558549852
+ },
+ {
+  "quando": "2026-11-27T15:38",
+  "simbolo": "ENAUSDT",
+  "lado": "BUY",
+  "qtd": 64.0,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 546091218
+ },
+ {
+  "quando": "2026-11-27T15:38",
+  "simbolo": "ADAUSDT",
+  "lado": "BUY",
+  "qtd": 31.0,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 1343890182
+ },
+ {
+  "quando": "2026-11-27T15:38",
+  "simbolo": "ZECUSDT",
+  "lado": "BUY",
+  "qtd": 0.004,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 3004161676
+ },
+ {
+  "quando": "2026-11-27T15:38",
+  "simbolo": "DOGEUSDT",
+  "lado": "BUY",
+  "qtd": 102.0,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 2399307712
+ },
+ {
+  "quando": "2026-11-27T15:38",
+  "simbolo": "SOLUSDT",
+  "lado": "BUY",
+  "qtd": 0.07,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 4252196548
+ },
+ {
+  "quando": "2026-11-27T15:38",
+  "simbolo": "ETHUSDT",
+  "erro": "Binance demo 400: {\"code\":-4164,\"msg\":\"Order's notional must be no smaller than 20 (unless you choose reduce only).\"}"
+ },
+ {
+  "quando": "2026-11-27T15:38",
+  "simbolo": "XRPUSDT",
+  "lado": "BUY",
+  "qtd": 5.5,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 3551533656
  }
 ]
