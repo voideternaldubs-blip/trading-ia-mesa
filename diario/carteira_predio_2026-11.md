@@ -6,3 +6,7 @@
 - ⚠️ BCHUSDT: ordem de saída falhou (Binance demo 400: {"code":-2022,"msg":"ReduceOnly Order is rejected."})
 - 🔴 CARTEIRA DO PRÉDIO fechou BCHUSDT no stop: -17.24 USD
 
+## 2026-11-27 05:48 UTC | CARTEIRA DO PRÉDIO 48.69 USD
+- ⚠️ TAOUSDT: ordem de saída falhou (Binance demo 400: {"code":-2022,"msg":"ReduceOnly Order is rejected."})
+- 🔴 CARTEIRA DO PRÉDIO fechou TAOUSDT no stop: -17.16 USD
+
