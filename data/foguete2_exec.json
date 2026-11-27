@@ -1377,5 +1377,23 @@
   "preco": 0.0,
   "status": "FILLED",
   "id": 4251869910
+ },
+ {
+  "quando": "2026-11-27T04:04",
+  "simbolo": "ZECUSDT",
+  "lado": "BUY",
+  "qtd": 0.006,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 3003943626
+ },
+ {
+  "quando": "2026-11-27T04:04",
+  "simbolo": "UNIUSDT",
+  "lado": "BUY",
+  "qtd": 2.0,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 500516603
  }
 ]
