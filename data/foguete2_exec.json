@@ -1494,5 +1494,14 @@
   "preco": 0.0,
   "status": "FILLED",
   "id": 4251940349
+ },
+ {
+  "quando": "2026-11-27T12:00",
+  "simbolo": "UNIUSDT",
+  "lado": "BUY",
+  "qtd": 1.0,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 500621458
  }
 ]
