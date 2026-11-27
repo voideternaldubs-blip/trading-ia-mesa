@@ -11,7 +11,7 @@
    "em": "2026-11-26T18:45",
    "tese": "GPT-OSS 20B disse VENDA (4/5): Tend\u00eancia negativa e valor esperado positivo para venda",
    "conferido_ate": "2026-11-27T05:07",
-   "atual": 187.6
+   "atual": 187.61
   }
  },
  "fechadas": [
@@ -2681,6 +2681,10 @@
   {
    "quando": "2026-11-27T05:08",
    "valor": 50.95
+  },
+  {
+   "quando": "2026-11-27T05:08",
+   "valor": 50.92
   }
  ],
  "modo": "Carteira do Pr\u00e9dio: a diretoria abre trades 1:3 sozinha com as IAs implantadas"
