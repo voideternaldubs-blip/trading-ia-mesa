@@ -11,7 +11,7 @@
    "em": "2026-11-26T13:52",
    "tese": "vendido a favor da tend\u00eancia de queda (m\u00e1quina do tempo: valor esperado positivo)",
    "conferido_ate": "2026-11-27T05:48",
-   "atual": 96.79
+   "atual": 96.76
   }
  },
  "fechadas": [
@@ -2998,6 +2998,10 @@
   {
    "quando": "2026-11-27T05:48",
    "valor": 68.99
+  },
+  {
+   "quando": "2026-11-27T05:48",
+   "valor": 69.05
   }
  ],
  "modo": "METODO 1:3 a favor da tend\u00eancia (vendido); probabilidades pela m\u00e1quina do tempo",
