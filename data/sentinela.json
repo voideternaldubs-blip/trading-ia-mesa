@@ -1,12 +1,12 @@
 {
- "gerado": "2026-11-27T20:20",
+ "gerado": "2026-11-27T21:06",
  "tudo_ok": false,
  "checks": [
   {
    "agente": "ARANHA",
    "ok": true,
-   "ultima_vez": "2026-11-27T20:20",
-   "horas": 0.0,
+   "ultima_vez": "2026-11-27T21:01",
+   "horas": 0.1,
    "esperado": "a cada 3h",
    "o_que_faz": "coleta e explica notícias do mundo"
   },
@@ -14,7 +14,7 @@
    "agente": "TENDÊNCIA CRIPTO",
    "ok": true,
    "ultima_vez": "2026-11-27T16:07",
-   "horas": 4.2,
+   "horas": 5.0,
    "esperado": "a cada 6h",
    "o_que_faz": "robô de futuros cripto"
   },
@@ -22,14 +22,14 @@
    "agente": "AÇÕES",
    "ok": true,
    "ultima_vez": "2026-11-26T21:00",
-   "horas": 23.3,
+   "horas": 24.1,
    "esperado": "a cada 80h",
    "o_que_faz": "robô de ETFs + Alpaca (dias úteis)"
   },
   {
    "agente": "CALENDÁRIO",
    "ok": true,
-   "ultima_vez": "2026-11-27T20:20",
+   "ultima_vez": "2026-11-27T21:06",
    "horas": 0.0,
    "esperado": "a cada 3h",
    "o_que_faz": "agenda do Fed, inflação e balanços"
@@ -38,7 +38,7 @@
    "agente": "SEC",
    "ok": false,
    "ultima_vez": "2026-11-27T16:08",
-   "horas": 4.2,
+   "horas": 5.0,
    "esperado": "a cada 3h",
    "o_que_faz": "documentos oficiais e compras de diretores"
   }
