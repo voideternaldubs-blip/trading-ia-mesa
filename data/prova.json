@@ -1,5 +1,5 @@
 {
- "gerado": "2026-11-27T06:12",
+ "gerado": "2026-11-27T06:14",
  "fim": "2026-11-30",
  "dias_restantes": 3,
  "robos": [
@@ -17,13 +17,13 @@
   {
    "robo": "Foguete v2 (Binance demo)",
    "inicial": 100.0,
-   "atual": 89.97,
-   "retorno_pct": -10.03,
+   "atual": 89.34,
+   "retorno_pct": -10.66,
    "operacoes": 37,
    "acerto_pct": 8.1,
    "ganho_medio": 0.09,
    "perda_media": -0.08,
-   "maior_queda_pct": -16.29
+   "maior_queda_pct": -16.63
   },
   {
    "robo": "Tendência cripto",
@@ -50,8 +50,8 @@
   {
    "robo": "IA pura (manual)",
    "inicial": 100.0,
-   "atual": 68.7,
-   "retorno_pct": -31.3,
+   "atual": 68.63,
+   "retorno_pct": -31.37,
    "operacoes": 8,
    "acerto_pct": 25.0,
    "ganho_medio": 1.0,
