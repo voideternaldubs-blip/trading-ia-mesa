@@ -6,8 +6,8 @@
   {
    "robo": "Carteira do Prédio",
    "inicial": 100.0,
-   "atual": 54.47,
-   "retorno_pct": -45.53,
+   "atual": 54.5,
+   "retorno_pct": -45.5,
    "operacoes": 2,
    "acerto_pct": 0.0,
    "ganho_medio": null,
