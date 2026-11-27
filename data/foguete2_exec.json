@@ -1395,5 +1395,95 @@
   "preco": 0.0,
   "status": "FILLED",
   "id": 500516603
+ },
+ {
+  "quando": "2026-11-27T05:33",
+  "simbolo": "XRPUSDT",
+  "lado": "BUY",
+  "qtd": 4.3,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 3551254539
+ },
+ {
+  "quando": "2026-11-27T05:33",
+  "simbolo": "ADAUSDT",
+  "lado": "BUY",
+  "qtd": 24.0,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 1343727620
+ },
+ {
+  "quando": "2026-11-27T05:33",
+  "simbolo": "BTCUSDT",
+  "lado": "BUY",
+  "qtd": 0.0001,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 28697384990
+ },
+ {
+  "quando": "2026-11-27T05:33",
+  "simbolo": "WLDUSDT",
+  "lado": "BUY",
+  "qtd": 22.0,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 558396452
+ },
+ {
+  "quando": "2026-11-27T05:33",
+  "simbolo": "ETHUSDT",
+  "lado": "BUY",
+  "qtd": 0.003,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 16882483089
+ },
+ {
+  "quando": "2026-11-27T05:33",
+  "simbolo": "SOLUSDT",
+  "lado": "BUY",
+  "qtd": 0.04,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 4251938158
+ },
+ {
+  "quando": "2026-11-27T05:33",
+  "simbolo": "DOGEUSDT",
+  "lado": "BUY",
+  "qtd": 79.0,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 2398949562
+ },
+ {
+  "quando": "2026-11-27T05:33",
+  "simbolo": "ENAUSDT",
+  "lado": "BUY",
+  "qtd": 50.0,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 545870668
+ },
+ {
+  "quando": "2026-11-27T05:33",
+  "simbolo": "ZECUSDT",
+  "lado": "BUY",
+  "qtd": 0.003,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 3003972680
+ },
+ {
+  "quando": "2026-11-27T05:33",
+  "simbolo": "BNBUSDT",
+  "lado": "BUY",
+  "qtd": 0.01,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 2686397722
  }
 ]
