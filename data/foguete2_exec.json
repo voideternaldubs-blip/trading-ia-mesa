@@ -1646,5 +1646,96 @@
   "quando": "2026-11-27T14:51",
   "simbolo": "ETHUSDT",
   "erro": "Binance demo 400: {\"code\":-4164,\"msg\":\"Order's notional must be no smaller than 20 (unless you choose reduce only).\"}"
+ },
+ {
+  "quando": "2026-11-27T14:57",
+  "simbolo": "BNBUSDT",
+  "lado": "SELL",
+  "qtd": 0.02,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 2686612774
+ },
+ {
+  "quando": "2026-11-27T14:57",
+  "simbolo": "ENAUSDT",
+  "lado": "SELL",
+  "qtd": 77.0,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 546077645
+ },
+ {
+  "quando": "2026-11-27T14:57",
+  "simbolo": "WLDUSDT",
+  "lado": "SELL",
+  "qtd": 34.0,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 558538188
+ },
+ {
+  "quando": "2026-11-27T14:57",
+  "simbolo": "DOGEUSDT",
+  "lado": "SELL",
+  "qtd": 122.0,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 2399278129
+ },
+ {
+  "quando": "2026-11-27T14:57",
+  "simbolo": "NEARUSDT",
+  "lado": "SELL",
+  "qtd": 2.0,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 666159708
+ },
+ {
+  "quando": "2026-11-27T14:57",
+  "simbolo": "XRPUSDT",
+  "lado": "SELL",
+  "qtd": 6.6,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 3551513422
+ },
+ {
+  "quando": "2026-11-27T14:57",
+  "simbolo": "BTCUSDT",
+  "erro": "Binance demo 400: {\"code\":-4164,\"msg\":\"Order's notional must be no smaller than 50 (unless you choose reduce only).\"}"
+ },
+ {
+  "quando": "2026-11-27T14:57",
+  "simbolo": "ETHUSDT",
+  "erro": "Binance demo 400: {\"code\":-4164,\"msg\":\"Order's notional must be no smaller than 20 (unless you choose reduce only).\"}"
+ },
+ {
+  "quando": "2026-11-27T14:57",
+  "simbolo": "ADAUSDT",
+  "lado": "SELL",
+  "qtd": 38.0,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 1343878884
+ },
+ {
+  "quando": "2026-11-27T14:57",
+  "simbolo": "SOLUSDT",
+  "lado": "SELL",
+  "qtd": 0.09,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 4252181695
+ },
+ {
+  "quando": "2026-11-27T14:57",
+  "simbolo": "ZECUSDT",
+  "lado": "SELL",
+  "qtd": 0.01,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 3004146214
  }
 ]
