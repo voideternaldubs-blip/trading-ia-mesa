@@ -1,6 +1,6 @@
 {
- "gerado": "2026-11-27T23:10",
- "segundos": 35,
+ "gerado": "2026-11-27T23:41",
+ "segundos": 83,
  "cerebros": {
   "GPT-OSS 120B": {
    "papel": "comite",
@@ -10,12 +10,12 @@
   "GPT-OSS 20B": {
    "papel": "analista",
    "limite_dia": 900,
-   "usados_hoje": 199
+   "usados_hoje": 201
   },
   "Qwen 27B": {
    "papel": "analista",
    "limite_dia": 900,
-   "usados_hoje": 111
+   "usados_hoje": 113
   },
   "Kimi K3.1": {
    "papel": "comite",
@@ -25,7 +25,7 @@
   "GLM 5.3": {
    "papel": "analista",
    "limite_dia": 5000,
-   "usados_hoje": 83
+   "usados_hoje": 84
   }
  },
  "andares": {
@@ -40,24 +40,24 @@
    "analistas": [
     {
      "moeda": "BTC",
-     "preco": 59818.17,
+     "preco": 59830.03,
      "stop_pct": 3.6,
      "alvo_pct": 10.81,
-     "var_24h_pct": -1.25,
-     "var_7d_pct": 1.47,
+     "var_24h_pct": -1.23,
+     "var_7d_pct": 1.49,
      "tendencia_4h": -0.67,
-     "chance_alvo_compra": 0.05,
-     "chance_stop_compra": 0.41,
-     "chance_alvo_venda": 0.03,
+     "chance_alvo_compra": 0.03,
+     "chance_stop_compra": 0.42,
+     "chance_alvo_venda": 0.01,
      "chance_stop_venda": 0.42,
-     "valor_esperado_compra": 0.12,
-     "valor_esperado_venda": 0.04,
+     "valor_esperado_compra": 0.09,
+     "valor_esperado_venda": -0.01,
      "financiamento_pct": 0.01,
      "noticias": [
+      "Mercado criptográfico hoje, 27 de novembro: Bitcoin cai abaixo de US$ 60.000 enquanto os mercados criptográficos lutam apesar da maior recuperação de Wall Street em mais de um ano",
+      "Os mineradores de Bitcoin estão em apuros quando a principal métrica atinge o nível mais baixo de todos os tempos",
       "Bitcoin abaixo de US$ 48 mil em 2026? Manifold Traders fixa o preço em 18%, já que as saídas de ETF atingem um recorde de US$ 5,39 bilhões",
-      "Bitcoin (BTC) enfrenta perdas históricas enquanto o IBIT da BlackRock registra saídas recordes",
-      "IREN está fazendo a transição da mineração de Bitcoin para a AI Cloud",
-      "Mercado criptográfico hoje, 27 de novembro: Bitcoin cai abaixo de US$ 60.000 enquanto os mercados criptográficos lutam apesar da maior recuperação de Wall Street em mais de um ano"
+      "Bitcoin (BTC) enfrenta perdas históricas enquanto o IBIT da BlackRock registra saídas recordes"
      ],
      "medo_ganancia": 12.0,
      "historico_desta_moeda": [
@@ -93,32 +93,27 @@
       }
      ],
      "simbolo": "BTCUSDT",
-     "decisao": "VENDA",
-     "confianca": 3,
-     "motivo": "Tendência 4h negativa indica venda, risco moderado.",
+     "decisao": "FORA",
+     "confianca": 1,
+     "motivo": "",
      "cerebro": "GPT-OSS 20B",
-     "quando": "2026-11-27T23:10",
-     "ev_escolhido": 0.04,
-     "comite": {
-      "aprova": true,
-      "motivo": "Tendência e valor esperado suportam a venda",
-      "cerebro": "GPT-OSS 120B"
-     }
+     "quando": "2026-11-27T23:40",
+     "ev_escolhido": 0
     },
     {
      "moeda": "ETH",
-     "preco": 1658.69,
+     "preco": 1659.71,
      "stop_pct": 4.44,
      "alvo_pct": 13.31,
-     "var_24h_pct": -1.84,
-     "var_7d_pct": 2.19,
+     "var_24h_pct": -1.78,
+     "var_7d_pct": 2.26,
      "tendencia_4h": -0.67,
-     "chance_alvo_compra": 0.04,
-     "chance_stop_compra": 0.5,
+     "chance_alvo_compra": 0.05,
+     "chance_stop_compra": 0.45,
      "chance_alvo_venda": 0.04,
-     "chance_stop_venda": 0.46,
-     "valor_esperado_compra": -0.04,
-     "valor_esperado_venda": -0.0,
+     "chance_stop_venda": 0.49,
+     "valor_esperado_compra": 0.09,
+     "valor_esperado_venda": -0.04,
      "financiamento_pct": 0.01,
      "noticias": [
       "O que há no roteiro Ethereum: Glamsterdam, Hegotá e além"
@@ -158,26 +153,26 @@
      ],
      "simbolo": "ETHUSDT",
      "decisao": "FORA",
-     "confianca": 2,
-     "motivo": "A tendência aponta para baixo, mas o histórico recente mostra que vendas nessa moeda têm errado consistentemente, gerando perdas.",
+     "confianca": 4,
+     "motivo": "A tendência é de queda, mas o histórico mostra que vender ETH tem dado prejuízo constante, então é melhor ficar de fora.",
      "cerebro": "Qwen 27B",
-     "quando": "2026-11-27T23:10",
+     "quando": "2026-11-27T23:40",
      "ev_escolhido": 0
     },
     {
      "moeda": "SOL",
-     "preco": 71.53,
-     "stop_pct": 4.34,
-     "alvo_pct": 13.03,
-     "var_24h_pct": 0.7,
-     "var_7d_pct": 3.85,
+     "preco": 71.5,
+     "stop_pct": 4.37,
+     "alvo_pct": 13.11,
+     "var_24h_pct": 0.66,
+     "var_7d_pct": 3.8,
      "tendencia_4h": -0.67,
-     "chance_alvo_compra": 0.09,
-     "chance_stop_compra": 0.51,
-     "chance_alvo_venda": 0.05,
-     "chance_stop_venda": 0.53,
-     "valor_esperado_compra": 0.12,
-     "valor_esperado_venda": -0.04,
+     "chance_alvo_compra": 0.06,
+     "chance_stop_compra": 0.52,
+     "chance_alvo_venda": 0.04,
+     "chance_stop_venda": 0.54,
+     "valor_esperado_compra": 0.02,
+     "valor_esperado_venda": -0.05,
      "financiamento_pct": 0.01,
      "noticias": [],
      "medo_ganancia": 12.0,
@@ -218,23 +213,23 @@
      "confianca": 1,
      "motivo": "",
      "cerebro": "GLM 5.3",
-     "quando": "2026-11-27T23:10",
+     "quando": "2026-11-27T23:41",
      "ev_escolhido": 0
     },
     {
      "moeda": "ZEC",
-     "preco": 730.32,
-     "stop_pct": 11.19,
-     "alvo_pct": 33.56,
-     "var_24h_pct": 7.0,
-     "var_7d_pct": -3.94,
+     "preco": 730.69,
+     "stop_pct": 11.18,
+     "alvo_pct": 33.54,
+     "var_24h_pct": 7.06,
+     "var_7d_pct": -3.89,
      "tendencia_4h": -0.67,
-     "chance_alvo_compra": 0.03,
-     "chance_stop_compra": 0.35,
+     "chance_alvo_compra": 0.04,
+     "chance_stop_compra": 0.36,
      "chance_alvo_venda": 0.0,
-     "chance_stop_venda": 0.42,
-     "valor_esperado_compra": 0.06,
-     "valor_esperado_venda": -0.12,
+     "chance_stop_venda": 0.4,
+     "valor_esperado_compra": 0.08,
+     "valor_esperado_venda": -0.06,
      "financiamento_pct": 0.01,
      "noticias": [],
      "medo_ganancia": 12.0,
@@ -273,25 +268,25 @@
      "simbolo": "ZECUSDT",
      "decisao": "FORA",
      "confianca": 4,
-     "motivo": "Não há vantagem clara e histórico mostra perdas ao vender",
+     "motivo": "Sem vantagem clara, melhor ficar fora.",
      "cerebro": "GPT-OSS 20B",
-     "quando": "2026-11-27T23:10",
+     "quando": "2026-11-27T23:40",
      "ev_escolhido": 0
     },
     {
      "moeda": "XRP",
-     "preco": 0.9462,
-     "stop_pct": 4.5,
-     "alvo_pct": 13.5,
-     "var_24h_pct": 0.25,
-     "var_7d_pct": 3.9,
+     "preco": 0.948,
+     "stop_pct": 4.49,
+     "alvo_pct": 13.47,
+     "var_24h_pct": 0.45,
+     "var_7d_pct": 4.1,
      "tendencia_4h": -0.67,
-     "chance_alvo_compra": 0.05,
-     "chance_stop_compra": 0.51,
-     "chance_alvo_venda": 0.04,
-     "chance_stop_venda": 0.5,
-     "valor_esperado_compra": -0.04,
-     "valor_esperado_venda": 0.0,
+     "chance_alvo_compra": 0.06,
+     "chance_stop_compra": 0.48,
+     "chance_alvo_venda": 0.01,
+     "chance_stop_venda": 0.51,
+     "valor_esperado_compra": 0.02,
+     "valor_esperado_venda": -0.09,
      "financiamento_pct": 0.01,
      "noticias": [
       "Preço XRP em 27 de novembro de 2026 às 19h EST Mercado de previsão de criptografia",
@@ -335,9 +330,9 @@
      "simbolo": "XRPUSDT",
      "decisao": "FORA",
      "confianca": 2,
-     "motivo": "Tendência fraca e valor esperado neutro não justificam o risco.",
+     "motivo": "Tendência fraca e valor esperado da venda negativo, sem vantagem clara para operar.",
      "cerebro": "Qwen 27B",
-     "quando": "2026-11-27T23:10",
+     "quando": "2026-11-27T23:40",
      "ev_escolhido": 0
     }
    ]
@@ -345,9 +340,7 @@
   "andar2": {
    "nome": "COMITÊ DE RISCO",
    "trabalho": "ranking por valor esperado",
-   "ranking": [
-    "BTCUSDT"
-   ]
+   "ranking": []
   },
   "andar3": {
    "nome": "DIRETORIA",
@@ -7226,6 +7219,51 @@
    "cerebro": "Qwen 27B",
    "preco": 0.9462,
    "quando": "2026-11-27T23:10",
+   "resultado": null
+  },
+  {
+   "simbolo": "BTCUSDT",
+   "decisao": "FORA",
+   "confianca": 1,
+   "cerebro": "GPT-OSS 20B",
+   "preco": 59830.03,
+   "quando": "2026-11-27T23:40",
+   "resultado": null
+  },
+  {
+   "simbolo": "ETHUSDT",
+   "decisao": "FORA",
+   "confianca": 4,
+   "cerebro": "Qwen 27B",
+   "preco": 1659.71,
+   "quando": "2026-11-27T23:40",
+   "resultado": null
+  },
+  {
+   "simbolo": "SOLUSDT",
+   "decisao": "FORA",
+   "confianca": 1,
+   "cerebro": "GLM 5.3",
+   "preco": 71.5,
+   "quando": "2026-11-27T23:41",
+   "resultado": null
+  },
+  {
+   "simbolo": "ZECUSDT",
+   "decisao": "FORA",
+   "confianca": 4,
+   "cerebro": "GPT-OSS 20B",
+   "preco": 730.69,
+   "quando": "2026-11-27T23:40",
+   "resultado": null
+  },
+  {
+   "simbolo": "XRPUSDT",
+   "decisao": "FORA",
+   "confianca": 2,
+   "cerebro": "Qwen 27B",
+   "preco": 0.948,
+   "quando": "2026-11-27T23:40",
    "resultado": null
   }
  ],
