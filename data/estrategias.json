@@ -1,5 +1,5 @@
 {
- "gerado": "2026-11-26T18:45",
+ "gerado": "2026-11-27T11:50",
  "periodo_1h": "2025-01-01 até hoje",
  "periodo_5m": "últimos 120 dias",
  "moedas_1h": [
@@ -41,11 +41,11 @@
   {
    "estrategia": "Strategy003",
    "tempo": "5m",
-   "trades": 185,
-   "acerto_pct": 64.9,
-   "media_trade_pct": 0.088,
-   "fator_lucro": 1.27,
-   "retorno_medio_moeda_pct": 1.6
+   "trades": 187,
+   "acerto_pct": 65.2,
+   "media_trade_pct": 0.095,
+   "fator_lucro": 1.29,
+   "retorno_medio_moeda_pct": 1.7
   },
   {
    "estrategia": "ClucMay72018",
@@ -113,29 +113,29 @@
   {
    "estrategia": "Quickie",
    "tempo": "5m",
-   "trades": 362,
-   "acerto_pct": 93.1,
-   "media_trade_pct": -0.406,
-   "fator_lucro": 0.69,
-   "retorno_medio_moeda_pct": -19.0
+   "trades": 366,
+   "acerto_pct": 93.7,
+   "media_trade_pct": -0.363,
+   "fator_lucro": 0.71,
+   "retorno_medio_moeda_pct": -17.7
   },
   {
    "estrategia": "MACDStrategy",
    "tempo": "5m",
-   "trades": 389,
-   "acerto_pct": 94.3,
-   "media_trade_pct": -0.372,
+   "trades": 377,
+   "acerto_pct": 95.0,
+   "media_trade_pct": -0.364,
    "fator_lucro": 0.71,
-   "retorno_medio_moeda_pct": -20.3
+   "retorno_medio_moeda_pct": -19.5
   },
   {
    "estrategia": "Strategy005",
    "tempo": "5m",
-   "trades": 272,
-   "acerto_pct": 80.5,
-   "media_trade_pct": -0.784,
-   "fator_lucro": 0.59,
-   "retorno_medio_moeda_pct": -20.6
+   "trades": 273,
+   "acerto_pct": 81.0,
+   "media_trade_pct": -0.764,
+   "fator_lucro": 0.6,
+   "retorno_medio_moeda_pct": -20.3
   },
   {
    "estrategia": "DoubleEMACrossoverWithTrend",
@@ -149,25 +149,25 @@
   {
    "estrategia": "Strategy001",
    "tempo": "5m",
-   "trades": 673,
-   "acerto_pct": 84.2,
-   "media_trade_pct": -0.471,
-   "fator_lucro": 0.63,
-   "retorno_medio_moeda_pct": -29.9
+   "trades": 682,
+   "acerto_pct": 85.0,
+   "media_trade_pct": -0.44,
+   "fator_lucro": 0.65,
+   "retorno_medio_moeda_pct": -28.7
   },
   {
    "estrategia": "BbandRsi",
    "tempo": "1h",
    "trades": 1337,
    "acerto_pct": 61.6,
-   "media_trade_pct": -0.434,
+   "media_trade_pct": -0.427,
    "fator_lucro": 0.88,
-   "retorno_medio_moeda_pct": -40.8
+   "retorno_medio_moeda_pct": -40.7
   },
   {
    "estrategia": "AdxSmas",
    "tempo": "1h",
-   "trades": 4418,
+   "trades": 4420,
    "acerto_pct": 45.5,
    "media_trade_pct": -0.199,
    "fator_lucro": 0.88,
@@ -176,38 +176,38 @@
   {
    "estrategia": "NOSSA tendência (Donchian, só compra)",
    "tempo": "1h",
-   "trades": 804,
-   "acerto_pct": 27.4,
-   "media_trade_pct": -1.784,
+   "trades": 805,
+   "acerto_pct": 27.6,
+   "media_trade_pct": -1.775,
    "fator_lucro": 0.63,
-   "retorno_medio_moeda_pct": -53.4
+   "retorno_medio_moeda_pct": -53.3
   },
   {
    "estrategia": "Supertrend",
    "tempo": "1h",
-   "trades": 4067,
-   "acerto_pct": 51.5,
-   "media_trade_pct": -0.292,
+   "trades": 4078,
+   "acerto_pct": 51.6,
+   "media_trade_pct": -0.286,
    "fator_lucro": 0.86,
-   "retorno_medio_moeda_pct": -53.9
+   "retorno_medio_moeda_pct": -53.5
   },
   {
    "estrategia": "ADXMomentum",
    "tempo": "1h",
-   "trades": 11088,
+   "trades": 11104,
    "acerto_pct": 82.6,
-   "media_trade_pct": -0.153,
+   "media_trade_pct": -0.151,
    "fator_lucro": 0.83,
-   "retorno_medio_moeda_pct": -60.3
+   "retorno_medio_moeda_pct": -59.9
   },
   {
    "estrategia": "Comprar e segurar",
    "tempo": "1h",
    "trades": 20,
    "acerto_pct": 5.0,
-   "media_trade_pct": -63.053,
+   "media_trade_pct": -62.4,
    "fator_lucro": 0.01,
-   "retorno_medio_moeda_pct": -63.1
+   "retorno_medio_moeda_pct": -62.4
   }
  ]
 }
