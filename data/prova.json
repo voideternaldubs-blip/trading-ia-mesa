@@ -50,13 +50,13 @@
   {
    "robo": "IA pura (manual)",
    "inicial": 100.0,
-   "atual": 71.76,
-   "retorno_pct": -28.24,
+   "atual": 71.78,
+   "retorno_pct": -28.22,
    "operacoes": 8,
    "acerto_pct": 25.0,
    "ganho_medio": 1.0,
    "perda_media": -4.47,
-   "maior_queda_pct": -33.01
+   "maior_queda_pct": -32.7
   },
   {
    "robo": "Foguete de ações (Alpaca)",
