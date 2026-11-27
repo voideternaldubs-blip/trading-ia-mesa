@@ -6,24 +6,24 @@
   {
    "robo": "Carteira do Prédio",
    "inicial": 100.0,
-   "atual": 50.86,
-   "retorno_pct": -49.14,
+   "atual": 50.77,
+   "retorno_pct": -49.23,
    "operacoes": 2,
    "acerto_pct": 0.0,
    "ganho_medio": null,
    "perda_media": -17.07,
-   "maior_queda_pct": -49.14
+   "maior_queda_pct": -49.23
   },
   {
    "robo": "Foguete v2 (Binance demo)",
    "inicial": 100.0,
-   "atual": 91.16,
-   "retorno_pct": -8.84,
+   "atual": 91.09,
+   "retorno_pct": -8.91,
    "operacoes": 27,
    "acerto_pct": 11.1,
    "ganho_medio": 0.09,
    "perda_media": -0.06,
-   "maior_queda_pct": -14.93
+   "maior_queda_pct": -15.0
   },
   {
    "robo": "Tendência cripto",
@@ -50,8 +50,8 @@
   {
    "robo": "IA pura (manual)",
    "inicial": 100.0,
-   "atual": 68.35,
-   "retorno_pct": -31.65,
+   "atual": 68.41,
+   "retorno_pct": -31.59,
    "operacoes": 8,
    "acerto_pct": 25.0,
    "ganho_medio": 1.0,
