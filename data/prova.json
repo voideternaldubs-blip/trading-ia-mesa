@@ -6,13 +6,13 @@
   {
    "robo": "Carteira do Prédio",
    "inicial": 100.0,
-   "atual": 51.07,
-   "retorno_pct": -48.93,
+   "atual": 51.01,
+   "retorno_pct": -48.99,
    "operacoes": 2,
    "acerto_pct": 0.0,
    "ganho_medio": null,
    "perda_media": -17.07,
-   "maior_queda_pct": -48.93
+   "maior_queda_pct": -48.99
   },
   {
    "robo": "Foguete v2 (Binance demo)",
@@ -50,13 +50,13 @@
   {
    "robo": "IA pura (manual)",
    "inicial": 100.0,
-   "atual": 68.39,
-   "retorno_pct": -31.61,
+   "atual": 68.37,
+   "retorno_pct": -31.63,
    "operacoes": 8,
    "acerto_pct": 25.0,
    "ganho_medio": 1.0,
    "perda_media": -4.47,
-   "maior_queda_pct": -36.16
+   "maior_queda_pct": -36.18
   },
   {
    "robo": "Foguete de ações (Alpaca)",
