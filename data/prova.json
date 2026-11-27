@@ -1,5 +1,5 @@
 {
- "gerado": "2026-11-27T09:10",
+ "gerado": "2026-11-27T09:12",
  "fim": "2026-11-30",
  "dias_restantes": 3,
  "robos": [
@@ -50,8 +50,8 @@
   {
    "robo": "IA pura (manual)",
    "inicial": 100.0,
-   "atual": 68.13,
-   "retorno_pct": -31.87,
+   "atual": 68.02,
+   "retorno_pct": -31.98,
    "operacoes": 8,
    "acerto_pct": 25.0,
    "ganho_medio": 1.0,
