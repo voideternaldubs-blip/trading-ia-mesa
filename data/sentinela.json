@@ -1,20 +1,20 @@
 {
- "gerado": "2026-11-28T13:38",
+ "gerado": "2026-11-28T14:19",
  "tudo_ok": false,
  "checks": [
   {
    "agente": "ARANHA",
    "ok": true,
-   "ultima_vez": "2026-11-28T13:38",
+   "ultima_vez": "2026-11-28T14:19",
    "horas": 0.0,
    "esperado": "a cada 3h",
    "o_que_faz": "coleta e explica notícias do mundo"
   },
   {
    "agente": "TENDÊNCIA CRIPTO",
-   "ok": true,
+   "ok": false,
    "ultima_vez": "2026-11-28T08:09",
-   "horas": 5.5,
+   "horas": 6.2,
    "esperado": "a cada 6h",
    "o_que_faz": "robô de futuros cripto"
   },
@@ -22,14 +22,14 @@
    "agente": "AÇÕES",
    "ok": true,
    "ultima_vez": "2026-11-26T21:00",
-   "horas": 40.6,
+   "horas": 41.3,
    "esperado": "a cada 80h",
    "o_que_faz": "robô de ETFs + Alpaca (dias úteis)"
   },
   {
    "agente": "CALENDÁRIO",
    "ok": true,
-   "ultima_vez": "2026-11-28T13:38",
+   "ultima_vez": "2026-11-28T14:19",
    "horas": 0.0,
    "esperado": "a cada 3h",
    "o_que_faz": "agenda do Fed, inflação e balanços"
@@ -38,10 +38,10 @@
    "agente": "SEC",
    "ok": false,
    "ultima_vez": "2026-11-28T10:13",
-   "horas": 3.4,
+   "horas": 4.1,
    "esperado": "a cada 3h",
    "o_que_faz": "documentos oficiais e compras de diretores"
   }
  ],
- "resumo": "ATENÇÃO: SEC atrasado(s)."
+ "resumo": "ATENÇÃO: TENDÊNCIA CRIPTO, SEC atrasado(s)."
 }
