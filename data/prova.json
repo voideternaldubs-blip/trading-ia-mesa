@@ -1,5 +1,5 @@
 {
- "gerado": "2026-11-28T17:08",
+ "gerado": "2026-11-28T17:09",
  "fim": "2026-11-30",
  "dias_restantes": 2,
  "robos": [
@@ -17,8 +17,8 @@
   {
    "robo": "Foguete v2 (Binance demo)",
    "inicial": 100.0,
-   "atual": 103.04,
-   "retorno_pct": 3.04,
+   "atual": 103.17,
+   "retorno_pct": 3.17,
    "operacoes": 51,
    "acerto_pct": 13.7,
    "ganho_medio": 0.06,
