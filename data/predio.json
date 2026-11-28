@@ -1,6 +1,6 @@
 {
- "gerado": "2026-11-28T04:29",
- "segundos": 98,
+ "gerado": "2026-11-28T04:41",
+ "segundos": 97,
  "cerebros": {
   "GPT-OSS 120B": {
    "papel": "comite",
@@ -10,12 +10,12 @@
   "GPT-OSS 20B": {
    "papel": "analista",
    "limite_dia": 900,
-   "usados_hoje": 37
+   "usados_hoje": 40
   },
   "Qwen 27B": {
    "papel": "analista",
    "limite_dia": 900,
-   "usados_hoje": 23
+   "usados_hoje": 24
   },
   "Kimi K3.1": {
    "papel": "comite",
@@ -25,7 +25,7 @@
   "GLM 5.3": {
    "papel": "analista",
    "limite_dia": 5000,
-   "usados_hoje": 16
+   "usados_hoje": 17
   }
  },
  "andares": {
@@ -40,18 +40,18 @@
    "analistas": [
     {
      "moeda": "BTC",
-     "preco": 60022.0,
+     "preco": 60018.01,
      "stop_pct": 3.0,
-     "alvo_pct": 9.0,
+     "alvo_pct": 9.01,
      "var_24h_pct": -2.68,
-     "var_7d_pct": 3.49,
+     "var_7d_pct": 3.48,
      "tendencia_4h": -0.67,
-     "chance_alvo_compra": 0.09,
-     "chance_stop_compra": 0.55,
-     "chance_alvo_venda": 0.04,
-     "chance_stop_venda": 0.54,
-     "valor_esperado_compra": 0.03,
-     "valor_esperado_venda": -0.05,
+     "chance_alvo_compra": 0.06,
+     "chance_stop_compra": 0.57,
+     "chance_alvo_venda": 0.05,
+     "chance_stop_venda": 0.55,
+     "valor_esperado_compra": -0.04,
+     "valor_esperado_venda": -0.06,
      "financiamento_pct": 0.01,
      "noticias": [
       "Chamath Palihapitiya adverte que a ‘matemática alienígena’ da IA ​​pode quebrar o Bitcoin enquanto a IA aborda a hipótese de Riemann, de 167 anos",
@@ -93,33 +93,27 @@
       }
      ],
      "simbolo": "BTCUSDT",
-     "decisao": "VENDA",
+     "decisao": "FORA",
      "confianca": 3,
-     "motivo": "Tendência indica queda, então vendemos.",
+     "motivo": "Sem vantagem clara, melhor ficar fora",
      "cerebro": "GPT-OSS 20B",
-     "quando": "2026-11-28T04:28",
-     "ev_escolhido": -0.05,
-     "comite": {
-      "aprova": false,
-      "motivo": "Tendência baixa, mas valor esperado de venda negativo.",
-      "cerebro": "GPT-OSS 120B"
-     },
-     "vetado": true
+     "quando": "2026-11-28T04:39",
+     "ev_escolhido": 0
     },
     {
      "moeda": "ETH",
-     "preco": 1665.35,
-     "stop_pct": 3.81,
-     "alvo_pct": 11.43,
-     "var_24h_pct": -4.04,
-     "var_7d_pct": 2.11,
+     "preco": 1664.41,
+     "stop_pct": 3.84,
+     "alvo_pct": 11.53,
+     "var_24h_pct": -4.09,
+     "var_7d_pct": 2.05,
      "tendencia_4h": -0.67,
-     "chance_alvo_compra": 0.08,
-     "chance_stop_compra": 0.56,
-     "chance_alvo_venda": 0.06,
-     "chance_stop_venda": 0.56,
-     "valor_esperado_compra": 0.01,
-     "valor_esperado_venda": -0.06,
+     "chance_alvo_compra": 0.06,
+     "chance_stop_compra": 0.53,
+     "chance_alvo_venda": 0.03,
+     "chance_stop_venda": 0.54,
+     "valor_esperado_compra": -0.01,
+     "valor_esperado_venda": -0.11,
      "financiamento_pct": 0.01,
      "noticias": [
       "O que há no roteiro Ethereum: Glamsterdam, Hegotá e além"
@@ -160,25 +154,25 @@
      "simbolo": "ETHUSDT",
      "decisao": "FORA",
      "confianca": 5,
-     "motivo": "A tendência aponta para baixo, mas o histórico recente mostra que vendas nessa moeda têm errado consistentemente, indicando reversão ou falta de força vendedora.",
+     "motivo": "A tendência aponta queda, mas o histórico mostra que vender ETH tem dado lucro consistente, enquanto a máquina do tempo indica risco alto para venda e neutralidade para compra, sugerindo falta de vantagem clara.",
      "cerebro": "Qwen 27B",
-     "quando": "2026-11-28T04:28",
+     "quando": "2026-11-28T04:39",
      "ev_escolhido": 0
     },
     {
      "moeda": "SOL",
-     "preco": 71.67,
-     "stop_pct": 3.6,
-     "alvo_pct": 10.81,
-     "var_24h_pct": -2.21,
-     "var_7d_pct": 6.3,
+     "preco": 71.65,
+     "stop_pct": 3.64,
+     "alvo_pct": 10.93,
+     "var_24h_pct": -2.24,
+     "var_7d_pct": 6.27,
      "tendencia_4h": -0.67,
-     "chance_alvo_compra": 0.1,
+     "chance_alvo_compra": 0.12,
      "chance_stop_compra": 0.59,
      "chance_alvo_venda": 0.1,
-     "chance_stop_venda": 0.6,
-     "valor_esperado_compra": -0.02,
-     "valor_esperado_venda": -0.01,
+     "chance_stop_venda": 0.57,
+     "valor_esperado_compra": 0.06,
+     "valor_esperado_venda": 0.02,
      "financiamento_pct": 0.01,
      "noticias": [],
      "medo_ganancia": 10.0,
@@ -215,32 +209,27 @@
       }
      ],
      "simbolo": "SOLUSDT",
-     "decisao": "VENDA",
-     "confianca": 3,
-     "motivo": "Tendência negativa indica queda, então venda.",
+     "decisao": "FORA",
+     "confianca": 4,
+     "motivo": "Sem vantagem clara, melhor ficar fora",
      "cerebro": "GPT-OSS 20B",
-     "quando": "2026-11-28T04:29",
-     "ev_escolhido": -0.01,
-     "comite": {
-      "aprova": true,
-      "motivo": "Tendência 4h negativa e valor esperado de venda mais favorável confirmam a decisão",
-      "cerebro": "GPT-OSS 120B"
-     }
+     "quando": "2026-11-28T04:41",
+     "ev_escolhido": 0
     },
     {
      "moeda": "ZEC",
-     "preco": 749.19,
-     "stop_pct": 9.5,
-     "alvo_pct": 28.51,
-     "var_24h_pct": 0.91,
-     "var_7d_pct": 3.31,
+     "preco": 750.98,
+     "stop_pct": 9.51,
+     "alvo_pct": 28.52,
+     "var_24h_pct": 1.15,
+     "var_7d_pct": 3.56,
      "tendencia_4h": -0.67,
      "chance_alvo_compra": 0.05,
-     "chance_stop_compra": 0.41,
+     "chance_stop_compra": 0.4,
      "chance_alvo_venda": 0.01,
-     "chance_stop_venda": 0.44,
-     "valor_esperado_compra": 0.04,
-     "valor_esperado_venda": -0.02,
+     "chance_stop_venda": 0.48,
+     "valor_esperado_compra": 0.1,
+     "valor_esperado_venda": -0.08,
      "financiamento_pct": 0.01,
      "noticias": [],
      "medo_ganancia": 10.0,
@@ -279,9 +268,9 @@
      "simbolo": "ZECUSDT",
      "decisao": "FORA",
      "confianca": 4,
-     "motivo": "Não há vantagem clara, histórico negativo e valor esperado negativo",
+     "motivo": "Não há vantagem clara e histórico mostra perdas",
      "cerebro": "GPT-OSS 20B",
-     "quando": "2026-11-28T04:28",
+     "quando": "2026-11-28T04:39",
      "ev_escolhido": 0
     }
    ]
@@ -289,9 +278,7 @@
   "andar2": {
    "nome": "COMITÊ DE RISCO",
    "trabalho": "ranking por valor esperado",
-   "ranking": [
-    "SOLUSDT"
-   ]
+   "ranking": []
   },
   "andar3": {
    "nome": "DIRETORIA",
@@ -7818,6 +7805,42 @@
    "cerebro": "GPT-OSS 20B",
    "preco": 749.19,
    "quando": "2026-11-28T04:28",
+   "resultado": null
+  },
+  {
+   "simbolo": "BTCUSDT",
+   "decisao": "FORA",
+   "confianca": 3,
+   "cerebro": "GPT-OSS 20B",
+   "preco": 60018.01,
+   "quando": "2026-11-28T04:39",
+   "resultado": null
+  },
+  {
+   "simbolo": "ETHUSDT",
+   "decisao": "FORA",
+   "confianca": 5,
+   "cerebro": "Qwen 27B",
+   "preco": 1664.41,
+   "quando": "2026-11-28T04:39",
+   "resultado": null
+  },
+  {
+   "simbolo": "SOLUSDT",
+   "decisao": "FORA",
+   "confianca": 4,
+   "cerebro": "GPT-OSS 20B",
+   "preco": 71.65,
+   "quando": "2026-11-28T04:41",
+   "resultado": null
+  },
+  {
+   "simbolo": "ZECUSDT",
+   "decisao": "FORA",
+   "confianca": 4,
+   "cerebro": "GPT-OSS 20B",
+   "preco": 750.98,
+   "quando": "2026-11-28T04:39",
    "resultado": null
   }
  ],
