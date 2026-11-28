@@ -1,21 +1,21 @@
 {
- "gerado": "2026-11-28T16:18",
+ "gerado": "2026-11-28T16:29",
  "segundos": 99,
  "cerebros": {
   "GPT-OSS 120B": {
    "papel": "comite",
    "limite_dia": 900,
-   "usados_hoje": 51
+   "usados_hoje": 52
   },
   "GPT-OSS 20B": {
    "papel": "analista",
    "limite_dia": 900,
-   "usados_hoje": 141
+   "usados_hoje": 143
   },
   "Qwen 27B": {
    "papel": "analista",
    "limite_dia": 900,
-   "usados_hoje": 94
+   "usados_hoje": 95
   },
   "Kimi K3.1": {
    "papel": "comite",
@@ -25,7 +25,7 @@
   "GLM 5.3": {
    "papel": "analista",
    "limite_dia": 5000,
-   "usados_hoje": 63
+   "usados_hoje": 64
   }
  },
  "andares": {
@@ -40,23 +40,24 @@
    "analistas": [
     {
      "moeda": "BTC",
-     "preco": 59483.12,
+     "preco": 59469.92,
      "stop_pct": 3.0,
      "alvo_pct": 9.0,
-     "var_24h_pct": -0.71,
-     "var_7d_pct": -1.46,
+     "var_24h_pct": -0.74,
+     "var_7d_pct": -1.48,
      "tendencia_4h": -0.67,
-     "chance_alvo_compra": 0.09,
-     "chance_stop_compra": 0.51,
-     "chance_alvo_venda": 0.07,
+     "chance_alvo_compra": 0.06,
+     "chance_stop_compra": 0.55,
+     "chance_alvo_venda": 0.05,
      "chance_stop_venda": 0.51,
-     "valor_esperado_compra": 0.11,
-     "valor_esperado_venda": 0.07,
-     "financiamento_pct": 0.0065,
+     "valor_esperado_compra": -0.04,
+     "valor_esperado_venda": -0.05,
+     "financiamento_pct": 0.0081,
      "noticias": [
+      "Bitcoin Price Prediction: Can BTC Catch Up With the Nasdaq Before December?",
+      "Bitcoin Price Analysis: Why BTC’s Compression Below $60K Could Spark an Extended Consolidation",
       "Claude AI responde à afirmação de Chamath Palihapitiya de que a IA poderia quebrar o Bitcoin",
-      "Probabilidades do Polymarket hoje: Liubliana, Bitcoin $ 55K, Clemson",
-      "Claude AI responde à afirmação de Chamath Palihapitiya de que a IA poderia quebrar o Bitcoin"
+      "Probabilidades do Polymarket hoje: Liubliana, Bitcoin $ 55K, Clemson"
      ],
      "medo_ganancia": 10.0,
      "historico_desta_moeda": [
@@ -94,31 +95,30 @@
      "simbolo": "BTCUSDT",
      "decisao": "VENDA",
      "confianca": 3,
-     "motivo": "Tendência negativa indica venda",
+     "motivo": "Tendência negativa indica venda, risco baixo",
      "cerebro": "GPT-OSS 20B",
-     "quando": "2026-11-28T16:16",
-     "ev_escolhido": 0.07,
+     "quando": "2026-11-28T16:28",
+     "ev_escolhido": -0.05,
      "comite": {
-      "aprova": false,
-      "motivo": "Tendência indica venda, mas valor esperado da venda é menor que o da compra",
+      "aprova": true,
+      "motivo": "Tendência e valor esperado confirmam a venda",
       "cerebro": "GPT-OSS 120B"
-     },
-     "vetado": true
+     }
     },
     {
      "moeda": "ETH",
-     "preco": 1648.87,
-     "stop_pct": 3.72,
-     "alvo_pct": 11.15,
-     "var_24h_pct": -1.34,
-     "var_7d_pct": -2.28,
+     "preco": 1648.51,
+     "stop_pct": 3.73,
+     "alvo_pct": 11.2,
+     "var_24h_pct": -1.36,
+     "var_7d_pct": -2.3,
      "tendencia_4h": -0.67,
      "chance_alvo_compra": 0.1,
-     "chance_stop_compra": 0.51,
-     "chance_alvo_venda": 0.07,
-     "chance_stop_venda": 0.53,
-     "valor_esperado_compra": 0.08,
-     "valor_esperado_venda": 0.06,
+     "chance_stop_compra": 0.54,
+     "chance_alvo_venda": 0.05,
+     "chance_stop_venda": 0.57,
+     "valor_esperado_compra": 0.05,
+     "valor_esperado_venda": -0.06,
      "financiamento_pct": 0.01,
      "noticias": [
       "Queda clássica do Ethereum explicada pelo amplo retrocesso da criptografia",
@@ -160,36 +160,36 @@
      ],
      "simbolo": "ETHUSDT",
      "decisao": "FORA",
-     "confianca": 1,
-     "motivo": "Tendência fraca e histórico de erros em vendas recentes indicam falta de vantagem clara.",
+     "confianca": 2,
+     "motivo": "Tendência fraca e histórico de erros em vendas recentes indicam falta de segurança para operar.",
      "cerebro": "Qwen 27B",
-     "quando": "2026-11-28T16:16",
+     "quando": "2026-11-28T16:28",
      "ev_escolhido": 0
     },
     {
      "moeda": "WLFI",
-     "preco": 0.0176,
+     "preco": 0.0173,
      "stop_pct": 12.0,
      "alvo_pct": 36.0,
-     "var_24h_pct": -51.25,
-     "var_7d_pct": -59.73,
+     "var_24h_pct": -52.08,
+     "var_7d_pct": -60.41,
      "tendencia_4h": -1.0,
-     "chance_alvo_compra": 0.01,
-     "chance_stop_compra": 0.15,
-     "chance_alvo_venda": 0.06,
-     "chance_stop_venda": 0.28,
-     "valor_esperado_compra": 0.3,
-     "valor_esperado_venda": -0.1,
-     "financiamento_pct": 0.005,
+     "chance_alvo_compra": 0.0,
+     "chance_stop_compra": 0.18,
+     "chance_alvo_venda": 0.07,
+     "chance_stop_venda": 0.31,
+     "valor_esperado_compra": 0.2,
+     "valor_esperado_venda": -0.06,
+     "financiamento_pct": 0.0028,
      "noticias": [],
      "medo_ganancia": 10.0,
      "historico_desta_moeda": [],
      "simbolo": "WLFIUSDT",
      "decisao": "FORA",
      "confianca": 3,
-     "motivo": "Trend indica queda e expectativa negativa, então não entra.",
+     "motivo": "Sem vantagem clara na direção da tendência",
      "cerebro": "GPT-OSS 20B",
-     "quando": "2026-11-28T16:18",
+     "quando": "2026-11-28T16:29",
      "ev_escolhido": 0
     }
    ]
@@ -197,7 +197,9 @@
   "andar2": {
    "nome": "COMITÊ DE RISCO",
    "trabalho": "ranking por valor esperado",
-   "ranking": []
+   "ranking": [
+    "BTCUSDT"
+   ]
   },
   "andar3": {
    "nome": "DIRETORIA",
@@ -9272,6 +9274,33 @@
    "cerebro": "GPT-OSS 20B",
    "preco": 0.0176,
    "quando": "2026-11-28T16:18",
+   "resultado": null
+  },
+  {
+   "simbolo": "BTCUSDT",
+   "decisao": "VENDA",
+   "confianca": 3,
+   "cerebro": "GPT-OSS 20B",
+   "preco": 59469.92,
+   "quando": "2026-11-28T16:28",
+   "resultado": null
+  },
+  {
+   "simbolo": "ETHUSDT",
+   "decisao": "FORA",
+   "confianca": 2,
+   "cerebro": "Qwen 27B",
+   "preco": 1648.51,
+   "quando": "2026-11-28T16:28",
+   "resultado": null
+  },
+  {
+   "simbolo": "WLFIUSDT",
+   "decisao": "FORA",
+   "confianca": 3,
+   "cerebro": "GPT-OSS 20B",
+   "preco": 0.0173,
+   "quando": "2026-11-28T16:29",
    "resultado": null
   }
  ],
