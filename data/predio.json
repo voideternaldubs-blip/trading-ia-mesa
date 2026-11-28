@@ -1,6 +1,6 @@
 {
- "gerado": "2026-11-28T19:43",
- "segundos": 43,
+ "gerado": "2026-11-28T19:54",
+ "segundos": 76,
  "cerebros": {
   "GPT-OSS 120B": {
    "papel": "comite",
@@ -10,12 +10,12 @@
   "GPT-OSS 20B": {
    "papel": "analista",
    "limite_dia": 900,
-   "usados_hoje": 155
+   "usados_hoje": 156
   },
   "Qwen 27B": {
    "papel": "analista",
    "limite_dia": 900,
-   "usados_hoje": 104
+   "usados_hoje": 105
   },
   "Kimi K3.1": {
    "papel": "comite",
@@ -25,7 +25,7 @@
   "GLM 5.3": {
    "papel": "analista",
    "limite_dia": 5000,
-   "usados_hoje": 73
+   "usados_hoje": 74
   }
  },
  "andares": {
@@ -40,18 +40,18 @@
    "analistas": [
     {
      "moeda": "BTC",
-     "preco": 59328.65,
+     "preco": 59342.68,
      "stop_pct": 3.06,
      "alvo_pct": 9.18,
-     "var_24h_pct": -0.97,
-     "var_7d_pct": -1.72,
+     "var_24h_pct": -0.95,
+     "var_7d_pct": -1.69,
      "tendencia_4h": -0.67,
      "chance_alvo_compra": 0.06,
-     "chance_stop_compra": 0.51,
-     "chance_alvo_venda": 0.06,
-     "chance_stop_venda": 0.51,
-     "valor_esperado_compra": 0.03,
-     "valor_esperado_venda": 0.04,
+     "chance_stop_compra": 0.52,
+     "chance_alvo_venda": 0.04,
+     "chance_stop_venda": 0.5,
+     "valor_esperado_compra": 0.01,
+     "valor_esperado_venda": 0.03,
      "financiamento_pct": 0.01,
      "noticias": [
       "Bitcoin de US$ 150 milhões faz com que a baleia hiperlíquida perca US$ 3,5 milhões em 5 horas",
@@ -93,32 +93,27 @@
       }
      ],
      "simbolo": "BTCUSDT",
-     "decisao": "VENDA",
-     "confianca": 2,
-     "motivo": "Tendência negativa indica venda",
+     "decisao": "FORA",
+     "confianca": 1,
+     "motivo": "",
      "cerebro": "GPT-OSS 20B",
-     "quando": "2026-11-28T19:42",
-     "ev_escolhido": 0.04,
-     "comite": {
-      "aprova": true,
-      "motivo": "Tendência 4h negativa e valor esperado de venda positivo concordam com a decisão",
-      "cerebro": "GPT-OSS 120B"
-     }
+     "quando": "2026-11-28T19:53",
+     "ev_escolhido": 0
     },
     {
      "moeda": "ETH",
-     "preco": 1645.7,
+     "preco": 1646.62,
      "stop_pct": 3.81,
      "alvo_pct": 11.44,
-     "var_24h_pct": -1.53,
-     "var_7d_pct": -2.47,
+     "var_24h_pct": -1.47,
+     "var_7d_pct": -2.41,
      "tendencia_4h": -0.67,
-     "chance_alvo_compra": 0.07,
-     "chance_stop_compra": 0.57,
-     "chance_alvo_venda": 0.08,
+     "chance_alvo_compra": 0.08,
+     "chance_stop_compra": 0.54,
+     "chance_alvo_venda": 0.05,
      "chance_stop_venda": 0.51,
-     "valor_esperado_compra": -0.06,
-     "valor_esperado_venda": 0.09,
+     "valor_esperado_compra": 0.02,
+     "valor_esperado_venda": 0.03,
      "financiamento_pct": 0.01,
      "noticias": [
       "Queda clássica do Ethereum explicada pelo amplo retrocesso da criptografia",
@@ -160,25 +155,25 @@
      ],
      "simbolo": "ETHUSDT",
      "decisao": "FORA",
-     "confianca": 4,
-     "motivo": "A tendência de queda não é forte o suficiente para compensar o risco, e o histórico mostra que vender ETH tem dado prejuízo recente.",
+     "confianca": 5,
+     "motivo": "A tendência aponta queda, mas o valor esperado é quase zero e o histórico recente mostra que vender ETH resultou em perdas constantes.",
      "cerebro": "Qwen 27B",
-     "quando": "2026-11-28T19:42",
+     "quando": "2026-11-28T19:53",
      "ev_escolhido": 0
     },
     {
      "moeda": "WLFI",
-     "preco": 0.0166,
+     "preco": 0.0169,
      "stop_pct": 12.0,
      "alvo_pct": 36.0,
-     "var_24h_pct": -54.02,
-     "var_7d_pct": -62.01,
+     "var_24h_pct": -53.19,
+     "var_7d_pct": -61.33,
      "tendencia_4h": -1.0,
-     "chance_alvo_compra": 0.01,
-     "chance_stop_compra": 0.16,
-     "chance_alvo_venda": 0.06,
+     "chance_alvo_compra": 0.0,
+     "chance_stop_compra": 0.19,
+     "chance_alvo_venda": 0.05,
      "chance_stop_venda": 0.27,
-     "valor_esperado_compra": 0.23,
+     "valor_esperado_compra": 0.2,
      "valor_esperado_venda": -0.1,
      "financiamento_pct": 0.005,
      "noticias": [],
@@ -186,10 +181,10 @@
      "historico_desta_moeda": [],
      "simbolo": "WLFIUSDT",
      "decisao": "FORA",
-     "confianca": 1,
-     "motivo": "",
+     "confianca": 3,
+     "motivo": "Tendência é de queda, mas o balanço da moeda não mostra vantagem clara para vender e comprar contra a queda seria arriscado; melhor ficar de fora.",
      "cerebro": "GLM 5.3",
-     "quando": "2026-11-28T19:43",
+     "quando": "2026-11-28T19:54",
      "ev_escolhido": 0
     }
    ]
@@ -197,9 +192,7 @@
   "andar2": {
    "nome": "COMITÊ DE RISCO",
    "trabalho": "ranking por valor esperado",
-   "ranking": [
-    "BTCUSDT"
-   ]
+   "ranking": []
   },
   "andar3": {
    "nome": "DIRETORIA",
@@ -9544,6 +9537,33 @@
    "cerebro": "GLM 5.3",
    "preco": 0.0166,
    "quando": "2026-11-28T19:43",
+   "resultado": null
+  },
+  {
+   "simbolo": "BTCUSDT",
+   "decisao": "FORA",
+   "confianca": 1,
+   "cerebro": "GPT-OSS 20B",
+   "preco": 59342.68,
+   "quando": "2026-11-28T19:53",
+   "resultado": null
+  },
+  {
+   "simbolo": "ETHUSDT",
+   "decisao": "FORA",
+   "confianca": 5,
+   "cerebro": "Qwen 27B",
+   "preco": 1646.62,
+   "quando": "2026-11-28T19:53",
+   "resultado": null
+  },
+  {
+   "simbolo": "WLFIUSDT",
+   "decisao": "FORA",
+   "confianca": 3,
+   "cerebro": "GLM 5.3",
+   "preco": 0.0169,
+   "quando": "2026-11-28T19:54",
    "resultado": null
   }
  ],
