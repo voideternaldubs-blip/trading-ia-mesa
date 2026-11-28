@@ -1,21 +1,21 @@
 {
- "gerado": "2026-11-28T12:07",
- "segundos": 99,
+ "gerado": "2026-11-28T12:18",
+ "segundos": 98,
  "cerebros": {
   "GPT-OSS 120B": {
    "papel": "comite",
    "limite_dia": 900,
-   "usados_hoje": 38
+   "usados_hoje": 39
   },
   "GPT-OSS 20B": {
    "papel": "analista",
    "limite_dia": 900,
-   "usados_hoje": 105
+   "usados_hoje": 108
   },
   "Qwen 27B": {
    "papel": "analista",
    "limite_dia": 900,
-   "usados_hoje": 74
+   "usados_hoje": 76
   },
   "Kimi K3.1": {
    "papel": "comite",
@@ -25,7 +25,7 @@
   "GLM 5.3": {
    "papel": "analista",
    "limite_dia": 5000,
-   "usados_hoje": 50
+   "usados_hoje": 51
   }
  },
  "andares": {
@@ -40,24 +40,24 @@
    "analistas": [
     {
      "moeda": "BTC",
-     "preco": 59367.73,
+     "preco": 59342.28,
      "stop_pct": 3.0,
      "alvo_pct": 9.0,
-     "var_24h_pct": -1.25,
-     "var_7d_pct": -0.96,
+     "var_24h_pct": -1.29,
+     "var_7d_pct": -1.0,
      "tendencia_4h": -0.67,
-     "chance_alvo_compra": 0.08,
-     "chance_stop_compra": 0.52,
-     "chance_alvo_venda": 0.05,
-     "chance_stop_venda": 0.52,
-     "valor_esperado_compra": 0.04,
-     "valor_esperado_venda": 0.08,
+     "chance_alvo_compra": 0.06,
+     "chance_stop_compra": 0.53,
+     "chance_alvo_venda": 0.07,
+     "chance_stop_venda": 0.49,
+     "valor_esperado_compra": -0.03,
+     "valor_esperado_venda": 0.09,
      "financiamento_pct": 0.01,
      "noticias": [
+      "Changpeng Zhao: “Mesmo US$ 60.000 é um bom preço para o Bitcoin – o mercado de criptografia está chegando ao fundo”",
+      "Bitcoin ultrapassa US$ 61.000, impulsionado pela demanda renovada por ativos digitais; Ethereum sobe 2,36%",
       "A montanha-russa do WLFI se intensifica à medida que o Bitcoin (BTC) perde o suporte de US$ 60 mil: observação de fim de semana",
-      "Faltam apenas 500 dias para a grande redução do Bitcoin pela metade, o que observar",
-      "Keel Infrastructure vende todo o tesouro Bitcoin no valor de US$ 192 milhões",
-      "Bitcoin: o segundo banco russo abre suas portas para o BTC"
+      "Faltam apenas 500 dias para a grande redução do Bitcoin pela metade, o que observar"
      ],
      "medo_ganancia": 10.0,
      "historico_desta_moeda": [
@@ -95,33 +95,34 @@
      "simbolo": "BTCUSDT",
      "decisao": "VENDA",
      "confianca": 3,
-     "motivo": "Tendência negativa indica venda",
+     "motivo": "Tendência baixa, expectativa positiva",
      "cerebro": "GPT-OSS 20B",
-     "quando": "2026-11-28T12:06",
-     "ev_escolhido": 0.08,
+     "quando": "2026-11-28T12:17",
+     "ev_escolhido": 0.09,
      "comite": {
       "aprova": true,
-      "motivo": "Tendência 4h negativa e valor esperado de venda maior, confirma a decisão",
+      "motivo": "Tendência e valor esperado confirmam venda",
       "cerebro": "GPT-OSS 120B"
      }
     },
     {
      "moeda": "ETH",
-     "preco": 1652.42,
+     "preco": 1652.22,
      "stop_pct": 3.72,
      "alvo_pct": 11.15,
-     "var_24h_pct": -1.2,
-     "var_7d_pct": -1.91,
+     "var_24h_pct": -1.21,
+     "var_7d_pct": -1.92,
      "tendencia_4h": -0.67,
      "chance_alvo_compra": 0.09,
-     "chance_stop_compra": 0.58,
-     "chance_alvo_venda": 0.07,
-     "chance_stop_venda": 0.53,
-     "valor_esperado_compra": -0.03,
-     "valor_esperado_venda": 0.03,
+     "chance_stop_compra": 0.55,
+     "chance_alvo_venda": 0.05,
+     "chance_stop_venda": 0.56,
+     "valor_esperado_compra": -0.0,
+     "valor_esperado_venda": -0.09,
      "financiamento_pct": 0.01,
      "noticias": [
       "Vitalik Buterin exorta Ethereum a não apressar Glamsterdam",
+      "Bitcoin ultrapassa US$ 61.000, impulsionado pela demanda renovada por ativos digitais; Ethereum sobe 2,36%",
       "Trump Crypto News: World Liberty Financial vende US$ 20 milhões em ativos Ethereum, mostram dados"
      ],
      "medo_ganancia": 10.0,
@@ -159,26 +160,26 @@
      ],
      "simbolo": "ETHUSDT",
      "decisao": "FORA",
-     "confianca": 2,
-     "motivo": "A tendência aponta para baixo, mas o histórico recente mostra que vendas nessa moeda estão errando consistentemente, indicando falta de vantagem clara.",
+     "confianca": 5,
+     "motivo": "A tendência aponta para baixo, mas o histórico recente mostra que vendas nessa moeda têm errado consistentemente, indicando falta de vantagem clara.",
      "cerebro": "Qwen 27B",
-     "quando": "2026-11-28T12:06",
+     "quando": "2026-11-28T12:17",
      "ev_escolhido": 0
     },
     {
      "moeda": "SOL",
-     "preco": 71.12,
-     "stop_pct": 3.54,
-     "alvo_pct": 10.62,
-     "var_24h_pct": -1.43,
-     "var_7d_pct": 0.99,
+     "preco": 71.08,
+     "stop_pct": 3.56,
+     "alvo_pct": 10.67,
+     "var_24h_pct": -1.48,
+     "var_7d_pct": 0.94,
      "tendencia_4h": -0.67,
-     "chance_alvo_compra": 0.11,
-     "chance_stop_compra": 0.63,
+     "chance_alvo_compra": 0.12,
+     "chance_stop_compra": 0.59,
      "chance_alvo_venda": 0.1,
-     "chance_stop_venda": 0.63,
-     "valor_esperado_compra": -0.05,
-     "valor_esperado_venda": -0.08,
+     "chance_stop_venda": 0.6,
+     "valor_esperado_compra": -0.0,
+     "valor_esperado_venda": -0.01,
      "financiamento_pct": 0.0031,
      "noticias": [],
      "medo_ganancia": 10.0,
@@ -215,17 +216,12 @@
       }
      ],
      "simbolo": "SOLUSDT",
-     "decisao": "VENDA",
+     "decisao": "FORA",
      "confianca": 3,
-     "motivo": "Tendência indica queda, mas risco baixo",
+     "motivo": "Trend aponta baixa, mas expectativa de lucro é nula",
      "cerebro": "GPT-OSS 20B",
-     "quando": "2026-11-28T12:07",
-     "ev_escolhido": -0.08,
-     "comite": {
-      "aprova": true,
-      "motivo": "Tendência e valor esperado confirmam venda",
-      "cerebro": "GPT-OSS 120B"
-     }
+     "quando": "2026-11-28T12:18",
+     "ev_escolhido": 0
     },
     {
      "moeda": "WLFI",
@@ -236,37 +232,37 @@
      "var_7d_pct": -55.33,
      "tendencia_4h": -1.0,
      "chance_alvo_compra": 0.0,
-     "chance_stop_compra": 0.18,
-     "chance_alvo_venda": 0.05,
-     "chance_stop_venda": 0.23,
-     "valor_esperado_compra": 0.2,
-     "valor_esperado_venda": -0.06,
+     "chance_stop_compra": 0.14,
+     "chance_alvo_venda": 0.06,
+     "chance_stop_venda": 0.29,
+     "valor_esperado_compra": 0.22,
+     "valor_esperado_venda": -0.13,
      "financiamento_pct": 0.005,
      "noticias": [],
      "medo_ganancia": 10.0,
      "historico_desta_moeda": [],
      "simbolo": "WLFIUSDT",
      "decisao": "FORA",
-     "confianca": 3,
-     "motivo": "Sem vantagem clara com tendência negativa e valor esperado negativo",
+     "confianca": 4,
+     "motivo": "Trend down e risco alto, não há vantagem clara",
      "cerebro": "GPT-OSS 20B",
-     "quando": "2026-11-28T12:06",
+     "quando": "2026-11-28T12:17",
      "ev_escolhido": 0
     },
     {
      "moeda": "ZEC",
-     "preco": 723.1,
-     "stop_pct": 9.63,
-     "alvo_pct": 28.89,
-     "var_24h_pct": -2.35,
-     "var_7d_pct": -8.34,
+     "preco": 724.63,
+     "stop_pct": 9.62,
+     "alvo_pct": 28.87,
+     "var_24h_pct": -2.14,
+     "var_7d_pct": -8.14,
      "tendencia_4h": -0.67,
-     "chance_alvo_compra": 0.05,
-     "chance_stop_compra": 0.39,
+     "chance_alvo_compra": 0.06,
+     "chance_stop_compra": 0.41,
      "chance_alvo_venda": 0.0,
-     "chance_stop_venda": 0.43,
-     "valor_esperado_compra": 0.16,
-     "valor_esperado_venda": -0.05,
+     "chance_stop_venda": 0.47,
+     "valor_esperado_compra": 0.1,
+     "valor_esperado_venda": -0.06,
      "financiamento_pct": 0.01,
      "noticias": [],
      "medo_ganancia": 10.0,
@@ -305,9 +301,9 @@
      "simbolo": "ZECUSDT",
      "decisao": "FORA",
      "confianca": 2,
-     "motivo": "A tendência de queda já se esgotou no curto prazo e o valor esperado da venda é negativo, indicando risco sem recompensa.",
+     "motivo": "Tendência de queda fraca e valor esperado da venda negativo, sem vantagem clara para operar.",
      "cerebro": "Qwen 27B",
-     "quando": "2026-11-28T12:06",
+     "quando": "2026-11-28T12:17",
      "ev_escolhido": 0
     }
    ]
@@ -316,8 +312,7 @@
    "nome": "COMITÊ DE RISCO",
    "trabalho": "ranking por valor esperado",
    "ranking": [
-    "BTCUSDT",
-    "SOLUSDT"
+    "BTCUSDT"
    ]
   },
   "andar3": {
@@ -8898,6 +8893,51 @@
    "cerebro": "Qwen 27B",
    "preco": 723.1,
    "quando": "2026-11-28T12:06",
+   "resultado": null
+  },
+  {
+   "simbolo": "BTCUSDT",
+   "decisao": "VENDA",
+   "confianca": 3,
+   "cerebro": "GPT-OSS 20B",
+   "preco": 59342.28,
+   "quando": "2026-11-28T12:17",
+   "resultado": null
+  },
+  {
+   "simbolo": "ETHUSDT",
+   "decisao": "FORA",
+   "confianca": 5,
+   "cerebro": "Qwen 27B",
+   "preco": 1652.22,
+   "quando": "2026-11-28T12:17",
+   "resultado": null
+  },
+  {
+   "simbolo": "SOLUSDT",
+   "decisao": "FORA",
+   "confianca": 3,
+   "cerebro": "GPT-OSS 20B",
+   "preco": 71.08,
+   "quando": "2026-11-28T12:18",
+   "resultado": null
+  },
+  {
+   "simbolo": "WLFIUSDT",
+   "decisao": "FORA",
+   "confianca": 4,
+   "cerebro": "GPT-OSS 20B",
+   "preco": 0.0197,
+   "quando": "2026-11-28T12:17",
+   "resultado": null
+  },
+  {
+   "simbolo": "ZECUSDT",
+   "decisao": "FORA",
+   "confianca": 2,
+   "cerebro": "Qwen 27B",
+   "preco": 724.63,
+   "quando": "2026-11-28T12:17",
    "resultado": null
   }
  ],
