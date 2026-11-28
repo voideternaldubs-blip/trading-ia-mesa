@@ -1,5 +1,5 @@
 {
- "gerado": "2026-11-27T11:50",
+ "gerado": "2026-11-28T11:26",
  "periodo_1h": "2025-01-01 até hoje",
  "periodo_5m": "últimos 120 dias",
  "moedas_1h": [
@@ -41,11 +41,11 @@
   {
    "estrategia": "Strategy003",
    "tempo": "5m",
-   "trades": 187,
-   "acerto_pct": 65.2,
-   "media_trade_pct": 0.095,
-   "fator_lucro": 1.29,
-   "retorno_medio_moeda_pct": 1.7
+   "trades": 191,
+   "acerto_pct": 65.4,
+   "media_trade_pct": 0.103,
+   "fator_lucro": 1.32,
+   "retorno_medio_moeda_pct": 1.9
   },
   {
    "estrategia": "ClucMay72018",
@@ -77,10 +77,10 @@
   {
    "estrategia": "Strategy002",
    "tempo": "5m",
-   "trades": 162,
-   "acerto_pct": 58.6,
-   "media_trade_pct": -0.089,
-   "fator_lucro": 0.83,
+   "trades": 168,
+   "acerto_pct": 58.3,
+   "media_trade_pct": -0.085,
+   "fator_lucro": 0.84,
    "retorno_medio_moeda_pct": -1.6
   },
   {
@@ -104,43 +104,43 @@
   {
    "estrategia": "RSIDirectionalWithTrend",
    "tempo": "1h",
-   "trades": 628,
-   "acerto_pct": 33.0,
-   "media_trade_pct": -0.209,
+   "trades": 629,
+   "acerto_pct": 33.1,
+   "media_trade_pct": -0.204,
    "fator_lucro": 0.82,
-   "retorno_medio_moeda_pct": -6.4
+   "retorno_medio_moeda_pct": -6.3
   },
   {
    "estrategia": "Quickie",
    "tempo": "5m",
-   "trades": 366,
-   "acerto_pct": 93.7,
-   "media_trade_pct": -0.363,
-   "fator_lucro": 0.71,
-   "retorno_medio_moeda_pct": -17.7
-  },
-  {
-   "estrategia": "MACDStrategy",
-   "tempo": "5m",
-   "trades": 377,
-   "acerto_pct": 95.0,
+   "trades": 385,
+   "acerto_pct": 92.2,
    "media_trade_pct": -0.364,
    "fator_lucro": 0.71,
-   "retorno_medio_moeda_pct": -19.5
+   "retorno_medio_moeda_pct": -18.5
   },
   {
    "estrategia": "Strategy005",
    "tempo": "5m",
-   "trades": 273,
-   "acerto_pct": 81.0,
-   "media_trade_pct": -0.764,
+   "trades": 272,
+   "acerto_pct": 80.9,
+   "media_trade_pct": -0.76,
    "fator_lucro": 0.6,
-   "retorno_medio_moeda_pct": -20.3
+   "retorno_medio_moeda_pct": -20.1
+  },
+  {
+   "estrategia": "MACDStrategy",
+   "tempo": "5m",
+   "trades": 398,
+   "acerto_pct": 94.2,
+   "media_trade_pct": -0.376,
+   "fator_lucro": 0.71,
+   "retorno_medio_moeda_pct": -20.8
   },
   {
    "estrategia": "DoubleEMACrossoverWithTrend",
    "tempo": "1h",
-   "trades": 2557,
+   "trades": 2558,
    "acerto_pct": 25.5,
    "media_trade_pct": -0.189,
    "fator_lucro": 0.84,
@@ -149,65 +149,65 @@
   {
    "estrategia": "Strategy001",
    "tempo": "5m",
-   "trades": 682,
-   "acerto_pct": 85.0,
-   "media_trade_pct": -0.44,
+   "trades": 703,
+   "acerto_pct": 84.8,
+   "media_trade_pct": -0.439,
    "fator_lucro": 0.65,
-   "retorno_medio_moeda_pct": -28.7
+   "retorno_medio_moeda_pct": -29.1
   },
   {
    "estrategia": "BbandRsi",
    "tempo": "1h",
-   "trades": 1337,
-   "acerto_pct": 61.6,
-   "media_trade_pct": -0.427,
+   "trades": 1339,
+   "acerto_pct": 61.5,
+   "media_trade_pct": -0.436,
    "fator_lucro": 0.88,
-   "retorno_medio_moeda_pct": -40.7
+   "retorno_medio_moeda_pct": -41.0
   },
   {
    "estrategia": "AdxSmas",
    "tempo": "1h",
-   "trades": 4420,
-   "acerto_pct": 45.5,
-   "media_trade_pct": -0.199,
+   "trades": 4437,
+   "acerto_pct": 45.3,
+   "media_trade_pct": -0.204,
    "fator_lucro": 0.88,
-   "retorno_medio_moeda_pct": -44.2
+   "retorno_medio_moeda_pct": -44.8
   },
   {
    "estrategia": "NOSSA tendência (Donchian, só compra)",
    "tempo": "1h",
    "trades": 805,
-   "acerto_pct": 27.6,
-   "media_trade_pct": -1.775,
+   "acerto_pct": 27.3,
+   "media_trade_pct": -1.785,
    "fator_lucro": 0.63,
-   "retorno_medio_moeda_pct": -53.3
+   "retorno_medio_moeda_pct": -53.5
   },
   {
    "estrategia": "Supertrend",
    "tempo": "1h",
-   "trades": 4078,
-   "acerto_pct": 51.6,
-   "media_trade_pct": -0.286,
+   "trades": 4079,
+   "acerto_pct": 51.3,
+   "media_trade_pct": -0.298,
    "fator_lucro": 0.86,
-   "retorno_medio_moeda_pct": -53.5
+   "retorno_medio_moeda_pct": -54.6
   },
   {
    "estrategia": "ADXMomentum",
    "tempo": "1h",
-   "trades": 11104,
+   "trades": 11105,
    "acerto_pct": 82.6,
-   "media_trade_pct": -0.151,
-   "fator_lucro": 0.83,
-   "retorno_medio_moeda_pct": -59.9
+   "media_trade_pct": -0.154,
+   "fator_lucro": 0.82,
+   "retorno_medio_moeda_pct": -60.6
   },
   {
    "estrategia": "Comprar e segurar",
    "tempo": "1h",
    "trades": 20,
    "acerto_pct": 5.0,
-   "media_trade_pct": -62.4,
+   "media_trade_pct": -63.541,
    "fator_lucro": 0.01,
-   "retorno_medio_moeda_pct": -62.4
+   "retorno_medio_moeda_pct": -63.5
   }
  ]
 }
