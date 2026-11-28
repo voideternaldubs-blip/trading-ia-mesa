@@ -1,11 +1,11 @@
 {
- "gerado": "2026-11-28T12:57",
- "tudo_ok": true,
+ "gerado": "2026-11-28T13:38",
+ "tudo_ok": false,
  "checks": [
   {
    "agente": "ARANHA",
    "ok": true,
-   "ultima_vez": "2026-11-28T12:57",
+   "ultima_vez": "2026-11-28T13:38",
    "horas": 0.0,
    "esperado": "a cada 3h",
    "o_que_faz": "coleta e explica notícias do mundo"
@@ -14,7 +14,7 @@
    "agente": "TENDÊNCIA CRIPTO",
    "ok": true,
    "ultima_vez": "2026-11-28T08:09",
-   "horas": 4.8,
+   "horas": 5.5,
    "esperado": "a cada 6h",
    "o_que_faz": "robô de futuros cripto"
   },
@@ -22,26 +22,26 @@
    "agente": "AÇÕES",
    "ok": true,
    "ultima_vez": "2026-11-26T21:00",
-   "horas": 40.0,
+   "horas": 40.6,
    "esperado": "a cada 80h",
    "o_que_faz": "robô de ETFs + Alpaca (dias úteis)"
   },
   {
    "agente": "CALENDÁRIO",
    "ok": true,
-   "ultima_vez": "2026-11-28T12:57",
+   "ultima_vez": "2026-11-28T13:38",
    "horas": 0.0,
    "esperado": "a cada 3h",
    "o_que_faz": "agenda do Fed, inflação e balanços"
   },
   {
    "agente": "SEC",
-   "ok": true,
+   "ok": false,
    "ultima_vez": "2026-11-28T10:13",
-   "horas": 2.7,
+   "horas": 3.4,
    "esperado": "a cada 3h",
    "o_que_faz": "documentos oficiais e compras de diretores"
   }
  ],
- "resumo": "Todos os agentes trabalhando."
+ "resumo": "ATENÇÃO: SEC atrasado(s)."
 }
