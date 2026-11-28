@@ -1,5 +1,5 @@
 {
- "gerado": "2026-11-28T18:27",
+ "gerado": "2026-11-28T18:28",
  "fim": "2026-11-30",
  "dias_restantes": 2,
  "robos": [
@@ -56,7 +56,7 @@
    "acerto_pct": 22.2,
    "ganho_medio": 1.0,
    "perda_media": -4.76,
-   "maior_queda_pct": -15.66
+   "maior_queda_pct": -14.77
   },
   {
    "robo": "Foguete de ações (Alpaca)",
