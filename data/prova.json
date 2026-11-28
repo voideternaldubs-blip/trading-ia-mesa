@@ -12,7 +12,7 @@
    "acerto_pct": 0.0,
    "ganho_medio": null,
    "perda_media": -17.1,
-   "maior_queda_pct": -30.89
+   "maior_queda_pct": -23.25
   },
   {
    "robo": "Foguete v2 (Binance demo)",
@@ -50,13 +50,13 @@
   {
    "robo": "IA pura (manual)",
    "inicial": 100.0,
-   "atual": 77.61,
-   "retorno_pct": -22.39,
+   "atual": 77.54,
+   "retorno_pct": -22.46,
    "operacoes": 8,
    "acerto_pct": 25.0,
    "ganho_medio": 1.0,
    "perda_media": -4.47,
-   "maior_queda_pct": -20.08
+   "maior_queda_pct": -16.53
   },
   {
    "robo": "Foguete de ações (Alpaca)",
