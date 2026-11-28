@@ -4955,5 +4955,76 @@
   "quando": "2026-11-28T10:02",
   "simbolo": "ETHUSDT",
   "erro": "Binance demo 400: {\"code\":-4164,\"msg\":\"Order's notional must be no smaller than 20 (unless you choose reduce only).\"}"
+ },
+ {
+  "quando": "2026-11-28T10:08",
+  "simbolo": "ZECUSDT",
+  "erro": "Binance demo 400: {\"code\":-4164,\"msg\":\"Order's notional must be no smaller than 5 (unless you choose reduce only).\"}"
+ },
+ {
+  "quando": "2026-11-28T10:08",
+  "simbolo": "WLDUSDT",
+  "lado": "SELL",
+  "qtd": 27.0,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 558839957
+ },
+ {
+  "quando": "2026-11-28T10:08",
+  "simbolo": "SOLUSDT",
+  "erro": "Binance demo 400: {\"code\":-4164,\"msg\":\"Order's notional must be no smaller than 5 (unless you choose reduce only).\"}"
+ },
+ {
+  "quando": "2026-11-28T10:08",
+  "simbolo": "DOGEUSDT",
+  "lado": "SELL",
+  "qtd": 100.0,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 2399904588
+ },
+ {
+  "quando": "2026-11-28T10:08",
+  "simbolo": "ADAUSDT",
+  "erro": "Binance demo 400: {\"code\":-4164,\"msg\":\"Order's notional must be no smaller than 5 (unless you choose reduce only).\"}"
+ },
+ {
+  "quando": "2026-11-28T10:08",
+  "simbolo": "BNBUSDT",
+  "lado": "SELL",
+  "qtd": 0.01,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 2687002698
+ },
+ {
+  "quando": "2026-11-28T10:08",
+  "simbolo": "ETHUSDT",
+  "erro": "Binance demo 400: {\"code\":-4164,\"msg\":\"Order's notional must be no smaller than 20 (unless you choose reduce only).\"}"
+ },
+ {
+  "quando": "2026-11-28T10:08",
+  "simbolo": "NEARUSDT",
+  "erro": "Binance demo 400: {\"code\":-4164,\"msg\":\"Order's notional must be no smaller than 5 (unless you choose reduce only).\"}"
+ },
+ {
+  "quando": "2026-11-28T10:08",
+  "simbolo": "ENAUSDT",
+  "lado": "SELL",
+  "qtd": 63.0,
+  "preco": 0.0,
+  "status": "FILLED",
+  "id": 546489783
+ },
+ {
+  "quando": "2026-11-28T10:08",
+  "simbolo": "XRPUSDT",
+  "erro": "Binance demo 400: {\"code\":-4164,\"msg\":\"Order's notional must be no smaller than 5 (unless you choose reduce only).\"}"
+ },
+ {
+  "quando": "2026-11-28T10:08",
+  "simbolo": "BTCUSDT",
+  "erro": "Binance demo 400: {\"code\":-4164,\"msg\":\"Order's notional must be no smaller than 50 (unless you choose reduce only).\"}"
  }
 ]
