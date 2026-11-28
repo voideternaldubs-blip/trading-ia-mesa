@@ -1,7 +1,7 @@
 {
- "gerado": "2026-11-27T23:59",
+ "gerado": "2026-11-28T00:01",
  "fim": "2026-11-30",
- "dias_restantes": 3,
+ "dias_restantes": 2,
  "robos": [
   {
    "robo": "Carteira do Prédio",
@@ -50,8 +50,8 @@
   {
    "robo": "IA pura (manual)",
    "inicial": 100.0,
-   "atual": 71.71,
-   "retorno_pct": -28.29,
+   "atual": 71.6,
+   "retorno_pct": -28.4,
    "operacoes": 8,
    "acerto_pct": 25.0,
    "ganho_medio": 1.0,
