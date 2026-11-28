@@ -10,7 +10,7 @@
    "alvo": 86.49,
    "em": "2026-11-26T13:52",
    "tese": "vendido a favor da tend\u00eancia de queda (m\u00e1quina do tempo: valor esperado positivo)",
-   "conferido_ate": "2026-11-28T01:39",
+   "conferido_ate": "2026-11-28T01:41",
    "atual": 95.39
   }
  },
@@ -83,10 +83,6 @@
  "tese": "Medo extremo (11) + repique de 24h com volume e funding neutro: aposta em alta de al\u00edvio de alguns dias nas alts mais fortes fora do foguete (que est\u00e1 vendido). Stop -5%, alvo topo de 5 dias.",
  "inicio": "2026-11-26T12:40",
  "hist": [
-  {
-   "quando": "2026-11-26T20:43",
-   "valor": 81.72
-  },
   {
    "quando": "2026-11-26T20:43",
    "valor": 81.72
@@ -8081,6 +8077,10 @@
   },
   {
    "quando": "2026-11-28T01:39",
+   "valor": 72.07
+  },
+  {
+   "quando": "2026-11-28T01:41",
    "valor": 72.07
   }
  ],
