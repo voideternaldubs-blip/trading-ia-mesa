@@ -3373,7 +3373,7 @@
   "em": "2026-11-28T00:03"
  },
  "ultima_4h": 1795881600000,
- "ultimo_minuto": 1795890600000,
+ "ultimo_minuto": 1795890660000,
  "hist": [
   {
    "quando": "2026-11-26T03:14",
@@ -6848,6 +6848,12 @@
    "valor": 104.85,
    "foguete": 54.85,
    "exposicao": 473.37
+  },
+  {
+   "quando": "2026-11-28T18:31",
+   "valor": 104.94,
+   "foguete": 54.94,
+   "exposicao": 473.27
   }
  ],
  "filtros": {
@@ -6902,7 +6908,7 @@
  },
  "demo": {
   "saldo": 4921.31883629,
-  "pnl_aberto": 8.62955351,
-  "disponivel": 4909.26900624
+  "pnl_aberto": 8.67055624,
+  "disponivel": 4909.28284242
  }
 }
