@@ -1,21 +1,13 @@
 {
- "gerado": "2026-11-27T16:08",
+ "gerado": "2026-11-28T06:06",
  "documentos": [
   {
-   "ticker": "NVDA",
-   "form": "4",
-   "dia": "2026-11-23",
-   "explica": "Um diretor ou grande acionista negociou ações da própria empresa.",
-   "link": "https://www.sec.gov/Archives/edgar/data/1045810/000169684126000016/xslF345X06/wk-form4_1795470863.xml",
-   "descricao": "FORM 4"
-  },
-  {
-   "ticker": "NVDA",
-   "form": "8-K",
-   "dia": "2026-11-23",
-   "explica": "Evento importante comunicado oficialmente (mudança na diretoria, aquisição, resultado, processo).",
-   "link": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000090/nvda-20261122.htm",
-   "descricao": "8-K"
+   "ticker": "AAPL",
+   "form": "144",
+   "dia": "2026-11-27",
+   "explica": "Aviso de que alguém de dentro pretende vender ações.",
+   "link": "https://www.sec.gov/Archives/edgar/data/320193/000195004726011560/xsl144X01/primary_doc.xml",
+   "descricao": ""
   },
   {
    "ticker": "AAPL",
@@ -42,36 +34,12 @@
    "descricao": "FORM 4"
   },
   {
-   "ticker": "META",
-   "form": "144",
-   "dia": "2026-11-23",
-   "explica": "Aviso de que alguém de dentro pretende vender ações.",
-   "link": "https://www.sec.gov/Archives/edgar/data/1326801/000192109426001245/xsl144X01/primary_doc.xml",
-   "descricao": ""
-  },
-  {
-   "ticker": "META",
-   "form": "8-K",
-   "dia": "2026-11-23",
-   "explica": "Evento importante comunicado oficialmente (mudança na diretoria, aquisição, resultado, processo).",
-   "link": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026075541/meta-20261118.htm",
-   "descricao": "8-K"
-  },
-  {
    "ticker": "GOOGL",
    "form": "8-K",
    "dia": "2026-11-24",
    "explica": "Evento importante comunicado oficialmente (mudança na diretoria, aquisição, resultado, processo).",
    "link": "https://www.sec.gov/Archives/edgar/data/1652044/000119312526475973/d91615d8k.htm",
    "descricao": "8-K"
-  },
-  {
-   "ticker": "GOOGL",
-   "form": "4",
-   "dia": "2026-11-23",
-   "explica": "Um diretor ou grande acionista negociou ações da própria empresa.",
-   "link": "https://www.sec.gov/Archives/edgar/data/1652044/000119312526472910/xslF345X06/ownership.xml",
-   "descricao": "4"
   },
   {
    "ticker": "AMZN",
@@ -127,54 +95,6 @@
    "dia": "2026-11-24",
    "explica": "Aviso de que alguém de dentro pretende vender ações.",
    "link": "https://www.sec.gov/Archives/edgar/data/1018724/000195917326008243/xsl144X01/primary_doc.xml",
-   "descricao": ""
-  },
-  {
-   "ticker": "AMZN",
-   "form": "144",
-   "dia": "2026-11-23",
-   "explica": "Aviso de que alguém de dentro pretende vender ações.",
-   "link": "https://www.sec.gov/Archives/edgar/data/1018724/000195004726011447/xsl144X01/primary_doc.xml",
-   "descricao": ""
-  },
-  {
-   "ticker": "AMZN",
-   "form": "144",
-   "dia": "2026-11-23",
-   "explica": "Aviso de que alguém de dentro pretende vender ações.",
-   "link": "https://www.sec.gov/Archives/edgar/data/1018724/000195004726011446/xsl144X01/primary_doc.xml",
-   "descricao": ""
-  },
-  {
-   "ticker": "AMZN",
-   "form": "144",
-   "dia": "2026-11-23",
-   "explica": "Aviso de que alguém de dentro pretende vender ações.",
-   "link": "https://www.sec.gov/Archives/edgar/data/1018724/000162828026075452/xsl144X01/primary_doc.xml",
-   "descricao": ""
-  },
-  {
-   "ticker": "AMZN",
-   "form": "144",
-   "dia": "2026-11-23",
-   "explica": "Aviso de que alguém de dentro pretende vender ações.",
-   "link": "https://www.sec.gov/Archives/edgar/data/1018724/000195917326008213/xsl144X01/primary_doc.xml",
-   "descricao": ""
-  },
-  {
-   "ticker": "AMZN",
-   "form": "144",
-   "dia": "2026-11-23",
-   "explica": "Aviso de que alguém de dentro pretende vender ações.",
-   "link": "https://www.sec.gov/Archives/edgar/data/1018724/000195917326008211/xsl144X01/primary_doc.xml",
-   "descricao": ""
-  },
-  {
-   "ticker": "AMZN",
-   "form": "144",
-   "dia": "2026-11-23",
-   "explica": "Aviso de que alguém de dentro pretende vender ações.",
-   "link": "https://www.sec.gov/Archives/edgar/data/1018724/000195917326008210/xsl144X01/primary_doc.xml",
    "descricao": ""
   },
   {
@@ -234,14 +154,6 @@
    "descricao": "FORM 4"
   },
   {
-   "ticker": "PLTR",
-   "form": "4",
-   "dia": "2026-11-23",
-   "explica": "Um diretor ou grande acionista negociou ações da própria empresa.",
-   "link": "https://www.sec.gov/Archives/edgar/data/1321655/000182415926000019/xslF345X06/wk-form4_1795482132.xml",
-   "descricao": "FORM 4"
-  },
-  {
    "ticker": "COIN",
    "form": "4",
    "dia": "2026-11-25",
@@ -272,14 +184,6 @@
    "explica": "Um diretor ou grande acionista negociou ações da própria empresa.",
    "link": "https://www.sec.gov/Archives/edgar/data/1679788/000185143226000003/xslF345X06/form4-11242026_041103.xml",
    "descricao": ""
-  },
-  {
-   "ticker": "MSTR",
-   "form": "8-K",
-   "dia": "2026-11-23",
-   "explica": "Evento importante comunicado oficialmente (mudança na diretoria, aquisição, resultado, processo).",
-   "link": "https://www.sec.gov/Archives/edgar/data/1050446/000119312526470961/mstr-20261123.htm",
-   "descricao": "8-K"
   }
  ],
  "compras_de_diretores": []
